@@ -1,0 +1,22 @@
+import Vue from 'vue'
+
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSearch, faMinusSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(faSearch)
+library.add(faMinusSquare)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+import App from './app/App'
+import router from './app/AppRouter'
+
+new Vue({
+  render: h => h(App),
+  router
+}).$mount('#app')
