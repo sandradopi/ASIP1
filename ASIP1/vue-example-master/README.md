@@ -1,4 +1,4 @@
-# VUEEEEEEE
+# Vue 
 
 Aplicación web de ejemplo implementada con Vue. Consta de un CRUD que realiza peticiones contra un servidor REST falso ([JSONPlaceholder](https://jsonplaceholder.typicode.com/)), por lo que las peticiones POST/PUT no funcio narán correctamente, aunque devuelven una respuesta falsa correcta. Como *package bundler* se ha usado Parcel, que no requiere configuración.
 
