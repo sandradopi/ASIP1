@@ -1,6 +1,6 @@
-# vue-example
+# VUEEEEEEE
 
-Aplicación web de ejemplo implementada con Vue. Consta de un CRUD que realiza peticiones contra un servidor REST falso ([JSONPlaceholder](https://jsonplaceholder.typicode.com/)), por lo que las peticiones POST/PUT no funcionarán correctamente, aunque devuelven una respuesta falsa correcta. Como *package bundler* se ha usado Parcel, que no requiere configuración.
+Aplicación web de ejemplo implementada con Vue. Consta de un CRUD que realiza peticiones contra un servidor REST falso ([JSONPlaceholder](https://jsonplaceholder.typicode.com/)), por lo que las peticiones POST/PUT no funcio narán correctamente, aunque devuelven una respuesta falsa correcta. Como *package bundler* se ha usado Parcel, que no requiere configuración.
 
 Los componentes Vue son definidos usando *single-file components*. Es decir, ficheros con extension `.vue` en los que se define el HTML, JS y CSS asociado a cada componente. Más información en la [documentación de Vue](https://vuejs.org/v2/guide/single-file-components.html).
 
