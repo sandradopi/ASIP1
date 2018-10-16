@@ -1,0 +1,24 @@
+package es.udc.lbd.asi.restexample.model.domain;
+
+import java.util.Date;
+
+public class Movie {
+    private Long idPelicula;
+    private String name;
+    private String summary;
+    private Integer duration;
+    private Date date;
+    
+
+    public Movie() {
+    }
+
+    public Movie(Long id, String name) {
+        super();
+        this.idPelicula = idPelicula;
+        this.name = name;
+        this.summary=summary;
+        this.duration=duration;
+        this.date=date;
+    }
+    }

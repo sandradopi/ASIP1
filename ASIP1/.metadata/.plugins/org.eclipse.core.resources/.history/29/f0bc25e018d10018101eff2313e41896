@@ -1,0 +1,68 @@
+package es.udc.lbd.asi.restexample.model.domain;
+
+import java.util.Date;
+
+@Entity
+@Table(name="Movie")
+public class Movie {
+    private Long idMovie;
+    private String name;
+    private String summary;
+    private Integer duration;
+    private Date date;
+    
+
+    public Movie() {
+    }
+
+    public Movie(Long id, String name) {
+        super();
+        this.idMovie = idMovie;
+        this.name = name;
+        this.summary=summary;
+        this.duration=duration;
+        this.date=date;
+    }
+
+	public Long getIdMovie() {
+		return idMovie;
+	}
+
+	public void setIdMovie(Long idMovie) {
+		this.idMovie = idMovie;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+    
+    
+    }

@@ -1,0 +1,15 @@
+package es.udc.lbd.asi.restexample.model.domain;
+
+public class Pelicula {
+    private Long idPelicula;
+    private String name;
+
+    public Pelicula() {
+    }
+
+    public Pelicula(Long id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+    }
+    }
