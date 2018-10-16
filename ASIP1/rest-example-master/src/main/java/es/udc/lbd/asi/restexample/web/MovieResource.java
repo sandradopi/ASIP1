@@ -17,19 +17,19 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
 
-//@RestController
-//@RequestMapping("/api/movies")
+@RestController
+@RequestMapping("/api/movies")
 public class MovieResource {
 
-   // @Autowired
+    @Autowired
     private MovieService movieService;
 
-    //@GetMapping
+    @GetMapping
     public List<Movie> findAll() {
         return movieService.findAll();
     }
 
-    //@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public Movie findOne(@PathVariable Long id) {
         return movieService.findById(id);
     }

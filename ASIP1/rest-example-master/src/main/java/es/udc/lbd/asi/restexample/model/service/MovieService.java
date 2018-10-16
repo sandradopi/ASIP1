@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 
-//@Service
-//@Transactional(readOnly = true, rollbackFor = Exception.class)
+@Service
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class MovieService {
 
-   // @Autowired
+  @Autowired
     private MovieDAO movieDAO;
 
     public List<Movie> findAll() {
