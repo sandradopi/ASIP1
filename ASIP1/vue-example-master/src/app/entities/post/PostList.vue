@@ -9,10 +9,10 @@
         variant="primary">New</b-btn>
     </div>
     <div
-      v-for="post in posts"
-      :key="post.id">
-      <router-link :to="{ name: 'PostDetail', params: { id: post.id } }">
-        {{ post.title }}
+      v-for="movie in movies"
+      :key="movie.id">
+      <router-link :to="{ name: 'PostDetail', params: { id: movie.id } }">
+        {{ movie.name }}
       </router-link>
     </div>
   </LoadingPage>
@@ -27,15 +27,15 @@ export default {
   data() {
     return {
       loading: false,
-      posts: null,
+      movie: null,
       error: null
     }
   },
   created() {
     this.loading = true
 
-    HTTP.get('posts')
-    .then(response => this.posts = response.data)
+    HTTP.get('movies')
+    .then(response => this.movies = response.data)
     .catch(err => this.error = err.response.data)
     .finally(() => this.loading = false)
   }

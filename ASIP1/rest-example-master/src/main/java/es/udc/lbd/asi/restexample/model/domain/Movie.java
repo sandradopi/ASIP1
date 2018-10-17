@@ -1,18 +1,20 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Movie")
 
 public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   
     private Long idMovie;
     private String name;
     private String summary;
@@ -31,6 +33,10 @@ public class Movie {
 		this.data = data;
 	}
 
+	@Id
+	@SequenceGenerator (name="idMovie", sequenceName ="id_movie_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "idMovie")
+	@Column(name="idMovie", nullable=false)
 	public Long getIdMovie() {
 		return idMovie;
 	}
@@ -38,7 +44,8 @@ public class Movie {
 	public void setIdMovie(Long idMovie) {
 		this.idMovie = idMovie;
 	}
-
+	
+	@Column(name="name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -47,14 +54,17 @@ public class Movie {
 		this.name = name;
 	}
 
+	@Column(name="summary")
 	public String getSummary() {
 		return summary;
 	}
-
+	
+	
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
+	@Column(name="duration", nullable=false)
 	public Integer getDuration() {
 		return duration;
 	}
@@ -63,6 +73,7 @@ public class Movie {
 		this.duration = duration;
 	}
 
+	@Column(name="data", nullable=false)
 	public Date getData() {
 		return data;
 	}

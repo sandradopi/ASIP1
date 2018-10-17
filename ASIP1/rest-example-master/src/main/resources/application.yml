@@ -12,4 +12,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
     # Creates and drops the database each run. Change to update/validate when needed.
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: create

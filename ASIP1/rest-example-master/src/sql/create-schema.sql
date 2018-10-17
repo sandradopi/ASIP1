@@ -5,7 +5,7 @@ CREATE TABLE movie (
 	name VARCHAR(32),
 	summary TEXT,
 	duration INT,
-	data TIMESTAMP,
+	data DATE,
 	CONSTRAINT movie_pk PRIMARY KEY (idMovie)
 );
 
