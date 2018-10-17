@@ -5,12 +5,8 @@ import java.util.List;
 import javax.management.InstanceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
@@ -27,11 +23,11 @@ public class MovieDAOMemory implements MovieDAO {
 	}
 	
 	private static String FIND_ALL = "SELECT * "
-			+ "FROM movies ";
+			+ "FROM movie ";
 	
-	private static String FIND_BY_ID = "SELECT * "
-			+ "FROM movies "
-			+ "WHERE idMovie = :idMovie";
+	/*private static String FIND_BY_ID = "SELECT * "
+			+ "FROM movie "
+			+ "WHERE idMovie = :idMovie";*/
 	
 	
 	@Override

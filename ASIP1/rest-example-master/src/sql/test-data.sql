@@ -1,0 +1,2 @@
+INSERT INTO movie (name,summary,duration,data) VALUES ('WonderWoman', 'La pelicula va sobre...',160, '2015-11-04 10:30');
+INSERT INTO movie (name,summary,duration,data) VALUES ('Spiderman', 'La pelicula va sobre...',200, '2016-10-3 12:30');

@@ -1,7 +1,7 @@
 spring:
   datasource:
     dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-    url: jdbc:postgresql://localhost:5432/asi
+    url: jdbc:postgresql://localhost:5432/asidb
     username: asi
     password: asi
   jpa:
@@ -12,4 +12,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
     # Creates and drops the database each run. Change to update/validate when needed.
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: none

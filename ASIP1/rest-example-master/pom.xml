@@ -57,12 +57,57 @@
 	</dependencies>
 
 	<build>
+	<pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		
+	
+			<!-- SQL Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<version>1.5</version>
+
+				<dependencies>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.1-901.jdbc4</version>
+					</dependency>
+				</dependencies>
+
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://localhost:5432/asidb</url>
+					<username>asi</username>
+					<password>asi</password>
+					<autocommit>true</autocommit>
+				</configuration>
+
+				<executions>
+
+					<execution>
+						<id>default-cli</id>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<srcFiles>
+								<srcFile>src/sql/create-schema.sql</srcFile>
+								<srcFile>src/sql/test-data.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+			</plugins>
+			</pluginManagement>
 	</build>
 
 
