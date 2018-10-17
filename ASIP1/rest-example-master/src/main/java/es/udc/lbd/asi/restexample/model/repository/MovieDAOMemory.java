@@ -15,30 +15,16 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 @Repository
 public class MovieDAOMemory implements MovieDAO {
 
-	@Autowired
-	private NamedParameterJdbcOperations jdbcTemplate;
-
-	public void setJdbcTemplate(NamedParameterJdbcOperations jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-	
-	private static String FIND_ALL = "SELECT * "
-			+ "FROM movie ";
-	
-	/*private static String FIND_BY_ID = "SELECT * "
-			+ "FROM movie "
-			+ "WHERE idMovie = :idMovie";*/
-	
 	
 	@Override
 	public List<Movie> findAll() {
-		return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Movie.class));
+		return null;
 	}
 
 	@Override
 	public Movie findById(Long idMovie) throws InstanceNotFoundException{
 		return null;
-		//jdbcTemplate.queryForObject(FIND_BY_ID, new Object[] { idMovie }, new RowMapper(Movie.class));;
+		
 	}
 
 
