@@ -1,5 +1,5 @@
-import PostDetail from './post/PostDetail'
-import PostForm from './post/PostForm'
-import PostList from './post/PostList'
+import MovieDetail from './movie/MovieDetail'
+import MovieForm from './movie/MovieForm'
+import MovieList from './movie/MovieList'
 
-export { PostDetail, PostForm, PostList }
+export { MovieDetail, MovieForm, MovieList }

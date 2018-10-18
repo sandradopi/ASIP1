@@ -3,7 +3,7 @@
     toggleable="md">
     <b-navbar-toggle target="nav_collapse"/>
 
-    <b-navbar-brand to="/">VueExample</b-navbar-brand>
+    <b-navbar-brand to="/">Práctica 1</b-navbar-brand>
 
     <b-collapse
       id="nav_collapse"
@@ -11,8 +11,8 @@
 
       <b-navbar-nav>
         <b-nav-item
-          :to="{ name: 'PostList' }"
-          exact>Posts</b-nav-item>
+          :to="{ name: 'MovieList' }"
+          exact>Películas</b-nav-item>
       </b-navbar-nav>
 
     </b-collapse>

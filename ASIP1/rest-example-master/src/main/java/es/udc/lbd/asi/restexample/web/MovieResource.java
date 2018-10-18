@@ -24,9 +24,9 @@ public class MovieResource {
         return movieService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Movie findOne(@PathVariable Long id) throws InstanceNotFoundException {
-        return movieService.findById(id);
+    @GetMapping("/{idMovie}")
+    public Movie findOne(@PathVariable Long idMovie) throws InstanceNotFoundException {
+        return movieService.findById(idMovie);
     }
 
     

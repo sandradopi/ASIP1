@@ -5,13 +5,13 @@
 
     <div class="float-right">
       <b-btn
-        :to="{ name: 'PostCreate' }"
-        variant="primary">New</b-btn>
+        :to="{ name: 'MovieCreate' }"
+        variant="outline-primary">New</b-btn>
     </div>
     <div
       v-for="movie in movies"
       :key="movie.id">
-      <router-link :to="{ name: 'PostDetail', params: { id: movie.id } }">
+      <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
         {{ movie.name }}
       </router-link>
     </div>
@@ -27,13 +27,13 @@ export default {
   data() {
     return {
       loading: false,
-      movie: null,
+      movies: null,
       error: null
     }
   },
   created() {
     this.loading = true
-
+    
     HTTP.get('movies')
     .then(response => this.movies = response.data)
     .catch(err => this.error = err.response.data)

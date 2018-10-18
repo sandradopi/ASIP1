@@ -1,14 +1,14 @@
 import VueRouter from 'vue-router'
 
-import { PostDetail, PostForm, PostList } from './entities'
+import { MovieDetail, MovieForm, MovieList } from './entities'
 import Home from './components/Home'
 
 const routes = [
   { path: '/', component: Home },
-  { name: 'PostDetail', path: '/posts/:id', component: PostDetail },
-  { name: 'PostCreate', path: '/posts/new', component: PostForm },
-  { name: 'PostUpdate', path: '/posts/:id/edit', component: PostForm },
-  { name: 'PostList', path: '/posts', component: PostList }
+  { name: 'MovieDetail', path: '/movies/:id', component: MovieDetail },
+  { name: 'MovieCreate', path: '/movies/new', component: MovieForm },
+  { name: 'MovieUpdate', path: '/movies/:id/edit', component: MovieForm },
+  { name: 'MovieList', path: '/movies', component: MovieList }
 ]
 
 export default new VueRouter({

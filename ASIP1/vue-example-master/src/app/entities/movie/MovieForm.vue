@@ -13,7 +13,7 @@
     </div>
 
     <b-form
-      v-if="post"
+      v-if="movie"
       class="app-form"
       @submit="save">
 
@@ -22,32 +22,31 @@
         label-for="title">
         <b-form-input
           id="title"
-          v-model="post.title"
+          v-model="movie.name"
           type="text"
           required
           placeholder="Enter title"/>
       </b-form-group>
 
       <b-form-group
-        label="Author:"
-        label-for="author">
+        label="Data"
+        label-for="data">
         <b-form-select
-          id="author"
-          :options="users"
-          v-model="post.author"
+          id="data"
+          v-model="movie.data"
           required/>
       </b-form-group>
 
       <b-form-group
-        label="Body:"
-        label-for="body">
+        label="Summary:"
+        label-for="summary">
         <b-form-textarea
-          id="body"
-          v-model="post.body"
+          id="summary"
+          v-model="movie.summary"
           :rows="3"
           :max-rows="6"
           required
-          placeholder="Enter body"/>
+          placeholder="Enter a Summary"/>
       </b-form-group>
     </b-form>
   </LoadingPage>
@@ -61,57 +60,35 @@ export default {
   components: { LoadingPage },
   data() {
     return {
-      post: {},
+      movie: {},
       error: null,
       loading: false,
-      allUsers: []
     }
   },
-  computed: {
-    users() {
-      return this.allUsers.map(user => {
-        return {
-          text: user.name,
-          value: user
-        }
-      })
-    }
-  },
+ 
   created() {
-    this.getUsers()
-    if (this.$route.params.id) {
       this.loading = true
-
-      HTTP.get(`posts/${this.$route.params.id}`)
-      .then(response => this.post = response.data)
+      HTTP.get(`movies/${this.$route.params.id}`)
+      .then(response => this.movie = response.data)
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
-    } else {
-      this.post = {}
-    }
-  },
-  methods: {
-    getUsers() {
-      HTTP.get('users')
-      .then(response => this.allUsers = response.data)
-      .catch(err => this.error = err.message)
-    },
+  }, 
     save() {
       if (this.$route.params.id) {
-        HTTP.put(`posts/${this.$route.params.id}`, this.post)
+        HTTP.put(`movies/${this.$route.params.id}`, this.movie)
         .then(response =>
-          this.$router.replace({ name: 'PostDetail', params: { id: response.data.id }}))
+          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.id }}))
         .catch(err => this.error = err.message)
       } else {
-        HTTP.post('posts', this.post)
+        HTTP.post('movies', this.movie)
         .then(response =>
-          this.$router.replace({ name: 'PostDetail', params: { id: response.data.id }}))
+          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.id }}))
         .catch(err => this.error = err.message)
       }
     },
     back() {
       this.$router.go(-1)
     }
-  }
+  
 }
 </script>

@@ -3,19 +3,19 @@
     :loading="loading"
     :error="error">
 
-    <div v-if="post">
+    <div v-if="movie">
       <div class="float-right">
         <b-btn
           variant="primary"
           @click="back()">Back</b-btn>
         <b-btn
-          :to="{ name: 'PostUpdate', params: { id: post.id }}"
+          :to="{ name: 'MovieUpdate', params: { id: movie.id }}"
           variant="primary">Edit</b-btn>
       </div>
-      <h3>{{ post.title }}</h3> <!-- el que definimos en la parte javaScript -->
-      <h5>{{ post.author.name }}</h5>
+      <h3>{{ movie.data}}</h3> <!-- el que definimos en la parte javaScript -->
+      <h5>{{ movie.name}}</h5>
       <hr>
-      <div class="post">{{ post.body }}</div>
+      <div class="movie">{{ movie.summary }}</div>
     </div>
   </LoadingPage>
 </template>
@@ -30,7 +30,7 @@ export default {
   data() {
     return { //datos que usamos
       loading: false,
-      post: null, //un dato que es post todo lo que visualicemos va a estar alli
+      movie: null, //un dato que es post todo lo que visualicemos va a estar alli
       error: null
     }
   },
@@ -42,12 +42,12 @@ export default {
   },
   methods: {
     fetchData() {
-      this.error = this.post = null
+      this.error = this.movie = null
       this.loading = true
 
-      HTTP.get(`posts/${this.$route.params.id}`) 
+      HTTP.get(`movies/${this.$route.params.id}`) 
       //hace una peticion a nuestro cliente rest, url del api a un id concreto
-      .then(response => this.post = response.data)
+      .then(response => this.movie = response.data)
       //pilla la respuesta y le asocia el valor al post (nos llega un jason {"id":valor;})
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
