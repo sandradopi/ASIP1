@@ -9,11 +9,12 @@
           variant="primary"
           @click="back()">Back</b-btn>
         <b-btn
-          :to="{ name: 'MovieUpdate', params: { id: movie.id }}"
+          :to="{ name: 'MovieUpdate', params: { id: movie.idMovie}}"
           variant="primary">Edit</b-btn>
       </div>
-      <h3>{{ movie.data}}</h3> <!-- el que definimos en la parte javaScript -->
-      <h5>{{ movie.name}}</h5>
+      <h3>{{ movie.name}}</h3> <!-- el que definimos en la parte javaScript -->
+      <h5>{{ movie.data}}</h5>
+      <h5>{{ movie.duration}}</h5>
       <hr>
       <div class="movie">{{ movie.summary }}</div>
     </div>

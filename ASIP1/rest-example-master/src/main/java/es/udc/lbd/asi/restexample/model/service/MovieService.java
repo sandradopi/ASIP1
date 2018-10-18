@@ -25,5 +25,13 @@ public class MovieService implements MovieServiceInterface{
     public Movie findById(Long idMovie) throws InstanceNotFoundException {
         return movieDAO.findById(idMovie);
     }
+    
+    public Movie save(Movie movie) {
+        return movieDAO.save(movie);
+    }
+
+    public void deleteById(Long idMovie) {
+        movieDAO.deleteById(idMovie);
+    }
 
 }

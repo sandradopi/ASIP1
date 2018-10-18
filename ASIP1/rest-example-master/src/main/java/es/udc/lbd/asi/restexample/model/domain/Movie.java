@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 @Entity
 @Table(name="Movie")
 
@@ -19,6 +21,7 @@ public class Movie {
     private String name;
     private String summary;
     private Integer duration;
+    //@Type NO FUNCIONA, MIRARLO
     private Date data;
 
     public Movie() {

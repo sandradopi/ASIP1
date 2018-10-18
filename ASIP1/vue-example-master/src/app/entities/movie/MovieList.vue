@@ -10,7 +10,7 @@
     </div>
     <div
       v-for="movie in movies"
-      :key="movie.id">
+      :key="movie.idMovie">
       <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
         {{ movie.name }}
       </router-link>

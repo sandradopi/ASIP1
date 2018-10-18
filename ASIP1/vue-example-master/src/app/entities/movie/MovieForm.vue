@@ -29,13 +29,27 @@
       </b-form-group>
 
       <b-form-group
-        label="Data"
-        label-for="data">
-        <b-form-select
-          id="data"
+        label="Date:"
+        label-for="date">
+        <b-form-input
+          id="date"
           v-model="movie.data"
-          required/>
+          type="text"
+          required
+          placeholder="Enter a date"/>
       </b-form-group>
+
+      <b-form-group
+        label="Duration:"
+        label-for="duration">
+        <b-form-input
+          id="duration"
+          v-model="movie.duration"
+          type="text"
+          required
+          placeholder="Enter a duration"/>
+      </b-form-group>
+
 
       <b-form-group
         label="Summary:"
@@ -67,28 +81,34 @@ export default {
   },
  
   created() {
+      if (this.$route.params.id) {
       this.loading = true
+
       HTTP.get(`movies/${this.$route.params.id}`)
       .then(response => this.movie = response.data)
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
-  }, 
+    } else {
+      this.movie = {}
+    }
+  },
+   methods: {
     save() {
       if (this.$route.params.id) {
         HTTP.put(`movies/${this.$route.params.id}`, this.movie)
         .then(response =>
-          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.id }}))
+          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }}))
         .catch(err => this.error = err.message)
       } else {
         HTTP.post('movies', this.movie)
         .then(response =>
-          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.id }}))
+          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }}))
         .catch(err => this.error = err.message)
       }
     },
     back() {
       this.$router.go(-1)
     }
-  
+  }
 }
 </script>
