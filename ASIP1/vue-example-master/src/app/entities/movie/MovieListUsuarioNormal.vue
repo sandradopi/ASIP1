@@ -3,10 +3,6 @@
     :loading="loading"
     :error="error">
 
-      <b-btn
-          :to="{ name: 'MovieCreate' }"
-          variant="outline-primary" class="botton">New</b-btn>
-
       <ul class="menu">
         <li><a href="#">Vistas</a></li>
         <li><a href="#">Pendientes</a></li>

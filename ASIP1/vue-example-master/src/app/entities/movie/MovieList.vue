@@ -3,10 +3,7 @@
     :loading="loading"
     :error="error">
 
-    <div class="float-right">
-      <b-btn
-        :to="{ name: 'MovieCreate' }"
-        variant="outline-primary">New</b-btn>
+    
     </div>
     <div class= "namemovie"
       v-for="movie in movies"

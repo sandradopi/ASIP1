@@ -120,7 +120,7 @@ export default {
       this.$router.go(-1)
     },
     _successHandler(response) {
-       this.$router.replace({ name: 'MovieList', params: { id: response.data.login }})
+       this.$router.replace({ name: 'MovieListUsuarioNormal', params: { id: response.data.login }})
      },
      _errorHandler(err) {
        this.error = err.response.data.message
