@@ -13,9 +13,11 @@
           variant="primary">Edit</b-btn>
       </div>
       <h3>{{ movie.name}}</h3> <!-- el que definimos en la parte javaScript -->
-      <h5>{{ movie.data}}</h5>
-      <h5>{{ movie.duration}}</h5>
+      <br>
+      <h5>Release date: {{ movie.data}}</h5>
+      <h5>Duration: {{ movie.duration}}</h5>
       <hr>
+      <h5>Movie´s summary:</h5>
       <div class="movie">{{ movie.summary }}</div>
     </div>
   </LoadingPage>
@@ -61,7 +63,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .post {
+  .movie {
     white-space: pre;
   }
 </style>

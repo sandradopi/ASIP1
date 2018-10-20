@@ -96,19 +96,23 @@ export default {
     save() {
       if (this.$route.params.id) {
         HTTP.put(`movies/${this.$route.params.id}`, this.movie)
-        .then(response =>
-          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }}))
-        .catch(err => this.error = err.message)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
       } else {
         HTTP.post('movies', this.movie)
-        .then(response =>
-          this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }}))
-        .catch(err => this.error = err.message)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
       }
     },
     back() {
       this.$router.go(-1)
-    }
+    },
+    _successHandler(response) {
+       this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }})
+     },
+     _errorHandler(err) {
+       this.error = err.response.data.message
+     }
   }
 }
 </script>

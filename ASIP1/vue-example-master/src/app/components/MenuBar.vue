@@ -12,7 +12,7 @@
       <b-navbar-nav>
         <b-nav-item
           :to="{ name: 'MovieList' }"
-          exact>Películas</b-nav-item>
+          exact>Movies</b-nav-item>
       </b-navbar-nav>
 
     </b-collapse>

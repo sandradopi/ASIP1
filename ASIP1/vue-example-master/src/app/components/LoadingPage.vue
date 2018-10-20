@@ -10,6 +10,9 @@
       v-else-if="error"
       class="error">
       <pre>{{ error }}</pre>
+        <button
+         class="btn btn-primary"
+         @click="reload">Reload</button>
     </div>
 
     <slot v-else/>
@@ -26,9 +29,14 @@ export default {
       required: true
     },
     error: {
-      type: Object,
+      type: [ String, Object ],
       default: null
     }
+    },
+   methods: {
+     reload() {
+       this.$router.go()
+     }
   }
 }
 </script>
