@@ -26,6 +26,7 @@
 </div><!--En vue solo podemos tener un unico elemento, por eso todo en un div-->
 </template>
 
+
 <style scoped lang="scss">
 	.login{
 		margin-top: 50px;

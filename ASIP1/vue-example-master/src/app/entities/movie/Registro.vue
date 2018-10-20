@@ -3,3 +3,5 @@
       <h1 align="middle">Create your account </h1>
  </div>
  </template>
+<script>
+</script>

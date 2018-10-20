@@ -1,8 +1,7 @@
 import VueRouter from 'vue-router'
 
-import { MovieDetail, MovieForm, MovieList } from './entities'
+import { MovieDetail, MovieForm, MovieList, Registro } from './entities'
 import Home from './components/Home'
-import Registro from './components/Registro'
 
 const routes = [
   { path: '/', component: Home },
