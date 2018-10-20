@@ -14,22 +14,31 @@
   </div>
   <div class="button" align="middle">
       <b-btn
-        variant="primary"
-        @click="enter()">Enter</b-btn>
-    </div>
+          :to="{ name: 'MovieList'}"
+          variant="primary">Enter</b-btn>
+   <br/>
+   <b-btn
+          :to="{ name: 'Registro'}"
+          variant="sumit">If you don´t have an account, create it!</b-btn>
+   
+
+   </div>
 </div><!--En vue solo podemos tener un unico elemento, por eso todo en un div-->
 </template>
 
 <style scoped lang="scss">
 	.login{
-		margin-top: 60px;
+		margin-top: 50px;
 	}
 	.contenido{
 		margin-top: 60px;
 	}
 	.button{
-		margin-top: 20px;
+		margin: 20px;
+	}
+	.registro{
+		margin: 20px;
 	}
 
-
 </style>
+

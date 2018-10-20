@@ -8,7 +8,7 @@
         :to="{ name: 'MovieCreate' }"
         variant="outline-primary">New</b-btn>
     </div>
-    <div
+    <div class= "namemovie"
       v-for="movie in movies"
       :key="movie.idMovie">
       <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
@@ -41,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .namemovie {
+    margin :10px;
+  }
+</style>
+
