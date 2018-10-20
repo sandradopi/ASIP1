@@ -3,11 +3,17 @@
     :loading="loading"
     :error="error">
 
-    <div class="float-right">
       <b-btn
-        :to="{ name: 'MovieCreate' }"
-        variant="outline-primary">New</b-btn>
-    </div>
+          :to="{ name: 'MovieCreate' }"
+          variant="outline-primary" class="botton">New</b-btn>
+
+      <ul class="menu">
+        <li><a href="#">Vistas</a></li>
+        <li><a href="#">Pendientes</a></li>
+      </ul>
+    </br>
+    </br>
+    <hr>
     <div class= "namemovie"
       v-for="movie in movies"
       :key="movie.idMovie">
@@ -45,5 +51,21 @@ export default {
   .namemovie {
     margin :10px;
   }
+  ul.menu{
+    padding:0;
+    margin:0;
+    float: left;
+  }
+
+  ul.menu li{
+    display:block;
+    float:left;
+    padding: 10px;
+    color:#ffff;
+  }
+.botton{
+  float:right;
+}
+
 </style>
 

@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 
-import { MovieDetail, MovieForm, MovieList, Registro } from './entities'
+import { MovieDetail, MovieForm, MovieList,MovieListUsuarioNormal, Registro } from './entities'
 import Home from './components/Home'
 
 const routes = [
@@ -9,7 +9,8 @@ const routes = [
   { name: 'Registro', path: '/movies/createAccount', component: Registro},
   { name: 'MovieDetail', path: '/movies/:id', component: MovieDetail },
   { name: 'MovieUpdate', path: '/movies/:id/edit', component: MovieForm },
-  { name: 'MovieList', path: '/movies', component: MovieList }
+  { name: 'MovieList', path: '/movies', component: MovieList },
+  { name: 'MovieListUsuarioNormal', path: '/moviesUsuario', component: MovieListUsuarioNormal }
 ]
 
 export default new VueRouter({

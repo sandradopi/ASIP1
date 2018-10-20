@@ -14,7 +14,7 @@
   </div>
   <div class="button" align="middle">
       <b-btn
-          :to="{ name: 'MovieList'}"
+          :to="{ name: 'MovieListUsuarioNormal'}"
           variant="primary">Enter</b-btn>
    <br/>
    <b-btn
