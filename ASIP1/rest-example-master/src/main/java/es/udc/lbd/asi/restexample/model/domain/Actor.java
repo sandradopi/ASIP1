@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,10 +14,16 @@ import javax.persistence.Table;
 
 public class Actor {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idActor;
+	@Column(unique = true)
 	private String name;
+	@Column(unique = true)
 	private String surname1;
+	@Column(unique = true)
 	private String surname2;
+	@Column(unique = true)
 	private Date birthdate;
 	
 	public Actor() {
@@ -32,9 +37,7 @@ public class Actor {
 		this.birthdate = birthdate;
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idActor")
+	
 	public Long getIdActor() {
 		return idActor;
 	}
@@ -43,7 +46,6 @@ public class Actor {
 		this.idActor = idActor;
 	}
 	
-	@Column(name="name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -52,7 +54,6 @@ public class Actor {
 		this.name = name;
 	}
 	
-	@Column(name="surname1", nullable=false)
 	public String getSurname1() {
 		return surname1;
 	}
@@ -61,7 +62,6 @@ public class Actor {
 		this.surname1 = surname1;
 	}
 	
-	@Column(name="surname2")
 	public String getSurname2() {
 		return surname2;
 	}
@@ -70,7 +70,6 @@ public class Actor {
 		this.surname2 = surname2;
 	}
 	
-	@Column(name="birthdate", nullable=false)
 	public Date getBirthdate() {
 		return birthdate;
 	}

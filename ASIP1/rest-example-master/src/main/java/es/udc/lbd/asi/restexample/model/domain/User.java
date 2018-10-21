@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,12 +12,20 @@ import javax.persistence.Table;
 
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(unique = true)
 	private String login;
+	@Column(unique = true)
 	private String password;
+	@Column(unique = true)
 	private String name;
+	@Column(unique = true)
 	private String surname1;
+	@Column(unique = true)
 	private String surname2;
+	@Column(unique = true)
 	private int phone;
 	
 	public User() {
@@ -34,8 +41,6 @@ public class User {
 		this.phone = phone;
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -44,8 +49,6 @@ public class User {
 		this.id = id;
 	}
 
-	
-	@Column(name="login", nullable=false, unique = true)
 	public String getLogin() {
 		return login;
 	}
@@ -54,7 +57,6 @@ public class User {
 		this.login = login;
 	}
 	
-	@Column(name="password", nullable=false)
 	public String getPassword() {
 		return password;
 	}
@@ -63,7 +65,6 @@ public class User {
 		this.password = password;
 	}
 	
-	@Column(name="name", nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -72,7 +73,6 @@ public class User {
 		this.name = name;
 	}
 	
-	@Column(name="surname1", nullable=false)
 	public String getSurname1() {
 		return surname1;
 	}
@@ -81,7 +81,6 @@ public class User {
 		this.surname1 = surname1;
 	}
 	
-	@Column(name="surname2")
 	public String getSurname2() {
 		return surname2;
 	}
@@ -90,7 +89,6 @@ public class User {
 		this.surname2 = surname2;
 	}
 	
-	@Column(name="phone")
 	public int getPhone() {
 		return phone;
 	}

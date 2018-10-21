@@ -7,21 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
 @Table(name="Movie")
 
 public class Movie {
    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovie;
+	@Column(unique = true)
     private String name;
+	@Column(unique = true)
     private String summary;
+    @Column(unique = true)
     private Integer duration;
     //@Type NO FUNCIONA, MIRARLO
+    @Column(unique = false)
     private Date data;
 
     public Movie() {
@@ -35,9 +38,6 @@ public class Movie {
 		this.data = data;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idMovie", nullable=false)
 	public Long getIdMovie() {
 		return idMovie;
 	}
@@ -46,7 +46,6 @@ public class Movie {
 		this.idMovie = idMovie;
 	}
 	
-	@Column(name="name", nullable=false, unique = true)
 	public String getName() {
 		return name;
 	}
@@ -55,7 +54,6 @@ public class Movie {
 		this.name = name;
 	}
 
-	@Column(name="summary")
 	public String getSummary() {
 		return summary;
 	}
@@ -65,7 +63,6 @@ public class Movie {
 		this.summary = summary;
 	}
 
-	@Column(name="duration", nullable=false)
 	public Integer getDuration() {
 		return duration;
 	}
@@ -74,7 +71,6 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	@Column(name="data", nullable=false)
 	public Date getData() {
 		return data;
 	}

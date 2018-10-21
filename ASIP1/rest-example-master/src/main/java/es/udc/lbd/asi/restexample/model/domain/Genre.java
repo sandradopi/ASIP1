@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +12,10 @@ import javax.persistence.Table;
 
 public class Genre {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idGenre;
+	@Column(unique= true)
 	private String type;
 	
 	public Genre() {
@@ -25,9 +27,6 @@ public class Genre {
 		this.type = type;
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idGenre")
 	public Long getIdGenre() {
 		return idGenre;
 	}
@@ -36,7 +35,6 @@ public class Genre {
 		this.idGenre = idGenre;
 	}
 
-	@Column(name="type", nullable=false, unique= true)
 	public String getType() {
 		return type;
 	}
