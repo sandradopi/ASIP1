@@ -7,7 +7,8 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.User;
 
 public interface UserServiceInterface {
-    public User findByLogin(String login) throws InstanceNotFoundException;;
+    public User findByLogin(String login) throws InstanceNotFoundException;
+    public List<User> findAll();
     public User save(User user);
 
 }

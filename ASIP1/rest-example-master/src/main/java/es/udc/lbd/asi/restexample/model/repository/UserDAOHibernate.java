@@ -9,23 +9,21 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.User;
 
 @Repository
-public class UserDAOMemory implements UserDAO {
+public class UserDAOHibernate implements UserDAO {
 
 
 	@Override
 	public User findByLogin(String login) throws InstanceNotFoundException{
-		 return InMemoryDB.user.get(login);
+		return null;
 		 
 	}
 	 @Override
 	    public User save(User user) {
-	  
-		 if (user.getId() == null) {
-	            user.setId(InMemoryDB.idGenerator.addAndGet(1));
-	        }
-	        InMemoryDB.user.put(user.getId(), user);
-	        return user;
-	    }
+		 return null;}
+	@Override
+	public List<User> findAll() {
+		return null;
+	}
 
 	   
 

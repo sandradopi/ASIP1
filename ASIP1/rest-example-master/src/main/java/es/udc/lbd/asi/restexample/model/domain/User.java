@@ -24,9 +24,8 @@ public class User {
 	public User() {
     }
 
-	public User(Long id, String login, String password, String name, String surname1, String surname2, int phone) {
+	public User(String login, String password, String name, String surname1, String surname2, int phone) {
 		super();
-		this.id= id;
 		this.login = login;
 		this.password = password;
 		this.name = name;
@@ -36,8 +35,7 @@ public class User {
 	}
 	
 	@Id
-	@SequenceGenerator (name="id", sequenceName ="id_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -47,7 +45,7 @@ public class User {
 	}
 
 	
-	@Column(name="login", nullable=false)
+	@Column(name="login", nullable=false, unique = true)
 	public String getLogin() {
 		return login;
 	}

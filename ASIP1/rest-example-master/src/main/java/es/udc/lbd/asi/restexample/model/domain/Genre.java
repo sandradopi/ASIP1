@@ -20,16 +20,14 @@ public class Genre {
 		
 	}
 	
-	public Genre(Long idGenre, String type) {
+	public Genre(String type) {
 		super();
-		this.idGenre = idGenre;
 		this.type = type;
 	}
 	
 	@Id
-	@SequenceGenerator (name="idGenre", sequenceName ="id_genre_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "idGenre")
-	@Column(name="idGenre", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idGenre")
 	public Long getIdGenre() {
 		return idGenre;
 	}
@@ -38,7 +36,7 @@ public class Genre {
 		this.idGenre = idGenre;
 	}
 
-	@Column(name="type", nullable=false)
+	@Column(name="type", nullable=false, unique= true)
 	public String getType() {
 		return type;
 	}

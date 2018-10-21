@@ -8,6 +8,7 @@ import es.udc.lbd.asi.restexample.model.domain.User;
 
 public interface UserDAO {
     public User findByLogin(String Login) throws InstanceNotFoundException;
+    public List <User> findAll();
     public User save(User user);
 ;
 

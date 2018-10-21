@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.management.InstanceNotFoundException;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 public interface MovieServiceInterface {
-    public List<Movie> findAll();
-    public Movie findById(Long id) throws InstanceNotFoundException;;
-    public Movie save(Movie movie);
+    public List<MovieDTO> findAll();
+    public MovieDTO findById(Long id) throws InstanceNotFoundException;;
+    public MovieDTO save(MovieDTO movie);
     public void deleteById(Long idMovie);
+    public MovieDTO update(MovieDTO post);
 }

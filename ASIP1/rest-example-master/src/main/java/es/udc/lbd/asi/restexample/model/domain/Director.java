@@ -21,17 +21,15 @@ public class Director {
 	public Director() {
 	}
 	
-	public Director(Long idDirector, String name, String surname1, String surname2) {
+	public Director(String name, String surname1, String surname2) {
 		super();
-		this.idDirector = idDirector;
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
 	}
 	
 	@Id
-	@SequenceGenerator (name="idDirector", sequenceName ="id_director_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "idDirector")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idDirector", nullable=false)
 	public Long getIdDirector() {
 		return idDirector;

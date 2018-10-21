@@ -24,9 +24,8 @@ public class Actor {
 	public Actor() {
     }
 
-	public Actor(Long idActor, String name, String surname1, String surname2, Date birthdate) {
+	public Actor(String name, String surname1, String surname2, Date birthdate) {
 		super();
-		this.idActor = idActor;
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
@@ -34,9 +33,8 @@ public class Actor {
 	}
 	
 	@Id
-	@SequenceGenerator (name="idActor", sequenceName ="id_actor_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "idActor")
-	@Column(name="idActor", nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idActor")
 	public Long getIdActor() {
 		return idActor;
 	}

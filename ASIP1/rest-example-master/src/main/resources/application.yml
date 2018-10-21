@@ -5,11 +5,21 @@ spring:
     username: asi
     password: asi
   jpa:
-    # From https://vkuzel.com/spring-boot-jpa-hibernate-atomikos-postgresql-exception
-    # Disable feature detection by this undocumented parameter. Check the org.hibernate.engine.jdbc.internal.JdbcServiceImpl.configure method for more details.
-    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    properties:
+        hibernate:
+            # From https://vkuzel.com/spring-boot-jpa-hibernate-atomikos-postgresql-exception
+            # Disable feature detection by this undocumented parameter. Check the org.hibernate.engine.jdbc.internal.JdbcServiceImpl.configure method for more details.
+            temp.use_jdbc_metadata_defaults: false
+            current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
     # Because detection is disabled you have to set correct dialect by hand.
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
-    # Creates and drops the database each run. Change to update/validate when needed.
+    # create      => crea la base de datos desde 0 cada vez que se lanza el proyecto, borrando todo
+    # create-drop => crea la base de datos desde 0 cada vez que se lanza el proyecto, borrando todo
+    #                también borra todo cuando el proyecto deja de ejecutarse, dejando la BD vacía
+    # update      => actualiza el esquema según lo vaya necesitando, sin borrar nada
+    #                puede causar problemas, que se solucionarían borrando la base de datos a mano
+    # validate    => no hace nada, espera que sea el usuario el que gestione la base de datos
+    #                y simplemente valida el esquema al iniciarse la aplicación
+    #                si se usan sql de creación e inserción de datos sería la modalidad a usar
     hibernate.ddl-auto: create

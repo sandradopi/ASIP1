@@ -27,6 +27,11 @@ public class UserService implements UserServiceInterface{
     public User save(User user) {
         return userDAO.save(user);
     }
+
+	@Override
+	public List<User> findAll() {
+		return userDAO.findAll();
+	}
    
 
 }

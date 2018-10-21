@@ -27,9 +27,8 @@ public class Movie {
     public Movie() {
     }
 
-	public Movie(Long idMovie, String name, String summary, Integer duration, Date data) {
+	public Movie(String name, String summary, Integer duration, Date data) {
 		super();
-		this.idMovie = idMovie;
 		this.name = name;
 		this.summary = summary;
 		this.duration = duration;
@@ -37,8 +36,7 @@ public class Movie {
 	}
 
 	@Id
-	@SequenceGenerator (name="idMovie", sequenceName ="id_movie_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "idMovie")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idMovie", nullable=false)
 	public Long getIdMovie() {
 		return idMovie;
@@ -48,7 +46,7 @@ public class Movie {
 		this.idMovie = idMovie;
 	}
 	
-	@Column(name="name", nullable=false)
+	@Column(name="name", nullable=false, unique = true)
 	public String getName() {
 		return name;
 	}

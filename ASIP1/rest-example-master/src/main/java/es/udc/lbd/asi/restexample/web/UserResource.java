@@ -27,6 +27,11 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    
+    @GetMapping
+    public List<User> findAll() {
+        return userService.findAll();
+    }
  
     @GetMapping("/{login}")
     public User findOne(@PathVariable String login) throws InstanceNotFoundException {
