@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,14 @@ public class Status {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idStatus;
 	
+	@ManyToOne
+	@JoinColumn (name = "idMovie")
+	private Movie movie;
+	
+	@ManyToOne
+	@JoinColumn (name = "idUser")
+	private NormalUser normalUser;
+
 	public Status() {
 		
 	}
@@ -25,6 +35,22 @@ public class Status {
 
 	public void setIdStatus(Long idStatus) {
 		this.idStatus = idStatus;
+	}
+	
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+	
+	public NormalUser getNormalUser() {
+		return normalUser;
+	}
+
+	public void setNormalUser(NormalUser normalUser) {
+		this.normalUser = normalUser;
 	}
 
 	@Override

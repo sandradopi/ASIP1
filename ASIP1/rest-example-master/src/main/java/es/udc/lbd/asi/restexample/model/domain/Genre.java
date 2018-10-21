@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
+import java.util.HashSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,8 @@ public class Genre {
 	private Long idGenre;
 	@Column(unique= true)
 	private String type;
+	
+	private HashSet<Movie> movies = new HashSet<Movie>();
 	
 	public Genre() {
 		
@@ -41,6 +45,14 @@ public class Genre {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public HashSet<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(HashSet<Movie> movies) {
+		this.movies = movies;
 	}
 
 	@Override

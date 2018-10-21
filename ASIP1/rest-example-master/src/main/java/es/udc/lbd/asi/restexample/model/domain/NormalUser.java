@@ -1,5 +1,8 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name="NormalUser")
 
-public class User {
+public class NormalUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +31,12 @@ public class User {
 	@Column(unique = true)
 	private int phone;
 	
-	public User() {
+	private Set<Status> status = new HashSet<Status>();
+	
+	public NormalUser() {
     }
 
-	public User(String login, String password, String name, String surname1, String surname2, int phone) {
+	public NormalUser(String login, String password, String name, String surname1, String surname2, int phone) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -96,6 +101,14 @@ public class User {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
+	
+	public Set<Status> getStatus() {
+		return status;
+	}
+
+	public void setStatus(Set<Status> status) {
+		this.status = status;
+	}
 
 	@Override
 	public int hashCode() {
@@ -119,7 +132,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		NormalUser other = (NormalUser) obj;
 		if (idUser == null) {
 			if (other.idUser != null)
 				return false;
@@ -160,6 +173,5 @@ public class User {
 		return "User [id=" + idUser + ", login=" + login + ", password=" + password + ", name=" + name + ", surname1="
 				+ surname1 + ", surname2=" + surname2 + ", phone=" + phone + "]";
 	}
-	
-	
+
 }

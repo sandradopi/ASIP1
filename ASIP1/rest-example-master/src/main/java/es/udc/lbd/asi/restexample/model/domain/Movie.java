@@ -1,12 +1,18 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +33,28 @@ public class Movie {
     @Column(unique = false)
     private Date data;
 
+    @ManyToOne
+    @JoinColumn (name = "idGenre")
+    private Genre genre;
+    
+    private Set<Status> status = new HashSet<Status>();
+    
+    @ManyToMany
+    @JoinTable(
+    		name = "MOVIE_ACTOR",
+    		joinColumns = {@JoinColumn(name = "idMovie")},
+    		inverseJoinColumns = {@JoinColumn(name = "idActor")}
+    		)
+    private Set<Actor> participantes = new HashSet<Actor>();
+    
+    @ManyToMany
+    @JoinTable(
+    		name = "MOVIE_DIRECTOR",
+    		joinColumns = {@JoinColumn(name = "idMovie")},
+    		inverseJoinColumns = {@JoinColumn(name = "idDirector")}
+    		)
+    private Set<Director> dirigentes = new HashSet<Director>();
+    
     public Movie() {
     }
 
@@ -77,6 +105,38 @@ public class Movie {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	
+	public Set<Status> getStatus() {
+		return status;
+	}
+
+	public void setStatus(Set<Status> status) {
+		this.status = status;
+	}
+	
+	public Set<Actor> getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(Set<Actor> participantes) {
+		this.participantes = participantes;
+	}
+	
+	public Set<Director> getDirigentes() {
+		return dirigentes;
+	}
+
+	public void setDirigentes(Set<Director> dirigentes) {
+		this.dirigentes = dirigentes;
 	}
 
 	@Override
@@ -129,12 +189,8 @@ public class Movie {
 	}
 
 	@Override
-	public String toString() {
-		return "Movie [id=" + idMovie + ", name=" + name + ", summary=" + summary + ", duration=" + duration + ", data="
+	public String toString() {		return "Movie [id=" + idMovie + ", name=" + name + ", summary=" + summary + ", duration=" + duration + ", data="
 				+ data + "]";
 	}
 
-    
-
-  
 }

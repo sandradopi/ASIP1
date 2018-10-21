@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name="AdminUser")
 
-public class User {
+public class AdminUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class User {
 	@Column(unique = true)
 	private int phone;
 	
-	public User() {
+	public AdminUser() {
     }
 
-	public User(String login, String password, String name, String surname1, String surname2, int phone) {
+	public AdminUser(String login, String password, String name, String surname1, String surname2, int phone) {
 		super();
 		this.login = login;
 		this.password = password;
@@ -119,7 +119,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		AdminUser other = (AdminUser) obj;
 		if (idUser == null) {
 			if (other.idUser != null)
 				return false;
@@ -160,6 +160,4 @@ public class User {
 		return "User [id=" + idUser + ", login=" + login + ", password=" + password + ", name=" + name + ", surname1="
 				+ surname1 + ", surname2=" + surname2 + ", phone=" + phone + "]";
 	}
-	
-	
 }
