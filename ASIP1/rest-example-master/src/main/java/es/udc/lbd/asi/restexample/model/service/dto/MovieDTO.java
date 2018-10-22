@@ -3,7 +3,6 @@ package es.udc.lbd.asi.restexample.model.service.dto;
 import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 

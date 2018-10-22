@@ -17,13 +17,13 @@ public class Actor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idActor;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String name;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname1;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname2;
-	@Column(unique = true)
+	@Column(unique = false)
 	private Date birthdate;
 	
 	public Actor() {

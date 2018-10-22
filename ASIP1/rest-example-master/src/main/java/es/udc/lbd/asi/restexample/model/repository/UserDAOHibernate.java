@@ -1,32 +1,41 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.management.InstanceNotFoundException;
+
 import org.springframework.stereotype.Repository;
-import es.udc.lbd.asi.restexample.model.domain.Movie;
+
 import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
 @Repository
-public class UserDAOHibernate implements UserDAO {
+public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 
 
 	@Override
 	public User findByLogin(String login) throws InstanceNotFoundException{
-		return null;
-		 
+		return (User) getSession().createQuery("from User").list();
 	}
-	 @Override
-	    public User save(User user) {
-		 return null;}
+	
+	@Override
+	public void save(User user) {
+		getSession().saveOrUpdate(user);
+	}
+	
 	@Override
 	public List<User> findAll() {
-		return null;
+		return getSession().createQuery("from User").list();
+	}
+	
+	@Override
+	public User findById(Long idUser) {
+		return (User) getSession().createQuery("from User p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
 	}
 
-	   
+	@Override
+	public void deleteById(Long idUser) {
+		getSession().delete(findById(idUser));
+	}
 
-
-   
 }

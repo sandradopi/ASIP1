@@ -17,7 +17,7 @@ public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idGenre;
-	@Column(unique= true)
+	@Column(unique= false)
 	private String type;
 	
 	private HashSet<Movie> movies = new HashSet<Movie>();

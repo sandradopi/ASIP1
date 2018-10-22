@@ -3,7 +3,7 @@ package es.udc.lbd.asi.restexample.model.service;
 import java.util.List;
 
 import javax.management.InstanceNotFoundException;
-import es.udc.lbd.asi.restexample.model.domain.Movie;
+
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 public interface MovieServiceInterface {

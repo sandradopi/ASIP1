@@ -17,15 +17,15 @@ public class AdminUser {
 	private Long idUser;
 	@Column(unique = true)
 	private String login;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String password;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String name;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname1;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname2;
-	@Column(unique = true)
+	@Column(unique = false)
 	private int phone;
 	
 	public AdminUser() {

@@ -15,11 +15,11 @@ public class Director {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idDirector;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String name;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname1;
-	@Column(unique = true)
+	@Column(unique = false)
 	private String surname2;
 	
 	public Director() {

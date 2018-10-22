@@ -23,11 +23,11 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovie;
-	@Column(unique = true)
+	@Column(unique = false)
     private String name;
-	@Column(unique = true)
+	@Column(unique = false)
     private String summary;
-    @Column(unique = true)
+    @Column(unique = false)
     private Integer duration;
     //@Type NO FUNCIONA, MIRARLO
     @Column(unique = false)

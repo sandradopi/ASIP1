@@ -15,7 +15,7 @@ public class StatusViewed {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idStatus;
-	@Column(unique= true)
+	@Column(unique= false)
 	private int valoration;
 	
 	public StatusViewed() {
