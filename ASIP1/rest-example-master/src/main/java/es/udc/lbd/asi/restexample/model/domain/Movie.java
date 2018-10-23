@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Movie {
    
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idMovie")
     private Long idMovie;
 	@NotEmpty
     private String name;
@@ -34,7 +36,7 @@ public class Movie {
     @NotNull
     private Date data;
 
-    @ManyToOne
+  /*  @ManyToOne
     @JoinColumn (name = "idGenre")
     private Genre genre;
     
@@ -57,7 +59,7 @@ public class Movie {
     		joinColumns = {@JoinColumn(name = "idMovie")},
     		inverseJoinColumns = {@JoinColumn(name = "idDirector")}
     		)
-    private Set<Director> dirigentes = new HashSet<Director>();
+    private Set<Director> dirigentes = new HashSet<Director>();*/
     
     public Movie() {
     }
@@ -111,7 +113,7 @@ public class Movie {
 		this.data = data;
 	}
 	
-	public Genre getGenre() {
+	/*public Genre getGenre() {
 		return genre;
 	}
 
@@ -142,7 +144,7 @@ public class Movie {
 
 	public void setDirigentes(Set<Director> dirigentes) {
 		this.dirigentes = dirigentes;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
