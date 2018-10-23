@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Movie")
@@ -23,21 +25,23 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovie;
-	@Column(unique = false)
+	@NotEmpty
     private String name;
-	@Column(unique = false)
     private String summary;
-    @Column(unique = false)
+    @NotNull
     private Integer duration;
     //@Type NO FUNCIONA, MIRARLO
-    @Column(unique = false)
+    @NotNull
     private Date data;
 
     @ManyToOne
     @JoinColumn (name = "idGenre")
     private Genre genre;
     
+    @OneToMany
+    @JoinColumn (name = "idStatus")
     private Set<Status> status = new HashSet<Status>();
+    
     
     @ManyToMany
     @JoinTable(
@@ -122,6 +126,7 @@ public class Movie {
 	public void setStatus(Set<Status> status) {
 		this.status = status;
 	}
+	
 	
 	public Set<Actor> getParticipantes() {
 		return participantes;

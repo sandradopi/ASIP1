@@ -37,7 +37,7 @@ public class MovieService implements MovieServiceInterface{
     }
     
     @Transactional(readOnly = false)
-    public MovieDTO update(MovieDTO movie) {
+    public MovieDTO update(MovieDTO movie) throws InstanceNotFoundException {
         Movie bdMovie = movieDAO.findById(movie.getIdMovie());
         bdMovie.setName(movie.getName());
         bdMovie.setSummary(movie.getSummary());
@@ -48,7 +48,7 @@ public class MovieService implements MovieServiceInterface{
         }
 
     @Transactional(readOnly = false)
-    public void deleteById(Long idMovie) {
+    public void deleteById(Long idMovie) throws InstanceNotFoundException{
     	movieDAO.deleteById(idMovie);
     }
 

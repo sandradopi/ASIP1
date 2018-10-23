@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="User")
 
 public class User {
@@ -16,16 +20,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUser;
 	@Column(unique = true)
+	@NotEmpty
 	private String login;
-	@Column(unique = false)
+	@NotEmpty
 	private String password;
-	@Column(unique = false)
+	@NotEmpty
 	private String name;
-	@Column(unique = false)
+	@NotEmpty
 	private String surname1;
-	@Column(unique = false)
 	private String surname2;
-	@Column(unique = false)
 	private int phone;
 	
 	public User() {

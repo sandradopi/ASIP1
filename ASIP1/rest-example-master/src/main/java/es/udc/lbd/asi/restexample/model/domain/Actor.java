@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="Actor")
@@ -16,14 +17,13 @@ public class Actor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idActor")
 	private Long idActor;
-	@Column(unique = false)
+	@NotEmpty
 	private String name;
-	@Column(unique = false)
+	@NotEmpty
 	private String surname1;
-	@Column(unique = false)
 	private String surname2;
-	@Column(unique = false)
 	private Date birthdate;
 	
 	public Actor() {

@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="StatusViewed")
+@PrimaryKeyJoinColumn(name="idStatus")
 
-public class StatusViewed {
+public class StatusViewed extends Status {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

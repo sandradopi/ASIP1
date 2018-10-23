@@ -4,19 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="StatusPending")
+@PrimaryKeyJoinColumn(name="idStatus")
 
-public class StatusPending {
+public class StatusPending extends Status{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idStatus;
 	
 	public StatusPending() {
-		
+		super();
 	}
 
 	public Long getIdStatus() {

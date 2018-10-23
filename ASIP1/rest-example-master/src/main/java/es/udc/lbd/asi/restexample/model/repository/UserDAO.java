@@ -11,6 +11,7 @@ public interface UserDAO {
     public User findByLogin(String Login) throws InstanceNotFoundException;
     public List <User> findAll();
     public void save(User user);
-    public User findById(Long idUser);
-    public void deleteById(Long idUser);
+    public User findById(Long idUser) throws InstanceNotFoundException;
+    public void deleteById(Long idUser) throws InstanceNotFoundException;
+   
 }

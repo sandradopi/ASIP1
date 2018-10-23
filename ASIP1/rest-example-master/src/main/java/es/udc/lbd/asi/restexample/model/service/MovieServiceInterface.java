@@ -8,8 +8,8 @@ import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 public interface MovieServiceInterface {
     public List<MovieDTO> findAll();
-    public MovieDTO findById(Long id) throws InstanceNotFoundException;;
+    public MovieDTO findById(Long id) throws InstanceNotFoundException;
     public MovieDTO save(MovieDTO movie);
-    public void deleteById(Long idMovie);
-    public MovieDTO update(MovieDTO post);
+    public void deleteById(Long idMovie) throws InstanceNotFoundException;
+    public MovieDTO update(MovieDTO post) throws InstanceNotFoundException;
 }

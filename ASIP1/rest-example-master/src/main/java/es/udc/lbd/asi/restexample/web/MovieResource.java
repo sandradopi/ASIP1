@@ -59,7 +59,7 @@ public class MovieResource {
     }
 
     @DeleteMapping("/{idMovie}")
-    public void delete(@RequestParam Long idMovie) {
+    public void delete(@RequestParam Long idMovie) throws InstanceNotFoundException {
         movieService.deleteById(idMovie);
     }
     

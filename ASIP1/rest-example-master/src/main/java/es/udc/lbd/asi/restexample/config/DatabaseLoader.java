@@ -37,8 +37,8 @@ public class DatabaseLoader {
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void loadData() {
-        userService.save(new User("sandradopi", "asi", "Sandra","Dopico", "Cantarero",698787878));
-        userService.save(new User("sarayramilo", "asi", "Saray","Ramilo", "Loureiro",698121212));
+    	//userService.save(new User("sandradopi", "asi", "Sandra","Dopico", "Cantarero",698787878));
+    	//userService.save(new User("sarayramilo", "asi", "Saray","Ramilo", "Loureiro",698121212));
        
 
         movieService.save(new Movie("Harry Potter", "La pelicula trata sobre...",160,new Date(2015-11-04)));

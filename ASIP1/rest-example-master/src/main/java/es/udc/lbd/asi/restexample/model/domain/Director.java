@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="Director")
@@ -14,12 +16,12 @@ public class Director {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idDirector")
 	private Long idDirector;
-	@Column(unique = false)
+	@NotEmpty
 	private String name;
-	@Column(unique = false)
+	@NotEmpty
 	private String surname1;
-	@Column(unique = false)
 	private String surname2;
 	
 	public Director() {

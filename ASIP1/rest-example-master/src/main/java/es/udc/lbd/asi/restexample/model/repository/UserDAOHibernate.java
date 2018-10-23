@@ -14,8 +14,8 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 
 
 	@Override
-	public User findByLogin(String login) throws InstanceNotFoundException{
-		return (User) getSession().createQuery("from User").list();
+	public User findByLogin(String login) throws InstanceNotFoundException {
+		return (User) getSession().createQuery("from User p where p.login = :login").setParameter("login",login).uniqueResult();
 	}
 	
 	@Override
@@ -29,12 +29,12 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 	}
 	
 	@Override
-	public User findById(Long idUser) {
+	public User findById(Long idUser) throws InstanceNotFoundException {
 		return (User) getSession().createQuery("from User p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
 	}
 
 	@Override
-	public void deleteById(Long idUser) {
+	public void deleteById(Long idUser) throws InstanceNotFoundException {
 		getSession().delete(findById(idUser));
 	}
 

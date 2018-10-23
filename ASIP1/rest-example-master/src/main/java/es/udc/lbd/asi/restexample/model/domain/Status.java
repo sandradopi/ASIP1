@@ -4,11 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED) //Probar con Signgle table si no funciona solo una clase
 @Table(name="Status")
 
 public class Status {
@@ -37,7 +40,7 @@ public class Status {
 		this.idStatus = idStatus;
 	}
 	
-	public Movie getMovie() {
+	/*public Movie getMovie() {
 		return movie;
 	}
 
@@ -51,7 +54,7 @@ public class Status {
 
 	public void setNormalUser(NormalUser normalUser) {
 		this.normalUser = normalUser;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
