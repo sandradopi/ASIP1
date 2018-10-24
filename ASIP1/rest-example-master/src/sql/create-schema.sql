@@ -1,14 +1,13 @@
-DROP TABLE IF EXISTS movie;
+DROP TABLE IF EXISTS Movie;
 
-CREATE TABLE movie (
-idMovie Serial,
-name VARCHAR (32),
-summary TEXT,
-duration INT,
-data DATE,
-CONSTRAINT movie_pk PRIMARY KEY (idMovie)
-);
-
+ CREATE TABLE Movie (
+ 	id_movie Serial,
+ 	name VARCHAR(32),
+ 	summary TEXT,
+ 	duration INT,
+ 	data TIMESTAMP,
+ 	CONSTRAINT movie_pk PRIMARY KEY (id_movie)
+ );
        
 
         

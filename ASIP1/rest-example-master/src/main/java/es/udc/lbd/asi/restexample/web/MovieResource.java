@@ -21,6 +21,7 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
+import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
 
@@ -38,7 +39,7 @@ public class MovieResource {
     }
 
     @GetMapping("/{idMovie}")
-    public MovieDTO findOne(@PathVariable Long idMovie) throws InstanceNotFoundException {
+    public MovieDTO findOne(@PathVariable Long idMovie) throws InstanceNotFoundExceptionHIB{
         return movieService.findById(idMovie);
     }
     
@@ -59,7 +60,7 @@ public class MovieResource {
     }
 
     @DeleteMapping("/{idMovie}")
-    public void delete(@RequestParam Long idMovie) throws InstanceNotFoundException {
+    public void delete(@RequestParam Long idMovie) throws InstanceNotFoundExceptionHIB{
         movieService.deleteById(idMovie);
     }
     

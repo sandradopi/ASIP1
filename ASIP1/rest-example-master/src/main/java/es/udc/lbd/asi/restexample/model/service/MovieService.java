@@ -25,7 +25,7 @@ public class MovieService implements MovieServiceInterface{
     	return movieDAO.findAll().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());
     }
 
-    public MovieDTO findById(Long idMovie) throws InstanceNotFoundException {
+    public MovieDTO findById(Long idMovie)  {
     	 return new MovieDTO(movieDAO.findById(idMovie));
     }
     
@@ -37,7 +37,7 @@ public class MovieService implements MovieServiceInterface{
     }
     
     @Transactional(readOnly = false)
-    public MovieDTO update(MovieDTO movie) throws InstanceNotFoundException {
+    public MovieDTO update(MovieDTO movie){
         Movie bdMovie = movieDAO.findById(movie.getIdMovie());
         bdMovie.setName(movie.getName());
         bdMovie.setSummary(movie.getSummary());
@@ -48,7 +48,7 @@ public class MovieService implements MovieServiceInterface{
         }
 
     @Transactional(readOnly = false)
-    public void deleteById(Long idMovie) throws InstanceNotFoundException{
+    public void deleteById(Long idMovie) {
     	movieDAO.deleteById(idMovie);
     }
 

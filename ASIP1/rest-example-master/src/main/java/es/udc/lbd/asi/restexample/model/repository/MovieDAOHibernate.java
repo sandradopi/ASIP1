@@ -1,11 +1,7 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
 import java.util.List;
-
-import javax.management.InstanceNotFoundException;
-
 import org.springframework.stereotype.Repository;
-
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
@@ -20,7 +16,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	}
 
 	@Override
-	public Movie findById(Long idMovie) throws InstanceNotFoundException{
+	public Movie findById(Long idMovie) {
 		 return (Movie) getSession().createQuery("from Movie p where p.idMovie = :idMovie").setParameter("idMovie", idMovie).uniqueResult();
 		 
 	}
@@ -30,7 +26,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	 }
 
 	 @Override
-	 public void deleteById(Long idMovie) throws InstanceNotFoundException{
+	 public void deleteById(Long idMovie) {
 	    getSession().delete(findById(idMovie));
 	 }
 

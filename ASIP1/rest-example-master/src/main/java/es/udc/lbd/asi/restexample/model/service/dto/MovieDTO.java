@@ -2,7 +2,11 @@ package es.udc.lbd.asi.restexample.model.service.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
@@ -12,10 +16,10 @@ public class MovieDTO {
     @NotEmpty
     private String name;
     private String summary;
-    @NotEmpty
-    private Date data ;
-    @NotEmpty
+    @NotNull
     private Integer duration;
+    @NotNull
+    private Date data ;
 
     public MovieDTO() {
     	
