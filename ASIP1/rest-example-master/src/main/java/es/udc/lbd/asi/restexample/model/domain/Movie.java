@@ -41,10 +41,6 @@ public class Movie {
     @NotNull
     private Genre genre;
     
-    @OneToMany
-    @JoinColumn (name = "idStatus")
-    private Set<Status> status = new HashSet<Status>();
-    
     
     @ManyToMany
     @JoinTable(
@@ -68,7 +64,7 @@ public class Movie {
 
 
 	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
-			@NotNull Genre genre, Set<Status> status, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
+			@NotNull Genre genre897, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
 		super();
 		this.hidden = hidden;
 		this.name = name;
@@ -76,7 +72,6 @@ public class Movie {
 		this.duration = duration;
 		this.data = data;
 		this.genre = genre;
-		this.status = status;
 		this.participantes = participantes;
 		this.dirigentes = dirigentes;
 	}
@@ -141,13 +136,6 @@ public class Movie {
 		this.genre = genre;
 	}
 	
-	public Set<Status> getStatus() {
-		return status;
-	}
-
-	public void setStatus(Set<Status> status) {
-		this.status = status;
-	}
 	
 	
 	public Set<Actor> getParticipantes() {

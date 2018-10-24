@@ -18,9 +18,11 @@ public class Status {
 	private Long idStatus;
 	private int valoration;
 	private tipoStatus type;
+	
 	@ManyToOne
 	@JoinColumn (name = "idMovie")
 	private Movie movie;
+	
 	@ManyToOne
 	@JoinColumn (name = "idUser")
 	private NormalUser normalUser;

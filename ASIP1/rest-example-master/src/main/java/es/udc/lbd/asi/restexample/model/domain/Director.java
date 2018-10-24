@@ -1,11 +1,15 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -23,17 +27,22 @@ public class Director {
 	@NotEmpty
 	private String surname1;
 	private String surname2;
+	@ManyToMany(mappedBy="dirigentes")
+	private Set<Movie> managment = new HashSet<Movie>();
 	
 	public Director() {
 	}
 	
-	public Director(String name, String surname1, String surname2) {
+	
+	public Director(@NotEmpty String name, @NotEmpty String surname1, String surname2, Set<Movie> managment) {
+		super();
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
+		this.managment = managment;
 	}
-	
-	public Director(String name, String surname1) {
+
+	public Director(@NotEmpty String name, @NotEmpty String surname1) {
 		this.name = name;
 		this.surname1 = surname1;
 	}

@@ -17,12 +17,12 @@ public class AdminUser extends User {
 	
 	public AdminUser() {
     }
-	
 
-
-	public AdminUser(String login, String password, String name, String surname1, String surname2, int phone) {
-		super(login, password, name, surname1, surname2, phone);
+	public AdminUser(String login, String email, String password, String name, String surname1, String surname2,
+			int phone) {
+		super(login, email, password, name, surname1, surname2, phone);
 	}
+	
 
 
 

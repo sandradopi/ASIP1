@@ -22,6 +22,9 @@ public class User {
 	@Column(unique = true)
 	@NotEmpty
 	private String login;
+	@Column(unique = true)
+	@NotEmpty
+	private String email;
 	@NotEmpty
 	private String password;
 	@NotEmpty
@@ -34,9 +37,9 @@ public class User {
 	public User() {
     }
 
-	public User(String login, String password, String name, String surname1, String surname2, int phone) {
-		super();
+	public User(String login,String email, String password, String name, String surname1, String surname2, int phone) {
 		this.login = login;
+		this.email=email;
 		this.password = password;
 		this.name = name;
 		this.surname1 = surname1;
@@ -44,6 +47,16 @@ public class User {
 		this.phone = phone;
 	}
 	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Long getIdUser() {
 		return idUser;
 	}

@@ -29,7 +29,6 @@ public class MovieDTO {
     private Date data ;
     @NotNull
     private Genre genre;
-    private Set<Status> status = new HashSet<Status>();
     private Set<Actor> participantes = new HashSet<Actor>();
     @NotNull
     private Set<Director> dirigentes = new HashSet<Director>();
@@ -46,7 +45,6 @@ public class MovieDTO {
          this.duration = movie.getDuration();
          this.data = movie.getData();
          this.genre = movie.getGenre();
-         this.status = movie.getStatus();
          this.participantes = movie.getParticipantes();
          this.dirigentes = movie.getDirigentes();
     }
@@ -109,13 +107,6 @@ public class MovieDTO {
 		this.genre = genre;
 	}
 
-	public Set<Status> getStatus() {
-		return status;
-	}
-
-	public void setStatus(Set<Status> status) {
-		this.status = status;
-	}
 
 	public Set<Actor> getParticipantes() {
 		return participantes;

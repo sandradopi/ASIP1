@@ -11,6 +11,8 @@ public class UserDTO {
 	@NotEmpty
 	private String login;
 	@NotEmpty
+	private String email;
+	@NotEmpty
 	private String password;
 	@NotEmpty
 	private String name;
@@ -26,11 +28,22 @@ public class UserDTO {
 	public UserDTO(User user) {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
+		this.email=user.getEmail();
 		this.password = user.getPassword();
 		this.name = user.getName();
 		this.surname1 = user.getSurname1();
 		this.surname2 = user.getSurname2();
 		this.phone = user.getPhone();
+	}
+
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getIdUser() {

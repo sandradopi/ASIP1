@@ -24,7 +24,7 @@ public class UserService implements UserServiceInterface{
     }
     
     public UserDTO save(UserDTO user) {
-    	User bdUser = new User(user.getLogin(), user.getPassword(), user.getName(), user.getSurname1(), user.getSurname2(), user.getPhone());
+    	User bdUser = new User(user.getLogin(), user.getEmail(), user.getPassword(), user.getName(), user.getSurname1(), user.getSurname2(), user.getPhone());
         userDAO.save(bdUser);
         return new UserDTO(bdUser);
     }

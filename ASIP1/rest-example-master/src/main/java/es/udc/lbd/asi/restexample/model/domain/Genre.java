@@ -23,9 +23,7 @@ public class Genre {
 	private Long idGenre;
 	@NotEmpty
 	private String type;
-	@OneToMany
-    @JoinColumn (name = "idMovies")
-	private Set<Movie> movies = new HashSet<Movie>();
+	
 	
 	public Genre() {
 		
@@ -52,48 +50,7 @@ public class Genre {
 		this.type = type;
 	}
 	
-	public Set<Movie> getMovies() {
-		return movies;
-	}
-
-	public void setMovies(Set<Movie> movies) {
-		this.movies = movies;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idGenre == null) ? 0 : idGenre.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Genre other = (Genre) obj;
-		if (idGenre == null) {
-			if (other.idGenre != null)
-				return false;
-		} else if (!idGenre.equals(other.idGenre))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
-	}
 	
-	@Override
-	public String toString() {
-		return "Genre [id=" + idGenre + ", type=" + type + "]";
-	}
+
 	
 }
