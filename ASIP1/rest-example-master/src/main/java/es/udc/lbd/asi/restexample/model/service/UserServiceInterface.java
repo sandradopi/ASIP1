@@ -7,7 +7,7 @@ import javax.management.InstanceNotFoundException;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 public interface UserServiceInterface {
-    public UserDTO findByLogin(String login) throws InstanceNotFoundException;
+    public UserDTO findByLogin(String login);
     public List<UserDTO> findAll();
     public UserDTO save(UserDTO user);
 

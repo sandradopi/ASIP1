@@ -19,7 +19,7 @@ public class UserService implements UserServiceInterface{
   @Autowired
     private UserDAO userDAO;
 
-    public UserDTO findByLogin(String login) throws InstanceNotFoundException{
+    public UserDTO findByLogin(String login){
         return new UserDTO(userDAO.findByLogin(login));
     }
     

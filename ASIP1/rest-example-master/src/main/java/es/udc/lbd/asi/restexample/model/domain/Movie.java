@@ -35,8 +35,9 @@ public class Movie {
     @NotNull
     private Date data;
 
-  /*  @ManyToOne
+    @ManyToOne
     @JoinColumn (name = "idGenre")
+    @NotNull
     private Genre genre;
     
     @OneToMany
@@ -58,17 +59,26 @@ public class Movie {
     		joinColumns = {@JoinColumn(name = "idMovie")},
     		inverseJoinColumns = {@JoinColumn(name = "idDirector")}
     		)
-    private Set<Director> dirigentes = new HashSet<Director>();*/
+    @NotNull
+    private Set<Director> dirigentes = new HashSet<Director>();
     
     public Movie() {
     }
 
-	public Movie(String name, String summary, Integer duration, Date data) {
+
+	public Movie(@NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
+			@NotNull Genre genre, Set<Status> status, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
 		this.name = name;
 		this.summary = summary;
 		this.duration = duration;
 		this.data = data;
+		this.genre = genre;
+		this.status = status;
+		this.participantes = participantes;
+		this.dirigentes = dirigentes;
 	}
+
+
 
 	public Long getIdMovie() {
 		return idMovie;
@@ -111,7 +121,7 @@ public class Movie {
 		this.data = data;
 	}
 	
-	/*public Genre getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 
@@ -142,6 +152,6 @@ public class Movie {
 
 	public void setDirigentes(Set<Director> dirigentes) {
 		this.dirigentes = dirigentes;
-	}*/
+	}
 
 }

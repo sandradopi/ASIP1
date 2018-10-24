@@ -31,7 +31,8 @@ public class MovieService implements MovieServiceInterface{
     
     @Transactional(readOnly = false)
     public MovieDTO save(MovieDTO movie) {
-    	Movie bdMovie = new Movie(movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
+    	Movie bdMovie = new Movie(movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData(),movie.getGenre(),movie.getStatus(),
+    			movie.getParticipantes(), movie.getDirigentes());
         movieDAO.save(bdMovie);
         return new MovieDTO(bdMovie);
     }

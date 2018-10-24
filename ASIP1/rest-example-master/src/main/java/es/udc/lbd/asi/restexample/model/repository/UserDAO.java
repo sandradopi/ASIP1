@@ -8,10 +8,10 @@ import es.udc.lbd.asi.restexample.model.domain.User;
 
 
 public interface UserDAO {
-    public User findByLogin(String Login) throws InstanceNotFoundException;
+    public User findByLogin(String Login) ;
     public List <User> findAll();
     public void save(User user);
-    public User findById(Long idUser) throws InstanceNotFoundException;
-    public void deleteById(Long idUser) throws InstanceNotFoundException;
+    public User findById(Long idUser) ;
+    public void deleteById(Long idUser);
    
 }

@@ -36,7 +36,25 @@ public class Actor {
 		this.surname2 = surname2;
 		this.birthdate = birthdate;
 	}
+	public Actor(String name, String surname1) {
+		super();
+		this.name = name;
+		this.surname1 = surname1;
+		
+	}
 	
+	public Actor(String name, String surname1, Date birthdate) {
+		super();
+		this.name = name;
+		this.surname1 = surname1;
+		this.birthdate = birthdate;}
+	
+	public Actor(String name, String surname1, String surname2) {
+		super();
+		this.name = name;
+		this.surname1 = surname1;
+		this.surname2 = surname2;
+	}
 	
 	public Long getIdActor() {
 		return idActor;

@@ -3,6 +3,7 @@ package es.udc.lbd.asi.restexample.model.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +21,9 @@ public class NormalUser extends User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idUser")
 	private Long idUser;
-
+	
 	@OneToMany
     @JoinColumn (name = "idStatus")
 	private Set<Status> status = new HashSet<Status>();
@@ -30,8 +32,9 @@ public class NormalUser extends User {
     }
 
 
-	public NormalUser(String login, String password, String name, String surname1, String surname2, int phone) {
+	public NormalUser( String login, String password, String name, String surname1, String surname2, int phone, Set<Status> status) {
 		super(login, password, name, surname1, surname2, phone);
+		this.status=status;
 	}
 
 

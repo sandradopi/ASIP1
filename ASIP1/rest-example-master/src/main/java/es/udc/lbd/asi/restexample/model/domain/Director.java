@@ -28,10 +28,14 @@ public class Director {
 	}
 	
 	public Director(String name, String surname1, String surname2) {
-		super();
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
+	}
+	
+	public Director(String name, String surname1) {
+		this.name = name;
+		this.surname1 = surname1;
 	}
 	
 	public Long getIdDirector() {

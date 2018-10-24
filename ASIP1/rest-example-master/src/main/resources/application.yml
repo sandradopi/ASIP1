@@ -22,4 +22,4 @@ spring:
     # validate    => no hace nada, espera que sea el usuario el que gestione la base de datos
     #                y simplemente valida el esquema al iniciarse la aplicación
     #                si se usan sql de creación e inserción de datos sería la modalidad a usar
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: create
