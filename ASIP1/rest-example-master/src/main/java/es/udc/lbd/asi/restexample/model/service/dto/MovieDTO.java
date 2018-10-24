@@ -19,6 +19,7 @@ import es.udc.lbd.asi.restexample.model.domain.Status;
 
 public class MovieDTO {
     private Long idMovie;
+    private Boolean hidden;
     @NotEmpty
     private String name;
     private String summary;
@@ -39,6 +40,7 @@ public class MovieDTO {
     
     public MovieDTO(Movie movie) {
     	 this.idMovie = movie.getIdMovie();
+    	 this.hidden=movie.getHidden();
          this.name = movie.getName();
          this.summary = movie.getSummary();
          this.duration = movie.getDuration();
@@ -48,6 +50,16 @@ public class MovieDTO {
          this.participantes = movie.getParticipantes();
          this.dirigentes = movie.getDirigentes();
     }
+    
+    
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
+	}
 
 	public Long getIdMovie() {
 		return idMovie;

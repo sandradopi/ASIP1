@@ -2,6 +2,8 @@ package es.udc.lbd.asi.restexample.model.service.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.udc.lbd.asi.restexample.model.domain.User;
 
 public class UserDTO {
@@ -47,6 +49,7 @@ public class UserDTO {
 		this.login = login;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

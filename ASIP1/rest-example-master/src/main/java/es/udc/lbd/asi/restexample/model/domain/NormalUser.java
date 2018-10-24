@@ -19,10 +19,6 @@ import javax.persistence.Table;
 
 public class NormalUser extends User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idUser")
-	private Long idUser;
 	
 	@OneToMany
     @JoinColumn (name = "idStatus")
@@ -38,15 +34,6 @@ public class NormalUser extends User {
 	}
 
 
-	public Long getIdUser() {
-		return idUser;
-	}
-
-
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-	
 	
 
 	public Set<Status> getStatus() {
@@ -56,39 +43,6 @@ public class NormalUser extends User {
 
 	public void setStatus(Set<Status> status) {
 		this.status = status;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		NormalUser other = (NormalUser) obj;
-		if (idUser == null) {
-			if (other.idUser != null)
-				return false;
-		} else if (!idUser.equals(other.idUser))
-			return false;
-		return true;
-	}
-
-
-	@Override
-	public String toString() {
-		return "NormalUser [idUser=" + idUser + "]";
 	}
 
 	

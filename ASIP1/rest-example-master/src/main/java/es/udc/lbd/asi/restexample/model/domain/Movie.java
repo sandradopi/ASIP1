@@ -26,6 +26,7 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovie;
+	private Boolean hidden;
 	@NotEmpty
     private String name;
     private String summary;
@@ -66,8 +67,10 @@ public class Movie {
     }
 
 
-	public Movie(@NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
+	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
 			@NotNull Genre genre, Set<Status> status, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
+		super();
+		this.hidden = hidden;
 		this.name = name;
 		this.summary = summary;
 		this.duration = duration;
@@ -78,6 +81,15 @@ public class Movie {
 		this.dirigentes = dirigentes;
 	}
 
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
+	}
 
 
 	public Long getIdMovie() {

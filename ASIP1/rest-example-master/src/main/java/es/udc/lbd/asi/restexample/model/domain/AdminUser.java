@@ -14,11 +14,6 @@ import javax.persistence.Table;
 
 public class AdminUser extends User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idUser")
-	private Long idUser;
-	
 	
 	public AdminUser() {
     }
@@ -30,47 +25,5 @@ public class AdminUser extends User {
 	}
 
 
-
-	public Long getIdUser() {
-		return idUser;
-	}
-
-
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AdminUser other = (AdminUser) obj;
-		if (idUser == null) {
-			if (other.idUser != null)
-				return false;
-		} else if (!idUser.equals(other.idUser))
-			return false;
-		return true;
-	}
-
-
-	@Override
-	public String toString() {
-		return "AdminUser [idUser=" + idUser + "]";
-	}
 
 }
