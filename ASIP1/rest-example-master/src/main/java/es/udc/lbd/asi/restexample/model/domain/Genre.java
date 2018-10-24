@@ -1,15 +1,9 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -23,7 +17,6 @@ public class Genre {
 	private Long idGenre;
 	@NotEmpty
 	private String type;
-	
 	
 	public Genre() {
 		
@@ -49,8 +42,5 @@ public class Genre {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-
-	
+		
 }

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -41,7 +39,6 @@ public class Movie {
     @NotNull
     private Genre genre;
     
-    
     @ManyToMany
     @JoinTable(
     		name = "MOVIE_ACTOR",
@@ -64,7 +61,7 @@ public class Movie {
 
 
 	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
-			@NotNull Genre genre897, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
+			@NotNull Genre genre, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
 		super();
 		this.hidden = hidden;
 		this.name = name;
@@ -76,11 +73,9 @@ public class Movie {
 		this.dirigentes = dirigentes;
 	}
 
-
 	public Boolean getHidden() {
 		return hidden;
 	}
-
 
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
@@ -135,8 +130,6 @@ public class Movie {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
-	
-	
 	
 	public Set<Actor> getParticipantes() {
 		return participantes;

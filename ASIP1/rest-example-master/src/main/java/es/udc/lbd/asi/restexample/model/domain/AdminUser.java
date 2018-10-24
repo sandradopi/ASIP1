@@ -1,10 +1,6 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -13,9 +9,9 @@ import javax.persistence.Table;
 @Table(name="AdminUser")
 
 public class AdminUser extends User {
-
 	
 	public AdminUser() {
+		
     }
 
 	public AdminUser(String login, String email, String password, String name, String surname1, String surname2,
@@ -23,7 +19,4 @@ public class AdminUser extends User {
 		super(login, email, password, name, surname1, surname2, phone);
 	}
 	
-
-
-
 }

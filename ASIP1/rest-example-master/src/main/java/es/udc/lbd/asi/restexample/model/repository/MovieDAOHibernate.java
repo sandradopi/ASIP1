@@ -8,7 +8,6 @@ import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
 @Repository
 public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
-
 	
 	@Override
 	public List<Movie> findAll() {
@@ -29,7 +28,5 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	 public void deleteById(Long idMovie) {
 	    getSession().delete(findById(idMovie));
 	 }
-
-
    
 }

@@ -27,11 +27,9 @@ public class Status {
 	@JoinColumn (name = "idUser")
 	private NormalUser normalUser;
 
-	
 	public Status() {
 		
 	}
-	
 	
 	public Status(int valoration, tipoStatus type, Movie movie, NormalUser normalUser) {
 		super();
@@ -41,31 +39,21 @@ public class Status {
 		this.normalUser = normalUser;
 	}
 
-
-
 	public int getValoration() {
 		return valoration;
 	}
-
-
 
 	public void setValoration(int valoration) {
 		this.valoration = valoration;
 	}
 
-
-
 	public tipoStatus getType() {
 		return type;
 	}
 
-
-
 	public void setType(tipoStatus type) {
 		this.type = type;
 	}
-
-
 
 	public Long getIdStatus() {
 		return idStatus;
@@ -90,6 +78,5 @@ public class Status {
 	public void setNormalUser(NormalUser normalUser) {
 		this.normalUser = normalUser;
 	}
-
 
 }
