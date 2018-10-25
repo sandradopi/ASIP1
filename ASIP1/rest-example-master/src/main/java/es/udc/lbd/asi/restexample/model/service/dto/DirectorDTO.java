@@ -3,15 +3,22 @@ package es.udc.lbd.asi.restexample.model.service.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotEmpty;
+
+import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
 public class DirectorDTO {
 	private Long idDirector;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String surname1;
 	private String surname2;
-	private Set<Movie> managment = new HashSet<Movie>();
+	private Set<MovieDTO> managment = new HashSet<MovieDTO>();
+	private Set<MovieDTO> auxiliarM = new HashSet<MovieDTO>();
+	
 	
 	public DirectorDTO() {
 		
@@ -22,7 +29,10 @@ public class DirectorDTO {
 		this.name = director.getName();
 		this.surname1 = director.getSurname1();
 		this.surname2 = director.getSurname2();
-		this.managment = director.getManagment();
+		for(Movie m: director.getManagment()){
+       	 auxiliarM.add(new MovieDTO(m));
+        }
+		this.managment=auxiliarM;
 	}
 
 	public Long getIdDirector() {
@@ -57,11 +67,11 @@ public class DirectorDTO {
 		this.surname2 = surname2;
 	}
 
-	public Set<Movie> getManagment() {
+	public Set<MovieDTO> getManagment() {
 		return managment;
 	}
 
-	public void setManagment(Set<Movie> managment) {
+	public void setManagment(Set<MovieDTO> managment) {
 		this.managment = managment;
 	}
 	

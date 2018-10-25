@@ -16,9 +16,9 @@
   </div>
 
   <div class="button" align="middle">
-	   <button
-         class="btn btn-primary"
-         @click="getUsers">Enter</button>
+	    <b-btn
+	          :to="{ name: 'MovieListUsuarioNormal'}"
+	          variant="primary">Enter</b-btn>
 
 	   <br/>
 	   <b-btn
@@ -29,32 +29,6 @@
 </div><!--En vue solo podemos tener un unico elemento, por eso todo en un div-->
 </template>
 
-<script>
-
-export default {
-  data() {
-    return {
-      allUsers: [],
-      encontrado:null,
-      valor:document.getElementById("login").value
-    }
-  },  
-  
-  methods: {
-    getUsers() {
-      HTTP.get('users')
-      .then(response => this.allUsers = response.data)
-      .catch(err => this.error = err.message)
-      encontrado = allUsers.find(function(element) {
-  		return element == valor;}); //si encontrado es undefined es que el usuario no existe
-      if(encontrado != "undefined"){ 
-      	this.$router.replace({ name: 'MovieListUsuarioNormal', params: { id: valor}})}
-      else{this.$router.replace({ name: 'Home', params: { id: "Este login no "}})}
-    },
-  }
-}
-
-</script>
 
 <style scoped lang="scss">
 	.login{

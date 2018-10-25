@@ -9,8 +9,16 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
+
+import es.udc.lbd.asi.restexample.model.domain.Actor;
+import es.udc.lbd.asi.restexample.model.domain.Director;
+import es.udc.lbd.asi.restexample.model.domain.Genre;
+import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
+import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
+import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 
 @Configuration
 public class DatabaseLoader {
@@ -19,6 +27,15 @@ public class DatabaseLoader {
 
     @Autowired
     private MovieDAO movieService;
+    
+    @Autowired
+    private GenreDAO genreService;
+    
+    @Autowired
+    private DirectorDAO directorService;
+    
+    @Autowired
+    private ActorDAO actorService;
 
     @Autowired
     private DatabaseLoader databaseLoader;
@@ -36,8 +53,25 @@ public class DatabaseLoader {
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void loadData() {
-//crear objetos y añadirlos
+ 
+    Genre genre1= new Genre("Drama");
+    genreService.save(genre1);	
+    Actor actor1= new Actor("Angelina","Jolie");
+    actorService.save(actor1);
+    Actor actor2= new Actor("Brad","Pitt");
+    actorService.save(actor2);
+    Director director1= new Director("Alex","Iglesias");
+    directorService.save(director1);
     
-        
+    Set <Actor>participantes = new <Actor> HashSet();
+    participantes.add(actor1);
+    participantes.add(actor2);
+    Set <Director>dirigentes = new <Director> HashSet();
+    dirigentes.add(director1);
+    
+    
+    movieService.save
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, new Date(2015-11-04),
+    		genre1, participantes,dirigentes));
     }
 }

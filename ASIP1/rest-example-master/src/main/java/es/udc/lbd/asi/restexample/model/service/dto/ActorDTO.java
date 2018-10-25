@@ -4,18 +4,22 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.NotEmpty;
+
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
 public class ActorDTO {
 
 	private Long idActor;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String surname1;
 	private String surname2;
 	private Date birthdate;
-	private Set<Movie> actuations = new HashSet<Movie>();
-	
+	private Set<MovieDTO> actuations = new HashSet<MovieDTO>();
+	private Set<MovieDTO> auxiliarM = new HashSet<MovieDTO>();
 	public ActorDTO() {
 		
 	}
@@ -26,7 +30,10 @@ public class ActorDTO {
 		this.surname1 = actor.getSurname1();
 		this.surname2 = actor.getSurname2();
 		this.birthdate = actor.getBirthdate();
-		this.actuations = actor.getActuations();
+		for(Movie m: actor.getActuations()){
+       	 auxiliarM.add(new MovieDTO(m));
+        }
+		this.actuations=auxiliarM;
 	}
 	
 	public Long getIdActor() {
@@ -69,11 +76,11 @@ public class ActorDTO {
 		this.birthdate = birthdate;
 	}
 	
-	public Set<Movie> getActuations() {
+	public Set<MovieDTO> getActuations() {
 		return actuations;
 	}
 	
-	public void setActuations(Set<Movie> actuations) {
+	public void setActuations(Set<MovieDTO> actuations) {
 		this.actuations = actuations;
 	}
 	

@@ -3,31 +3,28 @@
     toggleable="md">
     <b-navbar-toggle target="nav_collapse"/>
     
-    <b-navbar-brand to="/">Log in</b-navbar-brand>
+    <b-navbar-brand to="/login">Log in</b-navbar-brand>
+     <b-navbar-brand to="/login">Log out</b-navbar-brand>
 
     <b-collapse
       id="nav_collapse"
       is-nav>
 
       <b-navbar-nav>
+      <b-nav-item
+          :to="{ name: 'MovieListUsuarioNormalVistas' }"
+          exact>Viewed Movies</b-nav-item>
+      <b-nav-item
+          :to="{ name: 'MovieListUsuarioNormalPendientes' }"
+          exact>Pending Movies</b-nav-item>
         <b-nav-item
-          :to="{ name: 'MovieList' }"
+          :to="{ name: 'MovieListUsuarioNormal' }"
           exact>Movies</b-nav-item>
       </b-navbar-nav>
 
     </b-collapse>
   </b-navbar>
 </template>
-
-<script>
-export default {
-  computed: {
-    entitiesActive: function () {
-      return [ 'MovieCreate', 'MovieList', 'DirectorList' ].indexOf(this.$route.name) != -1
-    }
-  }
-}
-</script>
 
 <style scoped lang="scss">
   .movie {

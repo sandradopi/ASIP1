@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +34,13 @@ public class Movie {
     //@Type NO FUNCIONA, MIRARLO
     @NotNull
     private Date data;
-
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "idGenre")
     @NotNull
     private Genre genre;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     		name = "MOVIE_ACTOR",
     		joinColumns = {@JoinColumn(name = "idMovie")},
@@ -47,7 +48,8 @@ public class Movie {
     		)
     private Set<Actor> participantes = new HashSet<Actor>();
     
-    @ManyToMany
+    
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     		name = "MOVIE_DIRECTOR",
     		joinColumns = {@JoinColumn(name = "idMovie")},
@@ -72,6 +74,16 @@ public class Movie {
 		this.participantes = participantes;
 		this.dirigentes = dirigentes;
 	}
+	
+	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data) {
+		super();
+		this.hidden = hidden;
+		this.name = name;
+		this.summary = summary;
+		this.duration = duration;
+		this.data = data;
+	}
+
 
 	public Boolean getHidden() {
 		return hidden;

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Director {
 	private String surname1;
 	private String surname2;
 	
-	@ManyToMany(mappedBy="dirigentes")
+	@ManyToMany(mappedBy="dirigentes",fetch = FetchType.LAZY)
 	private Set<Movie> managment = new HashSet<Movie>();
 	
 	public Director() {
@@ -40,6 +41,13 @@ public class Director {
 		this.surname1 = surname1;
 		this.surname2 = surname2;
 		this.managment = managment;
+	}
+	
+	public Director(@NotEmpty String name, @NotEmpty String surname1, String surname2) {
+		super();
+		this.name = name;
+		this.surname1 = surname1;
+		this.surname2 = surname2;
 	}
 
 	public Director(@NotEmpty String name, @NotEmpty String surname1) {

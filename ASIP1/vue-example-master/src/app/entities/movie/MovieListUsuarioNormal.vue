@@ -2,13 +2,6 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-
-      <ul class="menu">
-        <li><a href="#">Vistas</a></li>
-        <li><a href="#">Pendientes</a></li>
-      </ul>
-    </br>
-    </br>
     <hr>
     <div class= "namemovie"
       v-for="movie in movies"

@@ -1,7 +1,5 @@
 <template>
-<LoadingPage
-    :loading="loading"
-    :error="error">
+  <div>
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -74,6 +72,18 @@
           placeholder="Enter a password"/>
       </b-form-group>
 
+
+       <b-form-group
+        label="Email:"
+        label-for="email">
+        <b-form-input
+          id="email"
+          v-model="user.email"
+          type="text"
+          required
+          placeholder="Enter your email"/>
+      </b-form-group>
+
       <b-form-group
         label="Phone number:"
         label-for="phone">
@@ -87,31 +97,24 @@
 
     </b-form>
 </div>
-</LoadingPage>
+</div>
 </template>
 
 <script>
 import { HTTP } from '../../common/http-common'
-import LoadingPage from '../../components/LoadingPage'
 
 export default {
-  components: { LoadingPage },
   data() {
     return {
-      user:null,
+      user: {},
       error: null,
       loading: false,
     }
   },
  
-  created() {
-      this.user = {}
-    
-  },
    methods: {
     save() {
- 
-        HTTP.post('users', this.user)
+        HTTP.post('normal_users', this.user)
         .then(this._successHandler)
         .catch(this._errorHandler)
       

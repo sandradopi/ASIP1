@@ -24,11 +24,15 @@ public class MovieDTO {
     @NotNull
     private Date data ;
     @NotNull
-    private Genre genre;
-    private Set<Actor> participantes = new HashSet<Actor>();
+    private GenreDTO genre;
+    private Set<ActorDTO> participantes = new HashSet<ActorDTO>();
     @NotNull
-    private Set<Director> dirigentes = new HashSet<Director>();
-
+    private Set<DirectorDTO> dirigentes = new HashSet<DirectorDTO>();
+    private Set<ActorDTO> auxiliarA = new HashSet<ActorDTO>();
+    
+    
+    private Set<DirectorDTO> auxiliarD = new HashSet<DirectorDTO>();
+    
     public MovieDTO() {
     	
     }
@@ -40,9 +44,16 @@ public class MovieDTO {
          this.summary = movie.getSummary();
          this.duration = movie.getDuration();
          this.data = movie.getData();
-         this.genre = movie.getGenre();
-         this.participantes = movie.getParticipantes();
-         this.dirigentes = movie.getDirigentes();
+         this.genre = new GenreDTO(movie.getGenre());
+         for(Actor a: movie.getParticipantes()){
+        	 auxiliarA.add(new ActorDTO(a));
+         }
+         for(Director d: movie.getDirigentes()){
+        	 auxiliarD.add(new DirectorDTO(d));
+         }
+         this.participantes=auxiliarA;
+         this.dirigentes=auxiliarD;
+         
     }
     
     
@@ -95,28 +106,28 @@ public class MovieDTO {
 		this.duration = duration;
 	}
 
-	public Genre getGenre() {
+	public GenreDTO getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Genre genre) {
+	public void setGenre(GenreDTO genre) {
 		this.genre = genre;
 	}
 
 
-	public Set<Actor> getParticipantes() {
+	public Set<ActorDTO> getParticipantes() {
 		return participantes;
 	}
 
-	public void setParticipantes(Set<Actor> participantes) {
+	public void setParticipantes(Set<ActorDTO> participantes) {
 		this.participantes = participantes;
 	}
 
-	public Set<Director> getDirigentes() {
+	public Set<DirectorDTO> getDirigentes() {
 		return dirigentes;
 	}
 
-	public void setDirigentes(Set<Director> dirigentes) {
+	public void setDirigentes(Set<DirectorDTO> dirigentes) {
 		this.dirigentes = dirigentes;
 	}
 	

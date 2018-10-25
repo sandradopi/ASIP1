@@ -4,4 +4,5 @@ import es.udc.lbd.asi.restexample.model.domain.Actor;
 
 public interface ActorDAO {
 	public void save(Actor actor);
+	 public Actor findById(Long id);
 }

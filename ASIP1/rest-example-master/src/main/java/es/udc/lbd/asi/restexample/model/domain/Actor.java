@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Actor {
 	private String surname2;
 	private Date birthdate;
 	
-	@ManyToMany(mappedBy = "participantes")
+	@ManyToMany(mappedBy = "participantes", fetch = FetchType.LAZY)
     private Set<Movie> actuations = new HashSet<Movie>();
 
 	public Actor() {
@@ -43,6 +44,14 @@ public class Actor {
 		this.surname2 = surname2;
 		this.birthdate = birthdate;
 		this.actuations = actuations;
+	}
+	
+	public Actor(@NotEmpty String name, @NotEmpty String surname1, String surname2, Date birthdate) {
+		super();
+		this.name = name;
+		this.surname1 = surname1;
+		this.surname2 = surname2;
+		this.birthdate = birthdate;
 	}
 
 	public Actor(@NotEmpty String name, @NotEmpty String surname1) {
