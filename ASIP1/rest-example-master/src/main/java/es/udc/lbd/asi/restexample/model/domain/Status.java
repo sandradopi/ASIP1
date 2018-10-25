@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Status")
@@ -21,10 +22,12 @@ public class Status {
 	
 	@ManyToOne
 	@JoinColumn (name = "idMovie")
+	@NotNull
 	private Movie movie;
 	
 	@ManyToOne
 	@JoinColumn (name = "idUser")
+	@NotNull
 	private NormalUser normalUser;
 
 	public Status() {
@@ -37,6 +40,12 @@ public class Status {
 		this.type = type;
 		this.movie = movie;
 		this.normalUser = normalUser;
+	}
+	
+	public Status(int valoration, tipoStatus type) {
+		super();
+		this.valoration = valoration;
+		this.type = type;
 	}
 
 	public int getValoration() {

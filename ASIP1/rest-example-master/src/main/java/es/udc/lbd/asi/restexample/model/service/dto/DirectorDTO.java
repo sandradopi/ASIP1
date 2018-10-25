@@ -17,7 +17,7 @@ public class DirectorDTO {
 	private String surname1;
 	private String surname2;
 	private Set<MovieDTO> managment = new HashSet<MovieDTO>();
-	private Set<MovieDTO> auxiliarM = new HashSet<MovieDTO>();
+	
 	
 	
 	public DirectorDTO() {

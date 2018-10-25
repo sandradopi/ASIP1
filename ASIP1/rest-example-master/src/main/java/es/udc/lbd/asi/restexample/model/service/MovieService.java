@@ -51,7 +51,6 @@ public class MovieService implements MovieServiceInterface{
     	Set<Actor> auxiliarA = new HashSet<Actor>();
     	Set<Director> auxiliarD = new HashSet<Director>();
     	
-    	
     	for(ActorDTO a: movie.getParticipantes()){
     		auxiliarA.add(actorDAO.findById(a.getIdActor()));
         }

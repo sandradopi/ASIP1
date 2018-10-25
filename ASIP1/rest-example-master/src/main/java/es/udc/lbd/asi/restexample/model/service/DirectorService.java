@@ -21,11 +21,12 @@ public class DirectorService implements DirectorServiceInterface {
 	private DirectorDAO directorDAO;
 	@Autowired
 	private MovieDAO movieDAO;
-	private Set<Movie> auxiliarM = new HashSet<Movie>();
+	
 	
 	@Transactional(readOnly = false)
 	public DirectorDTO save(DirectorDTO director) {
 		Director bdDirector = new Director(director.getName(), director.getSurname1(), director.getSurname2());
+		Set<Movie> auxiliarM = new HashSet<Movie>();
 		for(MovieDTO m: director.getManagment()){
     		auxiliarM.add(movieDAO.findById(m.getIdMovie()));
         }

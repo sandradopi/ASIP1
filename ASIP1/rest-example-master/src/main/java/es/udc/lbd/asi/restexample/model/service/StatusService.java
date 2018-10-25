@@ -9,31 +9,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
+import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
+import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class ActorService implements ActorServiceInterface {
+public class StatusService implements StatusServiceInterface {
+	
 	@Autowired
-	private ActorDAO actorDAO;
+	private StatusDAO statusDAO;
 	@Autowired
 	private MovieDAO movieDAO;
+
+
 	
 	
 	@Transactional(readOnly = false)
-	public ActorDTO save(ActorDTO actor) {
-		Actor bdActor = new Actor(actor.getName(), actor.getSurname1(), actor.getSurname2(), actor.getBirthdate());
-		Set<Movie> auxiliarM = new HashSet<Movie>();
-		for(MovieDTO m: actor.getActuations()){
-    		auxiliarM.add(movieDAO.findById(m.getIdMovie()));
-        }
-		bdActor.setActuations(auxiliarM);
-		actorDAO.save(bdActor);
-		return new ActorDTO(bdActor);
+	public StatusDTO save(StatusDTO status) {
+		Status bdStatus = new Status(status.getValoration(),status.getType());
+		bdStatus.setMovie(movieDAO.findById(status.getMovie().getIdMovie()));
+		//bdStatus.getNormalUser()
+		statusDAO.save(bdStatus);
+		return new StatusDTO(bdStatus);
 	}
 	
 }

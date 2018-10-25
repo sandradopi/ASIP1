@@ -58,8 +58,6 @@ public class MovieDTO {
          
     }
     
-    
-
 	public Boolean getHidden() {
 		return hidden;
 	}

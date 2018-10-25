@@ -36,7 +36,7 @@ public class Actor {
 	public Actor() {
     }
 
-	public Actor(@NotEmpty String name, @NotEmpty String surname1, String surname2, Date birthdate,
+	public Actor(@NotEmpty String name, @NotEmpty String surname1, String surname2, Date birthdate ,
 			Set<Movie> actuations) {
 		super();
 		this.name = name;
@@ -114,6 +114,7 @@ public class Actor {
 		this.birthdate = birthdate;
 	}
 
+	
 	public Set<Movie> getActuations() {
 		return actuations;
 	}
