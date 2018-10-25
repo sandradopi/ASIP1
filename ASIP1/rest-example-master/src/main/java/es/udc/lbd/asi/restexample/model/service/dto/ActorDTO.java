@@ -19,7 +19,7 @@ public class ActorDTO {
 	private String surname2;
 	private Date birthdate;
 	private Set<MovieDTO> actuations = new HashSet<MovieDTO>();
-	private Set<MovieDTO> auxiliarM = new HashSet<MovieDTO>();
+	
 	public ActorDTO() {
 		
 	}
@@ -31,9 +31,8 @@ public class ActorDTO {
 		this.surname2 = actor.getSurname2();
 		this.birthdate = actor.getBirthdate();
 		for(Movie m: actor.getActuations()){
-       	 auxiliarM.add(new MovieDTO(m));
+			this.actuations.add(new MovieDTO(m));
         }
-		this.actuations=auxiliarM;
 	}
 	
 	public Long getIdActor() {

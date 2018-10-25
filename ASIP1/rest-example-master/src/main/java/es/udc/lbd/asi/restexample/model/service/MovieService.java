@@ -28,8 +28,6 @@ public class MovieService implements MovieServiceInterface{
 
   @Autowired
   private MovieDAO movieDAO;
-  private Set<Actor> auxiliarA = new HashSet<Actor>();
-  private Set<Director> auxiliarD = new HashSet<Director>();
   @Autowired
   private GenreDAO genreDAO;
   @Autowired
@@ -49,6 +47,10 @@ public class MovieService implements MovieServiceInterface{
     public MovieDTO save(MovieDTO movie) {	
     	Movie bdMovie = new Movie(movie.getHidden(), movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
     	bdMovie.setGenre(genreDAO.findById(movie.getGenre().getIdGenre()));
+    	
+    	Set<Actor> auxiliarA = new HashSet<Actor>();
+    	Set<Director> auxiliarD = new HashSet<Director>();
+    	
     	
     	for(ActorDTO a: movie.getParticipantes()){
     		auxiliarA.add(actorDAO.findById(a.getIdActor()));

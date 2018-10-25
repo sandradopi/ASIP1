@@ -30,9 +30,9 @@ public class DirectorDTO {
 		this.surname1 = director.getSurname1();
 		this.surname2 = director.getSurname2();
 		for(Movie m: director.getManagment()){
-       	 auxiliarM.add(new MovieDTO(m));
+			this.managment.add(new MovieDTO(m));
         }
-		this.managment=auxiliarM;
+	
 	}
 
 	public Long getIdDirector() {

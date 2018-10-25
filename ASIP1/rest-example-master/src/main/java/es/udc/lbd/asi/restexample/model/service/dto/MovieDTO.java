@@ -25,13 +25,10 @@ public class MovieDTO {
     private Date data ;
     @NotNull
     private GenreDTO genre;
-    private Set<ActorDTO> participantes = new HashSet<ActorDTO>();
+    private Set<ActorDTO> participantes = new HashSet<>();
     @NotNull
-    private Set<DirectorDTO> dirigentes = new HashSet<DirectorDTO>();
-    private Set<ActorDTO> auxiliarA = new HashSet<ActorDTO>();
+    private Set<DirectorDTO> dirigentes = new HashSet<>();
     
-    
-    private Set<DirectorDTO> auxiliarD = new HashSet<DirectorDTO>();
     
     public MovieDTO() {
     	
@@ -45,9 +42,14 @@ public class MovieDTO {
          this.duration = movie.getDuration();
          this.data = movie.getData();
          this.genre = new GenreDTO(movie.getGenre());
+        
+         Set<ActorDTO> auxiliarA = new HashSet<>();
+         Set<DirectorDTO> auxiliarD = new HashSet<>();
+         
          for(Actor a: movie.getParticipantes()){
         	 auxiliarA.add(new ActorDTO(a));
          }
+         
          for(Director d: movie.getDirigentes()){
         	 auxiliarD.add(new DirectorDTO(d));
          }
