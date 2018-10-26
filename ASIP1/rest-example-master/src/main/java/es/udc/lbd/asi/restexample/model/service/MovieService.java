@@ -1,23 +1,15 @@
 package es.udc.lbd.asi.restexample.model.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.udc.lbd.asi.restexample.model.domain.Actor;
-import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
-import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
-import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
-import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 
@@ -30,12 +22,7 @@ public class MovieService implements MovieServiceInterface{
   private MovieDAO movieDAO;
   @Autowired
   private GenreDAO genreDAO;
-  @Autowired
-  private ActorDAO actorDAO;
-  @Autowired
-  private DirectorDAO directorDAO;
-
-    public List<MovieDTO> findAll() {
+  public List<MovieDTO> findAll() {
     	return movieDAO.findAll().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());
     }
 
@@ -48,19 +35,6 @@ public class MovieService implements MovieServiceInterface{
     	Movie bdMovie = new Movie(movie.getHidden(), movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
     	bdMovie.setGenre(genreDAO.findById(movie.getGenre().getIdGenre()));
     	
-    	Set<Actor> auxiliarA = new HashSet<Actor>();
-    	Set<Director> auxiliarD = new HashSet<Director>();
-    	
-    	for(ActorDTO a: movie.getParticipantes()){
-    		auxiliarA.add(actorDAO.findById(a.getIdActor()));
-        }
-    	
-    	for(DirectorDTO d: movie.getDirigentes()){
-    		auxiliarD.add(directorDAO.findById(d.getIdDirector()));
-        }
-    	
-    	bdMovie.setParticipantes(auxiliarA);
-    	bdMovie.setDirigentes(auxiliarD);
     	movieDAO.save(bdMovie);
         return new MovieDTO(bdMovie);
     }

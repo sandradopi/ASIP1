@@ -1,13 +1,10 @@
 package es.udc.lbd.asi.restexample.model.service.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
-import es.udc.lbd.asi.restexample.model.domain.Movie;
 
 public class ActorDTO {
 
@@ -18,7 +15,6 @@ public class ActorDTO {
 	private String surname1;
 	private String surname2;
 	private Date birthdate;
-	private Set<MovieDTO> actuations = new HashSet<MovieDTO>();
 	
 	public ActorDTO() {
 		
@@ -30,9 +26,6 @@ public class ActorDTO {
 		this.surname1 = actor.getSurname1();
 		this.surname2 = actor.getSurname2();
 		this.birthdate = actor.getBirthdate();
-		for(Movie m: actor.getActuations()){
-			this.actuations.add(new MovieDTO(m));
-        }
 	}
 	
 	public Long getIdActor() {
@@ -73,14 +66,6 @@ public class ActorDTO {
 	
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
-	}
-	
-	public Set<MovieDTO> getActuations() {
-		return actuations;
-	}
-	
-	public void setActuations(Set<MovieDTO> actuations) {
-		this.actuations = actuations;
 	}
 	
 }

@@ -1,15 +1,10 @@
 package es.udc.lbd.asi.restexample.model.service.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import es.udc.lbd.asi.restexample.model.domain.Actor;
-import es.udc.lbd.asi.restexample.model.domain.Director;
-import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
 
@@ -25,10 +20,6 @@ public class MovieDTO {
     private Date data ;
     @NotNull
     private GenreDTO genre;
-    private Set<ActorDTO> participantes = new HashSet<>();
-    @NotNull
-    private Set<DirectorDTO> dirigentes = new HashSet<>();
-    
     
     public MovieDTO() {
     	
@@ -42,20 +33,6 @@ public class MovieDTO {
          this.duration = movie.getDuration();
          this.data = movie.getData();
          this.genre = new GenreDTO(movie.getGenre());
-        
-         Set<ActorDTO> auxiliarA = new HashSet<>();
-         Set<DirectorDTO> auxiliarD = new HashSet<>();
-         
-         for(Actor a: movie.getParticipantes()){
-        	 auxiliarA.add(new ActorDTO(a));
-         }
-         
-         for(Director d: movie.getDirigentes()){
-        	 auxiliarD.add(new DirectorDTO(d));
-         }
-         this.participantes=auxiliarA;
-         this.dirigentes=auxiliarD;
-         
     }
     
 	public Boolean getHidden() {
@@ -112,23 +89,6 @@ public class MovieDTO {
 
 	public void setGenre(GenreDTO genre) {
 		this.genre = genre;
-	}
-
-
-	public Set<ActorDTO> getParticipantes() {
-		return participantes;
-	}
-
-	public void setParticipantes(Set<ActorDTO> participantes) {
-		this.participantes = participantes;
-	}
-
-	public Set<DirectorDTO> getDirigentes() {
-		return dirigentes;
-	}
-
-	public void setDirigentes(Set<DirectorDTO> dirigentes) {
-		this.dirigentes = dirigentes;
 	}
 	
     }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.udc.lbd.asi.restexample.model.service.DirectorService;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
 @RequestMapping("/api/directors")
