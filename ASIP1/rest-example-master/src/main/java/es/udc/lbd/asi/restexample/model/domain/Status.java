@@ -28,13 +28,13 @@ public class Status {
 	@ManyToOne
 	@JoinColumn (name = "idUser")
 	@NotNull
-	private User user;
+	private User_ user;
 
 	public Status() {
 		
 	}
 	
-	public Status(int valoration, tipoStatus type, Movie movie, User user) {
+	public Status(int valoration, tipoStatus type, Movie movie, User_ user) {
 		super();
 		this.valoration = valoration;
 		this.type = type;
@@ -80,11 +80,11 @@ public class Status {
 		this.movie = movie;
 	}
 	
-	public User getNormalUser() {
+	public User_ getNormalUser() {
 		return user;
 	}
 
-	public void setNormalUser(User user) {
+	public void setNormalUser(User_ user) {
 		this.user = user;
 	}
 

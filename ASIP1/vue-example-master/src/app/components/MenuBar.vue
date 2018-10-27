@@ -13,10 +13,22 @@
         <b-nav-item
           :to="{ name: 'MovieList' }"
           exact>Movies</b-nav-item>
+
+       <b-nav-item
+          v-if="!isAdmin && isLogged"
+          :to="{ name: 'MovieList' }"
+          exact>Viewed Movies</b-nav-item>
+
+        <b-nav-item
+          v-if="!isAdmin && isLogged"
+          :to="{ name: 'MovieList' }"
+          exact>Pending Movies</b-nav-item>
+
         <b-nav-item
           v-if="!isLogged"
           :to="{ name: 'Login' }"
           exact>Login</b-nav-item>
+
         <b-nav-item
           v-if="isLogged"
           @click="logout()">Logout</b-nav-item>
@@ -31,28 +43,25 @@
 </template>
 
 <script>
- import auth from '../common/auth'
+import auth from '../common/auth'
+export default {
 
- export default {
-   computed: {
-     isLogged() {
-       return auth.user.logged
-     },
-     loggedUser() {
-       return auth.user.logged ? `${auth.user.login} (${auth.user.authority})` : 'not logged'
+  computed: {
+    isLogged() {
+      return auth.user.logged
+    },
+    loggedUser() {
+      return auth.user.logged ? `${auth.user.login} (${auth.user.authority})` : 'not logged'
+    },
+    isAdmin() {
+       return auth.isAdmin()
      }
-   },
-   methods: {
-     logout() {
-       auth.logout()
-       this.$router.push({ name: 'Home' })
-     }
-   }
- }
- </script>
-
-<style scoped lang="scss">
-  .movie {
-    white-space: pre;
+  },
+  methods: {
+    logout() {
+      auth.logout()
+      this.$router.push({ name: 'Home' })
+    }
   }
-</style>
+}
+</script>

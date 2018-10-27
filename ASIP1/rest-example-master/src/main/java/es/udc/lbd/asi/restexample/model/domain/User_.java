@@ -15,7 +15,7 @@ import javax.persistence.Enumerated;
 @Entity
 @Table(name="User_")
 
-public class User {
+public class User_ {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,17 +36,18 @@ public class User {
 	@Enumerated(EnumType.STRING)
     private UserAuthority authority;
 	
-	public User() {
+	public User_() {
 		
     }
 	
 
-	public User(String login,String email, String password,  UserAuthority authority) {
+	public User_(String login,String email, String password,  UserAuthority authority) {
 		this.login = login;
 		this.email=email;
 		this.password = password;
 		this.authority=authority;
 	}
+	
 	
 	
 	public UserAuthority getAuthority() {

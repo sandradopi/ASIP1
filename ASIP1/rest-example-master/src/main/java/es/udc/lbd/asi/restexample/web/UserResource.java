@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.service.UserService;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
@@ -34,6 +36,11 @@ public class UserResource {
         return userService.findAll();
     }
  
+    @PostMapping
+    public void save(@RequestBody @Valid NormalUserDTO user, Errors errors) throws RequestBodyNotValidException, UserLoginExistsException {
+    	errorHandler(errors); 
+        userService.registerUser(user.getLogin(), user.getEmail(), user.getPassword());
+    }
     
     private void errorHandler(Errors errors) throws RequestBodyNotValidException {
         if (errors.hasErrors()) {

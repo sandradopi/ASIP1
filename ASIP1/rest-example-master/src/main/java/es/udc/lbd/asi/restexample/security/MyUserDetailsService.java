@@ -13,7 +13,7 @@ package es.udc.lbd.asi.restexample.security;
  import org.springframework.stereotype.Component;
  import org.springframework.transaction.annotation.Transactional;
 
- import es.udc.lbd.asi.restexample.model.domain.User;
+ import es.udc.lbd.asi.restexample.model.domain.User_;
  import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 
  @Component
@@ -26,7 +26,7 @@ package es.udc.lbd.asi.restexample.security;
      @Override
      @Transactional(readOnly = true)
      public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-         User user = userDAO.findByLogin(login);
+         User_ user = userDAO.findByLogin(login);
          if (user == null) {
              throw new UsernameNotFoundException("User " + login + " not found");
          }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.model.domain.User_;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
@@ -30,17 +30,21 @@ public class UserService implements UserServiceInterface{
 	@Override
 	public List<NormalUserDTO> findAll() {
 		 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
+	
 
+		
+	     @Transactional(readOnly = false)
 		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
 	         registerUser(login,email, password, false);
 	     }
-
+	     
+	     @Transactional(readOnly = false)
 	     public void registerUser(String login,String email,String password, boolean isAdmin) throws UserLoginExistsException {
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");
 	         }
 
-	         User user = new User();
+	         User_ user = new User_();
 	         String encryptedPassword = passwordEncoder.encode(password);
 
 	         user.setLogin(login);

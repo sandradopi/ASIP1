@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.model.domain.User_;
 
 public class UserDTO {
 	private Long idUser;
@@ -20,7 +20,7 @@ public class UserDTO {
 	public UserDTO() {
 	}
 	
-	public UserDTO(User user) {
+	public UserDTO(User_ user) {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
 		this.email=user.getEmail();

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.model.domain.User_;
 import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
 @Repository
@@ -12,23 +12,23 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 
 
 	@Override
-	public User findByLogin(String login){
-		return (User) getSession().createQuery("from User p where p.login = :login").setParameter("login",login).uniqueResult();
+	public User_ findByLogin(String login){
+		return (User_) getSession().createQuery("from User_ p where p.login = :login").setParameter("login",login).uniqueResult();
 	}
 	
 	@Override
-	public void save(User user) {
+	public void save(User_ user) {
 		getSession().saveOrUpdate(user);
 	}
 	
 	@Override
-	public List<User> findAll() {
-		return getSession().createQuery("from User").list();
+	public List<User_> findAll() {
+		return getSession().createQuery("from User_").list();
 	}
 	
 	@Override
-	public User findById(Long idUser){
-		return (User) getSession().createQuery("from User p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
+	public User_ findById(Long idUser){
+		return (User_) getSession().createQuery("from User_ p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
 	}
 
 

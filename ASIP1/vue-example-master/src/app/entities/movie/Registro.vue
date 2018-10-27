@@ -17,38 +17,6 @@
       class="app-form"
       @submit="save">
 
-      <b-form-group
-        label="Name:"
-        label-for="name">
-        <b-form-input
-          id="name"
-          v-model="user.name"
-          type="text"
-          required
-          placeholder="Enter your name"/>
-      </b-form-group>
-
-      <b-form-group
-        label="First surname:"
-        label-for="surname1">
-        <b-form-input
-          id="surname1"
-          v-model="user.surname1"
-          type="text"
-          required
-          placeholder="Enter your first surname"/>
-      </b-form-group>
-
-      <b-form-group
-        label="Second surname:"
-        label-for="surname2">
-        <b-form-input
-          id="surname2"
-          v-model="user.surname2"
-          type="text"
-          required
-          placeholder="Enter your second surname"/>
-      </b-form-group>
 
       <b-form-group
         label="Login:"
@@ -83,18 +51,6 @@
           required
           placeholder="Enter your email"/>
       </b-form-group>
-
-      <b-form-group
-        label="Phone number:"
-        label-for="phone">
-        <b-form-input
-          id="phone"
-          v-model="user.phone"
-          type="text"
-          required
-          placeholder="Enter your phone"/>
-      </b-form-group>
-
     </b-form>
 </div>
 </div>
@@ -107,16 +63,36 @@ export default {
   data() {
     return {
       user: {},
+      username: '',
+      password: '',
       error: null,
       loading: false,
     }
   },
  
    methods: {
+    userLogin() {
+      auth.login({
+        login: this.username,
+        password: this.password
+      })
+      .then(response => {
+        this.$router.go(-1)
+      })
+      .catch(err => {
+        this.error = err.response.data.message
+      })
+    },
     save() {
-        HTTP.post('user', this.user)
+        HTTP.post('users', this.user)
         .then(this._successHandler)
         .catch(this._errorHandler)
+
+      
+    },
+    union() {
+        save()
+        userLogin()
       
     },
     back() {

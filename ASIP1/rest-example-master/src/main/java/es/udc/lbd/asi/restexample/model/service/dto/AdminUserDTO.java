@@ -3,7 +3,7 @@ package es.udc.lbd.asi.restexample.model.service.dto;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.model.domain.User_;
 
 public class AdminUserDTO {
 	private Long idUser;
@@ -19,7 +19,7 @@ public class AdminUserDTO {
 	public AdminUserDTO() {
 	}
 	
-	public AdminUserDTO(User user) {
+	public AdminUserDTO(User_ user) {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
 		this.email=user.getEmail();

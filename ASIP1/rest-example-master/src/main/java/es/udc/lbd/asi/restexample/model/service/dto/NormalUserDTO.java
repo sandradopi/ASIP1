@@ -1,9 +1,12 @@
 package es.udc.lbd.asi.restexample.model.service.dto;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import es.udc.lbd.asi.restexample.model.domain.User;
+import es.udc.lbd.asi.restexample.model.domain.User_;
+import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 
 public class NormalUserDTO {
 	private Long idUser;
@@ -13,16 +16,18 @@ public class NormalUserDTO {
 	private String email;
 	@NotEmpty
 	private String password;
-	@NotEmpty
+	@Enumerated(EnumType.STRING)
+	private UserAuthority authority;
 	
 	
 	public NormalUserDTO() {
 	}
 	
-	public NormalUserDTO(User user) {
+	public NormalUserDTO(User_ user) {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
 		this.email=user.getEmail();
+		this.authority= authority.USER;
 	}
 
 	
@@ -51,7 +56,6 @@ public class NormalUserDTO {
 		this.login = login;
 	}
 
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

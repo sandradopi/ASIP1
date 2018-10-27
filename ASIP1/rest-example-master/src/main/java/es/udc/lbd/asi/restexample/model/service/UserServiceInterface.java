@@ -10,6 +10,7 @@ public interface UserServiceInterface {
     public List<NormalUserDTO> findAll();
     public void registerUser(String login,String email, String password, boolean isAdmin) throws UserLoginExistsException;
     public void registerUser(String login,String email, String password) throws UserLoginExistsException;
+  
 
 
 }

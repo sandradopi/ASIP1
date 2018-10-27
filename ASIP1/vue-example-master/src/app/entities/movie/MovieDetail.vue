@@ -13,10 +13,16 @@
            :to="{ name: 'MovieUpdate', params: { id: movie.idMovie }}"
            variant="primary">Edit</b-btn>
       </div>
-      <h3>{{ movie.name}}</h3> <!-- el que definimos en la parte javaScript -->
+     <h3>{{movie.name}}</h3>
       <br>
-      <h5>Release date: {{ movie.data}}</h5>
+      <h5>Release date: {{movie.data}}</h5>
       <h5>Duration: {{ movie.duration}}</h5>
+      <h5>Genre: {{ movie.genre.type}}</h5>
+      <h5>Actors:</h5>
+       <div class= "nameactors" v-for="actor in movie.participantes" :key="movie.participantes.idActor">
+         {{ actor.name }} {{actor.surname1}}</div>
+      <br>
+      <h5>Directors: {{ movie.dirigentes.name}}</h5>
       <hr>
       <h5>Movie´s summary:</h5>
       <div class="movie">{{ movie.summary }}</div>

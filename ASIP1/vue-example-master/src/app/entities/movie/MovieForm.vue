@@ -71,7 +71,7 @@
       </b-form-group>
 
 
-      <b-form-group
+      <!--<b-form-group
         label="Directors:"
         label-for="director">
         <b-form-select
@@ -79,7 +79,7 @@
           :options="dirigentes"
           v-model="movie.dirigentes"
           required/>
-      </b-form-group>
+      </b-form-group>-->
 
       <b-form-group
         label="Summary:"
@@ -125,7 +125,7 @@ export default {
     directors() {
       return this.alldirigentes.map(director => {
         return {
-          text: director.name + "" + director.surname1 + ""+ director.surname2,
+          text: director.name + " " + director.surname1,
           value: director
         }
       })
@@ -153,8 +153,8 @@ export default {
   },
 
     save() {
-      if (this.$route.params.id) {
-        HTTP.put(`movies/${this.$route.params.idMovie}`, this.movie)
+        if (this.$route.params.id) {
+        HTTP.put(`movies/${this.$route.params.id}`, this.movie)
         .then(this._successHandler)
         .catch(this._errorHandler)
       } else {
