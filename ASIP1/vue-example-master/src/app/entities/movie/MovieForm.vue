@@ -12,9 +12,6 @@
         @click="save()">Submit</b-btn>
     </div>
 
-    <div class= "namegenre" v-for="genre in genres" :key="genre.idGenre">
-          {{ genre.type }} </div>
-
     <b-form
       v-if="movie"
       class="app-form"
@@ -65,11 +62,11 @@
           required
           placeholder="Enter a Summary"/>
       </b-form-group>
-    </b-form>
+    
      <b-form-group
         label="Genre:"
         label-for="genre">
-          <select name="genre">
+          <select name="genre" v-model="movie.genre">
              <option v-for="genre in genres" :key="genre.idGenre">
                 {{ genre.type }}
              </option> 
@@ -77,28 +74,27 @@
      </b-form-group>
 
       <b-form-group
-        label="Actors:"
-        label-for="actors">
-        <b-form-input
-          id="actors"
-          v-model="movie.participantes"
-          type="text"
-          required
-          placeholder="Enter actors"/>
-      </b-form-group>
+        label="Actor:"
+        label-for="actor">
+          <select name="actor" v-model="movie.participantes">
+             <option v-for="actor in actors" :key="actor.idActor">
+                {{ actor.name }} {{actor.surname1}}{{actor.surname2}}
+             </option> 
+          </select>
+     </b-form-group>
 
+     <!--<b-form-group
+        label="Director:"
+        label-for="director">
+          <select name="director" v-model="movie.dirigentes">
+             <option v-for="director in directors" :key="director.idDirector">
+                {{ director.name }} {{director.surname1}}{{director.surname2}}
+             </option> 
+          </select>
+     </b-form-group>-->
 
-      <b-form-group
-        label="Directors:"
-        label-for="directors">
-        <b-form-input
-          id="directos"
-          v-model="movie.dirigentes"
-          type="text"
-          required
-          placeholder="Enter directors"/>
-      </b-form-group>
-
+      
+</b-form>
   </LoadingPage>
 </template>
 
@@ -114,6 +110,8 @@ export default {
       error: null,
       loading: false,
       genres: null,
+      actors: null,
+      directors: null,
     }
   },
  
@@ -131,6 +129,16 @@ export default {
         HTTP.get('genres')
         .then(response => this.genres = response.data)
         .catch(err => this.error = err.response.data)
+
+        HTTP.get('actors')
+        .then(response => this.actors = response.data)
+        .catch(err => this.error = err.response.data)
+
+        /* HTTP.get('directors')
+        .then(response => this.directors = response.data)
+        .catch(err => this.error = err.response.data)*/
+
+       
   },
    methods: {
     save() {

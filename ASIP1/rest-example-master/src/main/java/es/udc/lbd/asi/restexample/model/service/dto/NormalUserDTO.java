@@ -1,30 +1,16 @@
-package es.udc.lbd.asi.restexample.model.domain;
+package es.udc.lbd.asi.restexample.model.service.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
-@Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@Table(name="User")
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class User {
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
+import es.udc.lbd.asi.restexample.model.domain.User;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NormalUserDTO {
 	private Long idUser;
-	@Column(unique = true)
 	@NotEmpty
 	private String login;
-	@Column(unique = true)
 	@NotEmpty
 	private String email;
 	@NotEmpty
@@ -35,37 +21,24 @@ public class User {
 	private String surname1;
 	private String surname2;
 	private int phone;
-	@Enumerated(EnumType.STRING)
-    private UserAuthority authority;
 	
-	public User() {
-		
-    }
 	
-
-	public User(String login,String email, String password, 
-			String name, String surname1, String surname2, int phone, UserAuthority authority) {
-		this.login = login;
-		this.email=email;
-		this.password = password;
-		this.name = name;
-		this.surname1 = surname1;
-		this.surname2 = surname2;
-		this.phone = phone;
-		this.authority=authority;
+	public NormalUserDTO() {
 	}
 	
+	public NormalUserDTO(User user) {
+		this.idUser = user.getIdUser();
+		this.login = user.getLogin();
+		this.email=user.getEmail();
+		this.password = user.getPassword();
+		this.name = user.getName();
+		this.surname1 = user.getSurname1();
+		this.surname2 = user.getSurname2();
+		this.phone = user.getPhone();
+	}
+
 	
-	public UserAuthority getAuthority() {
-		return authority;
-	}
-
-
-	public void setAuthority(UserAuthority authority) {
-		this.authority = authority;
-	}
-
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -85,47 +58,48 @@ public class User {
 	public String getLogin() {
 		return login;
 	}
-	
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
+
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getSurname1() {
 		return surname1;
 	}
-	
+
 	public void setSurname1(String surname1) {
 		this.surname1 = surname1;
 	}
-	
+
 	public String getSurname2() {
 		return surname2;
 	}
-	
+
 	public void setSurname2(String surname2) {
 		this.surname2 = surname2;
 	}
-	
+
 	public int getPhone() {
 		return phone;
 	}
-	
+
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}

@@ -3,17 +3,23 @@ package es.udc.lbd.asi.restexample.config;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
+import es.udc.lbd.asi.restexample.model.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
@@ -22,8 +28,7 @@ import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 
 @Configuration
 public class DatabaseLoader {
-    @Autowired
-    private UserDAO userService;
+	private final Logger logger = LoggerFactory.getLogger(DatabaseLoader.class);
 
     @Autowired
     private MovieDAO movieService;
@@ -39,6 +44,9 @@ public class DatabaseLoader {
 
     @Autowired
     private DatabaseLoader databaseLoader;
+    
+    @Autowired
+    private UserService userService;
 
     /*
      * Para hacer que la carga de datos sea transacional, hay que cargar el propio
@@ -48,11 +56,19 @@ public class DatabaseLoader {
      */
     @PostConstruct
     public void init() {
-        databaseLoader.loadData();
+    	 try {
+             databaseLoader.loadData();
+         } catch (UserLoginExistsException e) {
+             logger.error(e.getMessage(), e);
+         }
     }
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
-    public void loadData() {
+    public void loadData() throws UserLoginExistsException{
+    	
+    userService.registerUser("pepe", "pepe", true);
+    userService.registerUser("maria", "maria", true);
+    userService.registerUser("laura", "laura");
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	

@@ -22,7 +22,7 @@ public class StatusDTO {
 	@NotNull
 	private MovieDTO movie;
 	@NotNull
-	//private NormalUser normalUser;
+	 private NormalUserDTO normalUser;
 	
 	public StatusDTO() {
 		
@@ -32,7 +32,7 @@ public class StatusDTO {
 		this.idStatus = status.getIdStatus();
 		this.valoration = status.getValoration();
 		this.movie = new MovieDTO(status.getMovie());
-		//this.normalUser = new NormalUserDTO(status.getNormalUser());
+		this.normalUser = new NormalUserDTO(status.getNormalUser());
 		
 	}
 
@@ -66,6 +66,14 @@ public class StatusDTO {
 
 	public void setMovie(MovieDTO movie) {
 		this.movie = movie;
+	}
+
+	public NormalUserDTO getNormalUser() {
+		return normalUser;
+	}
+
+	public void setNormalUser(NormalUserDTO normalUser) {
+		this.normalUser = normalUser;
 	}
 	
 	

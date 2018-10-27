@@ -23,3 +23,7 @@ spring:
     #                y simplemente valida el esquema al iniciarse la aplicación
     #                si se usan sql de creación e inserción de datos sería la modalidad a usar
     hibernate.ddl-auto: create
+ properties:
+   clientHost: http://localhost:1234
+   jwtSecretKey: thiadfnoasdbnawiougasonfpoasasdfhoas
+   jwtValidity: 7200

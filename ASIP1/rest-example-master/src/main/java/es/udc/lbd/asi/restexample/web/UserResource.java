@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.udc.lbd.asi.restexample.model.service.UserService;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
@@ -29,7 +30,7 @@ public class UserResource {
 
     
     @GetMapping
-    public List<UserDTO> findAll() {
+    public List<NormalUserDTO> findAll() {
         return userService.findAll();
     }
  
@@ -38,11 +39,6 @@ public class UserResource {
         return userService.findByLogin(login);
     }
     
-    @PostMapping
-    public UserDTO save(@RequestBody @Valid UserDTO user, Errors errors) throws RequestBodyNotValidException {
-        errorHandler(errors); 
-        return userService.save(user);
-    }
     
     private void errorHandler(Errors errors) throws RequestBodyNotValidException {
         if (errors.hasErrors()) {

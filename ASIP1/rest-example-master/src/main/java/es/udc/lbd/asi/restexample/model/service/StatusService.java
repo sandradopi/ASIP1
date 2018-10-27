@@ -36,7 +36,7 @@ public class StatusService implements StatusServiceInterface {
 	public StatusDTO save(StatusDTO status) {
 		Status bdStatus = new Status(status.getValoration(),status.getType());
 		bdStatus.setMovie(movieDAO.findById(status.getMovie().getIdMovie()));
-		//bdStatus.getNormalUser()
+		bdStatus.getNormalUser();
 		statusDAO.save(bdStatus);
 		return new StatusDTO(bdStatus);
 	}

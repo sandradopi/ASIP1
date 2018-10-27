@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 
 public class DirectorDTO {
+	
 	private Long idDirector;
 	@NotEmpty
 	private String name;

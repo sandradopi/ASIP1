@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.Actor;
@@ -47,6 +48,7 @@ public class MovieService implements MovieServiceInterface{
     	 return new MovieDTO(movieDAO.findById(idMovie));
     }
     
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
     public MovieDTO save(MovieDTO movie) {	
     	Movie bdMovie = new Movie(movie.getHidden(), movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
@@ -71,7 +73,7 @@ public class MovieService implements MovieServiceInterface{
     }
     
     
-    
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
     public MovieDTO update(MovieDTO movie){
         Movie bdMovie = movieDAO.findById(movie.getIdMovie());
@@ -83,6 +85,7 @@ public class MovieService implements MovieServiceInterface{
         return new MovieDTO(bdMovie);
         }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
     public void deleteById(Long idMovie) {
     	movieDAO.deleteById(idMovie);
