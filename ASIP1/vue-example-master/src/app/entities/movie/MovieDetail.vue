@@ -8,6 +8,10 @@
         <b-btn
           variant="primary"
           @click="back()">Back</b-btn>
+          <b-btn
+           v-if="isAdmin"
+           :to="{ name: 'MovieUpdate', params: { id: movie.idMovie }}"
+           variant="primary">Edit</b-btn>
       </div>
       <h3>{{ movie.name}}</h3> <!-- el que definimos en la parte javaScript -->
       <br>
@@ -24,6 +28,7 @@
 import { HTTP } from '../../common/http-common' 
 //LIBRERIA AXIOS (todas las peticiones al 8080 al servidor)
 import LoadingPage from '../../components/LoadingPage'
+import auth from '../../common/auth'
 
 export default {
   components: { LoadingPage },
@@ -34,6 +39,11 @@ export default {
       error: null
     }
   },
+  computed: {
+     isAdmin() {
+       return auth.isAdmin()
+     }
+   },
   watch: {
     '$route': 'fetchData'
   },

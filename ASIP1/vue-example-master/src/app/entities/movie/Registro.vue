@@ -114,7 +114,7 @@ export default {
  
    methods: {
     save() {
-        HTTP.post('normal_user', this.user)
+        HTTP.post('user', this.user)
         .then(this._successHandler)
         .catch(this._errorHandler)
       
@@ -123,7 +123,7 @@ export default {
       this.$router.go(-1)
     },
     _successHandler(response) {
-       this.$router.replace({ name: 'MovieListUsuarioNormal', params: { id: response.data}})
+       this.$router.replace({ name: 'MovieList', params: { id: response.data}})
      },
      _errorHandler(err) {
        this.error = err.response.data.message

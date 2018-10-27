@@ -29,17 +29,6 @@
       </b-form-group>
 
       <b-form-group
-        label="Date:"
-        label-for="date">
-        <b-form-input
-          id="date"
-          v-model="movie.data"
-          type="text"
-          required
-          placeholder="Enter a date"/>
-      </b-form-group>
-
-      <b-form-group
         label="Duration:"
         label-for="duration">
         <b-form-input
@@ -47,9 +36,50 @@
           v-model="movie.duration"
           type="text"
           required
-          placeholder="Enter a duration"/>
+          placeholder="Enter duration"/>
       </b-form-group>
 
+      <b-form-group
+        label="Data:"
+        label-for="Data">
+        <b-form-input
+          id="data"
+          v-model="movie.data"
+          type="text"
+          required
+          placeholder="Enter data"/>
+      </b-form-group>
+
+      <b-form-group
+        label="Actors:"
+        label-for="actor">
+        <b-form-select
+          id="actor"
+          :options="actors"
+          v-model="movie.participantes"
+          required/>
+      </b-form-group>
+
+      <b-form-group
+        label="Genre:"
+        label-for="genre">
+        <b-form-select
+          id="genre"
+          :options="genres"
+          v-model="movie.genre"
+          required/>
+      </b-form-group>
+
+
+      <b-form-group
+        label="Directors:"
+        label-for="director">
+        <b-form-select
+          id="director"
+          :options="dirigentes"
+          v-model="movie.dirigentes"
+          required/>
+      </b-form-group>
 
       <b-form-group
         label="Summary:"
@@ -60,48 +90,15 @@
           :rows="3"
           :max-rows="6"
           required
-          placeholder="Enter a Summary"/>
+          placeholder="Enter summary"/>
       </b-form-group>
-    
-     <b-form-group
-        label="Genre:"
-        label-for="genre">
-          <select name="genre" v-model="movie.genre">
-             <option v-for="genre in genres" :key="genre.idGenre">
-                {{ genre.type }}
-             </option> 
-          </select>
-     </b-form-group>
-
-      <b-form-group
-        label="Actor:"
-        label-for="actor">
-          <select name="actor" v-model="movie.participantes">
-             <option v-for="actor in actors" :key="actor.idActor">
-                {{ actor.name }} {{actor.surname1}}{{actor.surname2}}
-             </option> 
-          </select>
-     </b-form-group>
-
-     <!--<b-form-group
-        label="Director:"
-        label-for="director">
-          <select name="director" v-model="movie.dirigentes">
-             <option v-for="director in directors" :key="director.idDirector">
-                {{ director.name }} {{director.surname1}}{{director.surname2}}
-             </option> 
-          </select>
-     </b-form-group>-->
-
-      
-</b-form>
+    </b-form>
   </LoadingPage>
 </template>
 
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
-
 export default {
   components: { LoadingPage },
   data() {
@@ -109,41 +106,55 @@ export default {
       movie: {},
       error: null,
       loading: false,
-      genres: null,
-      actors: null,
-      directors: null,
+      allparticipantes: [],
+      alldirigentes: [],
+      allgenre: null
+    }
+  
+  },
+   computed: {
+    actors() {
+      return this.allparticipantes.map(actor => {
+        return {
+          text: actor.name + " " + actor.surname1,
+          value: actor
+        }
+      })
+    },
+
+    directors() {
+      return this.alldirigentes.map(director => {
+        return {
+          text: director.name + "" + director.surname1 + ""+ director.surname2,
+          value: director
+        }
+      })
+    },
+
+    genres() {
+      return this.allgenre.map(genre => {
+        return {
+          text: genre.type ,
+          value: genre
+        }
+      })
     }
   },
- 
   created() {
-      if (this.$route.params.id) {
-      this.loading = true
-
-      HTTP.get(`movies/${this.$route.params.id}`)
-      .then(response => this.movie = response.data)
+      HTTP.get('actors')
+      .then(response => this.allparticipantes = response.data)
       .catch(err => this.error = err.message)
-      .finally(() => this.loading = false)
-    } else {
-      this.movie = {}
-    }
-        HTTP.get('genres')
-        .then(response => this.genres = response.data)
-        .catch(err => this.error = err.response.data)
-
-        HTTP.get('actors')
-        .then(response => this.actors = response.data)
-        .catch(err => this.error = err.response.data)
-
-        /* HTTP.get('directors')
-        .then(response => this.directors = response.data)
-        .catch(err => this.error = err.response.data)*/
-
-       
+      /*HTTP.get('directors')
+      .then(response => this.alldirigentes = response.data)
+      .catch(err => this.error = err.message)*/
+      HTTP.get('genres')
+      .then(response => this.allgenre = response.data)
+      .catch(err => this.error = err.message)
   },
-   methods: {
+
     save() {
       if (this.$route.params.id) {
-        HTTP.put(`movies/${this.$route.params.id}`, this.movie)
+        HTTP.put(`movies/${this.$route.params.idMovie}`, this.movie)
         .then(this._successHandler)
         .catch(this._errorHandler)
       } else {
@@ -152,20 +163,15 @@ export default {
         .catch(this._errorHandler)
       }
     },
-
     back() {
       this.$router.go(-1)
     },
     _successHandler(response) {
-       this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }})
-     },
-     _errorHandler(err) {
-       this.error = err.response.data.message
-     }
+      this.$router.replace({ name: 'MovieDetail', params: { id: response.data.idMovie }})
+    },
+    _errorHandler(err) {
+      this.error = err.response.data.message
+    }
   }
-}
-</script>
 
-<style scoped lang="scss">
-  
-</style>
+</script>

@@ -29,7 +29,7 @@ export default {
       required: true
     },
     error: {
-      type: [ String, Object ],
+      type: [ String, Object, Error ],
       default: null
     }
     },

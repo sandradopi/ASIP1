@@ -3,14 +3,14 @@
     :loading="loading"
     :error="error">
 
-      <div class="new">
-        <b-btn 
-          :to="{ name: 'MovieCreate' }"
-          variant="primary">New</b-btn>
-      </div>
+      <b-btn
+         v-if="isAdmin"
+         :to="{ name: 'MovieCreate' }"
+         variant="primary">New</b-btn>
     <br/>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
-        <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
+        <router-link
+         :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
           {{ movie.name }}
         </router-link>
     </div>
@@ -20,6 +20,7 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
+import auth from '../../common/auth'
 
 export default {
   components: { LoadingPage },
@@ -30,11 +31,20 @@ export default {
       error: null
     }
   },
+  computed: {
+     isAdmin() {
+       return auth.isAdmin()
+     }
+   },
   created() {
     this.loading = true
     HTTP.get('movies')
-    .then(response => this.movies = response.data)
-    .catch(err => this.error = err.response.data)
+    .then(response => {
+       this.movies = response.data
+     })
+     .catch(err => {
+       this.error = err.message
+     })
     .finally(() => this.loading = false)
   }
 }
