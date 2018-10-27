@@ -14,6 +14,10 @@
       <b-nav-item
           :to="{ name: 'MovieListUsuarioNormalVistas' }"
           exact>Viewed Movies</b-nav-item>
+
+      <b-nav-item
+          :to="{ name: 'MovieList' }"
+          exact>Admin Films</b-nav-item>
       <b-nav-item
           :to="{ name: 'MovieListUsuarioNormalPendientes' }"
           exact>Pending Movies</b-nav-item>

@@ -12,6 +12,9 @@
         @click="save()">Submit</b-btn>
     </div>
 
+    <div class= "namegenre" v-for="genre in genres" :key="genre.idGenre">
+          {{ genre.type }} </div>
+
     <b-form
       v-if="movie"
       class="app-form"
@@ -63,6 +66,39 @@
           placeholder="Enter a Summary"/>
       </b-form-group>
     </b-form>
+     <b-form-group
+        label="Genre:"
+        label-for="genre">
+          <select name="genre">
+             <option v-for="genre in genres" :key="genre.idGenre">
+                {{ genre.type }}
+             </option> 
+          </select>
+     </b-form-group>
+
+      <b-form-group
+        label="Actors:"
+        label-for="actors">
+        <b-form-input
+          id="actors"
+          v-model="movie.participantes"
+          type="text"
+          required
+          placeholder="Enter actors"/>
+      </b-form-group>
+
+
+      <b-form-group
+        label="Directors:"
+        label-for="directors">
+        <b-form-input
+          id="directos"
+          v-model="movie.dirigentes"
+          type="text"
+          required
+          placeholder="Enter directors"/>
+      </b-form-group>
+
   </LoadingPage>
 </template>
 
@@ -77,6 +113,7 @@ export default {
       movie: {},
       error: null,
       loading: false,
+      genres: null,
     }
   },
  
@@ -91,6 +128,9 @@ export default {
     } else {
       this.movie = {}
     }
+        HTTP.get('genres')
+        .then(response => this.genres = response.data)
+        .catch(err => this.error = err.response.data)
   },
    methods: {
     save() {
@@ -104,6 +144,7 @@ export default {
         .catch(this._errorHandler)
       }
     },
+
     back() {
       this.$router.go(-1)
     },
@@ -116,3 +157,7 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  
+</style>

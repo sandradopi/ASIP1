@@ -3,14 +3,16 @@
     :loading="loading"
     :error="error">
 
-    
-    </div>
-    <div class= "namemovie"
-      v-for="movie in movies"
-      :key="movie.idMovie">
-      <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
-        {{ movie.name }}
-      </router-link>
+      <div class="new">
+        <b-btn 
+          :to="{ name: 'MovieCreate' }"
+          variant="primary">New</b-btn>
+      </div>
+    <br/>
+    <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
+        <router-link :to="{ name: 'MovieDetail', params: { id: movie.idMovie } }">
+          {{ movie.name }}
+        </router-link>
     </div>
   </LoadingPage>
 </template>
@@ -40,7 +42,8 @@ export default {
 
 <style scoped lang="scss">
   .namemovie {
-    margin :10px;
+    margin-top :10px;
   }
+
 </style>
 

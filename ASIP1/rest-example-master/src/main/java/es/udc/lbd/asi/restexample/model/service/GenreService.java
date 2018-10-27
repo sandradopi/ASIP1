@@ -1,11 +1,15 @@
 package es.udc.lbd.asi.restexample.model.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -19,4 +23,8 @@ public class GenreService implements GenreServiceInterface{
 		genreDAO.save(bdGenre);
 		return new GenreDTO(bdGenre);
 	}
+	
+	public List<GenreDTO> findAll() {
+    	return genreDAO.findAll().stream().map(genre -> new GenreDTO(genre)).collect(Collectors.toList());
+    }
 }
