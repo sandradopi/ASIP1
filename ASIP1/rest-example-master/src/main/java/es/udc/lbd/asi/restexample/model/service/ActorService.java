@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class ActorService implements ActorServiceInterface {
 	@Autowired
 	private ActorDAO actorDAO;
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@Transactional(readOnly = false)
 	public ActorDTO save(ActorDTO actor) {
 		Actor bdActor = new Actor(actor.getName(), actor.getSurname1(), actor.getSurname2(), actor.getBirthdate());

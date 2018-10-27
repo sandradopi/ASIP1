@@ -31,9 +31,5 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 		return (User) getSession().createQuery("from User p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
 	}
 
-	@Override
-	public void deleteById(Long idUser){
-		getSession().delete(findById(idUser));
-	}
 
 }

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +30,7 @@ public class StatusService implements StatusServiceInterface {
 	@Autowired
 	private MovieDAO movieDAO;
 
-
-	
-	
+	 @PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	public StatusDTO save(StatusDTO status) {
 		Status bdStatus = new Status(status.getValoration(),status.getType());

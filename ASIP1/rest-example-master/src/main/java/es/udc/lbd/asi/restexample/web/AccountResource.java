@@ -72,6 +72,6 @@ import es.udc.lbd.asi.restexample.model.service.dto.LoginDTO;
 
      @PostMapping("/register")
      public void registerAccount(@Valid @RequestBody AdminUserDTO account) throws UserLoginExistsException {
-         userService.registerUser(account.getLogin(), account.getPassword());
+         userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword());
      }
  }

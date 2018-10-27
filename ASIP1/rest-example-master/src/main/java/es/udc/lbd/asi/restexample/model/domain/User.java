@@ -13,28 +13,26 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@Table(name="User")
+@Table(name="User_")
 
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idUser")
 	private Long idUser;
+	
 	@Column(unique = true)
 	@NotEmpty
 	private String login;
+	
 	@Column(unique = true)
 	@NotEmpty
 	private String email;
+	
 	@NotEmpty
 	private String password;
-	@NotEmpty
-	private String name;
-	@NotEmpty
-	private String surname1;
-	private String surname2;
-	private int phone;
+	
 	@Enumerated(EnumType.STRING)
     private UserAuthority authority;
 	
@@ -43,15 +41,10 @@ public class User {
     }
 	
 
-	public User(String login,String email, String password, 
-			String name, String surname1, String surname2, int phone, UserAuthority authority) {
+	public User(String login,String email, String password,  UserAuthority authority) {
 		this.login = login;
 		this.email=email;
 		this.password = password;
-		this.name = name;
-		this.surname1 = surname1;
-		this.surname2 = surname2;
-		this.phone = phone;
 		this.authority=authority;
 	}
 	
@@ -98,36 +91,5 @@ public class User {
 		this.password = password;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getSurname1() {
-		return surname1;
-	}
-	
-	public void setSurname1(String surname1) {
-		this.surname1 = surname1;
-	}
-	
-	public String getSurname2() {
-		return surname2;
-	}
-	
-	public void setSurname2(String surname2) {
-		this.surname2 = surname2;
-	}
-	
-	public int getPhone() {
-		return phone;
-	}
-	
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
 	
 }

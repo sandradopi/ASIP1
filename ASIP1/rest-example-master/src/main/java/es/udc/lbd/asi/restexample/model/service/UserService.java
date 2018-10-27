@@ -26,20 +26,16 @@ public class UserService implements UserServiceInterface{
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-    public UserDTO findByLogin(String login){
-        return new UserDTO(userDAO.findByLogin(login));
-    }
-    
 
 	@Override
 	public List<NormalUserDTO> findAll() {
 		 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
 
-		 public void registerUser(String login, String password) throws UserLoginExistsException {
-	         registerUser(login, password, false);
+		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
+	         registerUser(login,email, password, false);
 	     }
 
-	     public void registerUser(String login, String password, boolean isAdmin) throws UserLoginExistsException {
+	     public void registerUser(String login,String email,String password, boolean isAdmin) throws UserLoginExistsException {
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");
 	         }
@@ -50,6 +46,7 @@ public class UserService implements UserServiceInterface{
 	         user.setLogin(login);
 	         user.setPassword(encryptedPassword);
 	         user.setAuthority(UserAuthority.USER);
+	         user.setEmail(email);
 	         if (isAdmin) {
 	             user.setAuthority(UserAuthority.ADMIN);
 	         }

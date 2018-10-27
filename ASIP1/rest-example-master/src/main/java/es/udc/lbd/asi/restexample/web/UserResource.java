@@ -34,11 +34,6 @@ public class UserResource {
         return userService.findAll();
     }
  
-    @GetMapping("/{login}")
-    public UserDTO findOne(@PathVariable String login) throws InstanceNotFoundException{
-        return userService.findByLogin(login);
-    }
-    
     
     private void errorHandler(Errors errors) throws RequestBodyNotValidException {
         if (errors.hasErrors()) {

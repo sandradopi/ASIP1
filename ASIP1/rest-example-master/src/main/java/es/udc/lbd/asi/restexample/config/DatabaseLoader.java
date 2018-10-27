@@ -66,9 +66,9 @@ public class DatabaseLoader {
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void loadData() throws UserLoginExistsException{
     	
-    userService.registerUser("pepe", "pepe", true);
-    userService.registerUser("maria", "maria", true);
-    userService.registerUser("laura", "laura");
+    userService.registerUser("pepe","pepe@pepe.com", "pepe", true);
+    userService.registerUser("maria","maria@maria.com","maria",true);
+    userService.registerUser("laura", "laura@laura.com","laura");
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	

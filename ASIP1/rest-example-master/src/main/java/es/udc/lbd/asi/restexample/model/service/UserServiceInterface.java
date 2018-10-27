@@ -7,10 +7,9 @@ import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 public interface UserServiceInterface {
-    public UserDTO findByLogin(String login);
     public List<NormalUserDTO> findAll();
-    public void registerUser(String login, String password, boolean isAdmin) throws UserLoginExistsException;
-    public void registerUser(String login, String password) throws UserLoginExistsException;
+    public void registerUser(String login,String email, String password, boolean isAdmin) throws UserLoginExistsException;
+    public void registerUser(String login,String email, String password) throws UserLoginExistsException;
 
 
 }

@@ -10,6 +10,5 @@ public interface UserDAO {
     public List <User> findAll();
     public void save(User user);
     public User findById(Long idUser) ;
-    public void deleteById(Long idUser);
    
 }
