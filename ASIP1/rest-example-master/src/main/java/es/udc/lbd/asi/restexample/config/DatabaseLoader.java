@@ -56,6 +56,8 @@ public class DatabaseLoader {
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	
+    Genre genre2= new Genre("Acción");
+    genreService.save(genre2);	
     Actor actor1= new Actor("Angelina","Jolie");
     actorService.save(actor1);
     Actor actor2= new Actor("Brad","Pitt");
@@ -73,5 +75,15 @@ public class DatabaseLoader {
     movieService.save
     (new Movie(false,"Spiderman","La pelicula va sobre...",160, new Date(2015-11-04),
     		genre1, participantes,dirigentes));
+    
+    movieService.save
+    (new Movie(false,"WonderWoman","La pelicula va sobre...",250, new Date(2018-12-06),
+    		genre2, participantes,dirigentes));
+    
+    movieService.save
+    (new Movie(false,"Harry Potter","La pelicula va sobre...",250, new Date(2018-12-06),
+    		genre2, participantes,dirigentes));
     }
+    
+    
 }

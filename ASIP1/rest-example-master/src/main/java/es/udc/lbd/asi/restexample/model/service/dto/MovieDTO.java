@@ -1,10 +1,16 @@
 package es.udc.lbd.asi.restexample.model.service.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import es.udc.lbd.asi.restexample.model.domain.Actor;
+import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 
 
@@ -20,6 +26,9 @@ public class MovieDTO {
     private Date data ;
     @NotNull
     private GenreDTO genre;
+    private Set<ActorDTO> participantes = new HashSet<ActorDTO>();
+    @NotNull
+    private Set<DirectorDTO> dirigentes = new HashSet<DirectorDTO>();
     
     public MovieDTO() {
     	
@@ -33,8 +42,35 @@ public class MovieDTO {
          this.duration = movie.getDuration();
          this.data = movie.getData();
          this.genre = new GenreDTO(movie.getGenre());
+         
+         
+         for(Actor a: movie.getParticipantes()){
+        	 this.participantes.add(new ActorDTO(a));
+         }
+         
+         for(Director d: movie.getDirigentes()){
+        	 this.dirigentes.add(new DirectorDTO(d));
+         }
+         
     }
     
+	public Set<ActorDTO> getParticipantes() {
+ 		return participantes;
+ 	}
+
+ 	public void setParticipantes(Set<ActorDTO> participantes) {
+ 		this.participantes = participantes;
+ 	}
+
+ 	public Set<DirectorDTO> getDirigentes() {
+ 		return dirigentes;
+ 	}
+
+ 	public void setDirigentes(Set<DirectorDTO> dirigentes) {
+ 		this.dirigentes = dirigentes;
+ 	}
+ 	
+ 	@JsonIgnore
 	public Boolean getHidden() {
 		return hidden;
 	}
