@@ -14,6 +14,8 @@ import javax.persistence.Enumerated;
 
 @Entity
 @Table(name="User_")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+
 
 public class User_ {
 

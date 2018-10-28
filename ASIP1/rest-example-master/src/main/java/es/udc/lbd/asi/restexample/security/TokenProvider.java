@@ -42,7 +42,10 @@ package es.udc.lbd.asi.restexample.security;
 
          long now = (new Date()).getTime();
          Date validity = new Date(now + (properties.getJwtValidity() * 1000));
-
+         
+         System.out.println(now);
+         System.out.println(validity);
+         
          return Jwts.builder().setSubject(authentication.getName()).claim(AUTHORITIES_KEY, authority)
                  .signWith(SignatureAlgorithm.HS512, properties.getJwtSecretKey()).setExpiration(validity).compact();
      }

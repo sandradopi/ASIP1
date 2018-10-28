@@ -21,7 +21,8 @@ package es.udc.lbd.asi.restexample.web;
  import es.udc.lbd.asi.restexample.model.service.UserService;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.LoginDTO;
- import es.udc.lbd.asi.restexample.security.JWTConfigurer;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
+import es.udc.lbd.asi.restexample.security.JWTConfigurer;
  import es.udc.lbd.asi.restexample.security.JWTToken;
  import es.udc.lbd.asi.restexample.security.TokenProvider;
  import es.udc.lbd.asi.restexample.web.exception.CredentialsAreNotValidException;
@@ -71,7 +72,7 @@ import es.udc.lbd.asi.restexample.model.service.dto.LoginDTO;
      }
 
      @PostMapping("/register")
-     public void registerAccount(@Valid @RequestBody AdminUserDTO account) throws UserLoginExistsException {
+     public void registerAccount(@Valid @RequestBody NormalUserDTO account) throws UserLoginExistsException {
          userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword());
      }
  }

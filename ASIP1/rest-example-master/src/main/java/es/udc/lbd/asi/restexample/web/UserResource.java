@@ -36,11 +36,6 @@ public class UserResource {
         return userService.findAll();
     }
  
-    @PostMapping
-    public void save(@RequestBody @Valid NormalUserDTO user, Errors errors) throws RequestBodyNotValidException, UserLoginExistsException {
-    	errorHandler(errors); 
-        userService.registerUser(user.getLogin(), user.getEmail(), user.getPassword());
-    }
     
     private void errorHandler(Errors errors) throws RequestBodyNotValidException {
         if (errors.hasErrors()) {

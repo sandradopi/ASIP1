@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.User_;
+import es.udc.lbd.asi.restexample.model.domain.AdminUser;
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
@@ -43,19 +45,24 @@ public class UserService implements UserServiceInterface{
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");
 	         }
-
-	         User_ user = new User_();
 	         String encryptedPassword = passwordEncoder.encode(password);
 
+	         if (isAdmin) {
+	        	 AdminUser user = new AdminUser();
+	        	 user.setLogin(login);
+	        	 user.setPassword(encryptedPassword);
+	        	 user.setAuthority(UserAuthority.ADMIN);
+		         user.setEmail(email);
+		         userDAO.save(user);
+	         }else{
+	         NormalUser user = new NormalUser();
 	         user.setLogin(login);
-	         user.setPassword(encryptedPassword);
+        	 user.setPassword(encryptedPassword);
 	         user.setAuthority(UserAuthority.USER);
 	         user.setEmail(email);
-	         if (isAdmin) {
-	             user.setAuthority(UserAuthority.ADMIN);
-	         }
+	         userDAO.save(user);}
 
-	         userDAO.save(user);
+	         
 	     }
 	     
 	     public AdminUserDTO getCurrentUserWithAuthority() {

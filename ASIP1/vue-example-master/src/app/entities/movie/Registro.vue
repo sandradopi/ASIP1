@@ -6,7 +6,7 @@
         @click="back()">Back</b-btn>
       <b-btn
         variant="primary"
-        @click="save()">Create</b-btn>
+        @click="union()">Create</b-btn>
     </div>
 <div>
   <div class ="contenido" align="middle">
@@ -52,6 +52,7 @@
           placeholder="Enter your email"/>
       </b-form-group>
     </b-form>
+
 </div>
 </div>
 </template>
@@ -63,8 +64,6 @@ export default {
   data() {
     return {
       user: {},
-      username: '',
-      password: '',
       error: null,
       loading: false,
     }
@@ -73,33 +72,30 @@ export default {
    methods: {
     userLogin() {
       auth.login({
-        login: this.username,
-        password: this.password
+        login: user.login,
+        password: user.password
       })
-      .then(response => {
-        this.$router.go(-1)
-      })
-      .catch(err => {
-        this.error = err.response.data.message
-      })
+      .then((response => {this.$router.replace({ name: 'MovieList'})}))
+      .catch(this._errorHandler)
+      
     },
     save() {
-        HTTP.post('users', this.user)
+        return HTTP.post('register', this.user)
         .then(this._successHandler)
         .catch(this._errorHandler)
 
       
     },
     union() {
-        save()
-        userLogin()
+        this.save().then().catch()
       
     },
     back() {
       this.$router.go(-1)
     },
     _successHandler(response) {
-       this.$router.replace({ name: 'MovieList', params: { id: response.data}})
+        this.userLogin().then().catch()
+       
      },
      _errorHandler(err) {
        this.error = err.response.data.message

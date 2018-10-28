@@ -71,15 +71,15 @@
       </b-form-group>
 
 
-      <!--<b-form-group
+      <b-form-group
         label="Directors:"
         label-for="director">
         <b-form-select
           id="director"
-          :options="dirigentes"
+          :options="directors"
           v-model="movie.dirigentes"
           required/>
-      </b-form-group>-->
+      </b-form-group>
 
       <b-form-group
         label="Summary:"
@@ -144,9 +144,9 @@ export default {
       HTTP.get('actors')
       .then(response => this.allparticipantes = response.data)
       .catch(err => this.error = err.message)
-      /*HTTP.get('directors')
+      HTTP.get('directors')
       .then(response => this.alldirigentes = response.data)
-      .catch(err => this.error = err.message)*/
+      .catch(err => this.error = err.message)
       HTTP.get('genres')
       .then(response => this.allgenre = response.data)
       .catch(err => this.error = err.message)

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.udc.lbd.asi.restexample.model.service.DirectorService;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
+@RestController
 @RequestMapping("/api/directors")
 public class DirectorResource {
 	@Autowired

@@ -53,6 +53,7 @@ public class MovieService implements MovieServiceInterface{
     public MovieDTO save(MovieDTO movie) {	
     	Movie bdMovie = new Movie(movie.getHidden(), movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
     	bdMovie.setGenre(genreDAO.findById(movie.getGenre().getIdGenre()));
+    	bdMovie.setHidden(false);
     	Set<Actor> auxiliarA = new HashSet<Actor>();
      	Set<Director> auxiliarD = new HashSet<Director>();
      	

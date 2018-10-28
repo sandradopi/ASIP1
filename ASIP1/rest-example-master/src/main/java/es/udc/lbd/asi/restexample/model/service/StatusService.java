@@ -30,7 +30,7 @@ public class StatusService implements StatusServiceInterface {
 	@Autowired
 	private MovieDAO movieDAO;
 
-	 @PreAuthorize("hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	public StatusDTO save(StatusDTO status) {
 		Status bdStatus = new Status(status.getValoration(),status.getType());
