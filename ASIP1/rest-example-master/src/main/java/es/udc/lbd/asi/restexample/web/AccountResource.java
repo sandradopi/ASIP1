@@ -53,6 +53,8 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
 
          UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                  loginDTO.getLogin(), loginDTO.getPassword());
+         
+        System.out.println( loginDTO.getLogin() + loginDTO.getPassword());
          try {
              Authentication authentication = authenticationManager.authenticate(authenticationToken);
              SecurityContextHolder.getContext().setAuthentication(authentication);

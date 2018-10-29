@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -33,6 +35,7 @@ public class Movie {
     private Integer duration;
     //@Type NO FUNCIONA, MIRARLO
     @NotNull
+    @Temporal(TemporalType.DATE)
     private Date data;
     
     @ManyToOne(fetch = FetchType.LAZY)

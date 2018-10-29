@@ -108,7 +108,7 @@ export default {
       loading: false,
       allparticipantes: [],
       alldirigentes: [],
-      allgenre: null
+      allgenre: []
     }
   
   },
@@ -151,6 +151,7 @@ export default {
       .then(response => this.allgenre = response.data)
       .catch(err => this.error = err.message)
   },
+  methods: {
 
     save() {
         if (this.$route.params.id) {
@@ -173,5 +174,6 @@ export default {
       this.error = err.response.data.message
     }
   }
+}
 
 </script>

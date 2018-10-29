@@ -6,7 +6,7 @@
         @click="back()">Back</b-btn>
       <b-btn
         variant="primary"
-        @click="union()">Create</b-btn>
+        @click="save()">Create</b-btn>
     </div>
 <div>
   <div class ="contenido" align="middle">
@@ -52,13 +52,14 @@
           placeholder="Enter your email"/>
       </b-form-group>
     </b-form>
-
+     
 </div>
 </div>
 </template>
 
 <script>
 import { HTTP } from '../../common/http-common'
+import auth from '../../common/auth'
 
 export default {
   data() {
@@ -72,33 +73,32 @@ export default {
    methods: {
     userLogin() {
       auth.login({
-        login: user.login,
-        password: user.password
+        login: this.user.login,
+        password: this.user.password
       })
-      .then((response => {this.$router.replace({ name: 'MovieList'})}))
+      .then(this._successHandler)
       .catch(this._errorHandler)
+
+      
       
     },
     save() {
         return HTTP.post('register', this.user)
-        .then(this._successHandler)
+        .then(this.userLogin())
         .catch(this._errorHandler)
 
-      
-    },
-    union() {
-        this.save().then().catch()
       
     },
     back() {
       this.$router.go(-1)
     },
     _successHandler(response) {
-        this.userLogin().then().catch()
+      response => {this.$router.replace({ name: 'MovieList'})}
+      
        
      },
-     _errorHandler(err) {
-       this.error = err.response.data.message
+      _errorHandler(err) {
+      this.error = err.response.data.message
      }
   }
 }
