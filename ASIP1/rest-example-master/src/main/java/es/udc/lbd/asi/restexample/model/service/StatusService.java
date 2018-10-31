@@ -15,7 +15,7 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.domain.User_;
-import es.udc.lbd.asi.restexample.model.domain.tipoStatus;
+import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
@@ -42,23 +42,17 @@ public class StatusService implements StatusServiceInterface {
 
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
-	public StatusDTO save(MovieDTO movie, String statu) {
-		tipoStatus STATE = null;
+	public void save(MovieDTO movie, TipoStatus STATE) {
 		
-		//if (estado == "vista"){
-			STATE = STATE.VISTA;
-		//} else if (estado=="pendiente")
-		//{
-			//STATE = STATE.PENDIENTE;
-		//} 
-		
-		Status bdStatus = new Status(0,STATE);
+		Status bdStatus = new Status(null,STATE);
 		bdStatus.setMovie(movieDAO.findById(movie.getIdMovie()));
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
-		NormalUser usuarioNormal= (NormalUser) userDAO.findById(usuario.getIdUser());
+		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		bdStatus.setNormalUser(usuarioNormal);
 		statusDAO.save(bdStatus);
-		return new StatusDTO(bdStatus);
+		new StatusDTO(bdStatus);
 	}
+	
+	
 	
 }

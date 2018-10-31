@@ -58,13 +58,14 @@
    <b-form-group>
       <multiselect 
         v-model="movie.participantes" 
+        tag-placeholder="Add this as new tag"
         :options="this.allparticipantes"
         :multiple="true"
         :searchable="true" 
         :clear-on-select="false" 
         :preserve-search="true"
         :close-on-select="false" 
-        :show-labels="false" 
+        :show-labels="false"
         track-by="idActor"
         placeholder="Pick some actors"
         :custom-label="nameCustom">
@@ -76,13 +77,13 @@
           {{ values.length }} options selected</span>
         </template>
       </multiselect>
+      <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
       <h5>Actors of the movie:</h5>
       <li v-for="actor in movie.participantes">
         {{ actor.name }} {{actor.surname1}}
-
-        <h5>{{movie.participantes}}}</h5>
        </li>
   </div>
+  
   </b-form-group>
 
     </div>
@@ -232,8 +233,5 @@ export default {
 }
 
 </script>
-<style scoped lang="scss">
+<style lang="sass" src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
-
-
-</style>

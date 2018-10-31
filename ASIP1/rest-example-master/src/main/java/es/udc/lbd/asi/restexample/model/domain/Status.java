@@ -17,8 +17,8 @@ public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idStatus;
-	private int valoration;
-	private tipoStatus type;
+	private Integer valoration;
+	private TipoStatus type;
 	
 	@ManyToOne
 	@JoinColumn (name = "idMovie")
@@ -34,7 +34,7 @@ public class Status {
 		
 	}
 	
-	public Status(int valoration, tipoStatus type, Movie movie, NormalUser user) {
+	public Status(Integer valoration, TipoStatus type, Movie movie, NormalUser user) {
 		super();
 		this.valoration = valoration;
 		this.type = type;
@@ -42,13 +42,13 @@ public class Status {
 		this.user = user;
 	}
 	
-	public Status(int valoration, tipoStatus type) {
+	public Status(Integer valoration, TipoStatus type) {
 		super();
 		this.valoration = valoration;
 		this.type = type;
 	}
 
-	public int getValoration() {
+	public Integer getValoration() {
 		return valoration;
 	}
 
@@ -56,11 +56,11 @@ public class Status {
 		this.valoration = valoration;
 	}
 
-	public tipoStatus getType() {
+	public TipoStatus getType() {
 		return type;
 	}
 
-	public void setType(tipoStatus type) {
+	public void setType(TipoStatus type) {
 		this.type = type;
 	}
 

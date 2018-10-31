@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.Status;
-import es.udc.lbd.asi.restexample.model.domain.tipoStatus;
+import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 
 public class StatusDTO {
 
 	private Long idStatus;
-	private int valoration;
-	private tipoStatus type;
+	private Integer valoration;
+	private TipoStatus type;
 	@NotNull
 	private MovieDTO movie;
 	@NotNull
@@ -43,7 +43,7 @@ public class StatusDTO {
 		this.idStatus = idStatus;
 	}
 
-	public int getValoration() {
+	public Integer getValoration() {
 		return valoration;
 	}
 
@@ -51,11 +51,11 @@ public class StatusDTO {
 		this.valoration = valoration;
 	}
 
-	public tipoStatus getType() {
+	public TipoStatus getType() {
 		return type;
 	}
 
-	public void setType(tipoStatus type) {
+	public void setType(TipoStatus type) {
 		this.type = type;
 	}
 

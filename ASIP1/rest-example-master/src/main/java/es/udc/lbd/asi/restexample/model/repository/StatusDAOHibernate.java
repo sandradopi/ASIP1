@@ -19,5 +19,11 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 	public Status findById(Long idStatus) {
 		 return (Status) getSession().createQuery("from Status p where p.idStatus = :idStatus").setParameter("idStatus", idStatus).uniqueResult();
 	}
+
+	@Override
+	public void delete(Status status) {
+		  getSession().delete(findById(status.getIdStatus()));
+		
+	}
 	
 }

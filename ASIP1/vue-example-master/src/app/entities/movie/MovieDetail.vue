@@ -23,7 +23,7 @@
       <b-form-checkbox v-if="!isAdmin" class="cheeck"
                        v-model="statu"
                        value="vista"
-                       unchecked-value="no vista"
+                       unchecked-value="novista"
                        @click.native="checkboxFuction">
        <div><strong>Marcar Pelicula como vista</strong></div>
 
@@ -60,7 +60,7 @@ export default {
       loading: false,
       movie: null, //un dato que es post todo lo que visualicemos va a estar alli
       error: null,
-      statu: 'mark movie as seen',
+      statu: 'novista',
       status: null
     }
   },
@@ -95,7 +95,7 @@ export default {
       .finally(() => this.loading = false)
     },
     checkboxFuction(){
-      HTTP.post(`status/movies/${this.$route.params.id/this.statu}`, this.movie)
+      HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`, this.movie)
         //.then(response => this.movie = response.data)
         .catch(this._errorHandler)
     },

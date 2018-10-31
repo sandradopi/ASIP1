@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.service.ActorService;
 import es.udc.lbd.asi.restexample.model.service.StatusService;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
@@ -30,8 +31,8 @@ public class StatusResource {
 	@Autowired
     private StatusService statusService;
 	
-	@PostMapping("/{idMovie}/statu")
-    public StatusDTO save(@PathVariable Long idMovie, @PathVariable String statu, 
+	@PostMapping("/{idMovie}/{statu}")
+    public void save(@PathVariable Long idMovie, @PathVariable String statu, 
     		@RequestBody @Valid MovieDTO movie, Errors errors) throws RequestBodyNotValidException,
     		IdAndBodyNotMatchingOnUpdateException {
 		
@@ -41,13 +42,20 @@ public class StatusResource {
             throw new IdAndBodyNotMatchingOnUpdateException(Movie.class); 
             //Digamos que va como a "actualizar el estado" por eso reutilizamos esta excepcion
         }
+        
+        if (statu == "vista") {
+        	statusService.save(movie, TipoStatus.VISTA);
+        } else if (statu == "novista"){
+        	//y no tiene valoracion puesta
+        	//statusService.findStatus(movie);
+        	//statusService.delete(status);
+        	
+        }
        
-        return statusService.save(movie, statu);
         
         
-       /* }else if (statu == "Mark film as seen") {
-        	return statusService.delete ()
-        }*/
+        
+       
     }
 	
 

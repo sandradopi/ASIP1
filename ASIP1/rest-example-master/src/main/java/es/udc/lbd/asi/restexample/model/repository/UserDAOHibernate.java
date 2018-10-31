@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.User_;
 import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
@@ -30,6 +31,12 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 	public User_ findById(Long idUser){
 		return (User_) getSession().createQuery("from User_ p where p.idUser = :idUser").setParameter("idUser", idUser).uniqueResult();
 	}
+	
+	@Override
+	public NormalUser findByIdNormal(Long idUser){
+		return ( NormalUser) getSession().createQuery("from User_ p where p.idUser = :idUser AND p.authority=\"USER\"").setParameter("idUser", idUser).uniqueResult();
+	}
+
 
 
 }
