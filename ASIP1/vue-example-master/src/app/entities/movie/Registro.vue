@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -52,6 +53,12 @@
           placeholder="Enter your email"/>
       </b-form-group>
     </b-form>
+     <div
+      v-if="error"
+      class="error"
+      ifd= "error">
+      <pre>{{ error }}</pre>
+    </div>
      
 </div>
 </div>
@@ -65,8 +72,7 @@ export default {
   data() {
     return {
       user: {},
-      error: null,
-      loading: false,
+      error: null
     }
   },
  
@@ -80,11 +86,10 @@ export default {
       .catch(this._errorHandler)
 
       
-      
     },
     save() {
         return HTTP.post('register', this.user)
-        .then(this.userLogin())
+        .then(this.userLogin)
         .catch(this._errorHandler)
 
       
@@ -103,4 +108,11 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .error{
+    font: 150% sans-serif;
+    font: message-box;
+  }
+</style>
 

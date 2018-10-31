@@ -2,7 +2,11 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-
+      <div
+      v-if="error"
+      class="error">
+      <pre>{{ error }}</pre>
+    </div>
       <b-btn
          v-if="isAdmin"
          :to="{ name: 'MovieCreate' }"

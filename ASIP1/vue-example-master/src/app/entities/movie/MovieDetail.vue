@@ -2,7 +2,11 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-
+    <div
+      v-if="error"
+      class="error">
+      <pre>{{ error }}</pre>
+    </div>
     <div v-if="movie">
       <div class="float-right">
         <b-btn
@@ -19,10 +23,10 @@
       <h5>Duration: {{ movie.duration}}</h5>
       <h5>Genre: {{ movie.genre.type}}</h5>
       <h5>Actors:</h5>
-       <div class= "nameactors" v-for="actor in movie.participantes" :key="movie.participantes.idActor">
-         {{ actor.name }} {{actor.surname1}}</div>
+       <div class="actors">{{ actorsAsString }}</div>
       <br>
-      <h5>Directors: {{ movie.dirigentes.name}}</h5>
+      <h5>Directors:</h5>
+       <div class="directors">{{ directorsAsString }}</div>
       <hr>
       <h5>Movie´s summary:</h5>
       <div class="movie">{{ movie.summary }}</div>
@@ -48,8 +52,15 @@ export default {
   computed: {
      isAdmin() {
        return auth.isAdmin()
-     }
+     
    },
+   actorsAsString() {
+       return this.movie.participantes.map(t => t.name +" "+ t.surname1).join(', ')
+     },
+    directorsAsString() {
+       return this.movie.dirigentes.map(t => t.name +" "+ t.surname1).join(', ')
+     }
+  },
   watch: {
     '$route': 'fetchData'
   },
@@ -79,4 +90,12 @@ export default {
   .movie {
     white-space: pre;
   }
+  .actors {
+     font-style: italic;
+   }
+
+   .directors {
+     font-style: italic;
+   }
+
 </style>

@@ -13,6 +13,7 @@ library.add(faSearch)
 library.add(faMinusSquare)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
 
@@ -20,6 +21,7 @@ import App from './app/App'
 import router from './app/AppRouter'
 
 new Vue({
+	
   render: h => h(App),
   router
 }).$mount('#app')

@@ -1,10 +1,6 @@
 <template>
   <form @submit.prevent="userLogin">
-    <div
-      v-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-    </div>
+    
     <div class ="contenido" align="middle">
       <h1 align="middle">Welcome to your Film Library! </h1>
     </div>
@@ -39,6 +35,11 @@
        <b-btn
             :to="{ name: 'Registro'}"
             variant="sumit">If you don´t have an account, create it!</b-btn>
+        <div
+          v-if="error"
+          class="error">
+          <pre>{{ error }}</pre>
+        </div>
      </div>
   </form>
 </template>

@@ -2,7 +2,11 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-
+    <div
+      v-if="error"
+      class="error">
+      <pre>{{ error }}</pre>
+    </div>
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -50,15 +54,37 @@
           placeholder="Enter data"/>
       </b-form-group>
 
-      <b-form-group
-        label="Actors:"
-        label-for="actor">
-        <b-form-select
-          id="actor"
-          :options="actors"
-          v-model="movie.participantes"
-          required/>
-      </b-form-group>
+
+   <b-form-group>
+      <multiselect 
+        v-model="movie.participantes" 
+        :options="this.allparticipantes"
+        :multiple="true"
+        :searchable="true" 
+        :clear-on-select="false" 
+        :preserve-search="true"
+        :close-on-select="false" 
+        :show-labels="false" 
+        :preselect-first="true"
+        track-by="idActor"
+        placeholder="Pick some actors"
+        :custom-label="nameCustom">
+      <template 
+          slot="selection" 
+          slot-scope="{ values, search, isOpen }">
+          <span class="multiselect__single" 
+          v-if="values.length &amp;&amp; !isOpen">
+          {{ values.length }} options selected</span>
+        </template>
+      </multiselect>
+      <h5>Actors of the movie:</h5>
+      <li v-for="actor in movie.participantes">
+        {{ actor.name }} {{actor.surname1}}
+       </li>
+  </div>
+  </b-form-group>
+
+    </div>
 
       <b-form-group
         label="Genre:"
@@ -71,15 +97,34 @@
       </b-form-group>
 
 
-      <b-form-group
-        label="Directors:"
-        label-for="director">
-        <b-form-select
-          id="director"
-          :options="directors"
-          v-model="movie.dirigentes"
-          required/>
-      </b-form-group>
+      <b-form-group label="Director:" label-for="Director">
+      <multiselect
+        v-model="movie.dirigentes" 
+        :options="this.alldirigentes"
+        :multiple="true"
+        :searchable="true" 
+        :clear-on-select="false" 
+        :preserve-search="true"
+        :close-on-select="false" 
+        :show-labels="false" 
+        :preselect-first="true"
+        track-by="idDirector"
+        placeholder="Pick some directors"
+        :custom-label="nameCustom">
+      <template 
+          slot="selection" 
+          slot-scope="{ values, search, isOpen }">
+          <span class="multiselect__single" 
+          v-if="values.length &amp;&amp; !isOpen">
+          {{ values.length }} options selected</span>
+        </template>
+      </multiselect>
+      <h5>Directors of the movie:</h5>
+      <li v-for="director in movie.dirigentes">
+        {{ director.name }} {{director.surname1}}
+       </li>
+  </div>
+  </b-form-group>
 
       <b-form-group
         label="Summary:"
@@ -89,7 +134,6 @@
           v-model="movie.summary"
           :rows="3"
           :max-rows="6"
-          required
           placeholder="Enter summary"/>
       </b-form-group>
     </b-form>
@@ -99,8 +143,10 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
+import Multiselect from 'vue-multiselect'
+
 export default {
-  components: { LoadingPage },
+  components: { LoadingPage, Multiselect},
   data() {
     return {
       movie: {},
@@ -113,24 +159,6 @@ export default {
   
   },
    computed: {
-    actors() {
-      return this.allparticipantes.map(actor => {
-        return {
-          text: actor.name + " " + actor.surname1,
-          value: actor
-        }
-      })
-    },
-
-    directors() {
-      return this.alldirigentes.map(director => {
-        return {
-          text: director.name + " " + director.surname1,
-          value: director
-        }
-      })
-    },
-
     genres() {
       return this.allgenre.map(genre => {
         return {
@@ -141,17 +169,44 @@ export default {
     }
   },
   created() {
-      HTTP.get('actors')
-      .then(response => this.allparticipantes = response.data)
-      .catch(err => this.error = err.message)
-      HTTP.get('directors')
-      .then(response => this.alldirigentes = response.data)
-      .catch(err => this.error = err.message)
-      HTTP.get('genres')
-      .then(response => this.allgenre = response.data)
-      .catch(err => this.error = err.message)
+     this.getActors()
+     this.getDirectors()
+     this.getGenres()
+
+      if (this.$route.params.id) {
+        this.loading = true
+
+        HTTP.get(`movies/${this.$route.params.id}`)
+        .then(response => this.movie = response.data)
+        .catch(err => this.error = err.message)
+        .finally(() => this.loading = false)
+    } else {
+      this.movie = {}
+    }
   },
   methods: {
+    nameCustom ({ name, surname1 }) {
+      return `${name}  ${surname1}`
+    },
+    getActors() {
+        
+       HTTP.get('actors')
+      .then(response => this.allparticipantes = response.data)
+      .catch(err => this.error = err.message)
+    },
+    getDirectors() {
+        
+       HTTP.get('directors')
+      .then(response => this.alldirigentes = response.data)
+      .catch(err => this.error = err.message)
+    },
+
+    getGenres() {
+        
+       HTTP.get('genres')
+      .then(response => this.allgenre = response.data)
+      .catch(err => this.error = err.message)
+    },
 
     save() {
         if (this.$route.params.id) {
@@ -177,3 +232,8 @@ export default {
 }
 
 </script>
+<style scoped lang="scss">
+
+
+
+</style>

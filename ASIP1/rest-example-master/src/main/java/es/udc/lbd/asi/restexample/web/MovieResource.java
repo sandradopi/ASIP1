@@ -56,7 +56,7 @@ public class MovieResource {
         if (idMovie != movie.getIdMovie()) {
             throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
         }
-        return movieService.save(movie);
+        return movieService.update(movie);
     }
 
     @DeleteMapping("/{idMovie}")
