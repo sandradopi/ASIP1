@@ -17,19 +17,32 @@
            :to="{ name: 'MovieUpdate', params: { id: movie.idMovie }}"
            variant="primary">Edit</b-btn>
       </div>
-     <h3>{{movie.name}}</h3>
+     <h3 class= "nameFilm">{{movie.name}}</h3> 
+
+    <div>
+      <b-form-checkbox v-if="!isAdmin" class="cheeck"
+                       v-model="statu"
+                       value="vista"
+                       unchecked-value="no vista"
+                       @click.native="checkboxFuction">
+       <div><strong>Marcar Pelicula como vista</strong></div>
+
+      </b-form-checkbox>
+  </div>
       <br>
-      <h5>Release date: {{movie.data}}</h5>
-      <h5>Duration: {{ movie.duration}}</h5>
-      <h5>Genre: {{ movie.genre.type}}</h5>
-      <h5>Actors:</h5>
-       <div class="actors">{{ actorsAsString }}</div>
-      <br>
-      <h5>Directors:</h5>
-       <div class="directors">{{ directorsAsString }}</div>
-      <hr>
-      <h5>Movie´s summary:</h5>
-      <div class="movie">{{ movie.summary }}</div>
+      <div class= "contenido">
+          <h5>Release date: {{movie.data}}</h5>
+          <h5>Duration: {{ movie.duration}}</h5>
+          <h5>Genre: {{ movie.genre.type}}</h5>
+          <h5>Actors:</h5>
+           <div class="actors">{{ actorsAsString }}</div>
+          </br>
+          <h5>Directors:</h5>
+           <div class="directors">{{ directorsAsString }}</div>
+          <hr>
+          <h5>Movie´s summary:</h5>
+          <div class="movie">{{ movie.summary }}</div>
+      </div>
     </div>
   </LoadingPage>
 </template>
@@ -46,7 +59,9 @@ export default {
     return { //datos que usamos
       loading: false,
       movie: null, //un dato que es post todo lo que visualicemos va a estar alli
-      error: null
+      error: null,
+      statu: 'mark movie as seen',
+      status: null
     }
   },
   computed: {
@@ -79,8 +94,16 @@ export default {
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
     },
+    checkboxFuction(){
+      HTTP.post(`status/movies/${this.$route.params.id/this.statu}`, this.movie)
+        //.then(response => this.movie = response.data)
+        .catch(this._errorHandler)
+    },
     back() {
       this.$router.go(-1)
+    },
+    _errorHandler(err) {
+      this.error = err.response.data.message
     }
   }
 }
@@ -90,12 +113,22 @@ export default {
   .movie {
     white-space: pre;
   }
+  .nameFilm{
+    float:left;
+  }
   .actors {
      font-style: italic;
    }
 
    .directors {
      font-style: italic;
+   }
+   .cheeck{
+    margin-left:10%;
+   }
+
+   .contenido{
+    margin-top:50px;
    }
 
 </style>

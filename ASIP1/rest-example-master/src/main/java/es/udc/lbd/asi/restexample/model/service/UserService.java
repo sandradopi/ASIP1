@@ -72,6 +72,15 @@ public class UserService implements UserServiceInterface{
 	         }
 	         return null;
 	     }
+	     
+	     public NormalUserDTO getCurrentUserWithoutAuthority() {
+	         String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+	         if (currentUserLogin != null) {
+	             return new NormalUserDTO(userDAO.findByLogin(currentUserLogin));
+	         }
+	         return null;
+	     }
+	     
    
 
 }

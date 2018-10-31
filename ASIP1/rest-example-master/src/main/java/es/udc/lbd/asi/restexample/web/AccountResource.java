@@ -22,6 +22,7 @@ package es.udc.lbd.asi.restexample.web;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.LoginDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 import es.udc.lbd.asi.restexample.security.JWTConfigurer;
  import es.udc.lbd.asi.restexample.security.JWTToken;
  import es.udc.lbd.asi.restexample.security.TokenProvider;

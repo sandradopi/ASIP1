@@ -65,7 +65,6 @@
         :preserve-search="true"
         :close-on-select="false" 
         :show-labels="false" 
-        :preselect-first="true"
         track-by="idActor"
         placeholder="Pick some actors"
         :custom-label="nameCustom">
@@ -80,6 +79,8 @@
       <h5>Actors of the movie:</h5>
       <li v-for="actor in movie.participantes">
         {{ actor.name }} {{actor.surname1}}
+
+        <h5>{{movie.participantes}}}</h5>
        </li>
   </div>
   </b-form-group>
@@ -107,7 +108,6 @@
         :preserve-search="true"
         :close-on-select="false" 
         :show-labels="false" 
-        :preselect-first="true"
         track-by="idDirector"
         placeholder="Pick some directors"
         :custom-label="nameCustom">

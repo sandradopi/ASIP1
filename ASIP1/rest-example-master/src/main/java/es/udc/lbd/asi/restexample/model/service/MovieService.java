@@ -82,6 +82,15 @@ public class MovieService implements MovieServiceInterface{
         bdMovie.setSummary(movie.getSummary());
         bdMovie.setDuration(movie.getDuration());
         bdMovie.setData(movie.getData());
+        bdMovie.setGenre(genreDAO.findById(movie.getGenre().getIdGenre()));
+        bdMovie.getParticipantes().clear();
+        movie.getParticipantes().forEach(actor -> {
+            bdMovie.getParticipantes().add(actorDAO.findById(actor.getIdActor()));
+        });
+        bdMovie.getDirigentes().clear();
+        movie.getDirigentes().forEach(director -> {
+            bdMovie.getDirigentes().add(directorDAO.findById(director.getIdDirector()));
+        });
         movieDAO.save(bdMovie);
         return new MovieDTO(bdMovie);
         }

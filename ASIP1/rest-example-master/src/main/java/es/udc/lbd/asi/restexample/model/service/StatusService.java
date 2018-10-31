@@ -12,14 +12,20 @@ import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
+import es.udc.lbd.asi.restexample.model.domain.User_;
+import es.udc.lbd.asi.restexample.model.domain.tipoStatus;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
+import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -29,13 +35,28 @@ public class StatusService implements StatusServiceInterface {
 	private StatusDAO statusDAO;
 	@Autowired
 	private MovieDAO movieDAO;
+	@Autowired
+	private UserDAO userDAO;
+	@Autowired
+	private UserService userService;
 
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
-	public StatusDTO save(StatusDTO status) {
-		Status bdStatus = new Status(status.getValoration(),status.getType());
-		bdStatus.setMovie(movieDAO.findById(status.getMovie().getIdMovie()));
-		bdStatus.getNormalUser();
+	public StatusDTO save(MovieDTO movie, String statu) {
+		tipoStatus STATE = null;
+		
+		//if (estado == "vista"){
+			STATE = STATE.VISTA;
+		//} else if (estado=="pendiente")
+		//{
+			//STATE = STATE.PENDIENTE;
+		//} 
+		
+		Status bdStatus = new Status(0,STATE);
+		bdStatus.setMovie(movieDAO.findById(movie.getIdMovie()));
+		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+		NormalUser usuarioNormal= (NormalUser) userDAO.findById(usuario.getIdUser());
+		bdStatus.setNormalUser(usuarioNormal);
 		statusDAO.save(bdStatus);
 		return new StatusDTO(bdStatus);
 	}
