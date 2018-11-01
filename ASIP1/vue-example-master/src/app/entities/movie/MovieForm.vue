@@ -56,6 +56,7 @@
 
 
    <b-form-group>
+   <h5>Actors:</h5>
       <multiselect 
         v-model="movie.participantes" 
         tag-placeholder="Add this as new tag"
@@ -69,19 +70,9 @@
         track-by="idActor"
         placeholder="Pick some actors"
         :custom-label="nameCustom">
-      <template 
-          slot="selection" 
-          slot-scope="{ values, search, isOpen }">
-          <span class="multiselect__single" 
-          v-if="values.length &amp;&amp; !isOpen">
-          {{ values.length }} options selected</span>
-        </template>
       </multiselect>
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
-      <h5>Actors of the movie:</h5>
-      <li v-for="actor in movie.participantes">
-        {{ actor.name }} {{actor.surname1}}
-       </li>
+      
   </div>
   
   </b-form-group>
@@ -99,8 +90,9 @@
       </b-form-group>
 
 
-      <b-form-group label="Director:" label-for="Director">
-      <multiselect
+      <b-form-group >
+      <h5>Directors:</h5>
+      <multiselect 
         v-model="movie.dirigentes" 
         :options="this.alldirigentes"
         :multiple="true"
@@ -112,18 +104,8 @@
         track-by="idDirector"
         placeholder="Pick some directors"
         :custom-label="nameCustom">
-      <template 
-          slot="selection" 
-          slot-scope="{ values, search, isOpen }">
-          <span class="multiselect__single" 
-          v-if="values.length &amp;&amp; !isOpen">
-          {{ values.length }} options selected</span>
-        </template>
       </multiselect>
-      <h5>Directors of the movie:</h5>
-      <li v-for="director in movie.dirigentes">
-        {{ director.name }} {{director.surname1}}
-       </li>
+      
   </div>
   </b-form-group>
 
@@ -155,7 +137,8 @@ export default {
       loading: false,
       allparticipantes: [],
       alldirigentes: [],
-      allgenre: []
+      allgenre: [],
+      selected: []
     }
   
   },
@@ -189,6 +172,7 @@ export default {
     nameCustom ({ name, surname1 }) {
       return `${name}  ${surname1}`
     },
+
     getActors() {
         
        HTTP.get('actors')
@@ -233,5 +217,6 @@ export default {
 }
 
 </script>
-<style lang="sass" src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style lang="sass" src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>
 

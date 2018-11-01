@@ -16,9 +16,9 @@
            v-if="isAdmin"
            :to="{ name: 'MovieUpdate', params: { id: movie.idMovie }}"
            variant="primary">Edit</b-btn>
+          
       </div>
      <h3 class= "nameFilm">{{movie.name}}</h3> 
-
     <div>
       <b-form-checkbox v-if="!isAdmin" class="cheeck"
                        v-model="statu"
@@ -30,7 +30,21 @@
 
       </b-form-checkbox>
   </div>
-      <br>
+</br>
+</br>
+      <div class="bottone">
+          <button
+              class="eliminado"
+              v-if="isAdmin"
+              variant="primary"
+              @click="eliminar()">Delete</button>
+
+          <button
+              class="ocultado"
+              v-if="isAdmin"
+              variant="primary"
+              @click="ocultar()">Hide</button>
+    </div>
       <div class= "contenido">
           <h5>Release date: {{movie.data}}</h5>
           <h5>Duration: {{ movie.duration}}</h5>
@@ -100,6 +114,17 @@ export default {
         //.then(response => this.movie = response.data)
         .catch(this._errorHandler)
     },
+    eliminar(){
+        HTTP.delete(`movies/${this.$route.params.id}`)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
+      },
+
+    ocultar(){
+        HTTP.delete(`movies/${this.$route.params.id}`)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
+      },
     back() {
       this.$router.go(-1)
     },
@@ -129,7 +154,49 @@ export default {
    }
 
    .contenido{
-    margin-top:50px;
+    margin-top:30px;
    }
+
+   .eliminado {
+    background-color: #f44336; 
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+
+  .eliminado:hover {
+    background-color: #f44336;
+    color: white;
+  
+}
+.ocultado {
+    background-color: #555555; 
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+
+  .ocultado:hover {
+    background-color: #555555;
+    color: white;
+  }
+
+  .bottone{
+    float:bottom;
+  }
 
 </style>
