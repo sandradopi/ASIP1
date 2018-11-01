@@ -30,6 +30,7 @@ public class StatusDTO {
 	public StatusDTO(Status status) {
 		this.idStatus = status.getIdStatus();
 		this.valoration = status.getValoration();
+		this.type=status.getType();
 		this.movie = new MovieDTO(status.getMovie());
 		this.normalUser = new NormalUserDTO(status.getNormalUser());
 		

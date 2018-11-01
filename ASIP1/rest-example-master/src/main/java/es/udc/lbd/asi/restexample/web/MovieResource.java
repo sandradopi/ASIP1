@@ -41,7 +41,6 @@ public class MovieResource {
     @GetMapping("/{idMovie}")
     public MovieDTO findOne(@PathVariable Long idMovie) throws InstanceNotFoundExceptionHIB{
         MovieDTO movie = movieService.findById(idMovie);
-        //if (movie == nulo){devuelve excepcion}
     	return movie;
     }
     

@@ -42,17 +42,28 @@ public class StatusService implements StatusServiceInterface {
 
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
-	public void save(MovieDTO movie, TipoStatus STATE) {
+	public void save(Long MovieId, TipoStatus STATE) {
 		
 		Status bdStatus = new Status(null,STATE);
-		bdStatus.setMovie(movieDAO.findById(movie.getIdMovie()));
+		bdStatus.setMovie(movieDAO.findById(MovieId));
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		bdStatus.setNormalUser(usuarioNormal);
 		statusDAO.save(bdStatus);
-		new StatusDTO(bdStatus);
+
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void deleteByIdMovieUser(Long movieId) {
+			NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+			NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+			Status status= statusDAO.findByMovieUser(movieId, usuarioNormal);
+	    	statusDAO.delete(status);
+	    }
+		
 	}
 	
 	
 	
-}
+

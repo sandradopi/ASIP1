@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,49 +27,34 @@ import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
-
 @RestController
 @RequestMapping("/api/status/movies")
 public class StatusResource {
 	@Autowired
-    private StatusService statusService;
-	
+	private StatusService statusService;
+	private final Logger logger = LoggerFactory.getLogger(AccountResource.class);
+
 	@PostMapping("/{idMovie}/{statu}")
-    public void save(@PathVariable Long idMovie, @PathVariable String statu, 
-    		@RequestBody @Valid MovieDTO movie, Errors errors) throws RequestBodyNotValidException,
-    		IdAndBodyNotMatchingOnUpdateException {
-		
-        errorHandler(errors); 
-        	
-        if (idMovie != movie.getIdMovie()) {
-            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class); 
-            //Digamos que va como a "actualizar el estado" por eso reutilizamos esta excepcion
-        }
-        
-        if (statu == "vista") {
-        	statusService.save(movie, TipoStatus.VISTA);
-        } else if (statu == "novista"){
-        	//y no tiene valoracion puesta
-        	//statusService.findStatus(movie);
-        	//statusService.delete(status);
-        	
-        }
-       
-        
-        
-        
-       
-    }
-	
+	public void save(@PathVariable Long idMovie, @PathVariable String statu) {
 
+		logger.warn(statu);
+		if (statu.equals("novista-vista")) {
+		statusService.save(idMovie, TipoStatus.VISTA);
+		} else if (statu.equals("vista-novista")){
+			statusService.deleteByIdMovieUser(idMovie);
+		}
 
-	private void errorHandler(Errors errors) throws RequestBodyNotValidException  {
+	}
+
+	 
+
+	private void errorHandler(Errors errors) throws RequestBodyNotValidException {
 		if (errors.hasErrors()) {
-            String errorMsg = errors.getFieldErrors().stream()
-                    .map(fe -> String.format("%s.%s %s", fe.getObjectName(), fe.getField(), fe.getDefaultMessage()))
-                    .collect(Collectors.joining("; "));
-            throw new RequestBodyNotValidException(errorMsg);
-		
+			String errorMsg = errors.getFieldErrors().stream()
+					.map(fe -> String.format("%s.%s %s", fe.getObjectName(), fe.getField(), fe.getDefaultMessage()))
+					.collect(Collectors.joining("; "));
+			throw new RequestBodyNotValidException(errorMsg);
+
+		}
 	}
 }
-	}

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
@@ -20,6 +21,11 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 		 return (Status) getSession().createQuery("from Status p where p.idStatus = :idStatus").setParameter("idStatus", idStatus).uniqueResult();
 	}
 
+	@Override
+	public Status findByMovieUser(Long idMovie, NormalUser user) {
+		 return (Status) getSession().createQuery("from Status p where p.idMovie = :idMovie AND p.user=user").setParameter("idMovie", idMovie).setParameter("user", user).uniqueResult();
+	}
+	
 	@Override
 	public void delete(Status status) {
 		  getSession().delete(findById(status.getIdStatus()));

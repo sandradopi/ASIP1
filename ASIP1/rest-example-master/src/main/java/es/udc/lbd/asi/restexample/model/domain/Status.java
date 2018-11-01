@@ -1,6 +1,8 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Status {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idStatus;
 	private Integer valoration;
+	@Enumerated(EnumType.STRING)
 	private TipoStatus type;
 	
 	@ManyToOne
