@@ -1,5 +1,5 @@
 <template>
-  <h1>Welcome to the Vue Example!</h1>
+  <h1>Welcome to your Movie Library!</h1>
 </template>
 
 <script>

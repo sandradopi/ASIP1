@@ -3,8 +3,6 @@
 @import '../../node_modules/bootstrap-vue/dist/bootstrap-vue';
 
 
-
-
 .content {
   margin: 10px 50px 10px 50px;
 }
@@ -12,5 +10,16 @@
 
 .app-form {
   padding-top: 30px;
+}
+
+ body {
+  height: 100%;
+  background: linear-gradient(to right, #7f3737, #2a2122);
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+
+ 
+
 }
 

@@ -37,7 +37,7 @@ export default {
 
 <style scoped lang="scss">
   #app {
-    color: #56b983;
+    color:  #ffffff;
   }
 
   .notification {
@@ -51,7 +51,7 @@ export default {
      border: 1px solid #D4E8FD;
 
      .error {
-       background: #000000;
+       background: #ffffff;
      }
 
      .notification-title {
