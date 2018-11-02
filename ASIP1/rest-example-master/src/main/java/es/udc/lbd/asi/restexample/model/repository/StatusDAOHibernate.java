@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
@@ -12,6 +14,11 @@ import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO {
 
 	@Override
+	public List<Status> findAll() {
+		return getSession().createQuery("from Status").list();
+	}
+	
+	@Override
 	public void save(Status status) {
 		getSession().saveOrUpdate(status);
 	}
@@ -22,8 +29,8 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 	}
 
 	@Override
-	public Status findByMovieUser(Long idMovie, NormalUser user) {
-		 return (Status) getSession().createQuery("from Status p where p.idMovie = :idMovie AND p.user=user").setParameter("idMovie", idMovie).setParameter("user", user).uniqueResult();
+	public Status findByMovieUser(Movie movie, NormalUser user) {
+		 return (Status) getSession().createQuery("from Status p where p.movie = :movie AND p.user=user").setParameter("movie", movie).setParameter("user", user).uniqueResult();
 	}
 	
 	@Override

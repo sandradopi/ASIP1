@@ -7,6 +7,19 @@
       class="error">
       <pre>{{ error }}</pre>
     </div>
+    <div class="bottone">
+          <button
+              class="eliminado"
+              v-if="isAdmin"
+              variant="primary"
+              @click="eliminar()">Delete</button>
+
+          <button
+              class="ocultado"
+              v-if="isAdmin"
+              variant="primary"
+              @click="ocultar()">Hide</button>
+    </div>
     <div v-if="movie">
       <div class="float-right">
         <b-btn
@@ -33,7 +46,7 @@
       <star-rating class="star"
         v-model="rating"
         @rating-selected= "puntuar"
-        star-size="30"
+         v-bind:star-size="30"
       ></star-rating>
       </div>
      
@@ -41,19 +54,6 @@
   </div>
 </br>
 </br>
-      <div class="bottone">
-          <button
-              class="eliminado"
-              v-if="isAdmin"
-              variant="primary"
-              @click="eliminar()">Delete</button>
-
-          <button
-              class="ocultado"
-              v-if="isAdmin"
-              variant="primary"
-              @click="ocultar()">Hide</button>
-    </div>
       <div class= "contenido">
           <h5>Release date: {{movie.data}}</h5>
           <h5>Duration: {{ movie.duration}}</h5>
@@ -122,24 +122,24 @@ export default {
     },
 
     puntuar(){
-      
+      HTTP.put(`status/movies/${this.$route.params.id}/${this.rating}`, this.movie)
+        //.then(response => this.movie = response.data)
+        .catch(this._errorHandler)
     },
 
     checkboxFuction(){
-      HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`)
+      HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`, this.movie)
         //.then(response => this.movie = response.data)
         .catch(this._errorHandler)
     },
     eliminar(){
-        HTTP.delete(`movies/${this.$route.params.id}`)
-        .then(this._successHandler)
+         HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`, this.movie)
+        //.then(this._successHandler)
         .catch(this._errorHandler)
       },
 
     ocultar(){
-        HTTP.delete(`movies/${this.$route.params.id}`)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
+        
       },
     back() {
       this.$router.go(-1)
@@ -156,6 +156,7 @@ export default {
     white-space: pre;
   }
   .nameFilm{
+    margin-top:20px;
 
   }
 
@@ -213,7 +214,8 @@ export default {
   }
 
   .bottone{
-    float:bottom;
+    float:right;
+    margin-bottom:10px;
   }
 
   .puntuation{

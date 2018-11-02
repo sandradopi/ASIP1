@@ -40,7 +40,7 @@ import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
 
 export default {
-  components: { LoadingPage },
+  components: { LoadingPage},
   data() {
     return {
       loading: false,

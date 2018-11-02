@@ -7,6 +7,7 @@ import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 
 public interface StatusServiceInterface {
 	public void save(Long MovieId, TipoStatus STATE);
-	public void deleteByIdMovieUser(Long MovieId);
+	public void update(MovieDTO movie, Integer valoracion);
+	public void deleteByIdMovieUser(MovieDTO movie);
 	
 }

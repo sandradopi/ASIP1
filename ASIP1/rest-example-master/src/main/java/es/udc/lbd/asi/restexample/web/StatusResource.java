@@ -13,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,16 +36,32 @@ public class StatusResource {
 	private final Logger logger = LoggerFactory.getLogger(AccountResource.class);
 
 	@PostMapping("/{idMovie}/{statu}")
-	public void save(@PathVariable Long idMovie, @PathVariable String statu) {
-
-		logger.warn(statu);
+	public void save(@PathVariable Long idMovie, @PathVariable String statu, @RequestBody @Valid MovieDTO movie, Errors errors)  
+	throws IdAndBodyNotMatchingOnUpdateException, RequestBodyNotValidException {
+		errorHandler(errors);
+        if (idMovie != movie.getIdMovie()) {
+            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
+        }
+        
 		if (statu.equals("novista-vista")) {
 		statusService.save(idMovie, TipoStatus.VISTA);
 		} else if (statu.equals("vista-novista")){
-			statusService.deleteByIdMovieUser(idMovie);
+			statusService.deleteByIdMovieUser(movie);
 		}
 
 	}
+	
+	@PutMapping("/{idMovie}/{valoracion}")
+    public void update(@PathVariable Long idMovie, @PathVariable Integer valoracion, 
+    @RequestBody @Valid MovieDTO movie,Errors errors ) throws IdAndBodyNotMatchingOnUpdateException, 
+    RequestBodyNotValidException {
+		errorHandler(errors);
+        if (idMovie != movie.getIdMovie()) {
+            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
+        }
+        
+        statusService.update(movie,valoracion);
+    }
 
 	 
 

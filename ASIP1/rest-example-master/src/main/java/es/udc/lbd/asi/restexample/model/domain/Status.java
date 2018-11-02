@@ -83,7 +83,7 @@ public class Status {
 		this.movie = movie;
 	}
 	
-	public User_ getNormalUser() {
+	public NormalUser getNormalUser() {
 		return user;
 	}
 

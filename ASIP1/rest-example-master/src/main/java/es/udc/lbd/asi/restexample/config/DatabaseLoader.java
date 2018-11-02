@@ -1,6 +1,9 @@
 package es.udc.lbd.asi.restexample.config;
 
-import java.sql.Date;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -55,7 +58,7 @@ public class DatabaseLoader {
      * transaciones.
      */
     @PostConstruct
-    public void init() {
+    public void init() throws ParseException {
     	 try {
              databaseLoader.loadData();
          } catch (UserLoginExistsException e) {
@@ -64,11 +67,12 @@ public class DatabaseLoader {
     }
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
-    public void loadData() throws UserLoginExistsException{
+    public void loadData() throws UserLoginExistsException, ParseException{
     	
     userService.registerUser("pepe","pepe@pepe.com", "pepe", true);
     userService.registerUser("maria","maria@maria.com","maria",true);
     userService.registerUser("laura", "laura@laura.com","laura");
+    userService.registerUser("sandra", "sandra111@outlook.com.com","sandra");
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	
@@ -86,18 +90,18 @@ public class DatabaseLoader {
     participantes.add(actor2);
     Set <Director>dirigentes = new <Director> HashSet();
     dirigentes.add(director1);
-    
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, new Date(2015-11-04),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-02"),
     		genre1, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"WonderWoman","La pelicula va sobre...",250, new Date(2018-12-06),
+    (new Movie(false,"WonderWoman","La pelicula va sobre...",250, sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"Harry Potter","La pelicula va sobre...",250, new Date(2018-12-06),
+    (new Movie(false,"Harry Potter","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes));
     }
     
