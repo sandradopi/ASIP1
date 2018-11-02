@@ -26,9 +26,18 @@
                        unchecked-value="novista-vista"
                        @click.native="checkboxFuction">
        <div><strong>Marcar Pelicula como vista</strong></div>
-       <h3>{{this.statu}}</h3> 
-
       </b-form-checkbox>
+
+      <div class= "puntuation" v-if = "statu == 'vista-novista'">
+      <strong>Puntuation:</strong>
+      <star-rating class="star"
+        v-model="rating"
+        @rating-selected= "puntuar"
+        star-size="30"
+      ></star-rating>
+      </div>
+     
+
   </div>
 </br>
 </br>
@@ -67,16 +76,18 @@ import { HTTP } from '../../common/http-common'
 //LIBRERIA AXIOS (todas las peticiones al 8080 al servidor)
 import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
+import StarRating from 'vue-star-rating'
 
 export default {
-  components: { LoadingPage },
+  components: { LoadingPage ,  StarRating},
   data() {
     return { //datos que usamos
       loading: false,
       movie: null, //un dato que es post todo lo que visualicemos va a estar alli
       error: null,
       statu: "novista-vista",
-      status: null
+      status: null,
+      rating:0      //this.$refs.component.note
     }
   },
   computed: {
@@ -109,6 +120,11 @@ export default {
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
     },
+
+    puntuar(){
+      
+    },
+
     checkboxFuction(){
       HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`)
         //.then(response => this.movie = response.data)
@@ -140,8 +156,9 @@ export default {
     white-space: pre;
   }
   .nameFilm{
-    float:left;
+
   }
+
   .actors {
      font-style: italic;
    }
@@ -150,11 +167,11 @@ export default {
      font-style: italic;
    }
    .cheeck{
-    margin-left:10%;
+    margin-top:20px;
    }
 
    .contenido{
-    margin-top:30px;
+    margin-top:5px;
    }
 
    .eliminado {
@@ -197,6 +214,16 @@ export default {
 
   .bottone{
     float:bottom;
+  }
+
+  .puntuation{
+    margin-top:10px;
+    margin-left:25px;
+
+  }
+
+  .star{
+
   }
 
 </style>

@@ -14,6 +14,7 @@
 import auth from './common/auth'
 import MenuBar from './components/MenuBar'
 
+
 export default {
   name: 'App',
    components: { MenuBar },
