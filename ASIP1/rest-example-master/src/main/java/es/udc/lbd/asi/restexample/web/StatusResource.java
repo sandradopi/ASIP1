@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,31 +37,23 @@ public class StatusResource {
 	private final Logger logger = LoggerFactory.getLogger(AccountResource.class);
 
 	@PostMapping("/{idMovie}/{statu}")
-	public void save(@PathVariable Long idMovie, @PathVariable String statu, @RequestBody @Valid MovieDTO movie, Errors errors)  
-	throws IdAndBodyNotMatchingOnUpdateException, RequestBodyNotValidException {
-		errorHandler(errors);
-        if (idMovie != movie.getIdMovie()) {
-            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
-        }
-        
-		if (statu.equals("novista-vista")) {
-		statusService.save(idMovie, TipoStatus.VISTA);
-		} else if (statu.equals("vista-novista")){
-			statusService.deleteByIdMovieUser(movie);
-		}
+	public void save(@PathVariable Long idMovie, @PathVariable String statu)   {
+		if(statusService.findByMovieUser(idMovie)== null){
+		statusService.save(idMovie, TipoStatus.VISTA);}
+		
+
+	}
+	
+   @DeleteMapping("/{idMovie}/{statu}")
+	public void delete(@PathVariable Long idMovie, @PathVariable String statu) {
+	   if((statusService.findByMovieUser(idMovie).getValoration()!=null)){
+			statusService.deleteByIdMovieUser(idMovie);}
 
 	}
 	
 	@PutMapping("/{idMovie}/{valoracion}")
-    public void update(@PathVariable Long idMovie, @PathVariable Integer valoracion, 
-    @RequestBody @Valid MovieDTO movie,Errors errors ) throws IdAndBodyNotMatchingOnUpdateException, 
-    RequestBodyNotValidException {
-		errorHandler(errors);
-        if (idMovie != movie.getIdMovie()) {
-            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
-        }
-        
-        statusService.update(movie,valoracion);
+    public void update(@PathVariable Long idMovie, @PathVariable Integer valoracion){
+        statusService.update(idMovie,valoracion);
     }
 
 	 

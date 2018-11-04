@@ -61,7 +61,7 @@ public class MovieResource {
     }
 
     @DeleteMapping("/{idMovie}")
-    public void delete(@RequestParam Long idMovie) throws InstanceNotFoundExceptionHIB{
+    public void delete(@PathVariable Long idMovie) throws InstanceNotFoundExceptionHIB{
         movieService.deleteById(idMovie);
     }
     

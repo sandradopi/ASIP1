@@ -8,17 +8,17 @@
       <pre>{{ error }}</pre>
     </div>
     <div class="bottone">
-          <button
+          <b-btn
               class="eliminado"
               v-if="isAdmin"
               variant="primary"
-              @click="eliminar()">Delete</button>
+              @click="eliminar(movie.idMovie)">Delete</b-btn>
 
-          <button
+          <b-btn
               class="ocultado"
               v-if="isAdmin"
               variant="primary"
-              @click="ocultar()">Hide</button>
+              @click="ocultar(movie.idMovie)">Hide</b-btn>
     </div>
     <div v-if="movie">
       <div class="float-right">
@@ -128,19 +128,27 @@ export default {
     },
 
     checkboxFuction(){
-      HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`, this.movie)
-        //.then(response => this.movie = response.data)
-        .catch(this._errorHandler)
+      if(this.statu =="novista-vista" ){
+           HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`)
+            .catch(this._errorHandler)}
+      else if (this.statu =="vista-novista" ){
+          HTTP.delete(`status/movies/${this.$route.params.id}/${this.statu}`)
+          .catch(this._errorHandler)}
     },
-    eliminar(){
-         HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`, this.movie)
-        //.then(this._successHandler)
+    eliminar(idMovie){
+        HTTP.delete(`movies/${idMovie}`)
+        .then(this._successHandler)
         .catch(this._errorHandler)
       },
 
-    ocultar(){
+    _successHandler(response) {
+      this.$router.replace({ name: 'MovieList'})
+    },
+
+    ocultar(idMovie){
         
       },
+
     back() {
       this.$router.go(-1)
     },

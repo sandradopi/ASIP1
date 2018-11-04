@@ -18,17 +18,17 @@
           {{ movie.name }}
         </router-link>
     <div class="buttone">
-    <button
+     <b-btn
         class="eliminado"
         v-if="isAdmin"
         variant="primary"
-        @click="eliminar()">Delete</button>
+        @click="eliminar(movie.idMovie)">Delete</b-btn>
 
-    <button
+     <b-btn
         class="ocultado"
         v-if="isAdmin"
         variant="primary"
-        @click="ocultar()">Hide</button>
+        @click="ocultar(movie.idMovie)">Hide</b-btn>
     </div>
     </div>
   </LoadingPage>
@@ -65,21 +65,20 @@ export default {
     .finally(() => this.loading = false)
   },
   methods: {
-    eliminar(){
-        HTTP.delete(`movies/${this.$route.params.id}`)
+    eliminar(idMovie){
+        HTTP.delete(`movies/${idMovie}`)
         .then(this._successHandler)
         .catch(this._errorHandler)
       },
 
-    ocultar(){
-        HTTP.delete(`movies/${this.$route.params.id}`)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
+    ocultar(idMovie){
+        
       },
     
     _successHandler(response) {
       this.$router.replace({ name: 'MovieList'})
     },
+
     _errorHandler(err) {
       this.error = err.response.data.message
     }

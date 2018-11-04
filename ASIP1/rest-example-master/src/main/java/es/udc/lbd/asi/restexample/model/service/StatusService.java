@@ -55,8 +55,8 @@ public class StatusService implements StatusServiceInterface {
 	@PreAuthorize("hasAuthority('USER')")
 	@Override
 	@Transactional(readOnly = false)
-	public void deleteByIdMovieUser(MovieDTO movie) {
-			Movie bdMovie = movieDAO.findById(movie.getIdMovie());
+	public void deleteByIdMovieUser(Long idMovie) {
+			Movie bdMovie = movieDAO.findById(idMovie);
 			NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 			NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 			Status status= statusDAO.findByMovieUser(bdMovie, usuarioNormal);
@@ -66,14 +66,24 @@ public class StatusService implements StatusServiceInterface {
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	@Override
-	public void update(MovieDTO movie, Integer valoracion) {
-		Movie bdMovie = movieDAO.findById(movie.getIdMovie());
+	public void update(Long idMovie, Integer valoracion) {
+		Movie bdMovie = movieDAO.findById(idMovie);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		Status bdStatus= statusDAO.findByMovieUser(bdMovie, usuarioNormal);
 		bdStatus.setValoration(valoracion);
 		statusDAO.save(bdStatus);
 		
+		
+	}
+	@Override
+	public StatusDTO findByMovieUser(Long idMovie) {
+		Movie bdMovie = movieDAO.findById(idMovie);
+		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		StatusDTO status = new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
+		return status;
+	
 		
 	}
 		

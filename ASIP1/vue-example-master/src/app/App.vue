@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  	   <notifications
+  	 <notifications
        :max="3"
        :width="400"
        position="top center"/>
@@ -38,6 +38,7 @@ export default {
 <style scoped lang="scss">
   #app {
     color:  #ffffff;
+    
   }
 
   .notification {
@@ -48,7 +49,7 @@ export default {
      padding: 10px 20px;
      color: #495061;
      background: #EAF4FE;
-     border: 1px solid #D4E8FD;
+     border: 1px solid #D4E8FD;}
 
      .error {
        background: #ffffff;
@@ -60,5 +61,7 @@ export default {
        font-size: 10px;
        color: #2589F3;
      }
-   }
+
+
+   
 </style>

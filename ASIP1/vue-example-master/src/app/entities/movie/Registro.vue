@@ -98,10 +98,8 @@ export default {
       this.$router.go(-1)
     },
     _successHandler(response) {
-      response => {this.$router.replace({ name: 'MovieList'})}
-      
-       
-     },
+      this.$router.replace({ name: 'MovieList'})
+    },
       _errorHandler(err) {
       this.error = err.response.data.message
      }
@@ -114,5 +112,7 @@ export default {
     font: 150% sans-serif;
     font: message-box;
   }
+
+ 
 </style>
 
