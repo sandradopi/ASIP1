@@ -1,31 +1,18 @@
 package es.udc.lbd.asi.restexample.model.service;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import es.udc.lbd.asi.restexample.model.domain.Actor;
-import es.udc.lbd.asi.restexample.model.domain.Director;
-import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
-import es.udc.lbd.asi.restexample.model.domain.User_;
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
-import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
-import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -66,13 +53,15 @@ public class StatusService implements StatusServiceInterface {
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	@Override
-	public void update(Long idMovie, Integer valoracion) {
+	public StatusDTO update(Long idMovie, Integer valoracion) {
 		Movie bdMovie = movieDAO.findById(idMovie);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		Status bdStatus= statusDAO.findByMovieUser(bdMovie, usuarioNormal);
 		bdStatus.setValoration(valoracion);
 		statusDAO.save(bdStatus);
+		StatusDTO status = new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
+		return status;
 		
 		
 	}

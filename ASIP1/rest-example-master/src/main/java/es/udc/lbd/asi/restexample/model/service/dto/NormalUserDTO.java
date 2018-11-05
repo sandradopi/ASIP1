@@ -27,7 +27,7 @@ public class NormalUserDTO {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
 		this.email=user.getEmail();
-		this.authority= authority.USER;
+		this.authority= UserAuthority.USER;
 	}
 
 	
@@ -51,7 +51,6 @@ public class NormalUserDTO {
 	public String getLogin() {
 		return login;
 	}
-
 	public void setLogin(String login) {
 		this.login = login;
 	}

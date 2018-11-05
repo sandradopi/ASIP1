@@ -32,12 +32,12 @@
           
       </div>
      <h3 class= "nameFilm">{{movie.name}}</h3> 
-    <div>
-      <b-form-checkbox v-if="!isAdmin" class="cheeck"
+    <div v-if="!isAdmin">
+      <b-form-checkbox  class="cheeck"
                        v-model="statu"
                        value="vista-novista"
                        unchecked-value="novista-vista"
-                       @click.native="checkboxFuction">
+                       @change="checkboxFuction">
        <div><strong>Marcar Pelicula como vista</strong></div>
       </b-form-checkbox>
 
@@ -45,7 +45,7 @@
       <strong>Puntuation:</strong>
       <star-rating class="star"
         v-model="rating"
-        @rating-selected= "puntuar"
+        @rating-selected= "puntuar()"
          v-bind:star-size="30"
       ></star-rating>
       </div>
@@ -65,7 +65,7 @@
            <div class="directors">{{ directorsAsString }}</div>
           <hr>
           <h5>Movie´s summary:</h5>
-          <div class="movie">{{ movie.summary }}</div>
+          <div class="movie">{{ movie.summary }}</div> 
       </div>
     </div>
   </LoadingPage>
@@ -87,7 +87,7 @@ export default {
       error: null,
       statu: "novista-vista",
       status: null,
-      rating:0      //this.$refs.component.note
+      rating:null      //this.$refs.component.note
     }
   },
   computed: {
@@ -114,16 +114,20 @@ export default {
       this.loading = true
 
       HTTP.get(`movies/${this.$route.params.id}`) 
-      //hace una peticion a nuestro cliente rest, url del api a un id concreto
       .then(response => this.movie = response.data)
-      //pilla la respuesta y le asocia el valor al post (nos llega un jason {"id":valor;})
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
+
+      HTTP.get(`status/movies/${this.$route.params.id}`)
+      .then(response => this.rating = response.data.valoration)
+      .catch()
+
+      
     },
 
     puntuar(){
-      HTTP.put(`status/movies/${this.$route.params.id}/${this.rating}`, this.movie)
-        //.then(response => this.movie = response.data)
+      HTTP.put(`status/movies/${this.$route.params.id}/${this.rating}`)
+        .then(response => this.rating = response.data.valoration)
         .catch(this._errorHandler)
     },
 

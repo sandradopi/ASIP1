@@ -54,7 +54,12 @@ export default {
      }
    },
   created() {
-    this.loading = true
+    this.fetchData()
+    
+  },
+  methods: {
+    fetchData() {
+      this.loading = true
     HTTP.get('movies')
     .then(response => {
        this.movies = response.data
@@ -63,8 +68,7 @@ export default {
        this.error = err.message
      })
     .finally(() => this.loading = false)
-  },
-  methods: {
+    },
     eliminar(idMovie){
         HTTP.delete(`movies/${idMovie}`)
         .then(this._successHandler)
@@ -76,7 +80,7 @@ export default {
       },
     
     _successHandler(response) {
-      this.$router.replace({ name: 'MovieList'})
+      this.fetchData()
     },
 
     _errorHandler(err) {
