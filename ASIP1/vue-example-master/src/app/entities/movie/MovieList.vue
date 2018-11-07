@@ -20,17 +20,15 @@
         </router-link>
     </div>
     <img class="imagen"  v-if="!isAdmin" src="movie.jpg">
-    <div class="buttone">
+    <div class="buttone" v-if="isAdmin">
      <b-btn
         class="eliminado"
-        v-if="isAdmin"
         variant="primary"
         @click="eliminar(movie.idMovie)">Delete</b-btn>
 
     <div class= "oculto" v-if= "movie.hidden==false">
      <b-btn
         class="ocultado"
-        v-if="isAdmin"
         variant="primary"
         @click="ocultar(movie.idMovie,movie)">Hide</b-btn>
     </div>
@@ -38,7 +36,6 @@
     <div class= "mostra" v-if= "movie.hidden==true">
      <b-btn
         class="mostrar"
-        v-if="isAdmin"
         variant="primary"
         @click="mostrar(movie.idMovie,movie)">Show</b-btn>
     </div>

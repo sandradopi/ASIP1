@@ -17,6 +17,7 @@ import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
+import es.udc.lbd.asi.restexample.security.SecurityUtils;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -80,8 +81,7 @@ public class StatusService implements StatusServiceInterface {
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		try{
-			StatusDTO status = new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
-			return status;
+			return new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
 		}catch(Exception e){
 			return null;
 		}

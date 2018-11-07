@@ -7,19 +7,26 @@
       class="error">
       <pre>{{ error }}</pre>
     </div>
-    <div class="bottone">
-          <b-btn
-              class="eliminado"
-              v-if="isAdmin"
-              variant="primary"
-              @click="eliminar(movie.idMovie)">Delete</b-btn>
+    <div class="buttone" v-if="isAdmin">
+     <b-btn
+        class="eliminado"
+        variant="primary"
+        @click="eliminar(movie.idMovie)">Delete</b-btn>
 
-          <b-btn
-              class="ocultado"
-              v-if="isAdmin"
-              variant="primary"
-              @click="ocultar(movie.idMovie)">Hide</b-btn>
+    <div class= "oculto" v-if= "this.hide==false">
+     <b-btn
+        class="ocultado"
+        variant="primary"
+        @click="ocultar(movie.idMovie,movie)">Hide</b-btn>
     </div>
+
+    <div class= "mostra" v-if= "this.hide==true">
+     <b-btn
+        class="mostrar"
+        variant="primary"
+        @click="mostrar(movie.idMovie,movie)">Show</b-btn>
+    </div>
+     </div>
     <div v-if="movie">
       <div class="float-right">
         <b-btn
@@ -32,13 +39,23 @@
           
       </div>
      <h3 class= "nameFilm">{{movie.name}}</h3> 
-    <div v-if="!isAdmin">
-      <b-form-checkbox  class="cheeck"
+     <div v-if="!isAdmin">
+       
+      <b-form-checkbox class="cheeck"
                        v-model="statu"
+                       v-if="this.rating==null|| this.rating==0 "
                        value="vista-novista"
                        unchecked-value="novista-vista"
                        @change="checkboxFuction">
        <div><strong>Marcar Pelicula como vista</strong></div>
+      </b-form-checkbox>
+      <b-form-checkbox class="cheeck1"
+                       v-if="statu=='novista-vista'"
+                       v-model="statup"
+                       value="pendiente-nopendiente"
+                       unchecked-value="nopendiente-pendiente"
+                       @change="checkboxFuction">
+       <div><strong>Marcar Pelicula como pendiente</strong></div>
       </b-form-checkbox>
 
       <div class= "puntuation" v-if = "statu == 'vista-novista'">
@@ -66,6 +83,9 @@
           <hr>
           <h5>Movie´s summary:</h5>
           <div class="movie">{{ movie.summary }}</div> 
+          <div>{{this.statu}}</div> 
+          <div>{{this.aux}}</div> 
+
 
       </div>
     </div>
@@ -87,8 +107,10 @@ export default {
       movie: null, //un dato que es post todo lo que visualicemos va a estar alli
       error: null,
       statu: "novista-vista",
-      status: null,
-      rating:null      //this.$refs.component.note
+      statup: "nopendiente-pendiente",
+      hide:null,
+      aux: "",
+      rating:0    
     }
   },
   computed: {
@@ -115,22 +137,34 @@ export default {
       this.loading = true
 
       HTTP.get(`movies/${this.$route.params.id}`) 
-      .then(response => this.movie = response.data)
+      .then(response => {
+        this.movie = response.data
+        return response
+      })
+      .then(response => {this.hide= response.data.hidden})
       .catch(err => this.error = err.message)
       .finally(() => this.loading = false)
 
       HTTP.get(`status/movies/${this.$route.params.id}`)
-      .then(response => this.rating = response.data.valoration)
-      //.then(response => this.status = response.data)
+      .then(response => {
+        this.rating = response.data.valoration
+        return response
+      })
+      .then(response => {
+        this.aux = response.data.type
+        return response
+      })
+      .then(() => { 
+        if(this.aux=="VISTA"){
+        this.statu="vista-novista";}
+      else{
+        this.statu="novista-vista";}
+      })
+
       .catch()
 
-      /*if(this.status.type=="VISTA"){
-        this.statu="vista-novista";
-      }
-      else{
-        this.statu="novista-vista";
-      }*/
-
+    },
+    comprobarValoracion(){
       
     },
 
@@ -158,8 +192,18 @@ export default {
       this.$router.replace({ name: 'MovieList'})
     },
 
-    ocultar(idMovie){
-        
+     ocultar(idMovie,movie){
+        this.hide=false
+        movie.hidden = true
+        HTTP.put(`movies/${idMovie}`, movie)
+        .catch(this._errorHandler)
+      },
+
+      mostrar(idMovie,movie){
+        this.hide=false
+        movie.hidden = false
+        HTTP.put(`movies/${idMovie}`, movie)
+        .catch(this._errorHandler)
       },
 
     back() {
@@ -195,12 +239,11 @@ export default {
    .contenido{
     margin-top:5px;
    }
-
-   .eliminado {
+.eliminado {
     background-color: #f44336; 
     border: none;
     color: white;
-    padding: 8px 20px;
+    padding: 8px 22px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -208,6 +251,8 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+
+    float:bottom;
   }
 
   .eliminado:hover {
@@ -216,10 +261,11 @@ export default {
   
 }
 .ocultado {
+    margin-top:10px;
     background-color: #555555; 
     border: none;
     color: white;
-    padding: 8px 20px;
+    padding: 8px 28px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -232,12 +278,30 @@ export default {
   .ocultado:hover {
     background-color: #555555;
     color: white;
-  }
+  
+}
+.buttone{
+  margin-top:10px;
+  width:25%;
+  height:40%;
 
-  .bottone{
-    float:right;
-    margin-bottom:10px;
-  }
+}
+
+.mostrar{
+    margin-top:10px;
+    background-color: green; 
+    border: none;
+    color: white;
+    padding: 8px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+
+}
 
   .puntuation{
     margin-top:10px;

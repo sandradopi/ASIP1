@@ -39,6 +39,7 @@ public class StatusResource {
 
 	@PostMapping("/{idMovie}/{statu}")
 	public void save(@PathVariable Long idMovie, @PathVariable String statu)   {
+			
 			statusService.save(idMovie, TipoStatus.VISTA);
 	
 		
