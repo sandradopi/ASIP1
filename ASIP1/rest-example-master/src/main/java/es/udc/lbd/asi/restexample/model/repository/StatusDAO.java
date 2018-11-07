@@ -12,5 +12,7 @@ public interface StatusDAO {
 	 public Status findById(Long id);
 	 public void delete(Status status);
 	 public Status findByMovieUser(Movie movie, NormalUser usuario);
+	 public Status findByMovie(Movie movie);
 	 public List<Status> findAll();
+ 
 }

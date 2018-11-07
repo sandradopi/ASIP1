@@ -1,5 +1,8 @@
 package es.udc.lbd.asi.restexample.model.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 
@@ -30,24 +34,27 @@ public class StatusService implements StatusServiceInterface {
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	public void save(Long MovieId, TipoStatus STATE) {
-		
-		Status bdStatus = new Status(null,STATE);
-		bdStatus.setMovie(movieDAO.findById(MovieId));
+		Movie bdMovie = movieDAO.findById(MovieId);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
-		bdStatus.setNormalUser(usuarioNormal);
-		statusDAO.save(bdStatus);
-
+		if(statusDAO.findByMovieUser(bdMovie,usuarioNormal)==null){
+				Status bdStatus = new Status(null,STATE);
+				bdStatus.setMovie(bdMovie);
+				bdStatus.setNormalUser(usuarioNormal);
+				statusDAO.save(bdStatus);
+		}
+				
 	}
 	@PreAuthorize("hasAuthority('USER')")
 	@Override
 	@Transactional(readOnly = false)
 	public void deleteByIdMovieUser(Long idMovie) {
-			Movie bdMovie = movieDAO.findById(idMovie);
-			NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
-			NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		Movie bdMovie = movieDAO.findById(idMovie);
+		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		 if((statusDAO.findByMovieUser(bdMovie,usuarioNormal).getValoration()==null)){
 			Status status= statusDAO.findByMovieUser(bdMovie, usuarioNormal);
-	    	statusDAO.delete(status);
+	    	statusDAO.delete(status);}
 	    }
 
 	@PreAuthorize("hasAuthority('USER')")
@@ -65,16 +72,25 @@ public class StatusService implements StatusServiceInterface {
 		
 		
 	}
+	
+	
 	@Override
 	public StatusDTO findByMovieUser(Long idMovie) {
 		Movie bdMovie = movieDAO.findById(idMovie);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
-		StatusDTO status = new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
-		return status;
+		try{
+			StatusDTO status = new StatusDTO(statusDAO.findByMovieUser(bdMovie, usuarioNormal));
+			return status;
+		}catch(Exception e){
+			return null;
+		}
+		
 	
 		
 	}
+	
+
 		
 	}
 	

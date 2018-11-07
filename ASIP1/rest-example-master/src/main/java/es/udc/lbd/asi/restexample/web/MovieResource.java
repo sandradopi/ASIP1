@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
+import es.udc.lbd.asi.restexample.model.service.StatusService;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
 import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;
@@ -32,10 +33,21 @@ public class MovieResource {
 
     @Autowired
     private MovieService movieService;
+   
 
     @GetMapping
     public List<MovieDTO> findAll() {
         return movieService.findAll();
+    }
+    
+    @GetMapping("/vistas")
+    public List<MovieDTO> findAllVistas() {
+        return movieService.findAllVistas();
+    }
+    
+    @GetMapping("/pendientes")
+    public List<MovieDTO> findAllPendientes() {
+        return movieService.findAllPendientes();
     }
 
     @GetMapping("/{idMovie}")

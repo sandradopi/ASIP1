@@ -26,6 +26,7 @@
           id="title"
           v-model="user.login"
           type="text"
+          autocomplete="off"
           required
           placeholder="Enter a login"/>
       </b-form-group>
@@ -36,7 +37,8 @@
         <b-form-input
           id="password"
           v-model="user.password"
-          type="text"
+          type="password"
+          autocomplete="off"
           required
           placeholder="Enter a password"/>
       </b-form-group>
@@ -48,7 +50,8 @@
         <b-form-input
           id="email"
           v-model="user.email"
-          type="text"
+          type="email"
+          autocomplete="off"
           required
           placeholder="Enter your email"/>
       </b-form-group>

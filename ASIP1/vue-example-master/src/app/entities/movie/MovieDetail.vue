@@ -66,6 +66,7 @@
           <hr>
           <h5>Movie´s summary:</h5>
           <div class="movie">{{ movie.summary }}</div> 
+
       </div>
     </div>
   </LoadingPage>
@@ -120,7 +121,15 @@ export default {
 
       HTTP.get(`status/movies/${this.$route.params.id}`)
       .then(response => this.rating = response.data.valoration)
+      //.then(response => this.status = response.data)
       .catch()
+
+      /*if(this.status.type=="VISTA"){
+        this.statu="vista-novista";
+      }
+      else{
+        this.statu="novista-vista";
+      }*/
 
       
     },

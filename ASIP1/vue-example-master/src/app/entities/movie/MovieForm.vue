@@ -28,8 +28,21 @@
           id="title"
           v-model="movie.name"
           type="text"
+          autocomplete="off"
           required
           placeholder="Enter title"/>
+      </b-form-group>
+
+      <b-form-group
+        label="Hidden:"
+        label-for="title">
+        <b-form-input
+          id="title"
+          v-model="movie.hidden"
+          type="text"
+          autocomplete="off"
+          required
+          placeholder="Enter hidden"/>
       </b-form-group>
 
       <b-form-group
@@ -38,7 +51,8 @@
         <b-form-input
           id="duration"
           v-model="movie.duration"
-          type="text"
+          type="number"
+          autocomplete="off"
           required
           placeholder="Enter duration"/>
       </b-form-group>
@@ -49,7 +63,8 @@
         <b-form-input
           id="data"
           v-model="movie.data"
-          type="text"
+          type="date"
+          autocomplete="off"
           required
           placeholder="Enter data"/>
       </b-form-group>
@@ -117,6 +132,7 @@
           v-model="movie.summary"
           :rows="3"
           :max-rows="6"
+          autocomplete="off"
           placeholder="Enter summary"/>
       </b-form-group>
     </b-form>

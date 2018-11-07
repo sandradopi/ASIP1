@@ -16,7 +16,7 @@
 
        <b-nav-item
           v-if="!isAdmin && isLogged"
-          :to="{ name: 'MovieList' }"
+          :to="{ name: 'MovieListVistas' }"
           exact>Viewed Movies</b-nav-item>
 
         <b-nav-item

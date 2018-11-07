@@ -10,4 +10,6 @@ public interface MovieServiceInterface {
     public MovieDTO save(MovieDTO movie);
     public void deleteById(Long idMovie);
     public MovieDTO update(MovieDTO movie);
+	List<MovieDTO> findAllPendientes();
+	List<MovieDTO> findAllVistas();
 }

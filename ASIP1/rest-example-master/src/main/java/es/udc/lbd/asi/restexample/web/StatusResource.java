@@ -39,29 +39,22 @@ public class StatusResource {
 
 	@PostMapping("/{idMovie}/{statu}")
 	public void save(@PathVariable Long idMovie, @PathVariable String statu)   {
-		try{
-			StatusDTO status= statusService.findByMovieUser(idMovie);
-		}catch(Exception e){
-		statusService.save(idMovie, TipoStatus.VISTA);
-		}
+			statusService.save(idMovie, TipoStatus.VISTA);
+	
 		
 
 	}
 	
 	@GetMapping("/{idMovie}")
     public StatusDTO findStatus(@PathVariable Long idMovie){
-		try{
-			StatusDTO status= statusService.findByMovieUser(idMovie);
-			return status;
-		}catch(Exception e){
-			return null;
-		}
+			return statusService.findByMovieUser(idMovie);
+			
     }
 	
    @DeleteMapping("/{idMovie}/{statu}")
 	public void delete(@PathVariable Long idMovie, @PathVariable String statu) {
-	   if((statusService.findByMovieUser(idMovie).getValoration()==null)){
-			statusService.deleteByIdMovieUser(idMovie);}
+	   //Solo permitimos borrar estados vistos si no han sido puntuados (La persona se equivoco al clickear checkbox vista)
+			statusService.deleteByIdMovieUser(idMovie);
 
 	}
 	

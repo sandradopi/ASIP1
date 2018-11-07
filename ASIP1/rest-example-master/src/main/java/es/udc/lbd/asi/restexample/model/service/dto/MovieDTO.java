@@ -70,7 +70,6 @@ public class MovieDTO {
  		this.dirigentes = dirigentes;
  	}
  	
- 	@JsonIgnore
 	public Boolean getHidden() {
 		return hidden;
 	}

@@ -3,6 +3,8 @@ package es.udc.lbd.asi.restexample.model.repository;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.Status;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.repository.util.GenericDAOHibernate;
 
 
@@ -28,5 +30,23 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	 public void deleteById(Long idMovie) {
 	    getSession().delete(findById(idMovie));
 	 }
-   
+	 
+	 @Override
+		public List<Movie> findAllVistas() {
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='VISTA'").list();
+			
+		}
+
+		@Override
+		public List<Movie> findAllPendientes() {
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE'").list();
+			
+		}
+
+		@Override
+		public List<Movie> findAllUser() {
+			return getSession().createQuery("from Movie m where m.hidden=false").list();
+			}
+
+	   
 }

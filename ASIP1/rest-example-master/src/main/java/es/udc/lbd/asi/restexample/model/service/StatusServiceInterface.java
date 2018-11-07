@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.service;
 
+import java.util.List;
+
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
