@@ -137,6 +137,7 @@ export default {
       font-weight: bold;
       font-family: sans-serif;
       font: 150% sans-serif;
+      font-size: 1.5vw;
       
     }
    
@@ -186,6 +187,7 @@ export default {
   
 }
 .ocultado {
+    margin-top:10px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -210,14 +212,10 @@ export default {
   height:40%;
 
 }
-.oculto{
-  float:right;
-  margin-left:10px;
-  margin-top:10px;
 
-}
 .mostrar{
-   background-color: green; 
+    margin-top:10px;
+    background-color: green; 
     border: none;
     color: white;
     padding: 8px 26px;
@@ -230,13 +228,6 @@ export default {
     transition-duration: 0.4s;
 
 }
-
-.mostra{
-  float:right;
-  margin-left:10px;
-  margin-top:10px;
-}
-
 
 
 </style>
