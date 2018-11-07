@@ -168,7 +168,7 @@ export default {
     background-color: #f44336; 
     border: none;
     color: white;
-    padding: 8px 16px;
+    padding: 8px 22px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -189,7 +189,7 @@ export default {
     background-color: #555555; 
     border: none;
     color: white;
-    padding: 8px 21px;
+    padding: 8px 28px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -220,7 +220,7 @@ export default {
    background-color: green; 
     border: none;
     color: white;
-    padding: 8px 18px;
+    padding: 8px 26px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
