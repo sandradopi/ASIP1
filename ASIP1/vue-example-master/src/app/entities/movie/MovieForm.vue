@@ -34,18 +34,6 @@
       </b-form-group>
 
       <b-form-group
-        label="Hidden:"
-        label-for="title">
-        <b-form-input
-          id="title"
-          v-model="movie.hidden"
-          type="text"
-          autocomplete="off"
-          required
-          placeholder="Enter hidden"/>
-      </b-form-group>
-
-      <b-form-group
         label="Duration:"
         label-for="duration">
         <b-form-input
@@ -58,7 +46,7 @@
       </b-form-group>
 
       <b-form-group
-        label="Data:"
+        label="Data: (yyyy-MM-dd)"
         label-for="Data">
         <b-form-input
           id="data"

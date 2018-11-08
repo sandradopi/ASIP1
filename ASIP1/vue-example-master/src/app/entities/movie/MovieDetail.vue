@@ -83,8 +83,7 @@
           <hr>
           <h5>Movie´s summary:</h5>
           <div class="movie">{{ movie.summary }}</div> 
-          <div>{{this.statu}}</div> 
-          <div>{{this.aux}}</div> 
+         
 
 
       </div>
@@ -205,6 +204,7 @@ export default {
         this.hide=false
         movie.hidden = true
         HTTP.put(`movies/${idMovie}`, movie)
+        .then(this.fetchData)
         .catch(this._errorHandler)
       },
 
@@ -212,6 +212,7 @@ export default {
         this.hide=false
         movie.hidden = false
         HTTP.put(`movies/${idMovie}`, movie)
+        .then(this.fetchData)
         .catch(this._errorHandler)
       },
 

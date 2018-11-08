@@ -121,46 +121,29 @@ export default {
     float-left:20px;
     margin-left :10px;}
 
-    .imagen{
-      width:40%;
-      height:auto;
-      float:left;
+  .imagen{
+    width:40%;
+    height:auto;
+    float:left;
     
     }
 
-     .tittle{
-      float:right;
-      text-align:middle;
-      font-weight: bold;
-      font-family: sans-serif;
-      font: 150% sans-serif;
-      font-size: 1.5vw;
+  .tittle{
+    float:right;
+    text-align:middle;
+    font-weight: bold;
+    font-family: sans-serif;
+    font: 150% sans-serif;
+    font-size: 1.5vw;
       
     }
    
 
-    .namemovie{
+  .namemovie{
     background-color: #ffffff;
     border-radius: 35px 35px 35px 35px
   }
 
-  .duration{
-   color:  #555555;
-   float:bottom;
-   margin-top:10px;
-   font-size: small;
-   font-style:italic;
-
-}
-
-  .genre{
-   color: #555555;
-   float:bottom;
-   margin-top:10px;
-   font-size: small;
-   font-style:italic;
-
-}
   
   .eliminado {
     background-color: #f44336; 
@@ -174,7 +157,6 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-
     float:bottom;
   }
 
@@ -182,8 +164,8 @@ export default {
     background-color: #f44336;
     color: white;
   
-}
-.ocultado {
+  }
+  .ocultado {
     margin-top:10px;
     background-color: #555555; 
     border: none;
@@ -202,15 +184,15 @@ export default {
     background-color: #555555;
     color: white;
   
-}
-.buttone{
-  margin-top:10px;
-  width:25%;
-  height:40%;
+  }
 
+  .buttone{
+    margin-top:10px;
+    width:25%;
+    height:40%;
 }
 
-.mostrar{
+  .mostrar{
     margin-top:10px;
     background-color: green; 
     border: none;
@@ -223,7 +205,6 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-
 }
 
 

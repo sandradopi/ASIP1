@@ -7,10 +7,6 @@
       class="error">
       <pre>{{ error }}</pre>
     </div>
-      <b-btn
-         v-if="isAdmin"
-         :to="{ name: 'MovieCreate' }"
-         variant="primary">New</b-btn>
     <br/>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
@@ -19,30 +15,7 @@
           {{ movie.name }}
         </router-link>
     </div>
-    <img class="imagen"  v-if="!isAdmin" src="movie.jpg">
-    <div class="buttone">
-     <b-btn
-        class="eliminado"
-        v-if="isAdmin"
-        variant="primary"
-        @click="eliminar(movie.idMovie)">Delete</b-btn>
-
-    <div class= "oculto" v-if= "movie.hidden==false">
-     <b-btn
-        class="ocultado"
-        v-if="isAdmin"
-        variant="primary"
-        @click="ocultar(movie.idMovie,movie)">Hide</b-btn>
-    </div>
-
-    <div class= "mostra" v-if= "movie.hidden==true">
-     <b-btn
-        class="mostrar"
-        v-if="isAdmin"
-        variant="primary"
-        @click="mostrar(movie.idMovie,movie)">Show</b-btn>
-    </div>
-     </div>
+    <img class="imagen" src="movie.jpg">
     </div>
   </LoadingPage>
 </template>
@@ -61,11 +34,7 @@ export default {
       error: null
     }
   },
-  computed: {
-     isAdmin() {
-       return auth.isAdmin()
-     }
-   },
+  
   created() {
     this.fetchData()
     
@@ -82,25 +51,6 @@ export default {
      })
     .finally(() => this.loading = false)
     },
-    eliminar(idMovie){
-        HTTP.delete(`movies/${idMovie}`)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      },
-
-    ocultar(idMovie,movie){
-        movie.hidden = true
-        HTTP.put(`movies/${idMovie}`, movie)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      },
-
-     mostrar(idMovie,movie){
-        movie.hidden = false
-        HTTP.put(`movies/${idMovie}`, movie)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      },
     
     _successHandler(response) {
       this.fetchData()
@@ -122,112 +72,28 @@ export default {
     float:left;
     padding:20px;
     float-left:20px;
-    margin-left :10px;}
-
-    .imagen{
-      width:40%;
-      height:auto;
-      float:left;
-    
-    }
-
-     .tittle{
-      float:right;
-      text-align:middle;
-      font-weight: bold;
-      font-family: sans-serif;
-      font: 150% sans-serif;
-      font-size: 1.5vw;
-      
-    }
-   
-
-    .namemovie{
+    margin-left :10px;
     background-color: #ffffff;
     border-radius: 35px 35px 35px 35px
   }
 
-  .duration{
-   color:  #555555;
-   float:bottom;
-   margin-top:10px;
-   font-size: small;
-   font-style:italic;
+  .imagen{
+    width:40%;
+    height:auto;
+    float:left;
+    
+    }
 
-}
-
-  .genre{
-   color: #555555;
-   float:bottom;
-   margin-top:10px;
-   font-size: small;
-   font-style:italic;
-
-}
-  
-  .eliminado {
-    background-color: #f44336; 
-    border: none;
-    color: white;
-    padding: 8px 22px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-
-    float:bottom;
-  }
-
-  .eliminado:hover {
-    background-color: #f44336;
-    color: white;
-  
-}
-.ocultado {
-    margin-top:10px;
-    background-color: #555555; 
-    border: none;
-    color: white;
-    padding: 8px 28px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-  }
-
-  .ocultado:hover {
-    background-color: #555555;
-    color: white;
-  
-}
-.buttone{
-  margin-top:10px;
-  width:25%;
-  height:40%;
-
-}
-
-.mostrar{
-    margin-top:10px;
-    background-color: green; 
-    border: none;
-    color: white;
-    padding: 8px 26px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-
-}
+  .tittle{
+    float:right;
+    text-align:middle;
+    font-weight: bold;
+    font-family: sans-serif;
+    font: 150% sans-serif;
+    font-size: 1.5vw;
+      
+    }
+   
 
 
 </style>
