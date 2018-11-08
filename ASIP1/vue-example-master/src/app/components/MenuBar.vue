@@ -25,6 +25,11 @@
           exact>Pending Movies</b-nav-item>
 
         <b-nav-item
+          v-if="isAdmin"
+          :to="{ name: 'ActorList' }"
+          exact>Actors</b-nav-item>
+
+        <b-nav-item
           v-if="!isLogged"
           :to="{ name: 'Login' }"
           exact>Login</b-nav-item>
