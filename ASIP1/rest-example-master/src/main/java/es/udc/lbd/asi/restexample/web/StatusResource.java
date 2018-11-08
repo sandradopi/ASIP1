@@ -39,10 +39,7 @@ public class StatusResource {
 
 	@PostMapping("/{idMovie}/{statu}")
 	public void save(@PathVariable Long idMovie, @PathVariable String statu)   {
-			
-			statusService.save(idMovie, TipoStatus.VISTA);
-	
-		
+			statusService.save(idMovie, statu);
 
 	}
 	
@@ -52,8 +49,8 @@ public class StatusResource {
 			
     }
 	
-   @DeleteMapping("/{idMovie}/{statu}")
-	public void delete(@PathVariable Long idMovie, @PathVariable String statu) {
+   @DeleteMapping("/{idMovie}")
+	public void delete(@PathVariable Long idMovie) {
 	   //Solo permitimos borrar estados vistos si no han sido puntuados (La persona se equivoco al clickear checkbox vista)
 			statusService.deleteByIdMovieUser(idMovie);
 

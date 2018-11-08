@@ -43,7 +43,7 @@
        
       <b-form-checkbox class="cheeck"
                        v-model="statu"
-                       v-if="this.rating==null|| this.rating==0 "
+                       v-if="this.rating==null && statup=='nopendiente-pendiente'"
                        value="vista-novista"
                        unchecked-value="novista-vista"
                        @change="checkboxFuction">
@@ -54,7 +54,7 @@
                        v-model="statup"
                        value="pendiente-nopendiente"
                        unchecked-value="nopendiente-pendiente"
-                       @change="checkboxFuction">
+                       @change="checkboxFuctionPen">
        <div><strong>Marcar Pelicula como pendiente</strong></div>
       </b-form-checkbox>
 
@@ -110,7 +110,7 @@ export default {
       statup: "nopendiente-pendiente",
       hide:null,
       aux: "",
-      rating:0    
+      rating:null    
     }
   },
   computed: {
@@ -157,8 +157,8 @@ export default {
       .then(() => { 
         if(this.aux=="VISTA"){
         this.statu="vista-novista";}
-      else{
-        this.statu="novista-vista";}
+      else if(this.aux=="PENDIENTE"){
+        this.statup="pendiente-nopendiente";}
       })
 
       .catch()
@@ -179,7 +179,16 @@ export default {
            HTTP.post(`status/movies/${this.$route.params.id}/${this.statu}`)
             .catch(this._errorHandler)}
       else if (this.statu =="vista-novista" ){
-          HTTP.delete(`status/movies/${this.$route.params.id}/${this.statu}`)
+          HTTP.delete(`status/movies/${this.$route.params.id}`)
+          .catch(this._errorHandler)}
+    },
+
+    checkboxFuctionPen(){
+      if(this.statup =="nopendiente-pendiente" ){
+           HTTP.post(`status/movies/${this.$route.params.id}/${this.statup}`)
+            .catch(this._errorHandler)}
+      else if (this.statup =="pendiente-nopendiente" ){
+          HTTP.delete(`status/movies/${this.$route.params.id}`)
           .catch(this._errorHandler)}
     },
     eliminar(idMovie){

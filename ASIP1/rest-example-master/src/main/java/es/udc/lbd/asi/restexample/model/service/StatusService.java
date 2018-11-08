@@ -34,16 +34,23 @@ public class StatusService implements StatusServiceInterface {
 
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
-	public void save(Long MovieId, TipoStatus STATE) {
+	public void save(Long MovieId, String statu) {
 		Movie bdMovie = movieDAO.findById(MovieId);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		Status bdStatus = null;
+		
 		if(statusDAO.findByMovieUser(bdMovie,usuarioNormal)==null){
-				Status bdStatus = new Status(null,STATE);
+			if(statu.equals("novista-vista")){
+				bdStatus = new Status(null,TipoStatus.VISTA);
+			} else if(statu.equals("nopendiente-pendiente")){
+				bdStatus = new Status(null,TipoStatus.PENDIENTE);	
+			}
 				bdStatus.setMovie(bdMovie);
 				bdStatus.setNormalUser(usuarioNormal);
 				statusDAO.save(bdStatus);
 		}
+				
 				
 	}
 	@PreAuthorize("hasAuthority('USER')")

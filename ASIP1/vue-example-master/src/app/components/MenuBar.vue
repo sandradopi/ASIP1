@@ -21,7 +21,7 @@
 
         <b-nav-item
           v-if="!isAdmin && isLogged"
-          :to="{ name: 'MovieList' }"
+          :to="{ name: 'MovieListPendientes' }"
           exact>Pending Movies</b-nav-item>
 
         <b-nav-item

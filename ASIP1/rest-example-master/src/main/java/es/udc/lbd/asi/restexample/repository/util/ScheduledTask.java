@@ -41,21 +41,21 @@ public class ScheduledTask {
 	UserDAO userDAO;
 	@Autowired
 	MovieDAO movieDAO;
-	private final Properties properties = new Properties();
+	private Properties properties = new Properties();
 	private String password;
 	private Session session;
 
 	private void init() {
-		properties.put("mail.smtp.host", "mail.gmail.com");
-		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.port","587");
-		properties.put("mail.smtp.user", "guajndos@gmail.com");
-		properties.put("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.port","587");
+		properties.setProperty("mail.smtp.user", "marsusanez@gmail.com");
+		properties.setProperty("mail.smtp.auth", "true");
  
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(fixedRate = 86400)
+    @Scheduled(cron = "0 43 11 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException {
     	init();
     	Date ahora = new Date();
@@ -67,16 +67,17 @@ public class ScheduledTask {
     	    	Movie movie=state.getMovie();
     	    	NormalUser usuarioNormal = state.getNormalUser();
     	    	if(movie.getData().toString().equals(actualDate)){
+    	    		
     	    	try{
 	    	    		MimeMessage message = new MimeMessage(session);
-	    	    		message.setFrom(new InternetAddress("guajndos@gmail.com"));
+	    	    		message.setFrom(new InternetAddress("marsusanez@gmail.com"));
 	    				message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarioNormal.getEmail()));
 	    				message.setSubject("Hi! The movie "+ state.getMovie().getName() +" is now available.");
-	    				message.setText("Good morning Dear customer "+ state.getNormalUser().getLogin() +" this email is to let you know that the film "
-	    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today, so please sign"
-	    				+ " in to our page, go and make some popcorn and give it to play.");
+	    				message.setText("Hi Mr/Mrs "+ state.getNormalUser().getLogin() +" :"+"\n" +"This email is to let you know that the film "
+	    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign"
+	    				+ "in , make some popcorn and give it to play :D" +"\n"+"\n"+ "Best Wishes, your favorite app of Movies Online <3");
 	    				Transport t = session.getTransport("smtp");
-	    				t.connect("guajndos@gmail.com","deportivo13");
+	    				t.connect("marsusanez@gmail.com","asiasi2018");
 	    				t.sendMessage(message, message.getAllRecipients());
 	    				t.close();
 	    		}catch (MessagingException me){

@@ -16,6 +16,8 @@ public class NormalUser extends User_ {
 	public NormalUser(String login, String email, String password, UserAuthority authority) {
 		super(login, email, password, authority);
 	}
+
+
 	
 
 }

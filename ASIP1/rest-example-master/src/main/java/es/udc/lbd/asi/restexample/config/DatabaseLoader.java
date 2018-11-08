@@ -72,7 +72,7 @@ public class DatabaseLoader {
     userService.registerUser("pepe","pepe@pepe.com", "pepe", true);
     userService.registerUser("maria","maria@maria.com","maria",true);
     userService.registerUser("laura", "laura@laura.com","laura");
-    userService.registerUser("sandra", "sandra111@outlook.com.com","sandra");
+    userService.registerUser("sandra", "vicfic23@gmail.com","sandra");
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	
@@ -93,7 +93,7 @@ public class DatabaseLoader {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-02"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-08"),
     		genre1, participantes,dirigentes));
     
     movieService.save

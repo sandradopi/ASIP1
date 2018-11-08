@@ -75,7 +75,6 @@ public class MovieService implements MovieServiceInterface{
 		
 		
 		
-		
     }
 
     public MovieDTO findById(Long idMovie)  {
@@ -146,7 +145,7 @@ public class MovieService implements MovieServiceInterface{
     @PreAuthorize("hasAuthority('USER')")
 	@Override
 	public List<MovieDTO> findAllPendientes() {
-    	List<MovieDTO> movies= movieDAO.findAllVistas().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+    	List<MovieDTO> movies= movieDAO.findAllPendientes().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
 		return movies; 
 	}
 
