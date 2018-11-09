@@ -30,17 +30,15 @@ export default {}
   text-transform: uppercase;
 }
 .ima{
-	width:80%;
-	float:right;
-	margin-right:165px;
-    
-
+	width:100%;
+    height:100%;
 
 
 }
 .ima2{
-	width:100%;
-	margin-left:20px;
+	width:80%;
+	margin-left:10%;
+	
 }
 
 

@@ -1,8 +1,10 @@
 <template>
   <form @submit.prevent="userLogin">
     
-    <div class ="contenido" align="middle">
-      <h1 align="middle">Welcome to your Film Library! </h1>
+    
+    <div class= "formulario">
+      <div class ="contenido" align="middle">
+      <h1 class= "titulo" align="middle">Sign in! </h1>
     </div>
     <div class="form-group">
       <label for="username">Username</label>
@@ -12,7 +14,6 @@
         name="username"
         placeholder="Write your login"
         type="text"
-
         class="form-control"
         required>
     </div>
@@ -27,14 +28,17 @@
         name="password"
         required>
     </div>
-    <div align="middle">
-     <button
-       type="submit"
-       class="btn btn-primary">Log In</button> </div>
-       <div align="middle">
-       <b-btn
-            :to="{ name: 'Registro'}"
-            variant="sumit">If you don´t have an account, create it!</b-btn>
+    <div class="registro">
+      <div align="middle">
+       <button
+         type="submit"
+         class="btn btn-primary">Log In</button> </div>
+         <div align="middle">
+         <b-btn 
+              :to="{ name: 'Registro'}"
+              variant="sumit">If you don´t have an account, create it!</b-btn>
+        </div>
+    </div>
         <div
           v-if="error"
           class="error">
@@ -70,3 +74,20 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.formulario{
+  width:40%;
+  margin-left:30%;
+  margin-top:10%;
+
+  
+}
+
+.registro{
+   margin-top:5%;
+}
+
+
+
+
+</style>
