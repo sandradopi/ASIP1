@@ -238,6 +238,11 @@ export default {
      width:40%;
   }
 
+  .mostra{
+     width:40%;
+  }
+
+
   .movie {
     white-space: pre;
   }
@@ -312,11 +317,12 @@ export default {
 }
 
 .mostrar{
-    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:20px;
     background-color: green; 
     border: none;
     color: white;
-    padding: 8px 26px;
+    padding: 8px 28px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -324,6 +330,7 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    float:left
 
 }
 
