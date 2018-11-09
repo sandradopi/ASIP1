@@ -38,7 +38,9 @@
            variant="primary">Edit</b-btn>
           
       </div>
-     <h3 class= "nameFilm">{{movie.name}}</h3> 
+    </br>
+    </br>
+     <div class="datosPelicula">
      <div v-if="!isAdmin">
        
       <b-form-checkbox class="cheeck"
@@ -70,22 +72,21 @@
 
   </div>
 </br>
-</br>
-      <div class= "contenido">
-          <h5>Release date: {{movie.data}}</h5>
-          <h5>Duration: {{ movie.duration}}</h5>
-          <h5>Genre: {{ movie.genre.type}}</h5>
-          <h5>Actors:</h5>
-           <div class="actors">{{ actorsAsString }}</div>
-          </br>
-          <h5>Directors:</h5>
-           <div class="directors">{{ directorsAsString }}</div>
-          <hr>
-          <h5>Movie´s summary:</h5>
-          <div class="movie">{{ movie.summary }}</div> 
-         
-
-
+              <h1 class="title">
+                {{movie.name}}
+              </h1>
+              <h4 class="subtitle">
+                <p class="subtitle-tag">{{ movie.duration}} minutes |</p>
+                <p class="subtitle-tag">{{ movie.genre.type}} | </p>
+                <p class="subtitle-tag">{{movie.data}}</p>
+              </h4>
+              <p class="description">{{ movie.summary }}</p>
+              <h4>
+              </br>
+              <p class="actors">Actors: {{ actorsAsString }}</p>
+              <p class="directors">Directors: {{ directorsAsString }}</p>
+            </h4>
+          </div>
       </div>
     </div>
   </LoadingPage>
@@ -227,6 +228,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+  .datosPelicula{
+    background-color:black;
+    padding:3%;
+    width:80%;
+  }
+  .oculto{
+     width:40%;
+  }
+
   .movie {
     white-space: pre;
   }
@@ -250,6 +261,7 @@ export default {
     margin-top:5px;
    }
 .eliminado {
+    margin-bottom:20px;
     background-color: #f44336; 
     border: none;
     color: white;
@@ -261,8 +273,7 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-
-    float:bottom;
+    float:left
   }
 
   .eliminado:hover {
@@ -271,7 +282,8 @@ export default {
   
 }
 .ocultado {
-    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:20px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -283,6 +295,8 @@ export default {
     border-radius: 8px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    float:left
+
   }
 
   .ocultado:hover {
@@ -319,8 +333,35 @@ export default {
 
   }
 
-  .star{
+  .subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: red;
 
+
+      .subtitle-tag {
+       display: inline;
+        }
+    }
+
+  .description {
+      font-size: 15px;
+      margin-bottom: 24px;
+      max-width: 450px;
+      font-style:italic;
+    }
+
+  .actors{
+    font-size: 15px;
+    margin-bottom: 24px;
+    max-width: 450px;
+  }
+
+  .directors{
+    font-size: 15px;
+    margin-bottom: 24px;
+    max-width: 450px;
+    
   }
 
 </style>

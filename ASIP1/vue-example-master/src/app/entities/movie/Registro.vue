@@ -6,10 +6,12 @@
         variant="primary"
         @click="back()">Back</b-btn>
       <b-btn
-        variant="primary"
+        variant="success"
         @click="save()">Create</b-btn>
     </div>
 <div>
+
+  <div class="formulario">
   <div class ="contenido" align="middle">
       <h1 align="middle">Create your account </h1>
   </div>
@@ -56,6 +58,7 @@
           placeholder="Enter your email"/>
       </b-form-group>
     </b-form>
+  </div>
      <div
       v-if="error"
       class="error"
@@ -115,6 +118,14 @@ export default {
     font: 150% sans-serif;
     font: message-box;
   }
+
+  .formulario{
+  width:40%;
+  margin-left:30%;
+
+
+  
+}
 
  
 </style>

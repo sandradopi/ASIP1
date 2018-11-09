@@ -36,7 +36,7 @@
          <div align="middle">
          <b-btn 
               :to="{ name: 'Registro'}"
-              variant="sumit">If you don´t have an account, create it!</b-btn>
+              variant="link">If you don´t have an account, create it!</b-btn>
         </div>
     </div>
         <div

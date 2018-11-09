@@ -3,7 +3,10 @@
     toggleable="md">
     <b-navbar-toggle target="nav_collapse"/>
 
-    <b-navbar-brand to="/">Movie World</b-navbar-brand>
+    <b-navbar-brand 
+      class="hello"
+      to="/">Movie World
+    </b-navbar-brand>
 
     <b-collapse
       id="nav_collapse"
@@ -86,6 +89,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+.hello{
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: red;
+  text-align: center;
+  text-transform: uppercase;
+}
 
 </style>
