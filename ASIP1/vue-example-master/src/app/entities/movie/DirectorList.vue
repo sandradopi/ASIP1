@@ -8,18 +8,17 @@
       <pre>{{ error }}</pre>
     </div>
      <b-btn
-         :to="{ name: 'ActorCreate' }"
+         :to="{ name: 'DirectorCreate' }"
          variant="primary">New</b-btn>
     <br/>
-    <div class= "nameactor" v-for="actor in actors" :key="actor.idActor">
+    <div class= "namedirector" v-for="director in directors" :key="director.idDirector">
     <div class= "tittle">
         <router-link
          :to="{ name: ''}">
-          {{ actor.name }} {{actor.surname1}}
+          {{ director.name }} {{director.surname1}}
         </router-link>
     </div>
-    <img class="imagen" src="perfil.jpg">
-    </div>
+    <img class="imagen" src="director.jpg">
   </LoadingPage>
 </template>
 
@@ -33,7 +32,7 @@ export default {
   data() {
     return {
       loading: false,
-      actors: null,
+      directors: null,
       error: null
     }
   },
@@ -45,9 +44,9 @@ export default {
   methods: {
   fetchData() {
       this.loading = true
-     HTTP.get(`actors`)
+     HTTP.get(`directors`)
     .then(response => {
-       this.actors = response.data
+       this.directors = response.data
      })
      .catch(err => {
        this.error = err.message
@@ -67,7 +66,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .nameactor {
+  .namedirector {
     margin-top :20px;
     width:28%;
     height:20%;
@@ -96,6 +95,7 @@ export default {
     font-size: 1.5vw;
       
     }
+
    
 
 

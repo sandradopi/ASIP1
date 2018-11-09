@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -28,6 +30,7 @@ public class Actor {
 	@NotEmpty
 	private String surname1;
 	private String surname2;
+	@Temporal(TemporalType.DATE)
 	private Date birthdate;
 	
 	@ManyToMany(mappedBy = "participantes", fetch = FetchType.LAZY)
@@ -36,23 +39,16 @@ public class Actor {
 	public Actor() {
     }
 
-	public Actor(@NotEmpty String name, @NotEmpty String surname1, String surname2, Date birthdate ,
-			Set<Movie> actuations) {
-		super();
-		this.name = name;
-		this.surname1 = surname1;
-		this.surname2 = surname2;
-		this.birthdate = birthdate;
-		this.actuations = actuations;
-	}
-	
 	public Actor(@NotEmpty String name, @NotEmpty String surname1, String surname2, Date birthdate) {
 		super();
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
 		this.birthdate = birthdate;
+		
 	}
+	
+	
 
 	public Actor(@NotEmpty String name, @NotEmpty String surname1) {
 		super();
@@ -115,12 +111,6 @@ public class Actor {
 	}
 
 	
-	public Set<Movie> getActuations() {
-		return actuations;
-	}
-
-	public void setActuations(Set<Movie> actuations) {
-		this.actuations = actuations;
-	}
+	
 	
 }

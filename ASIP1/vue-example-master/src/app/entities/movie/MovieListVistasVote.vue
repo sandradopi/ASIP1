@@ -7,18 +7,17 @@
       class="error">
       <pre>{{ error }}</pre>
     </div>
-     <b-btn
-         :to="{ name: 'ActorCreate' }"
-         variant="primary">New</b-btn>
+      
     <br/>
-    <div class= "nameactor" v-for="actor in actors" :key="actor.idActor">
+    <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         <router-link
-         :to="{ name: ''}">
-          {{ actor.name }} {{actor.surname1}}
+         :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
+          {{ movie.name }}
         </router-link>
     </div>
-    <img class="imagen" src="perfil.jpg">
+    <img class="imagen" src="movie.jpg">
+     </div>
     </div>
   </LoadingPage>
 </template>
@@ -33,7 +32,7 @@ export default {
   data() {
     return {
       loading: false,
-      actors: null,
+      movies: null,
       error: null
     }
   },
@@ -45,9 +44,9 @@ export default {
   methods: {
   fetchData() {
       this.loading = true
-     HTTP.get(`actors`)
+     HTTP.get(`movies/vistas/tovote`)
     .then(response => {
-       this.actors = response.data
+       this.movies = response.data
      })
      .catch(err => {
        this.error = err.message
@@ -67,7 +66,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .nameactor {
+  .namemovie {
     margin-top :20px;
     width:28%;
     height:20%;
@@ -77,8 +76,7 @@ export default {
     float-left:20px;
     margin-left :10px;
     background-color: #ffffff;
-    border-radius: 35px 35px 35px 35px
-  }
+    border-radius: 35px 35px 35px 35px}
 
   .imagen{
     width:40%;
@@ -98,8 +96,12 @@ export default {
     }
    
 
+ 
+
 
 </style>
+
+
 
 
 

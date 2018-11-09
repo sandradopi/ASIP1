@@ -33,13 +33,13 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	 
 	 @Override
 		public List<Movie> findAllVistas() {
-			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='VISTA'").list();
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='VISTA' AND movie.hidden=false").list();
 			
 		}
 
 		@Override
 		public List<Movie> findAllPendientes() {
-			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE'").list();
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE' AND movie.hidden=false").list();
 			
 		}
 
@@ -47,6 +47,11 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 		public List<Movie> findAllUser() {
 			return getSession().createQuery("from Movie m where m.hidden=false").list();
 			}
+
+		@Override
+		public List<Movie> findAllVistasVote() {
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='VISTA' AND movie.hidden=false AND s.valoration=null").list();
+		}
 
 	   
 }

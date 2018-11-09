@@ -12,4 +12,5 @@ public interface MovieServiceInterface {
     public MovieDTO update(MovieDTO movie);
 	List<MovieDTO> findAllPendientes();
 	List<MovieDTO> findAllVistas();
+	List<MovieDTO> findAllVistasVote();
 }

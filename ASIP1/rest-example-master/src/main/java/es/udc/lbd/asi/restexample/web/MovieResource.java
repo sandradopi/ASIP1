@@ -45,6 +45,11 @@ public class MovieResource {
         return movieService.findAllVistas();
     }
     
+    @GetMapping("/vistas/tovote")
+    public List<MovieDTO> findAllVistasVote() {
+        return movieService.findAllVistasVote();
+    }
+    
     @GetMapping("/pendientes")
     public List<MovieDTO> findAllPendientes() {
         return movieService.findAllPendientes();

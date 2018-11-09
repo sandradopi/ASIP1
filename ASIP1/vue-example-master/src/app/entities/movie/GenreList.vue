@@ -8,18 +8,17 @@
       <pre>{{ error }}</pre>
     </div>
      <b-btn
-         :to="{ name: 'ActorCreate' }"
+         :to="{ name: 'GenreCreate' }"
          variant="primary">New</b-btn>
     <br/>
-    <div class= "nameactor" v-for="actor in actors" :key="actor.idActor">
+    <div class= "namegenre" v-for="genre in genres" :key="genre.idGenre">
     <div class= "tittle">
         <router-link
          :to="{ name: ''}">
-          {{ actor.name }} {{actor.surname1}}
+          {{ genre.type }}
         </router-link>
     </div>
-    <img class="imagen" src="perfil.jpg">
-    </div>
+    <img class="imagen" src="genero.jpg">
   </LoadingPage>
 </template>
 
@@ -33,7 +32,7 @@ export default {
   data() {
     return {
       loading: false,
-      actors: null,
+      genres: null,
       error: null
     }
   },
@@ -45,9 +44,9 @@ export default {
   methods: {
   fetchData() {
       this.loading = true
-     HTTP.get(`actors`)
+     HTTP.get(`genres`)
     .then(response => {
-       this.actors = response.data
+       this.genres = response.data
      })
      .catch(err => {
        this.error = err.message
@@ -67,7 +66,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .nameactor {
+  .namegenre {
     margin-top :20px;
     width:28%;
     height:20%;
@@ -96,6 +95,7 @@ export default {
     font-size: 1.5vw;
       
     }
+
    
 
 

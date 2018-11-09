@@ -156,6 +156,14 @@ public class MovieService implements MovieServiceInterface{
 		List<MovieDTO> movies= movieDAO.findAllVistas().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
 		return movies; 
 	}
+	
+	@PreAuthorize("hasAuthority('USER')")
+	@Override
+	public List<MovieDTO> findAllVistasVote() {
+
+		List<MovieDTO> movies= movieDAO.findAllVistasVote().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+		return movies; 
+	}
 
 	
 

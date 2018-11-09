@@ -2,7 +2,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import auth from './common/auth'
 
-import { MovieDetail, MovieForm, MovieList, ActorList,ActorForm, Registro, MovieListVistas, MovieListPendientes } from './entities'
+import { MovieDetail, MovieForm, MovieList, ActorList, ActorForm,GenreList, GenreForm, DirectorList, DirectorForm, Registro,MovieListVistas,MovieListVistasVote,MovieListPendientes } from './entities'
 import { Home, Login, NotFound } from './components'
 
 const routes = [
@@ -10,8 +10,13 @@ const routes = [
   { name: 'MovieCreate', path: '/movies/new', component: MovieForm, meta: { authority: 'ADMIN' } },
   { name: 'ActorCreate', path: '/actors/new', component: ActorForm, meta: { authority: 'ADMIN' } },
   { name: 'ActorList', path: '/actors', component: ActorList, meta: { authority: 'ADMIN' } },
+  { name: 'GenreCreate', path: '/genres/new', component: GenreForm, meta: { authority: 'ADMIN' } },
+  { name: 'GenreList', path: '/genres', component: GenreList, meta: { authority: 'ADMIN' } },
+  { name: 'DirectorCreate', path: '/directors/new', component: DirectorForm, meta: { authority: 'ADMIN' } },
+  { name: 'DirectorList', path: '/directors', component: DirectorList, meta: { authority: 'ADMIN' } },
   { name: 'MovieList', path: '/movies', component: MovieList, meta: { public: true }},
   { name: 'MovieListVistas', path: '/movies/vistas', component: MovieListVistas, meta: { authority: 'USER' }},
+  { name: 'MovieListVistasVote', path: '/movies/vistasToVote', component: MovieListVistasVote, meta: { authority: 'USER' }},
   { name: 'MovieListPendientes', path: '/movies/pendientes', component: MovieListPendientes, meta: { authority: 'USER' }},
   { name: 'Registro', path: '/login/createAccount', component: Registro,meta: { public: true }},
   { name: 'MovieDetail', path: '/movies/:id', component: MovieDetail},

@@ -14,6 +14,7 @@ public interface MovieDAO {
     public void save(Movie movie);
     public void deleteById(Long idMovie) ;
 	public List<Movie> findAllVistas();
+	public List<Movie> findAllVistasVote();
 	public List<Movie> findAllPendientes();
 	public List<Movie> findAllUser();
 }

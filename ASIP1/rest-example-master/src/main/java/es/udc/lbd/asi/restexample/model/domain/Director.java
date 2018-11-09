@@ -35,20 +35,14 @@ public class Director {
 	public Director() {
 	}
 	
-	public Director(@NotEmpty String name, @NotEmpty String surname1, String surname2 , Set<Movie> managment) {
-		super();
-		this.name = name;
-		this.surname1 = surname1;
-		this.surname2 = surname2;
-		this.managment = managment;
-	}
-	
 	public Director(@NotEmpty String name, @NotEmpty String surname1, String surname2) {
 		super();
 		this.name = name;
 		this.surname1 = surname1;
 		this.surname2 = surname2;
+		
 	}
+
 
 	public Director(@NotEmpty String name, @NotEmpty String surname1) {
 		this.name = name;

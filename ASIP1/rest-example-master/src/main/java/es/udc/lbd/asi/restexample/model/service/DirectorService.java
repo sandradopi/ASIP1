@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.lbd.asi.restexample.model.domain.Director;
+import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 
@@ -17,6 +20,7 @@ public class DirectorService implements DirectorServiceInterface {
 	@Autowired
 	private DirectorDAO directorDAO;
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@Transactional(readOnly = false)
 	public DirectorDTO save(DirectorDTO director) {
 		Director bdDirector = new Director(director.getName(), director.getSurname1(), director.getSurname2());
@@ -25,7 +29,11 @@ public class DirectorService implements DirectorServiceInterface {
 		return new DirectorDTO(bdDirector);
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<DirectorDTO> findAll() {
     	return directorDAO.findAll().stream().map(director-> new DirectorDTO(director)).collect(Collectors.toList());
     }
+	
+	
+	    
 }

@@ -3,7 +3,7 @@
     toggleable="md">
     <b-navbar-toggle target="nav_collapse"/>
 
-    <b-navbar-brand to="/">VueExample</b-navbar-brand>
+    <b-navbar-brand to="/">Movie World</b-navbar-brand>
 
     <b-collapse
       id="nav_collapse"
@@ -25,9 +25,24 @@
           exact>Pending Movies</b-nav-item>
 
         <b-nav-item
+          v-if="!isAdmin && isLogged"
+          :to="{ name: 'MovieListVistasVote' }"
+          exact>Viewed Movies to Value</b-nav-item>
+
+        <b-nav-item
           v-if="isAdmin"
           :to="{ name: 'ActorList' }"
           exact>Actors</b-nav-item>
+
+         <b-nav-item
+          v-if="isAdmin"
+          :to="{ name: 'GenreList' }"
+          exact>Genres</b-nav-item>
+
+        <b-nav-item
+          v-if="isAdmin"
+          :to="{ name: 'DirectorList' }"
+          exact>Directors</b-nav-item>
 
         <b-nav-item
           v-if="!isLogged"
