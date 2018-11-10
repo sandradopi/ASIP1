@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -26,6 +25,7 @@ public class GenreService implements GenreServiceInterface{
 		return new GenreDTO(bdGenre);
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<GenreDTO> findAll() {
     	return genreDAO.findAll().stream().map(genre -> new GenreDTO(genre)).collect(Collectors.toList());
     }

@@ -12,6 +12,7 @@
          :to="{ name: 'MovieCreate' }"
          variant="primary">New</b-btn>
     <br/>
+    <h1 class="princ"> Movies</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         <router-link
@@ -111,39 +112,49 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+  .princ{
+    font-size: 40px;
+    letter-spacing: 8px;
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+
   .namemovie {
     margin-top :20px;
     width:28%;
     height:20%;
     font-size: big;
     float:left;
-    padding:20px;
+    padding:10px;
     float-left:20px;
-    margin-left :10px;}
+    margin-left :50px;
+    background-color: white;
+    border-radius: 20px 20px 20px 20px
+  }
+
+
 
   .imagen{
-    width:40%;
-    height:auto;
-    float:left;
+    width:50%;
+    height:30%;
+    margin-left:70px;
+
     
     }
 
   .tittle{
-    float:right;
-    text-align:middle;
-    font-weight: bold;
-    font-family: sans-serif;
-    font: 150% sans-serif;
-    font-size: 1.5vw;
+    font-size: 20px;
+    color: red;
+    text-align: center;
+    margin-bottom:10px;
+    text-transform: uppercase;
+
       
     }
    
-
-  .namemovie{
-    background-color: #ffffff;
-    border-radius: 35px 35px 35px 35px
-  }
-
   
   .eliminado {
     background-color: #f44336; 

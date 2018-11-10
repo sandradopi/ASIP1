@@ -1,7 +1,5 @@
 package es.udc.lbd.asi.restexample.model.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,10 +12,8 @@ import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
-import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
-import es.udc.lbd.asi.restexample.security.SecurityUtils;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -53,7 +49,7 @@ public class StatusService implements StatusServiceInterface {
 				
 				
 	}
-	@PreAuthorize("hasAuthority('USER')")
+	
 	@Override
 	@Transactional(readOnly = false)
 	public void deleteByIdMovieUser(Long idMovie) {

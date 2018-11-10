@@ -19,8 +19,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name="Movie")
 
@@ -35,7 +33,6 @@ public class Movie {
     private String summary;
     @NotNull
     private Integer duration;
-    //@Type NO FUNCIONA, MIRARLO
     @NotNull
     @Temporal(TemporalType.DATE)
     private Date data;

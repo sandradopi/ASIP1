@@ -21,8 +21,8 @@
       class="app-form"
       @submit="save">
 
+      <h5>Type *</h5>
       <b-form-group
-        label="Type:"
         label-for="Name">
         <b-form-input
           id="name"

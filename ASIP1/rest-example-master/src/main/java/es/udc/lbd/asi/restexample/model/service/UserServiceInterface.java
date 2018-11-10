@@ -4,7 +4,7 @@ import java.util.List;
 
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
+
 
 public interface UserServiceInterface {
     public List<NormalUserDTO> findAll();

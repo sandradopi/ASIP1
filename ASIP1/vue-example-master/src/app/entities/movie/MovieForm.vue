@@ -21,8 +21,8 @@
       class="app-form"
       @submit="save">
 
+      <h5>Tittle *</h5>
       <b-form-group
-        label="Title:"
         label-for="title">
         <b-form-input
           id="title"
@@ -33,8 +33,8 @@
           placeholder="Enter title"/>
       </b-form-group>
 
+      <h5>Duration *</h5>
       <b-form-group
-        label="Duration:"
         label-for="duration">
         <b-form-input
           id="duration"
@@ -45,8 +45,9 @@
           placeholder="Enter duration"/>
       </b-form-group>
 
+      <h5>Data *</h5>
       <b-form-group
-        label="Data: (yyyy-MM-dd)"
+        label="(yyyy-MM-dd)"
         label-for="Data">
         <b-form-input
           id="data"
@@ -81,9 +82,8 @@
   </b-form-group>
 
     </div>
-
+      <h5>Genre *</h5>
       <b-form-group
-        label="Genre:"
         label-for="genre">
         <b-form-select
           id="genre"
@@ -94,7 +94,7 @@
 
 
       <b-form-group >
-      <h5>Directors:</h5>
+      <h5>Directors *</h5>
       <multiselect 
         v-model="movie.dirigentes" 
         :options="this.alldirigentes"
@@ -113,9 +113,8 @@
 
   
   </b-form-group>
-
+      <h5>Summary *</h5>
       <b-form-group
-        label="Summary:"
         label-for="summary">
         <b-form-textarea
           id="summary"

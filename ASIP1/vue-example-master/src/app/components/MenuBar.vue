@@ -47,10 +47,12 @@
           :to="{ name: 'DirectorList' }"
           exact>Directors</b-nav-item>
 
+      
         <b-nav-item
           v-if="!isLogged"
           :to="{ name: 'Login' }"
           exact>Login</b-nav-item>
+      
 
         <b-nav-item
           v-if="isLogged"
@@ -58,7 +60,8 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-item>{{ loggedUser }}</b-nav-item>
+        <b-nav-item>
+        {{ loggedUser }} </b-nav-item>
       </b-navbar-nav>
 
     </b-collapse>
@@ -96,5 +99,15 @@ export default {
   text-align: center;
   text-transform: uppercase;
 }
+
+.nav-item{
+  font-size:17px;
+
+}
+
+ml-auto.nav-item{
+  color: red;
+}
+
 
 </style>

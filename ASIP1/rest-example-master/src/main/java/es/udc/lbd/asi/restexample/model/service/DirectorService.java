@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.lbd.asi.restexample.model.domain.Director;
-import es.udc.lbd.asi.restexample.model.domain.Movie;
-import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 

@@ -3,7 +3,6 @@ package es.udc.lbd.asi.restexample.config;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -15,8 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
@@ -26,7 +24,6 @@ import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
-import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 
 @Configuration
@@ -93,17 +90,35 @@ public class DatabaseLoader {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-08"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-10"),
     		genre1, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"WonderWoman","La pelicula va sobre...",250, sdf.parse("2018-11-02"),
+    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes));
     
     movieService.save
     (new Movie(false,"Harry Potter","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes));
+   
+    
+    movieService.save
+    (new Movie(false,"Infiltrados en miami","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes));
+    
+    
+    movieService.save
+    (new Movie(false,"Lara Croft","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes));
+    
+    movieService.save
+    (new Movie(false,"Jumanji","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes));
+    
+   
     }
+
+
     
     
 }

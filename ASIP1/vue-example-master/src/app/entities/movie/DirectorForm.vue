@@ -21,8 +21,8 @@
       class="app-form"
       @submit="save">
 
+      <h5>Name *</h5>
       <b-form-group
-        label="Name:"
         label-for="Name">
         <b-form-input
           id="name"
@@ -33,8 +33,8 @@
           placeholder="Enter a name"/>
       </b-form-group>
 
+      <h5>First Surname *</h5>
       <b-form-group
-        label="First Surname:"
         label-for="surname1">
         <b-form-input
           id="surname1"
@@ -45,8 +45,8 @@
           placeholder="Enter the first Surname"/>
       </b-form-group>
 
+      <h5>Second Surname</h5>
       <b-form-group
-        label="Second Surname:"
         label-for="surname2">
         <b-form-input
           id="surname2"

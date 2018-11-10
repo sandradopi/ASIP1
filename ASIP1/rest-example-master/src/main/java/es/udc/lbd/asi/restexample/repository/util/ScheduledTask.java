@@ -42,7 +42,6 @@ public class ScheduledTask {
 	@Autowired
 	MovieDAO movieDAO;
 	private Properties properties = new Properties();
-	private String password;
 	private Session session;
 
 	private void init() {
@@ -55,7 +54,7 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 43 11 * * * ")
+    @Scheduled(cron = "0 00 10 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException {
     	init();
     	Date ahora = new Date();
@@ -74,7 +73,7 @@ public class ScheduledTask {
 	    				message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarioNormal.getEmail()));
 	    				message.setSubject("Hi! The movie "+ state.getMovie().getName() +" is now available.");
 	    				message.setText("Hi Mr/Mrs "+ state.getNormalUser().getLogin() +" :"+"\n" +"This email is to let you know that the film "
-	    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign"
+	    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign "
 	    				+ "in , make some popcorn and give it to play :D" +"\n"+"\n"+ "Best Wishes, your favorite app of Movies Online <3");
 	    				Transport t = session.getTransport("smtp");
 	    				t.connect("marsusanez@gmail.com","asiasi2018");

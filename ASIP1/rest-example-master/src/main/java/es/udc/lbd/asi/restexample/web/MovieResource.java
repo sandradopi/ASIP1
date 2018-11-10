@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
-import es.udc.lbd.asi.restexample.model.service.StatusService;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
 import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;

@@ -91,11 +91,7 @@ public class Status {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "ESTADITO [idStatus=" + idStatus + ", valoration=" + valoration + ", type=" + type + ", movie=" + movie
-				+ ", user=" + user + "]";
-	}
+	
 	
 
 }

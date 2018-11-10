@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
-import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.User_;
@@ -25,11 +24,8 @@ import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 
@@ -60,6 +56,7 @@ public class MovieService implements MovieServiceInterface{
   @Autowired
   private UserService userService;
   
+  @Override
   public List<MovieDTO> findAll() {
 	   try{
 		   UserDTO user= userService.getCurrentUserWithAuthorityUser();
@@ -83,6 +80,7 @@ public class MovieService implements MovieServiceInterface{
     
     @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
+    @Override
     public MovieDTO save(MovieDTO movie) {	
     	Movie bdMovie = new Movie(movie.getHidden(), movie.getName(), movie.getSummary(), movie.getDuration(), movie.getData());
     	bdMovie.setGenre(genreDAO.findById(movie.getGenre().getIdGenre()));
@@ -109,6 +107,7 @@ public class MovieService implements MovieServiceInterface{
     
     @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
+    @Override
     public MovieDTO update(MovieDTO movie){
         Movie bdMovie = movieDAO.findById(movie.getIdMovie());
         bdMovie.setName(movie.getName());
@@ -131,6 +130,7 @@ public class MovieService implements MovieServiceInterface{
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
+    @Override
     public void deleteById(Long idMovie) {
 		Movie bdMovie = movieDAO.findById(idMovie);
 		try{

@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.GenreDTO;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -28,6 +27,7 @@ public class ActorService implements ActorServiceInterface {
 		return new ActorDTO(bdActor);
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<ActorDTO> findAll() {
     	return actorDAO.findAll().stream().map(actor-> new ActorDTO(actor)).collect(Collectors.toList());
     }
