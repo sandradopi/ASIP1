@@ -90,11 +90,11 @@ public class DatabaseLoader {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-10"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-15"),
     		genre1, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-02"),
+    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-15"),
     		genre2, participantes,dirigentes));
     
     movieService.save

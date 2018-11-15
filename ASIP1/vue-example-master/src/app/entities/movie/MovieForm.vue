@@ -16,6 +16,7 @@
         @click="save()">Submit</b-btn>
     </div>
 
+    <div class= "formulario">
     <b-form
       v-if="movie"
       class="app-form"
@@ -77,11 +78,8 @@
       </multiselect>
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
       
-  </div>
   
   </b-form-group>
-
-    </div>
       <h5>Genre *</h5>
       <b-form-group
         label-for="genre">
@@ -108,8 +106,7 @@
         placeholder="Pick some directors"
         :custom-label="nameCustom">
       </multiselect>
-      
-  </div>
+
 
   
   </b-form-group>
@@ -125,6 +122,7 @@
           placeholder="Enter summary"/>
       </b-form-group>
     </b-form>
+</div>
   </LoadingPage>
 </template>
 
@@ -222,6 +220,13 @@ export default {
 }
 
 </script>
-<style lang="sass" src="vue-multiselect/dist/vue-multiselect.min.css">
+<style scoped lang="scss" src="vue-multiselect/dist/vue-multiselect.min.css">
+
+.formulario{
+  width:50%;
+  margin-left:25%;
+
+}
+
 </style>
 

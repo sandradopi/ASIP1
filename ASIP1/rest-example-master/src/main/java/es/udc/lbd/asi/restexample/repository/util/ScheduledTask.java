@@ -1,4 +1,5 @@
 package es.udc.lbd.asi.restexample.repository.util;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,19 +55,20 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 00 10 * * * ")
-    public void reportCurrentTime() throws AddressException, MessagingException {
+    @Scheduled(cron = "0 59 12 * * * ")
+    public void reportCurrentTime() throws AddressException, MessagingException, ParseException {
     	init();
     	Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         String actualDate= formateador.format(ahora);
+        Date fecha = formateador.parse(actualDate);
         
-    	for (Status state : statusDAO.findAll()) {
-    	    if (state.getType().equals(TipoStatus.PENDIENTE)){
-    	    	Movie movie=state.getMovie();
+        
+    	for (Object object : statusDAO.findAllPendientes(fecha)) {
+    			
+    			Status state= new Status();
     	    	NormalUser usuarioNormal = state.getNormalUser();
-    	    	if(movie.getData().toString().equals(actualDate)){
-    	    		
+    		
     	    	try{
 	    	    		MimeMessage message = new MimeMessage(session);
 	    	    		message.setFrom(new InternetAddress("marsusanez@gmail.com"));
@@ -85,6 +87,5 @@ public class ScheduledTask {
     	    		
     	    	}
     	    }
-    	}
+    	
     }
-}

@@ -1,4 +1,5 @@
 <template>
+  <div class="fondo">
   <LoadingPage
     :loading="loading"
     :error="error">
@@ -7,9 +8,8 @@
       class="error">
       <pre>{{ error }}</pre>
     </div>
-      
     <br/>
-    <h1 class="princ"> Viewed Movies</h1>
+    <h1 class="princ" :key="this.titulo"> {{titulo}}</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         <router-link
@@ -18,9 +18,9 @@
         </router-link>
     </div>
     <img class="imagen" src="movie.jpg">
-     </div>
     </div>
   </LoadingPage>
+</div>
 </template>
 
 <script>
@@ -34,7 +34,8 @@ export default {
     return {
       loading: false,
       movies: null,
-      error: null
+      error: null,
+      titulo:''
     }
   },
   
@@ -44,15 +45,39 @@ export default {
   },
   methods: {
   fetchData() {
-      this.loading = true
-     HTTP.get(`movies/vistas`)
-    .then(response => {
-       this.movies = response.data
-     })
+    this.loading = true
+
+    if (this.$route.params.id=='vista') {
+      this.titulo = 'Viewed Movies'
+      HTTP.get(`movies/vistas`)
+      .then(response => {
+       this.movies = response.data})
      .catch(err => {
-       this.error = err.message
-     })
+       this.error = err.message })
+     .finally(() => this.loading = false)
+
+    }
+
+    else if (this.$route.params.id=='pendiente'){
+       this.titulo = 'Pending Movies'
+       HTTP.get(`movies/pendientes`)
+      .then(response => {
+       this.movies = response.data })
+      .catch(err => {
+       this.error = err.message})
     .finally(() => this.loading = false)
+
+
+    } else if (this.$route.params.id=='vistavote'){
+       this.titulo = 'Movies to valorate'
+       HTTP.get(`movies/vistas/tovote`)
+      .then(response => {
+       this.movies = response.data})
+       .catch(err => {
+       this.error = err.message})
+      .finally(() => this.loading = false)
+    }
+     
     },
     
     _successHandler(response) {
@@ -67,7 +92,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
   .princ{
     font-size: 40px;
     letter-spacing: 8px;
@@ -89,7 +113,7 @@ export default {
     border-radius: 20px 20px 20px 20px
   }
 
- .imagen{
+  .imagen{
     width:50%;
     height:30%;
     margin-left:70px;
@@ -106,9 +130,6 @@ export default {
       
     }
    
-   
-
- 
 
 
 </style>

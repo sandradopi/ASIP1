@@ -19,17 +19,17 @@
 
        <b-nav-item
           v-if="!isAdmin && isLogged"
-          :to="{ name: 'MovieListVistas' }"
+          :to="{ name: 'MovieListVistas' , params:{ id: 'vista' }}"
           exact>Viewed Movies</b-nav-item>
 
         <b-nav-item
           v-if="!isAdmin && isLogged"
-          :to="{ name: 'MovieListPendientes' }"
+          :to="{ name: 'MovieListPendientes' , params:{ id: 'pendiente' }}"
           exact>Pending Movies</b-nav-item>
 
         <b-nav-item
           v-if="!isAdmin && isLogged"
-          :to="{ name: 'MovieListVistasVote' }"
+          :to="{ name: 'MovieListVistasVote' , params:{ id: 'vistavote' }}"
           exact>Viewed Movies to Value</b-nav-item>
 
         <b-nav-item

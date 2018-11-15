@@ -1,5 +1,6 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
@@ -14,5 +15,6 @@ public interface StatusDAO {
 	 public Status findByMovieUser(Movie movie, NormalUser usuario);
 	 public Status findByMovie(Movie movie);
 	 public List<Status> findAll();
+	 public List<Status> findAllPendientes(Date actualDate);
  
 }

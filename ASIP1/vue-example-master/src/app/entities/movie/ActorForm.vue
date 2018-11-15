@@ -21,6 +21,7 @@
       class="app-form"
       @submit="save">
 
+<div class="formulario">
       <h5>Name *</h5>
       <b-form-group
         label-for="Name">
@@ -69,7 +70,7 @@
           required
           placeholder="Enter the Birthday"/>
       </b-form-group>
-  
+  </div>
     </b-form>
   </LoadingPage>
 </template>
@@ -117,5 +118,14 @@ export default {
 
 
 </script>
+<style scoped lang="scss">
+
+.formulario{
+  width:50%;
+  margin-left:25%;
+
+}
+
+</style>
 
 
