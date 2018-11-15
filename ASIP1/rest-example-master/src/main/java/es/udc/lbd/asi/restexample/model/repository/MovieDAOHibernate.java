@@ -1,5 +1,6 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
@@ -51,6 +52,12 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 		@Override
 		public List<Movie> findAllVistasVote() {
 			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='VISTA' AND movie.hidden=false AND s.valoration=null").list();
+		}
+		
+		@Override
+		public List<Movie> findAllDatePendiente(Date data) {
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE' AND movie.data = :data").setParameter("data", data).list();
+			
 		}
 
 	   

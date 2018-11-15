@@ -47,14 +47,6 @@ public class Status {
 	
 	
 	
-	public Status(Long idStatus, Integer valoration, TipoStatus type, @NotNull Movie movie, @NotNull NormalUser user) {
-		super();
-		this.idStatus = idStatus;
-		this.valoration = valoration;
-		this.type = type;
-		this.movie = movie;
-		this.user = user;
-	}
 
 	public Status(Integer valoration, TipoStatus type) {
 		super();
@@ -100,6 +92,12 @@ public class Status {
 
 	public void setNormalUser(NormalUser user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Status [idStatus=" + idStatus + ", valoration=" + valoration + ", type=" + type + ", movie=" + movie
+				+ ", user=" + user + "]";
 	}
 
 	

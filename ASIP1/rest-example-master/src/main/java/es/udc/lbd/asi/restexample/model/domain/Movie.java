@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 
 public class Movie {
    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovie;
@@ -161,7 +162,12 @@ public class Movie {
 		this.dirigentes = dirigentes;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Movie [idMovie=" + idMovie + ", hidden=" + hidden + ", name=" + name + ", summary=" + summary
+				+ ", duration=" + duration + ", data=" + data + ", genre=" + genre + ", participantes=" + participantes
+				+ ", dirigentes=" + dirigentes + "]";
+	}
 	
 
 }

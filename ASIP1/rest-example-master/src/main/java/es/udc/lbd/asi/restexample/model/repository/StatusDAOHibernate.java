@@ -44,10 +44,7 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 		
 	}
 
-	@Override
-	public List<Status> findAllPendientes(Date actualDate) {
-		return getSession().createQuery("from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE' AND movie.data= :actualDate").setParameter("actualDate", actualDate).list();
-	}
+	
 
 	
 

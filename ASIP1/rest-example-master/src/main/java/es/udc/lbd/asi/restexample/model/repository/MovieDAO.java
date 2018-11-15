@@ -1,6 +1,7 @@
 package es.udc.lbd.asi.restexample.model.repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
@@ -17,4 +18,5 @@ public interface MovieDAO {
 	public List<Movie> findAllVistasVote();
 	public List<Movie> findAllPendientes();
 	public List<Movie> findAllUser();
+	public List<Movie> findAllDatePendiente(Date data);
 }

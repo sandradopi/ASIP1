@@ -2,6 +2,7 @@ package es.udc.lbd.asi.restexample.repository.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
@@ -43,6 +44,7 @@ public class ScheduledTask {
 	@Autowired
 	MovieDAO movieDAO;
 	private Properties properties = new Properties();
+	private List<Movie> movies= null;
 	private Session session;
 
 	private void init() {
@@ -55,7 +57,7 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 59 12 * * * ")
+    @Scheduled(cron = "0 00 10 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException, ParseException {
     	init();
     	Date ahora = new Date();
@@ -63,10 +65,11 @@ public class ScheduledTask {
         String actualDate= formateador.format(ahora);
         Date fecha = formateador.parse(actualDate);
         
+        movies =movieDAO.findAllDatePendiente(fecha);
         
-    	for (Object object : statusDAO.findAllPendientes(fecha)) {
-    			
-    			Status state= new Status();
+        if(movies !=null){
+        for (Movie movie: movies){
+        		Status state= statusDAO.findByMovie(movie);
     	    	NormalUser usuarioNormal = state.getNormalUser();
     		
     	    	try{
@@ -85,7 +88,7 @@ public class ScheduledTask {
 	    			return;
 	    				}
     	    		
-    	    	}
+        		}
     	    }
-    	
+    	}
     }

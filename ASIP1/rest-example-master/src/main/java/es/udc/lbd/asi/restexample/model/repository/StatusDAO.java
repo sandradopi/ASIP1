@@ -15,6 +15,6 @@ public interface StatusDAO {
 	 public Status findByMovieUser(Movie movie, NormalUser usuario);
 	 public Status findByMovie(Movie movie);
 	 public List<Status> findAll();
-	 public List<Status> findAllPendientes(Date actualDate);
+
  
 }
