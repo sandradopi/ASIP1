@@ -19,6 +19,18 @@
           {{ actor.name }} {{actor.surname1}}
         </router-link>
     </div>
+    <div class="buttone" >
+     <b-btn
+        class="eliminado"
+        variant="primary"
+        @click="eliminar(actor.idActor)">Delete</b-btn>
+
+      <b-btn
+          class="editado"
+           :to="{ name: 'ActorUpdate', params: { id: actor.idActor }}"
+           variant="primary">Edit</b-btn>
+
+     </div>
     <img class="imagen" src="perfil.jpg">
     </div>
   </LoadingPage>
@@ -107,8 +119,55 @@ export default {
       
     }
    
+.buttone{
+    margin-top:10px;
+    width:30%;
+    height:40%;
+}
+.eliminado {
+    margin-left:10px;
+    margin-bottom:20px;
+    background-color: #f44336; 
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    float:left
+  }
 
+  .eliminado:hover {
+    background-color: #f44336;
+    color: white;
+  
+}
 
+.editado {
+    margin-left:10px;
+    margin-bottom:10px;
+    border: none;
+    color: white;
+    padding: 8px 29px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    float:left
+
+  }
+
+  .editado:hover {
+    color: white;
+  
+}
 </style>
 
 

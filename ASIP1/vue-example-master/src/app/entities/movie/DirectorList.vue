@@ -19,6 +19,18 @@
           {{ director.name }} {{director.surname1}}
         </router-link>
     </div>
+     <div class="buttone" >
+     <b-btn
+        class="eliminado"
+        variant="primary"
+        @click="eliminar(director.idDirector)">Delete</b-btn>
+
+       <b-btn
+          class="editado"
+           :to="{ name: 'DirectorUpdate', params: { id: director.idDirector }}"
+           variant="primary">Edit</b-btn>
+
+     </div>
     <img class="imagen" src="director.jpg">
   </LoadingPage>
 </template>
@@ -93,7 +105,8 @@ export default {
   .imagen{
     width:50%;
     height:30%;
-    margin-left:70px;
+    margin-left:100px;
+    
     
     }
 
@@ -105,6 +118,51 @@ export default {
     text-transform: uppercase;
       
     }
+
+    .eliminado {
+    margin-left:90px;
+    margin-bottom:20px;
+    background-color: #f44336; 
+    border: none;
+    color: white;
+    padding: 8px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    float:left
+  }
+
+  .eliminado:hover {
+    background-color: #f44336;
+    color: white;
+  
+}
+
+.editado {
+    margin-left:10px;
+    margin-bottom:10px;
+    border: none;
+    color: white;
+    padding: 8px 29px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    float:left
+
+  }
+
+  .editado:hover {
+    color: white;
+  
+}
 
    
 

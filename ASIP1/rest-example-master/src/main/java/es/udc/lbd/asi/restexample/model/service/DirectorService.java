@@ -8,8 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
+import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 
 @Service
@@ -32,6 +34,22 @@ public class DirectorService implements DirectorServiceInterface {
     	return directorDAO.findAll().stream().map(director-> new DirectorDTO(director)).collect(Collectors.toList());
     }
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public DirectorDTO findById(Long idDirector)  {
+   	 return new DirectorDTO(directorDAO.findById(idDirector));
+   }
 	
+	 @PreAuthorize("hasAuthority('ADMIN')")
+	    @Transactional(readOnly = false)
+	    @Override
+	    public DirectorDTO update(DirectorDTO director){
+	        Director bdDirector = directorDAO.findById(director.getIdDirector());
+	        bdDirector.setName(director.getName());
+	        bdDirector.setSurname1(director.getSurname1());
+	        bdDirector.setSurname2(director.getSurname2());
+	       
+	        directorDAO.save(bdDirector);
+	        return new DirectorDTO(bdDirector);
+	        }
 	    
 }

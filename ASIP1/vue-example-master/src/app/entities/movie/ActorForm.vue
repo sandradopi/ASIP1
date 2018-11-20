@@ -93,14 +93,29 @@ export default {
   },
    
   created() {
+     if (this.$route.params.id) {
+        this.loading = true
+        HTTP.get(`actors/${this.$route.params.id}`)
+        .then(response => this.actor = response.data)
+        .catch(err => this.error = err.message)
+        .finally(() => this.loading = false)
+    } else {
       this.actor = {}
+    }
   },
   methods: {
     
     save() {
+      if (this.$route.params.id) {
+        HTTP.put(`actors/${this.$route.params.id}`, this.actor)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
+      } else {
         HTTP.post('actors', this.actor)
         .then(this._successHandler)
         .catch(this._errorHandler)
+      }
+        
       
     },
     back() {

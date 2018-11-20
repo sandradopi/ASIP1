@@ -80,14 +80,29 @@ export default {
   },
    
   created() {
+     if (this.$route.params.id) {
+        this.loading = true
+        HTTP.get(`directors/${this.$route.params.id}`)
+        .then(response => this.director = response.data)
+        .catch(err => this.error = err.message)
+        .finally(() => this.loading = false)
+    } else {
       this.director = {}
+    }
   },
   methods: {
     
     save() {
-        HTTP.post('directors', this.director)
+      if (this.$route.params.id) {
+        HTTP.put(`directors/${this.$route.params.id}`, this.director)
         .then(this._successHandler)
         .catch(this._errorHandler)
+      } else {
+        HTTP.post('directors', this.actor)
+        .then(this._successHandler)
+        .catch(this._errorHandler)
+      }
+
       
     },
     back() {

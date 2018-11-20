@@ -110,6 +110,14 @@ public class Actor {
 		this.birthdate = birthdate;
 	}
 
+	public Set<Movie> getActuations() {
+		return actuations;
+	}
+
+	public void setActuations(Set<Movie> actuations) {
+		this.actuations = actuations;
+	}
+
 	
 	
 	
