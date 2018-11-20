@@ -126,7 +126,7 @@ export default {
 }
 .eliminado {
     margin-left:10px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     background-color: #f44336; 
     border: none;
     color: white;

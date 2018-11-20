@@ -106,8 +106,16 @@ export default {
     width:50%;
     height:30%;
     margin-left:100px;
+    float:right;
     
     
+    }
+
+  .buttone{
+    float:left;
+    width:10%;
+    height:10%;
+
     }
 
   .tittle{
@@ -120,8 +128,8 @@ export default {
     }
 
     .eliminado {
-    margin-left:90px;
-    margin-bottom:20px;
+    margin-left:10px;
+    margin-bottom:10px;
     background-color: #f44336; 
     border: none;
     color: white;
@@ -144,7 +152,6 @@ export default {
 
 .editado {
     margin-left:10px;
-    margin-bottom:10px;
     border: none;
     color: white;
     padding: 8px 29px;
