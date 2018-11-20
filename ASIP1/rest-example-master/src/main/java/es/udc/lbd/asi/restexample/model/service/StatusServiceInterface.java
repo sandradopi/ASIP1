@@ -9,5 +9,6 @@ public interface StatusServiceInterface {
 	public StatusDTO update(Long idMovie, Integer valoracion);
 	public void deleteByIdMovieUser(Long idMovie);
 	public StatusDTO findByMovieUser(Long idMovie);
+	public Long countVistas();
 	
 }

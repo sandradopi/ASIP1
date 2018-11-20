@@ -2,6 +2,8 @@ package es.udc.lbd.asi.restexample.web;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.udc.lbd.asi.restexample.model.service.StatusService;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.StatusDTO;
 import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;
 
@@ -43,6 +46,11 @@ public class StatusResource {
 	@PutMapping("/{idMovie}/{valoracion}")
     public StatusDTO update(@PathVariable Long idMovie, @PathVariable Integer valoracion){
         return statusService.update(idMovie,valoracion);
+    }
+	
+	@GetMapping("/vistas")
+    public Long CountVistas() {
+        return statusService.countVistas();
     }
 
 }

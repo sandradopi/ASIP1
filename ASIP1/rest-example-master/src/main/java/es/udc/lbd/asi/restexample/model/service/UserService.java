@@ -32,7 +32,6 @@ public class UserService implements UserServiceInterface{
 	public List<NormalUserDTO> findAll() {
 		 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
 	
-
 		
 	     @Transactional(readOnly = false)
 		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
@@ -86,6 +85,10 @@ public class UserService implements UserServiceInterface{
 	         }
 	         return null;
 	     }
+
+
+
+		
 	     
    
 

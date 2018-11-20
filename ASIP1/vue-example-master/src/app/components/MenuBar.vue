@@ -33,6 +33,11 @@
           exact>Viewed Movies to Value</b-nav-item>
 
         <b-nav-item
+          v-if="!isAdmin && isLogged"
+          :to="{ name: 'UsersList' }"
+          exact>Users</b-nav-item>
+
+        <b-nav-item
           v-if="isAdmin"
           :to="{ name: 'ActorList' }"
           exact>Actors</b-nav-item>
