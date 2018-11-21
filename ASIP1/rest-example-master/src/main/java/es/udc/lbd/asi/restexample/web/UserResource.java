@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import es.udc.lbd.asi.restexample.model.service.UserService;
-import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
 import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;
 
 
@@ -26,6 +24,17 @@ public class UserResource {
     @GetMapping
     public List<NormalUserDTO> findAll() {
         return userService.findAll();
+    }
+    
+    @GetMapping("/contadores")
+    public List<NormalUserListUserDTO> findAllContadores() {
+        return userService.findAllContadores();
+    }
+    
+    @GetMapping("detail/{login}")
+    public NormalUserListUserDTO findOneContadores(@PathVariable String login) throws InstanceNotFoundExceptionHIB{
+    	NormalUserListUserDTO user = userService.findByLoginContadores(login);
+    	return user;
     }
     
     @GetMapping("/{idUser}")

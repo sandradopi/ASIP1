@@ -11,10 +11,9 @@
     <h1 class="princ"> Users</h1>
     <div class= "namemovie" v-for="user in users" :key="user.idUser">
     <div class= "tittle">
-     <!--{{contar(user.login)}}-->
         <router-link
-         :to="{ name: 'UserDetail', params: { id: user.idUser }}">
-         {{ user.login }} {{count}}
+         :to="{ name: 'UserDetail', params: { id: user.login }}">
+         {{ user.login }} {{user.countVista}}
         </router-link>
     </div>
      </div>
@@ -37,11 +36,7 @@ export default {
 
     }
   },
-  computed: {
-     isAdmin() {
-       return auth.isAdmin()
-     }
-   },
+  
   created() {
     this.fetchData()
     
@@ -50,7 +45,7 @@ export default {
     fetchData() {
 
     this.loading = true
-    HTTP.get('users')
+    HTTP.get('users/contadores') 
     .then(response => {
        this.users = response.data
      })
@@ -72,6 +67,7 @@ export default {
     .then(response => {
        this.count = response.data
      })
+
      .catch(err => {
        this.error = err.message
      })

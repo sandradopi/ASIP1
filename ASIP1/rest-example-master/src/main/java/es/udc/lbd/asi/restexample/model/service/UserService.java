@@ -12,10 +12,12 @@ import es.udc.lbd.asi.restexample.model.domain.AdminUser;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
+import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 import es.udc.lbd.asi.restexample.security.SecurityUtils;
 
@@ -27,9 +29,12 @@ public class UserService implements UserServiceInterface{
     private UserDAO userDAO;
   
   @Autowired
+  private StatusDAO statusDAO;
+  
+  @Autowired
   private PasswordEncoder passwordEncoder;
 
-
+  		@PreAuthorize("hasAuthority('USER')")
 		@Override
 		public List<NormalUserDTO> findAll() {
 			 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
@@ -37,6 +42,15 @@ public class UserService implements UserServiceInterface{
 		@PreAuthorize("hasAuthority('USER')")
 		public NormalUserDTO findById(Long idUser)  {
 	   	 return new NormalUserDTO(userDAO.findById(idUser));
+	   }
+		
+		@PreAuthorize("hasAuthority('USER')")
+		public NormalUserListUserDTO findByLoginContadores(String login)  {
+			NormalUserListUserDTO u= new NormalUserListUserDTO(userDAO.findByLogin(login));
+			u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
+			u.setCountPendiente(statusDAO.findByMovieUserPendiente(u.getLogin()));
+			u.setCountValoration(statusDAO.findByMovieUserVistaValoration(u.getLogin()));
+	   	return u;
 	   }
 	
 	     @Transactional(readOnly = false)
@@ -91,6 +105,20 @@ public class UserService implements UserServiceInterface{
 	         }
 	         return null;
 	     }
+
+	    @PreAuthorize("hasAuthority('USER')")
+		@Override
+		public List<NormalUserListUserDTO> findAllContadores() {
+			
+			List <NormalUserListUserDTO> usuario = userDAO.findAll().stream().map(user -> new NormalUserListUserDTO(user)).collect(Collectors.toList());
+			for(NormalUserListUserDTO u: usuario){
+				u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
+				u.setCountPendiente(statusDAO.findByMovieUserPendiente(u.getLogin()));
+				u.setCountValoration(statusDAO.findByMovieUserVistaValoration(u.getLogin()));
+				
+			}
+			return usuario;
+		}
 
 
 

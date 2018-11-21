@@ -8,14 +8,14 @@
       <pre>{{ error }}</pre>
     </div>
 
-  <div class= "datosUsuario">
+  <div class= "datosUsuario" >
      <h1 class="title"> {{user.login}}</h1>  
      <h4 class="subtitle">
                   <div class="subdatos">
                   <p class="subtitle-tag">Email: {{user.email}} </p>
-                  <p class="subtitle-tag1">Peliculas pendientes: {{this.count1}} |</p>
-                  <p class="subtitle-tag1">Peliculas vistas: {{this.count}} |</p>
-                  <p class="subtitle-tag1">Peliculas valoradas: {{this.count2}} </p>
+                  <p class="subtitle-tag1">Peliculas pendientes: {{user.countPendiente}} |</p>
+                  <p class="subtitle-tag1">Peliculas vistas: {{user.countVista}} |</p>
+                  <p class="subtitle-tag1">Peliculas valoradas: {{user.countValoration}} </p>
                  </div>
      </h4>    
  </div>
@@ -36,10 +36,7 @@ export default {
     return { //datos que usamos
       loading: false,
       error: null,
-      user:null,
-      count:null,
-      count1:null,
-      count2:null,
+      user:{}
 
     }
   },
@@ -51,15 +48,11 @@ export default {
     fetchData() {
 
     this.loading = true
-     HTTP.get(`users/${this.$route.params.id}`) 
+     HTTP.get(`users/detail/${this.$route.params.id}`) 
     .then(response => {
        this.user = response.data
-       return response
+       
      })
-
-    .then(this.contarVistas)
-    .then(this.contarPendientes)
-    .then(this.contarValoradas)
      .catch(err => {
        this.error = err.message
      })

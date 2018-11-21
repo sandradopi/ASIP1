@@ -83,7 +83,7 @@ export default {
         .then(() => { 
             if (this.noti=="fracaso"){
             Vue.notify({
-               text: 'You can´t delete this actor because He/She acts in somo movies',
+               text: 'You can´t delete this actor because he/she acts in somo movies',
                type: 'error'})
             }
             else if (this.noti=="exito"){
