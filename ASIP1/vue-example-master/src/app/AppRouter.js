@@ -2,7 +2,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import auth from './common/auth'
 
-import { MovieDetail, MovieForm, MovieList,UsersList,ActorList, ActorForm,GenreList, GenreForm, DirectorList, DirectorForm, Registro,MovieListAux } from './entities'
+import { MovieDetail, MovieForm, MovieList,UserDetail,UsersList,ActorList, ActorForm,GenreList, GenreForm, DirectorList, DirectorForm, Registro,MovieListAux } from './entities'
 import { Home, Login, NotFound } from './components'
 
 const routes = [
@@ -23,6 +23,7 @@ const routes = [
   { name: 'MovieListPendientes', path: '/movies/pendientes', component: MovieListAux, meta: { authority: 'USER' }},
   { name: 'Registro', path: '/login/createAccount', component: Registro,meta: { public: true }},
   { name: 'MovieDetail', path: '/movies/:id', component: MovieDetail},
+  { name: 'UserDetail', path: '/users/:id', component: UserDetail,meta: { authority: 'USER' }},
   { name: 'MovieUpdate', path: '/movies/:id/edit', component: MovieForm, meta: { authority: 'ADMIN' } },
   { name: 'Login', path: '/login', component: Login, meta: { public: true, isLoginPage: true }},
   { path: '*', component: NotFound, meta: { public: true }}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
+import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
@@ -28,11 +30,15 @@ public class UserService implements UserServiceInterface{
   private PasswordEncoder passwordEncoder;
 
 
-	@Override
-	public List<NormalUserDTO> findAll() {
-		 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
-	
+		@Override
+		public List<NormalUserDTO> findAll() {
+			 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
 		
+		@PreAuthorize("hasAuthority('USER')")
+		public NormalUserDTO findById(Long idUser)  {
+	   	 return new NormalUserDTO(userDAO.findById(idUser));
+	   }
+	
 	     @Transactional(readOnly = false)
 		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
 	         registerUser(login,email, password, false);

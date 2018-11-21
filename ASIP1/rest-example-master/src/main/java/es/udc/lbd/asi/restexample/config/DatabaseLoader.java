@@ -79,7 +79,7 @@ public class DatabaseLoader {
     actorService.save(actor1);
     Actor actor2= new Actor("Brad","Pitt");
     actorService.save(actor2);
-    Director director1= new Director("Alex","Iglesias");
+    Director director1= new Director("Alex","De la Iglesia");
     directorService.save(director1);
     
     Set <Actor>participantes = new <Actor> HashSet();

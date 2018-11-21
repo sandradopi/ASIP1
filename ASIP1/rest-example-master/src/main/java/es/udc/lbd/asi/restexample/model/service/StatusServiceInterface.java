@@ -10,5 +10,7 @@ public interface StatusServiceInterface {
 	public void deleteByIdMovieUser(Long idMovie);
 	public StatusDTO findByMovieUser(Long idMovie);
 	public Long countVistas(String login);
+	public Long countVistasValoration(String login);
+	public Long countPendientes(String login);
 	
 }

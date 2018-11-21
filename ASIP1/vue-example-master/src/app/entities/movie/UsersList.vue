@@ -9,11 +9,11 @@
     </div>
     <br/>
     <h1 class="princ"> Users</h1>
-    <div class= "namemovie" v-for="user in users" :key="user.login">
+    <div class= "namemovie" v-for="user in users" :key="user.idUser">
     <div class= "tittle">
      <!--{{contar(user.login)}}-->
         <router-link
-         :to="{ name: '', params: { id: user.login }}">
+         :to="{ name: 'UserDetail', params: { id: user.idUser }}">
          {{ user.login }} {{count}}
         </router-link>
     </div>
@@ -48,8 +48,6 @@ export default {
   },
   methods: {
     fetchData() {
-
-      
 
     this.loading = true
     HTTP.get('users')

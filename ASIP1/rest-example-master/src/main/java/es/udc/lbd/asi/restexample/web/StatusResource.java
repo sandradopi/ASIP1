@@ -52,5 +52,16 @@ public class StatusResource {
     public Long CountVistas(@PathVariable String login) {
         return statusService.countVistas(login);
     }
+	
+	@GetMapping("/pendientes/{login}")
+    public Long CountPendientes(@PathVariable String login) {
+        return statusService.countPendientes(login);
+    }
+	
+	@GetMapping("/valoration/{login}")
+    public Long CountVistasValoration(@PathVariable String login) {
+        return statusService.countVistasValoration(login);
+    }
+
 
 }

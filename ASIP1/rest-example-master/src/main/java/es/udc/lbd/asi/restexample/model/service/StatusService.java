@@ -100,6 +100,18 @@ public class StatusService implements StatusServiceInterface {
 		
 	}
 	
+	@Override
+	public Long countVistasValoration(String login) {
+		return statusDAO.findByMovieUserVistaValoration(login);
+		
+	}
+	
+	@Override
+	public Long countPendientes(String login) {
+		return statusDAO.findByMovieUserPendiente(login);
+		
+	}
+	
 
 		
 	}
