@@ -8,4 +8,5 @@ public interface ActorDAO {
 	public void save(Actor actor);
 	 public Actor findById(Long id);
 	 public List<Actor> findAll();
+	 public void deleteById(Long idActor);
 }

@@ -11,4 +11,5 @@ public interface DirectorServiceInterface {
 	public List<DirectorDTO> findAll();
 	public DirectorDTO findById(Long idDirector);
 	public DirectorDTO update(DirectorDTO director);
+	public String deleteById(Long idDirector);
 }

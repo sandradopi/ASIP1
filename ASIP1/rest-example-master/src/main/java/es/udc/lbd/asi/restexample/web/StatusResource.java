@@ -48,9 +48,9 @@ public class StatusResource {
         return statusService.update(idMovie,valoracion);
     }
 	
-	@GetMapping("/vistas")
-    public Long CountVistas() {
-        return statusService.countVistas();
+	@GetMapping("/vistas/{login}")
+    public Long CountVistas(@PathVariable String login) {
+        return statusService.countVistas(login);
     }
 
 }

@@ -11,5 +11,6 @@ public interface ActorServiceInterface {
 	public List<ActorDTO> findAll();
 	public ActorDTO findById(Long idActor);
 	public ActorDTO update(ActorDTO actor);
+	public String deleteById(Long idActor);
 	
 }

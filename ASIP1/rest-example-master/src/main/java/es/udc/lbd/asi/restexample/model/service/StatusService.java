@@ -95,10 +95,8 @@ public class StatusService implements StatusServiceInterface {
 
 	
 	@Override
-	public Long countVistas() {
-		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
-		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
-		return statusDAO.findByMovieUserVista(usuarioNormal);
+	public Long countVistas(String login) {
+		return statusDAO.findByMovieUserVista(login);
 		
 	}
 	

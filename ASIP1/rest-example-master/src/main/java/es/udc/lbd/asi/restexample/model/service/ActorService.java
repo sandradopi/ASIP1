@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.repository.ActorDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
@@ -54,5 +55,22 @@ public class ActorService implements ActorServiceInterface {
 	        actorDAO.save(bdActor);
 	        return new ActorDTO(bdActor);
 	        }
+	 
+	 @PreAuthorize("hasAuthority('ADMIN')")
+	    @Transactional(readOnly = false)
+	    @Override
+	    public String deleteById(Long idActor) {
+		 	String resultado;
+			Actor bdActor = actorDAO.findById(idActor);
+			if (bdActor.getActuations().size()==0){
+				actorDAO.deleteById(idActor);
+				resultado="exito";
+				return resultado;
+			}
+			else {
+				resultado="fracaso";
+				return resultado;
+			}
+	    }
 	
 }

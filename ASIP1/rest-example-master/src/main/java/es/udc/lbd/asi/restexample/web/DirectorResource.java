@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,12 @@ public class DirectorResource {
 	        DirectorDTO director = directorService.findById(idDirector);
 	    	return director;
 	    }
+	 
+	 @DeleteMapping("/{idDirector}")
+	    public String delete(@PathVariable Long idDirector) throws InstanceNotFoundExceptionHIB{
+	       return directorService.deleteById(idDirector);
+	    }
+	
 		
 		 @PutMapping("/{idDirector}")
 		    public DirectorDTO update(@PathVariable Long idDirector, @RequestBody @Valid DirectorDTO director, Errors errors)

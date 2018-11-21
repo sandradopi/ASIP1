@@ -7,4 +7,5 @@ public interface DirectorDAO {
 	public void save(Director director);
 	public Director findById(Long id);
 	public List<Director> findAll();
+	public void deleteById(Long idDirector);
 }

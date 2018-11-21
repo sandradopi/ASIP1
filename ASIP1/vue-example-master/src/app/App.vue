@@ -55,6 +55,10 @@ export default {
        background: #ffffff;
      }
 
+     .success{
+      background: #68CD86;
+     }
+
      .notification-title {
        letter-spacing: 1px;
        text-transform: uppercase;

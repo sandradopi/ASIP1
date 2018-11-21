@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,11 @@ public class ActorResource {
 	            throw new IdAndBodyNotMatchingOnUpdateException(Movie.class);
 	        }
 	        return actorService.update(actor);
+	    }
+	 
+	 @DeleteMapping("/{idActor}")
+	    public String delete(@PathVariable Long idActor) throws InstanceNotFoundExceptionHIB{
+	       return actorService.deleteById(idActor);
 	    }
 	
     private void errorHandler(Errors errors) throws RequestBodyNotValidException {

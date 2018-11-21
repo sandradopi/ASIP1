@@ -51,5 +51,22 @@ public class DirectorService implements DirectorServiceInterface {
 	        directorDAO.save(bdDirector);
 	        return new DirectorDTO(bdDirector);
 	        }
+	
+	 @PreAuthorize("hasAuthority('ADMIN')")
+	    @Transactional(readOnly = false)
+	    @Override
+	    public String deleteById(Long idDirector) {
+		 	String resultado;
+			Director bdDirector = directorDAO.findById(idDirector);
+			if (bdDirector.getManagment().size()==0){
+				directorDAO.deleteById(idDirector);
+				resultado="exito";
+				return resultado;
+			}
+			else {
+				resultado="fracaso";
+				return resultado;
+			}
+	    }
 	    
 }

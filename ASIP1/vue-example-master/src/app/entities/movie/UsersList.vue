@@ -11,13 +11,13 @@
     <h1 class="princ"> Users</h1>
     <div class= "namemovie" v-for="user in users" :key="user.login">
     <div class= "tittle">
+     <!--{{contar(user.login)}}-->
         <router-link
          :to="{ name: '', params: { id: user.login }}">
-          {{ user.login }} {{count}}
+         {{ user.login }} {{count}}
         </router-link>
     </div>
      </div>
-    </div>
   </LoadingPage>
 </template>
 
@@ -33,7 +33,8 @@ export default {
       loading: false,
       users: null,
       error: null,
-      count:null
+      count:null,
+
     }
   },
   computed: {
@@ -48,15 +49,8 @@ export default {
   methods: {
     fetchData() {
 
-      HTTP.get('status/movies/vistas')
-    .then(response => {
-       this.count = response.data
-     })
-     .catch(err => {
-       this.error = err.message
-     })
-    .finally(() => this.loading = false)
-    
+      
+
     this.loading = true
     HTTP.get('users')
     .then(response => {
@@ -73,6 +67,18 @@ export default {
 
     _errorHandler(err) {
       this.error = err.response.data.message
+    },
+
+    contar(login){
+      HTTP.get(`status/movies/vistas/${login}`)
+    .then(response => {
+       this.count = response.data
+     })
+     .catch(err => {
+       this.error = err.message
+     })
+    .finally(() => this.loading = false)
+
     },
     
     

@@ -39,6 +39,7 @@
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
+import Vue from 'vue'
 
 export default {
   components: { LoadingPage},
@@ -46,7 +47,8 @@ export default {
     return {
       loading: false,
       directors: null,
-      error: null
+      error: null,
+      noti:null
     }
   },
   
@@ -65,6 +67,35 @@ export default {
        this.error = err.message
      })
     .finally(() => this.loading = false)
+    },
+
+    eliminar(idDirector){
+        HTTP.delete(`directors/${idDirector}`)
+        .then(response => {
+          this.noti = response.data
+          return response
+        })
+        
+        .then(() => { 
+            if (this.noti=="fracaso"){
+            Vue.notify({
+               text: 'You can´t delete this director because He/She directs some movies',
+               type: 'error'})
+            }
+            else if (this.noti=="exito"){
+              Vue.notify({
+               text: 'The director has been delete',
+               type: 'success'})
+            }
+
+          })
+        .then(this._successHandler)
+        
+        .catch(this._errorHandler)
+      },
+
+    _errorHandler(err) {
+      this.error = err.response.data.message
     },
     
     _successHandler(response) {

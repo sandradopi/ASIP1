@@ -35,8 +35,8 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 	}
 	
 	@Override
-	public Long findByMovieUserVista(NormalUser user) {
-		 return (Long) getSession().createQuery("select count(*) from Status p where p.user=:user AND p.type='VISTA'").setParameter("user", user).uniqueResult();
+	public Long findByMovieUserVista(String login) {
+		 return (Long) getSession().createQuery("select count(*) from Status p where p.user.login=:login AND p.type='VISTA'").setParameter("login", login).uniqueResult();
 	}
 	
 	@Override

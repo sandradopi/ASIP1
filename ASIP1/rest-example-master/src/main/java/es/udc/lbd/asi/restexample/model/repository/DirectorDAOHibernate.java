@@ -24,4 +24,9 @@ public class DirectorDAOHibernate extends GenericDAOHibernate implements Directo
 	public List<Director> findAll() {
 		return getSession().createQuery("from Director").list();
 	}
+	
+	@Override
+	 public void deleteById(Long idDirector) {
+	    getSession().delete(findById(idDirector));
+	 }
 }

@@ -27,4 +27,9 @@ public class ActorDAOHibernate extends GenericDAOHibernate implements ActorDAO {
 		return getSession().createQuery("from Actor").list();
 	}
 	
+	@Override
+	 public void deleteById(Long idActor) {
+	    getSession().delete(findById(idActor));
+	 }
+	
 }

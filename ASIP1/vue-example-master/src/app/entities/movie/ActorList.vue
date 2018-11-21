@@ -40,6 +40,7 @@
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
+import Vue from 'vue'
 
 export default {
   components: { LoadingPage},
@@ -47,7 +48,8 @@ export default {
     return {
       loading: false,
       actors: null,
-      error: null
+      error: null,
+      noti:null
     }
   },
   
@@ -71,6 +73,30 @@ export default {
     _successHandler(response) {
       this.fetchData()
     },
+    eliminar(idActor){
+        HTTP.delete(`actors/${idActor}`)
+        .then(response => {
+          this.noti = response.data
+          return response
+        })
+        
+        .then(() => { 
+            if (this.noti=="fracaso"){
+            Vue.notify({
+               text: 'You can´t delete this actor because He/She acts in somo movies',
+               type: 'error'})
+            }
+            else if (this.noti=="exito"){
+              Vue.notify({
+               text: 'The actor has been delete',
+               type: 'success'})
+            }
+
+          })
+        .then(this._successHandler)
+        
+        .catch(this._errorHandler)
+      },
 
     _errorHandler(err) {
       this.error = err.response.data.message
