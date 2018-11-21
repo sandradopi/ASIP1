@@ -40,11 +40,13 @@ public class UserService implements UserServiceInterface{
 			 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
 		
 		@PreAuthorize("hasAuthority('USER')")
+		@Override
 		public NormalUserDTO findById(Long idUser)  {
 	   	 return new NormalUserDTO(userDAO.findById(idUser));
 	   }
 		
 		@PreAuthorize("hasAuthority('USER')")
+		@Override
 		public NormalUserListUserDTO findByLoginContadores(String login)  {
 			NormalUserListUserDTO u= new NormalUserListUserDTO(userDAO.findByLogin(login));
 			u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
@@ -52,13 +54,15 @@ public class UserService implements UserServiceInterface{
 			u.setCountValoration(statusDAO.findByMovieUserVistaValoration(u.getLogin()));
 	   	return u;
 	   }
-	
+		
 	     @Transactional(readOnly = false)
+	     @Override
 		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
 	         registerUser(login,email, password, false);
 	     }
 	     
 	     @Transactional(readOnly = false)
+	     @Override
 	     public void registerUser(String login,String email,String password, boolean isAdmin) throws UserLoginExistsException {
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");

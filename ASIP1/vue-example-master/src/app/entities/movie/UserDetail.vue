@@ -61,33 +61,6 @@ export default {
 
     },
 
-    contarVistas(){
-
-     HTTP.get(`status/movies/vistas/${this.user.login}`)
-    .then(response => {
-       this.count = response.data
-       return response
-     })
-  },
-
-  contarValoradas(){
-
-     HTTP.get(`status/movies/valoration/${this.user.login}`)
-    .then(response => {
-       this.count2 = response.data
-       return response
-     })
-  },
-
-  contarPendientes(){
-
-     HTTP.get(`status/movies/pendientes/${this.user.login}`)
-    .then(response => {
-       this.count1 = response.data
-       return response
-     })
-  },
-
     _successHandler(response) {
       this.fetchData()
     },

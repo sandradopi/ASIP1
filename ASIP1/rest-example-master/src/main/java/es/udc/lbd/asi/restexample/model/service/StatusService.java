@@ -30,6 +30,7 @@ public class StatusService implements StatusServiceInterface {
 
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
+	@Override
 	public void save(Long MovieId, String statu) {
 		Movie bdMovie = movieDAO.findById(MovieId);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
@@ -89,29 +90,9 @@ public class StatusService implements StatusServiceInterface {
 			return null;
 		}
 		
-	
 		
 	}
 
-	
-	@Override
-	public Long countVistas(String login) {
-		return statusDAO.findByMovieUserVista(login);
-		
-	}
-	
-	@Override
-	public Long countVistasValoration(String login) {
-		return statusDAO.findByMovieUserVistaValoration(login);
-		
-	}
-	
-	@Override
-	public Long countPendientes(String login) {
-		return statusDAO.findByMovieUserPendiente(login);
-		
-	}
-	
 
 		
 	}

@@ -14,6 +14,7 @@ public interface UserServiceInterface {
     public NormalUserDTO findById(Long idUser);
     public void registerUser(String login,String email, String password, boolean isAdmin) throws UserLoginExistsException;
     public void registerUser(String login,String email, String password) throws UserLoginExistsException;
+	public NormalUserListUserDTO findByLoginContadores(String login);
   
 
 
