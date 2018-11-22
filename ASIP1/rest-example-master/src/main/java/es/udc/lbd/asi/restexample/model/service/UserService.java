@@ -114,7 +114,7 @@ public class UserService implements UserServiceInterface{
 		@Override
 		public List<NormalUserListUserDTO> findAllContadores() {
 			
-			List <NormalUserListUserDTO> usuario = userDAO.findAll().stream().map(user -> new NormalUserListUserDTO(user)).collect(Collectors.toList());
+			List <NormalUserListUserDTO> usuario = userDAO.findAllNoAdmin().stream().map(user -> new NormalUserListUserDTO(user)).collect(Collectors.toList());
 			for(NormalUserListUserDTO u: usuario){
 				u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
 				u.setCountPendiente(statusDAO.findByMovieUserPendiente(u.getLogin()));

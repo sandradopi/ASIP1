@@ -12,5 +12,6 @@ public interface UserDAO {
     public void save(User_ user);
     public User_ findById(Long idUser) ;
     public NormalUser findByIdNormal(Long idUser) ;
+	public List<NormalUser> findAllNoAdmin();
    
 }
