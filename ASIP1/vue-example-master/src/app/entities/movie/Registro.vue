@@ -97,6 +97,7 @@ import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
 
+
 export default {
   components: {  Multiselect},
   data() {

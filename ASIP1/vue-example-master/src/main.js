@@ -6,9 +6,6 @@ Vue.use(VueRouter)
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 
-import ToggleButton from 'vue-js-toggle-button'
-Vue.use(ToggleButton)
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch, faMinusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
