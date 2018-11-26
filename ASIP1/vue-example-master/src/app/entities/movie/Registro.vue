@@ -19,7 +19,7 @@
       class="app-form"
       @submit="save">
 
-
+      {{user}}
       <b-form-group
         label="Login:"
         label-for="login">
@@ -45,6 +45,7 @@
       </b-form-group>
 
 
+
        <b-form-group
         label="Email:"
         label-for="email">
@@ -56,28 +57,32 @@
           required
           placeholder="Enter your email"/>
       </b-form-group>
+      <b-form-checkbox class="cheeck"
+                       v-model="statu"
+                       value= "true"
+                       unchecked-value= "false"
+                       @change="">
+       <div><strong>Would you like to receive notifications?</strong></div>
+      </b-form-checkbox>
 
-
-      <b-form-group>
+    </br>
+    </br>
+    <b-form-group v-if="statu=='true'">
    <h6>Notifications:</h6>
       <multiselect 
-        v-model="notification" 
-        tag-placeholder="Add this as new tag"
+        v-model="user.noti" 
         :options= options
-        :multiple="true"
-        :searchable="true" 
-        :clear-on-select="false" 
-        :preserve-search="true"
-        :close-on-select="false" 
+        :allow-empty="false"
+        :searchable="false"
         :show-labels="false"
-        track-by="idActor"
-        placeholder="Pick some actors">
+        placeholder="Select one">
       </multiselect>
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
       
   
   </b-form-group>
     </b-form>
+
 
 
   </div>
@@ -96,6 +101,7 @@
 import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
+import ToggleButton from 'vue-js-toggle-button/src/Button'
 
 
 export default {
@@ -103,9 +109,9 @@ export default {
   data() {
     return {
       user: {},
-      notification: null,
       error: null,
-      options: ['SMS','Email']
+      statu:null,
+      options: ['SMS','EMAIL']
     }
   },
  
@@ -121,6 +127,9 @@ export default {
       
     },
     save() {
+      if(this.statu== false){
+        this.user.noti=null;
+      }
         return HTTP.post('register', this.user)
         .then(this.userLogin)
         .catch(this._errorHandler)

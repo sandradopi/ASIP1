@@ -10,27 +10,32 @@ import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 
 public class NormalUserDTO {
 	private Long idUser;
+	
 	@NotEmpty
 	private String login;
+	
 	@NotEmpty
 	private String email;
+	
 	@NotEmpty
 	private String password;
+	
 	@Enumerated(EnumType.STRING)
 	private UserAuthority authority;
-	@NotEmpty
+	
+	@Enumerated(EnumType.STRING)
 	private UserNoti noti;
 	
 	
 	public NormalUserDTO() {
 	}
 	
+	
 	public NormalUserDTO(User_ user) {
 		this.idUser = user.getIdUser();
 		this.login = user.getLogin();
 		this.email=user.getEmail();
 		this.authority= UserAuthority.USER;
-		this.noti= user.getNotification();
 	}
 
 	
@@ -81,5 +86,12 @@ public class NormalUserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "NormalUserDTO [idUser=" + idUser + ", login=" + login + ", email=" + email + ", password=" + password
+				+ ", authority=" + authority + ", notification=" + noti + "]";
+	}
+	
 
 }

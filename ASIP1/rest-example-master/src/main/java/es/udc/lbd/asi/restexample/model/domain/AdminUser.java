@@ -15,9 +15,8 @@ public class AdminUser extends User_{
 		super();
 	}
 
-	public AdminUser(String login, String email, String password, UserAuthority authority, Date data,
-			UserNoti notification) {
-		super(login, email, password, authority, data, notification);
+	public AdminUser(String login, String email, String password, UserAuthority authority, Date data) {
+		super(login, email, password, authority, data);
 		
 	}
 
