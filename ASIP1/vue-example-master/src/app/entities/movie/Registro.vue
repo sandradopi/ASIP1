@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -57,7 +56,30 @@
           required
           placeholder="Enter your email"/>
       </b-form-group>
+
+
+      <b-form-group>
+   <h6>Notifications:</h6>
+      <multiselect 
+        v-model="notification" 
+        tag-placeholder="Add this as new tag"
+        :options= options
+        :multiple="true"
+        :searchable="true" 
+        :clear-on-select="false" 
+        :preserve-search="true"
+        :close-on-select="false" 
+        :show-labels="false"
+        track-by="idActor"
+        placeholder="Pick some actors">
+      </multiselect>
+      <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+      
+  
+  </b-form-group>
     </b-form>
+
+
   </div>
      <div
       v-if="error"
@@ -73,12 +95,16 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
+import Multiselect from 'vue-multiselect'
 
 export default {
+  components: {  Multiselect},
   data() {
     return {
       user: {},
-      error: null
+      notification: null,
+      error: null,
+      options: ['SMS','Email']
     }
   },
  

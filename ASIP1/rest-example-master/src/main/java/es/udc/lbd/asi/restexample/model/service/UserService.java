@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.AdminUser;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
+import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
@@ -60,19 +61,19 @@ public class UserService implements UserServiceInterface{
 		
 	     @Transactional(readOnly = false)
 	     @Override
-		 public void registerUser(String login, String email,String password) throws UserLoginExistsException, ParseException {
+		 public void registerUser(String login, String email,String password, UserNoti noti) throws UserLoginExistsException, ParseException {
 	    
 	    		 Date ahora = new Date();
 	    	     SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
 	    	     String actualDate= formateador.format(ahora);
 	    	     Date data = formateador.parse(actualDate);
 	   
-	         registerUser(login,email, password, false, data);
+	         registerUser(login,email, password, false, data, noti);
 	     }
 	     
 	     @Transactional(readOnly = false)
 	     @Override
-	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data) throws UserLoginExistsException {
+	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data, UserNoti noti) throws UserLoginExistsException {
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");
 	         }
@@ -87,13 +88,15 @@ public class UserService implements UserServiceInterface{
 		         user.setData(data);
 		         userDAO.save(user);
 	         }else{
-	         NormalUser user = new NormalUser();
-	         user.setLogin(login);
-        	 user.setPassword(encryptedPassword);
-	         user.setAuthority(UserAuthority.USER);
-	         user.setEmail(email);
-	         user.setData(data);
-	         userDAO.save(user);}
+	        	 NormalUser user = new NormalUser();
+	        	 user.setNotification(noti);
+		         user.setLogin(login);
+	        	 user.setPassword(encryptedPassword);
+		         user.setAuthority(UserAuthority.USER);
+		         user.setEmail(email);
+		         user.setData(data);
+		         userDAO.save(user);
+		         }
 
 	         
 	     }

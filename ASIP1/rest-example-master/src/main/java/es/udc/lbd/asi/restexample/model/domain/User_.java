@@ -47,21 +47,35 @@ public class User_ {
 	@Enumerated(EnumType.STRING)
     private UserAuthority authority;
 	
+	@Enumerated(EnumType.STRING)
+    private UserNoti notification;
+	
 	public User_() {
 		
     }
 	
 
-	public User_(String login,String email, String password,  UserAuthority authority, Date data) {
+	public User_(String login,String email, String password,  UserAuthority authority, Date data, UserNoti notification) {
 		this.login = login;
 		this.email=email;
 		this.password = password;
 		this.authority=authority;
 		this.data=data;
+		this.notification=notification;
 	}
 	
 	
 	
+	public UserNoti getNotification() {
+		return notification;
+	}
+
+
+	public void setNotification(UserNoti notification) {
+		this.notification = notification;
+	}
+
+
 	public UserAuthority getAuthority() {
 		return authority;
 	}

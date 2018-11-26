@@ -78,6 +78,6 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
 
      @PostMapping("/register")
      public void registerAccount(@Valid @RequestBody NormalUserDTO account) throws UserLoginExistsException, ParseException {
-         userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword());
+         userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword(), account.getNoti());
      }
  }

@@ -21,6 +21,7 @@ import es.udc.lbd.asi.restexample.model.domain.Actor;
 import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
@@ -69,10 +70,10 @@ public class DatabaseLoader {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
     	
-    userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-15"));
-    userService.registerUser("maria","maria@maria.com","maria",true, sdf.parse("2018-11-15"));
-    userService.registerUser("laura", "laura@laura.com","laura", false, sdf.parse("2018-11-18"));
-    userService.registerUser("sandra", "vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"));
+    userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-15"), null);
+    userService.registerUser("maria","maria@maria.com","maria",true, sdf.parse("2018-11-15"), null);
+    userService.registerUser("laura", "laura@laura.com","laura", false, sdf.parse("2018-11-18"), UserNoti.EMAIL);
+    userService.registerUser("sandra", "vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"), UserNoti.SMS);
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	

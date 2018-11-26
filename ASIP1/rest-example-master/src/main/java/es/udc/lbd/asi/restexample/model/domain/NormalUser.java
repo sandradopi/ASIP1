@@ -15,12 +15,14 @@ public class NormalUser extends User_ {
 		super();
 	}
 
-
-	public NormalUser(String login, String email, String password, UserAuthority authority, Date data) {
-		super(login, email, password, authority, data);
+	public NormalUser(String login, String email, String password, UserAuthority authority, Date data,
+			UserNoti notification) {
+		super(login, email, password, authority, data, notification);
 		
 	}
 
+
+	
 
 	
 

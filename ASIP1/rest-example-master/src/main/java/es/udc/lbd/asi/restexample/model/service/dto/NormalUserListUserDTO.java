@@ -4,7 +4,10 @@ import java.util.Date;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.User_;
@@ -16,9 +19,13 @@ public class NormalUserListUserDTO {
 	private String login;
 	@NotEmpty
 	private String email;
+	@NotEmpty
 	private Long countVista;
+	@NotEmpty
 	private Long countPendiente;
+	@NotEmpty
 	private Long countValoration;
+	@NotNull
 	private Date data;
 	
 	
