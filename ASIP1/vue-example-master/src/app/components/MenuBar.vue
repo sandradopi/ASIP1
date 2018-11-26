@@ -65,9 +65,18 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-item>
+        <b-nav-item
+         v-if="isLogged"
+         :to="{ name: 'UserDetail' , params: { id: WhatLogin}}">
         {{ loggedUser }} </b-nav-item>
       </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto1">
+      <b-nav-item
+       v-if="!isLogged">
+        {{ loggedUser }} </b-nav-item>
+      </b-navbar-nav>
+
 
     </b-collapse>
   </b-navbar>
@@ -80,6 +89,9 @@ export default {
   computed: {
     isLogged() {
       return auth.user.logged
+    },
+    WhatLogin() {
+      return auth.user.login
     },
     loggedUser() {
       return auth.user.logged ? `${auth.user.login} (${auth.user.authority})` : 'not logged'
@@ -107,12 +119,13 @@ export default {
 
 .nav-item{
   font-size:17px;
+  color:white;
 
 }
 
-ml-auto.nav-item{
-  color: red;
-}
+
+
+
 
 
 </style>
