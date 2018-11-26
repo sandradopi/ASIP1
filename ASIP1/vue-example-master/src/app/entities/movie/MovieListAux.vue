@@ -12,7 +12,7 @@
     <h1 class="princ" :key="this.titulo"> {{titulo}}</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
-        <router-link
+        <router-link 
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           {{ movie.name }}
         </router-link>

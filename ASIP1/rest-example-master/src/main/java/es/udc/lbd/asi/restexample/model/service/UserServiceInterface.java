@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
@@ -12,8 +14,8 @@ public interface UserServiceInterface {
     public List<NormalUserDTO> findAll();
     public List<NormalUserListUserDTO> findAllContadores();
     public NormalUserDTO findById(Long idUser);
-    public void registerUser(String login,String email, String password, boolean isAdmin) throws UserLoginExistsException;
-    public void registerUser(String login,String email, String password) throws UserLoginExistsException;
+    public void registerUser(String login,String email, String password, boolean isAdmin, Date data) throws UserLoginExistsException;
+    public void registerUser(String login,String email, String password) throws UserLoginExistsException, ParseException;
 	public NormalUserListUserDTO findByLoginContadores(String login);
   
 

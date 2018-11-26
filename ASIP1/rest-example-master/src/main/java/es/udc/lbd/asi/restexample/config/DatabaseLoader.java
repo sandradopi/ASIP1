@@ -3,6 +3,7 @@ package es.udc.lbd.asi.restexample.config;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -65,11 +66,13 @@ public class DatabaseLoader {
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void loadData() throws UserLoginExistsException, ParseException{
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
     	
-    userService.registerUser("pepe","pepe@pepe.com", "pepe", true);
-    userService.registerUser("maria","maria@maria.com","maria",true);
-    userService.registerUser("laura", "laura@laura.com","laura");
-    userService.registerUser("sandra", "vicfic23@gmail.com","sandra");
+    userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-15"));
+    userService.registerUser("maria","maria@maria.com","maria",true, sdf.parse("2018-11-15"));
+    userService.registerUser("laura", "laura@laura.com","laura", false, sdf.parse("2018-11-18"));
+    userService.registerUser("sandra", "vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"));
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	
@@ -87,7 +90,6 @@ public class DatabaseLoader {
     participantes.add(actor2);
     Set <Director>dirigentes = new <Director> HashSet();
     dirigentes.add(director1);
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     movieService.save
     (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-15"),

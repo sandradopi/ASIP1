@@ -9,13 +9,15 @@
     </div>
 
   <div class= "datosUsuario" >
-     <h1 class="title"> {{user.login}}</h1>  
+     <h1 class="title" :key="user.login"> {{user.login}}</h1>  
      <h4 class="subtitle">
                   <div class="subdatos">
                   <p class="subtitle-tag">Email: {{user.email}} </p>
+                  <p class="subtitle-tag">Fecha de registro: {{user.data}} </p>
                   <p class="subtitle-tag1">Peliculas pendientes: {{user.countPendiente}} |</p>
                   <p class="subtitle-tag1">Peliculas vistas: {{user.countVista}} |</p>
                   <p class="subtitle-tag1">Peliculas valoradas: {{user.countValoration}} </p>
+
                  </div>
      </h4>    
  </div>

@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
@@ -28,6 +33,10 @@ public class User_ {
 	@NotEmpty
 	private String login;
 	
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date data;
+	
 	@Column(unique = true)
 	@NotEmpty
 	private String email;
@@ -43,11 +52,12 @@ public class User_ {
     }
 	
 
-	public User_(String login,String email, String password,  UserAuthority authority) {
+	public User_(String login,String email, String password,  UserAuthority authority, Date data) {
 		this.login = login;
 		this.email=email;
 		this.password = password;
 		this.authority=authority;
+		this.data=data;
 	}
 	
 	
@@ -92,6 +102,16 @@ public class User_ {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 	
 	

@@ -1,5 +1,8 @@
 package es.udc.lbd.asi.restexample.model.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,13 +60,19 @@ public class UserService implements UserServiceInterface{
 		
 	     @Transactional(readOnly = false)
 	     @Override
-		 public void registerUser(String login, String email,String password) throws UserLoginExistsException {
-	         registerUser(login,email, password, false);
+		 public void registerUser(String login, String email,String password) throws UserLoginExistsException, ParseException {
+	    
+	    		 Date ahora = new Date();
+	    	     SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+	    	     String actualDate= formateador.format(ahora);
+	    	     Date data = formateador.parse(actualDate);
+	   
+	         registerUser(login,email, password, false, data);
 	     }
 	     
 	     @Transactional(readOnly = false)
 	     @Override
-	     public void registerUser(String login,String email,String password, boolean isAdmin) throws UserLoginExistsException {
+	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data) throws UserLoginExistsException {
 	         if (userDAO.findByLogin(login) != null) {
 	             throw new UserLoginExistsException("User login " + login + " already exists");
 	         }
@@ -75,6 +84,7 @@ public class UserService implements UserServiceInterface{
 	        	 user.setPassword(encryptedPassword);
 	        	 user.setAuthority(UserAuthority.ADMIN);
 		         user.setEmail(email);
+		         user.setData(data);
 		         userDAO.save(user);
 	         }else{
 	         NormalUser user = new NormalUser();
@@ -82,6 +92,7 @@ public class UserService implements UserServiceInterface{
         	 user.setPassword(encryptedPassword);
 	         user.setAuthority(UserAuthority.USER);
 	         user.setEmail(email);
+	         user.setData(data);
 	         userDAO.save(user);}
 
 	         

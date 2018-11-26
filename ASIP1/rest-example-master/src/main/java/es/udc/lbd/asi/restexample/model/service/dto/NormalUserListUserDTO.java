@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.service.dto;
 
+import java.util.Date;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +19,7 @@ public class NormalUserListUserDTO {
 	private Long countVista;
 	private Long countPendiente;
 	private Long countValoration;
+	private Date data;
 	
 	
 	
@@ -30,6 +33,7 @@ public class NormalUserListUserDTO {
 		this.countPendiente = new Long(0);
 		this.countVista = new Long(0);
 		this.countValoration = new Long(0);
+		this.data=user.getData();
 	}
 
 	
@@ -71,6 +75,14 @@ public class NormalUserListUserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	

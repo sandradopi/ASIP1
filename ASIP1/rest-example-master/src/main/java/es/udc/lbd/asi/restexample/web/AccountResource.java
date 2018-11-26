@@ -1,6 +1,8 @@
 package es.udc.lbd.asi.restexample.web;
 
- import javax.validation.Valid;
+ import java.text.ParseException;
+
+import javax.validation.Valid;
 
  import org.slf4j.Logger;
  import org.slf4j.LoggerFactory;
@@ -75,7 +77,7 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
      }
 
      @PostMapping("/register")
-     public void registerAccount(@Valid @RequestBody NormalUserDTO account) throws UserLoginExistsException {
+     public void registerAccount(@Valid @RequestBody NormalUserDTO account) throws UserLoginExistsException, ParseException {
          userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword());
      }
  }
