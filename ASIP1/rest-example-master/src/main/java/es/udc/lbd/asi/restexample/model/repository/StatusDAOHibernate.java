@@ -35,9 +35,10 @@ public class StatusDAOHibernate extends GenericDAOHibernate implements StatusDAO
 	}
 	
 	
+	
 	@Override
-	public Status findByMovie(Movie movie) {
-		 return (Status) getSession().createQuery("from Status p where p.movie = :movie").setParameter("movie", movie).uniqueResult();
+	public List <Status> findByMovies(Movie movie) {
+		 return getSession().createQuery("from Status p where p.movie = :movie").setParameter("movie", movie).list();
 	}
 	
 	@Override

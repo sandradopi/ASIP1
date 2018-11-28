@@ -45,6 +45,7 @@ public class ScheduledTask {
 	MovieDAO movieDAO;
 	private Properties properties = new Properties();
 	private List<Movie> movies= null;
+	private List<Status> status=null;
 	private Session session;
 
 	private void init() {
@@ -57,7 +58,7 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 54 16 * * * ")
+    @Scheduled(cron = "0 48 18 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException, ParseException {
     	init();
     	Date ahora = new Date();
@@ -69,7 +70,8 @@ public class ScheduledTask {
         
         if(movies !=null){
         for (Movie movie: movies){
-        		Status state= statusDAO.findByMovie(movie);
+        	 status= statusDAO.findByMovies(movie);
+        		for(Status state: status){
     	    	NormalUser usuarioNormal = state.getNormalUser();
     		
     	    	try{
@@ -87,7 +89,7 @@ public class ScheduledTask {
 	    		}catch (MessagingException me){
 	    			return;
 	    				}
-    	    		
+        			}
         		}
     	    }
     	}

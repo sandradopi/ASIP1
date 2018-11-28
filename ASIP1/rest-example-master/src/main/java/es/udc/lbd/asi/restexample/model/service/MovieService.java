@@ -137,8 +137,10 @@ public class MovieService implements MovieServiceInterface{
     public void deleteById(Long idMovie) {
 		Movie bdMovie = movieDAO.findById(idMovie);
 		try{
-			Status status= statusDAO.findByMovie(bdMovie);
-			statusDAO.delete(status);
+			List<Status> status= statusDAO.findByMovies(bdMovie);
+			for(Status state: status){
+			statusDAO.delete(state);
+			}
     		movieDAO.deleteById(idMovie);
 		}catch(Exception e){
 			movieDAO.deleteById(idMovie);
