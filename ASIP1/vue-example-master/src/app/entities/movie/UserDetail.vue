@@ -42,6 +42,9 @@ export default {
 
     }
   },
+  watch: {
+    '$route': 'fetchData'
+  },
  
   created() { //se va a lanzar siempre en una clase de componentes
     this.fetchData()

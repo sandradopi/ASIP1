@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
+import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.User_;
 import es.udc.lbd.asi.restexample.model.domain.Actor;
@@ -26,6 +28,7 @@ import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 
@@ -144,24 +147,26 @@ public class MovieService implements MovieServiceInterface{
     
     @PreAuthorize("hasAuthority('USER')")
 	@Override
-	public List<MovieDTO> findAllPendientes() {
-    	List<MovieDTO> movies= movieDAO.findAllPendientes().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+	public List<MovieDTO> findAllMoviesType(String tipo) {
+    	TipoStatus estado = null;
+    	NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		if (tipo.equals("VISTA")){
+			estado= TipoStatus.VISTA;
+		}else if(tipo.equals("PENDIENTE")){
+			estado= TipoStatus.PENDIENTE;
+		}
+    	List<MovieDTO> movies= movieDAO.findAllMoviesType(usuarioNormal,estado).stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
 		return movies; 
 	}
 
-	@PreAuthorize("hasAuthority('USER')")
-	@Override
-	public List<MovieDTO> findAllVistas() {
-
-		List<MovieDTO> movies= movieDAO.findAllVistas().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
-		return movies; 
-	}
 	
 	@PreAuthorize("hasAuthority('USER')")
 	@Override
 	public List<MovieDTO> findAllVistasVote() {
-
-		List<MovieDTO> movies= movieDAO.findAllVistasVote().stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
+		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+		List<MovieDTO> movies= movieDAO.findAllVistasVote(usuarioNormal).stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
 		return movies; 
 	}
 

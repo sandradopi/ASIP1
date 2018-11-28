@@ -15,9 +15,7 @@ public interface StatusDAO {
 	 public Status findByMovieUser(Movie movie, NormalUser usuario);
 	 public Status findByMovie(Movie movie);
 	 public List<Status> findAll();
-	 public Long findByMovieUserVista(String login);
-	 public Long findByMovieUserPendiente(String login);
-	 public Long findByMovieUserVistaValoration(String login);
+	 
 
  
 }

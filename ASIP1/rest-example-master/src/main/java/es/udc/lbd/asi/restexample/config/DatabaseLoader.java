@@ -70,9 +70,9 @@ public class DatabaseLoader {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
     	
-    userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-15"), null);
+    userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-28"), null);
     userService.registerUser("maria","maria@maria.com","maria",true, sdf.parse("2018-11-15"), null);
-    userService.registerUser("laura", "laura@laura.com","laura", false, sdf.parse("2018-11-18"), UserNoti.EMAIL);
+    userService.registerUser("laura", "guajndos@gmail.com","laura", false, sdf.parse("2018-11-18"), UserNoti.EMAIL);
     userService.registerUser("sandra", "vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"), UserNoti.SMS);
  
     Genre genre1= new Genre("Drama");
@@ -93,7 +93,7 @@ public class DatabaseLoader {
     dirigentes.add(director1);
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-15"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-28"),
     		genre1, participantes,dirigentes));
     
     movieService.save

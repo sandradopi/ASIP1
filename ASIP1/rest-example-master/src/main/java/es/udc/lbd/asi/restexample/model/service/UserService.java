@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.AdminUser;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
+import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
+import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
@@ -36,6 +38,9 @@ public class UserService implements UserServiceInterface{
   private StatusDAO statusDAO;
   
   @Autowired
+  private MovieDAO movieDAO;
+  
+  @Autowired
   private PasswordEncoder passwordEncoder;
 
   		@PreAuthorize("hasAuthority('USER')")
@@ -53,9 +58,9 @@ public class UserService implements UserServiceInterface{
 		@Override
 		public NormalUserListUserDTO findByLoginContadores(String login)  {
 			NormalUserListUserDTO u= new NormalUserListUserDTO(userDAO.findByLogin(login));
-			u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
-			u.setCountPendiente(statusDAO.findByMovieUserPendiente(u.getLogin()));
-			u.setCountValoration(statusDAO.findByMovieUserVistaValoration(u.getLogin()));
+			u.setCountVista(movieDAO.findByMovieUserVistaPendiente(u.getLogin(), TipoStatus.VISTA));
+			u.setCountPendiente(movieDAO.findByMovieUserVistaPendiente(u.getLogin(),TipoStatus.PENDIENTE));
+			u.setCountValoration(movieDAO.findByMovieUserVistaValoration(u.getLogin()));
 	   	return u;
 	   }
 		
@@ -130,9 +135,9 @@ public class UserService implements UserServiceInterface{
 			
 			List <NormalUserListUserDTO> usuario = userDAO.findAllNoAdmin().stream().map(user -> new NormalUserListUserDTO(user)).collect(Collectors.toList());
 			for(NormalUserListUserDTO u: usuario){
-				u.setCountVista(statusDAO.findByMovieUserVista(u.getLogin()));
-				u.setCountPendiente(statusDAO.findByMovieUserPendiente(u.getLogin()));
-				u.setCountValoration(statusDAO.findByMovieUserVistaValoration(u.getLogin()));
+				u.setCountVista(movieDAO.findByMovieUserVistaPendiente(u.getLogin(), TipoStatus.VISTA));
+				u.setCountPendiente(movieDAO.findByMovieUserVistaPendiente(u.getLogin(),TipoStatus.PENDIENTE));
+				u.setCountValoration(movieDAO.findByMovieUserVistaValoration(u.getLogin()));
 				
 			}
 			return usuario;

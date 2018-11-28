@@ -1,15 +1,12 @@
 <template>
   <div class="fondo">
-  <LoadingPage
-    :loading="loading"
-    :error="error">
       <div
       v-if="error"
       class="error">
       <pre>{{ error }}</pre>
     </div>
     <br/>
-    <h1 class="princ" :key="this.titulo"> {{titulo}}</h1>
+    <h1 class="princ" > {{titulo}}</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         <router-link 
@@ -19,7 +16,6 @@
     </div>
     <img class="imagen" src="movie.jpg">
     </div>
-  </LoadingPage>
 </div>
 </template>
 
@@ -32,11 +28,14 @@ export default {
   components: { LoadingPage},
   data() {
     return {
-      loading: false,
       movies: null,
       error: null,
       titulo:''
     }
+  },
+
+   watch: {
+    '$route': 'fetchData'
   },
   
   created() {
@@ -45,37 +44,36 @@ export default {
   },
   methods: {
   fetchData() {
-    this.loading = true
+    debugger
 
-    if (this.$route.params.id=='vista') {
+    if (this.$route.params.id=='VISTA') {
       this.titulo = 'Viewed Movies'
-      HTTP.get(`movies/vistas`)
+      HTTP.get(`list/${this.$route.params.id}`)
       .then(response => {
        this.movies = response.data})
      .catch(err => {
        this.error = err.message })
-     .finally(() => this.loading = false)
+     
 
     }
 
-    else if (this.$route.params.id=='pendiente'){
+    else if (this.$route.params.id=='PENDIENTE'){
        this.titulo = 'Pending Movies'
-       HTTP.get(`movies/pendientes`)
+       HTTP.get(`list/${this.$route.params.id}`)
       .then(response => {
        this.movies = response.data })
       .catch(err => {
        this.error = err.message})
-    .finally(() => this.loading = false)
+
 
 
     } else if (this.$route.params.id=='vistavote'){
        this.titulo = 'Movies to valorate'
-       HTTP.get(`movies/vistas/tovote`)
+       HTTP.get(`vistas/tovote`)
       .then(response => {
        this.movies = response.data})
        .catch(err => {
        this.error = err.message})
-      .finally(() => this.loading = false)
     }
      
     },

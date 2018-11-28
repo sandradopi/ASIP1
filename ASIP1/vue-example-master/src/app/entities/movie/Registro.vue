@@ -19,7 +19,7 @@
       class="app-form"
       @submit="save">
 
-      {{user}}
+      
       <b-form-group
         label="Login:"
         label-for="login">
@@ -127,7 +127,7 @@ export default {
       
     },
     save() {
-      if(this.statu== false){
+      if(this.statu=='false'){
         this.user.noti=null;
       }
         return HTTP.post('register', this.user)

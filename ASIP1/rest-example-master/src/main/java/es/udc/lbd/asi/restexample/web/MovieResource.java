@@ -25,46 +25,42 @@ import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
 
 @RestController
-@RequestMapping("/api/movies")
+@RequestMapping("/api")
 public class MovieResource {
 
     @Autowired
     private MovieService movieService;
    
 
-    @GetMapping
+    @GetMapping("/movies")
     public List<MovieDTO> findAll() {
         return movieService.findAll();
     }
     
-    @GetMapping("/vistas")
-    public List<MovieDTO> findAllVistas() {
-        return movieService.findAllVistas();
-    }
     
     @GetMapping("/vistas/tovote")
     public List<MovieDTO> findAllVistasVote() {
         return movieService.findAllVistasVote();
     }
     
-    @GetMapping("/pendientes")
-    public List<MovieDTO> findAllPendientes() {
-        return movieService.findAllPendientes();
+    @GetMapping("/list/{tipo}")
+    public List<MovieDTO> findAllMoviesType(@PathVariable String tipo) {
+        return movieService.findAllMoviesType(tipo);
     }
 
-    @GetMapping("/{idMovie}")
+    @GetMapping("/movies/{idMovie}")
     public MovieDTO findOne(@PathVariable Long idMovie) throws InstanceNotFoundExceptionHIB{
         MovieDTO movie = movieService.findById(idMovie);
     	return movie;
     }
     
-    @PostMapping
+    @PostMapping("/movies")
     public MovieDTO save(@RequestBody @Valid MovieDTO movie, Errors errors) throws RequestBodyNotValidException {
         errorHandler(errors); 
         return movieService.save(movie);
     }
     
-    @PutMapping("/{idMovie}")
+    @PutMapping("/movies/{idMovie}")
     public MovieDTO update(@PathVariable Long idMovie, @RequestBody @Valid MovieDTO movie, Errors errors)
             throws IdAndBodyNotMatchingOnUpdateException, RequestBodyNotValidException {
         errorHandler(errors);
@@ -74,7 +70,7 @@ public class MovieResource {
         return movieService.update(movie);
     }
 
-    @DeleteMapping("/{idMovie}")
+    @DeleteMapping("/movies/{idMovie}")
     public void delete(@PathVariable Long idMovie) throws InstanceNotFoundExceptionHIB{
         movieService.deleteById(idMovie);
     }
