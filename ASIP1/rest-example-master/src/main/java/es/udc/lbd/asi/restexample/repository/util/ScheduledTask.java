@@ -3,7 +3,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import java.util.logging.Logger;
+import org.apache.commons.logging.Log;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -22,6 +23,7 @@ import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.Status;
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
+import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
@@ -43,10 +45,12 @@ public class ScheduledTask {
 	UserDAO userDAO;
 	@Autowired
 	MovieDAO movieDAO;
+	
 	private Properties properties = new Properties();
 	private List<Movie> movies= null;
 	private List<Status> status=null;
 	private Session session;
+	private final static Logger log = Logger.getLogger("SMS");
 
 	private void init() {
 		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -58,7 +62,7 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 48 18 * * * ")
+    @Scheduled(cron = "0 50 11 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException, ParseException {
     	init();
     	Date ahora = new Date();
@@ -70,25 +74,31 @@ public class ScheduledTask {
         
         if(movies !=null){
         for (Movie movie: movies){
-        	 status= statusDAO.findByMovies(movie);
+        		status= statusDAO.findByMovies(movie);
         		for(Status state: status){
     	    	NormalUser usuarioNormal = state.getNormalUser();
+    	    	if(usuarioNormal.getNotification()== UserNoti.EMAIL){
     		
-    	    	try{
-	    	    		MimeMessage message = new MimeMessage(session);
-	    	    		message.setFrom(new InternetAddress("marsusanez@gmail.com"));
-	    				message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarioNormal.getEmail()));
-	    				message.setSubject("Hi! The movie "+ state.getMovie().getName() +" is now available.");
-	    				message.setText("Hi Mr/Mrs "+ state.getNormalUser().getLogin() +" :"+"\n" +"This email is to let you know that the film "
-	    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign "
-	    				+ "in , make some popcorn and give it to play :D" +"\n"+"\n"+ "Best Wishes, your favorite app of Movies Online <3");
-	    				Transport t = session.getTransport("smtp");
-	    				t.connect("marsusanez@gmail.com","asiasi2018");
-	    				t.sendMessage(message, message.getAllRecipients());
-	    				t.close();
-	    		}catch (MessagingException me){
-	    			return;
-	    				}
+	    	    	try{
+		    	    		MimeMessage message = new MimeMessage(session);
+		    	    		message.setFrom(new InternetAddress("marsusanez@gmail.com"));
+		    				message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarioNormal.getEmail()));
+		    				message.setSubject("Hi! The movie "+ state.getMovie().getName() +" is now available.");
+		    				message.setText("Hi Mr/Mrs "+ state.getNormalUser().getLogin() +" :"+"\n" +"This email is to let you know that the film "
+		    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign "
+		    				+ "in , make some popcorn and give it to play :D" +"\n"+"\n"+ "Best Wishes, your favorite app of Movies Online <3");
+		    				Transport t = session.getTransport("smtp");
+		    				t.connect("marsusanez@gmail.com","asiasi2018");
+		    				t.sendMessage(message, message.getAllRecipients());
+		    				t.close();
+		    		}catch (MessagingException me){
+		    			return;
+		    				}
+    	    			} else if(usuarioNormal.getNotification()== UserNoti.SMS) {
+    	    				log.info("\n" +"Hi Mr/Mrs "+ state.getNormalUser().getLogin() +" :"+"\n" +"This email is to let you know that the film "
+    			    				+state.getMovie().getName()+" that you kept in your list of Pending Movies has been released today.\n" +"So please sign "
+    			    				+ "in , make some popcorn and give it to play :D" +"\n"+ "Best Wishes, your favorite app of Movies Online <3"+"\n");
+    	    			}
         			}
         		}
     	    }

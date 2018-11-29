@@ -53,7 +53,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 		
 		@Override
 		public List<Movie> findAllDatePendiente(Date data) {
-			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE' AND movie.data = :data").setParameter("data", data).list();
+			return getSession().createQuery("select DISTINCT movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type='PENDIENTE' AND movie.data = :data").setParameter("data", data).list();
 			
 		}
 		@Override

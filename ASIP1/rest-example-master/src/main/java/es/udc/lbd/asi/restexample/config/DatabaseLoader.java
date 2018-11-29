@@ -73,7 +73,8 @@ public class DatabaseLoader {
     userService.registerUser("pepe","pepe@pepe.com", "pepe", true, sdf.parse("2018-11-28"), null);
     userService.registerUser("maria","maria@maria.com","maria",true, sdf.parse("2018-11-15"), null);
     userService.registerUser("laura", "guajndos@gmail.com","laura", false, sdf.parse("2018-11-18"), UserNoti.EMAIL);
-    userService.registerUser("sandra", "vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"), UserNoti.SMS);
+    userService.registerUser("sandra","vicfic23@gmail.com","sandra", false, sdf.parse("2018-11-18"), UserNoti.SMS);
+    userService.registerUser("lucas", "sandra111@outlook.com","lucas", false, sdf.parse("2018-11-18"),null);
  
     Genre genre1= new Genre("Drama");
     genreService.save(genre1);	
@@ -93,11 +94,11 @@ public class DatabaseLoader {
     dirigentes.add(director1);
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-28"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-29"),
     		genre1, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-15"),
+    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-29"),
     		genre2, participantes,dirigentes));
     
     movieService.save

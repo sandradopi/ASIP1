@@ -101,7 +101,7 @@
 import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
-import ToggleButton from 'vue-js-toggle-button/src/Button'
+
 
 
 export default {

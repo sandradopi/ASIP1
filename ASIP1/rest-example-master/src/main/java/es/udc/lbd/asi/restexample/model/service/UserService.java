@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.udc.lbd.asi.restexample.model.domain.AdminUser;
+import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
@@ -22,6 +23,7 @@ import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
@@ -142,6 +144,16 @@ public class UserService implements UserServiceInterface{
 			}
 			return usuario;
 		}
+	    
+	    @PreAuthorize("hasAuthority('USER')")
+	    @Transactional(readOnly = false)
+	    @Override
+	    public void update(String login, UserNoti noti){
+	    	NormalUser bdUser = userDAO.findByLogin(login);
+	    	bdUser.setNotification(noti);
+	        userDAO.save(bdUser);
+	        
+	        }
 
 
 

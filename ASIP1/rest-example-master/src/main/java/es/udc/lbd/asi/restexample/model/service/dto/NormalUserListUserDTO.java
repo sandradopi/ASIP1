@@ -9,7 +9,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
+import es.udc.lbd.asi.restexample.model.domain.UserNoti;
 import es.udc.lbd.asi.restexample.model.domain.User_;
 
 public class NormalUserListUserDTO {
@@ -27,6 +29,7 @@ public class NormalUserListUserDTO {
 	private Long countValoration;
 	@NotNull
 	private Date data;
+	private UserNoti noti;
 	
 	
 	
@@ -34,16 +37,26 @@ public class NormalUserListUserDTO {
 	public NormalUserListUserDTO() {
 	}
 	
-	public NormalUserListUserDTO(User_ user) {
+	public NormalUserListUserDTO(NormalUser user) {
 		this.login = user.getLogin();
 		this.email = user.getEmail();
 		this.countPendiente = new Long(0);
 		this.countVista = new Long(0);
 		this.countValoration = new Long(0);
 		this.data=user.getData();
+		this.noti=user.getNotification();
+		
 	}
 
 	
+
+	public UserNoti getNoti() {
+		return noti;
+	}
+
+	public void setNoti(UserNoti noti) {
+		this.noti = noti;
+	}
 
 	public Long getCountVista() {
 		return countVista;

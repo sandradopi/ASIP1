@@ -18,6 +18,7 @@ public interface UserServiceInterface {
     public void registerUser(String login,String email, String password, boolean isAdmin, Date data, UserNoti noti) throws UserLoginExistsException;
     public void registerUser(String login,String email, String password,UserNoti noti) throws UserLoginExistsException, ParseException;
 	public NormalUserListUserDTO findByLoginContadores(String login);
+	public void update(String login, UserNoti noti);
   
 
 
