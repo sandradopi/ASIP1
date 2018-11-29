@@ -158,7 +158,8 @@ export default {
         if(this.aux=="VISTA"){
         this.statu="vista-novista";}
       else if(this.aux=="PENDIENTE"){
-        this.statup="pendiente-nopendiente";}
+        this.statup="pendiente-nopendiente";
+      }
       })
 
       .catch()

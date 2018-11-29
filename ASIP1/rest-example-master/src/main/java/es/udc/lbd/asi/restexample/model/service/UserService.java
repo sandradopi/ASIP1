@@ -148,9 +148,15 @@ public class UserService implements UserServiceInterface{
 	    @PreAuthorize("hasAuthority('USER')")
 	    @Transactional(readOnly = false)
 	    @Override
-	    public void update(String login, UserNoti noti){
+	    public void update(String login, String noti){
 	    	NormalUser bdUser = userDAO.findByLogin(login);
-	    	bdUser.setNotification(noti);
+	    	if(noti.equals("no")){
+	    		bdUser.setNotification(null);
+	    	}else if(noti.equals("EMAIL")){
+	    		bdUser.setNotification(UserNoti.EMAIL);
+	    	}else if (noti.equals("SMS")){
+	    		bdUser.setNotification(UserNoti.SMS);
+	    	}
 	        userDAO.save(bdUser);
 	        
 	        }

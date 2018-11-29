@@ -1,12 +1,11 @@
 <template>
-  <LoadingPage
-    :loading="loading"
-    :error="error">
+<div>
     <div
       v-if="error"
       class="error">
       <pre>{{ error }}</pre>
     </div>
+
   <div class= "datosUsuario" >
      <b-btn
                     class="editado"
@@ -35,9 +34,19 @@
      </h4>    
  </div>
 
+</br>
  <div class= "Noti" 
   v-if= "WhatLogin() ==this.user.login && this.control==true">
-  <div class="multi">
+   <b-form-checkbox class="cheeck"
+                       v-model="statu"
+                       value= "true"
+                       unchecked-value= "false"
+                       @change="">
+       <div><strong>Would you like to receive notifications?</strong></div>
+      </b-form-checkbox>
+
+
+  <div class="multi" v-if="this.statu=='true'">
   <h6>Notifications:</h6>
       <multiselect 
         v-model="user.noti" 
@@ -52,26 +61,26 @@
 
  </div >
 
-  </LoadingPage>
+  </div>
 </template>
 
 <script>
 import { HTTP } from '../../common/http-common' 
-//LIBRERIA AXIOS (todas las peticiones al 8080 al servidor)
-import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
+import Vue from 'vue'
 
 
 export default {
-  components: { LoadingPage, Multiselect },
+  components: {  Multiselect },
   data() {
     return { //datos que usamos
-      loading: false,
       error: null,
       user:{},
       control:false,
       options: ['SMS','EMAIL'],
+      statu:"false",
+      aux:null,
 
     }
   },
@@ -85,35 +94,69 @@ export default {
   methods: {
     fetchData() {
 
-    this.loading = true
      HTTP.get(`users/detail/${this.$route.params.id}`) 
     .then(response => {
        this.user = response.data
+       return response
        
      })
+     .then(response => {
+        this.aux = response.data.noti
+        return response
+      })
+
+    .then(() => { 
+        if(this.aux!=null){
+        this.statu="true";
+      }
+
+      else if(this.aux==null){
+        this.statu="false";
+      }
+      })
+
      .catch(err => {
        this.error = err.message
      })
-    .finally(() => this.loading = false)
-
 
     },
      WhatLogin() {
       return auth.user.login
     },
+
+     Control() {
+
+        if (this.user.noti == null){
+          this.statu=="false"
+        }else{
+          this.statu=="true"
+        }
+    },
+
     Editado() {
       this.control=true;
     },
+  
 
      Save() {
+
+      if(this.statu=="true" && this.user.noti==null){
+          Vue.notify({
+               text: 'Select one option please',
+               type: 'error'})
+      }else{
+
       this.control=false;
+      if(this.statu=="false"){
+        this.user.noti="no";
+      }
 
           HTTP.put(`users/${this.$route.params.id}/${this.user.noti}`)
          .then(this._successHandler)
          .catch(err => {
            this.error = err.message
          })
-
+  }
     },
 
     _successHandler(response) {

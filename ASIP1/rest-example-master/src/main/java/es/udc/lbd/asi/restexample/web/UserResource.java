@@ -57,7 +57,7 @@ public class UserResource {
     }
     
     @PutMapping("/{login}/{noti}")
-    public void update(@PathVariable String login, @PathVariable UserNoti noti) {
+    public void update(@PathVariable String login, @PathVariable String noti) {
        
        userService.update(login,noti);
     }
