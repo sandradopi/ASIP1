@@ -24,6 +24,7 @@ const routes = [
   { name: 'Registro', path: '/login/createAccount', component: Registro,meta: { public: true }},
   { name: 'MovieDetail', path: '/movies/:id', component: MovieDetail},
   { name: 'UserDetail', path: '/users/:id', component: UserDetail,meta: { authority: 'USER' }},
+  { name: 'UserUpdate', path: '/users/:id/edit', component: UserDetail, meta: { authority: 'USER' } },
   { name: 'MovieUpdate', path: '/movies/:id/edit', component: MovieForm, meta: { authority: 'ADMIN' } },
   { name: 'Login', path: '/login', component: Login, meta: { public: true, isLoginPage: true }},
   { path: '*', component: NotFound, meta: { public: true }}

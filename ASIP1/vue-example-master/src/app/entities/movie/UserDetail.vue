@@ -10,6 +10,7 @@
      <b-btn
                     class="editado"
                     v-if=" WhatLogin() ==this.user.login && this.control==false"
+                    :to="{ name: 'UserUpdate', params: { id: user.login }}"
                     variant="primary"
                     @click="Editado()">Edit</b-btn>
       <b-btn
