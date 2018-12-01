@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieListDTO;
 import es.udc.lbd.asi.restexample.web.exception.IdAndBodyNotMatchingOnUpdateException;
 import es.udc.lbd.asi.restexample.web.exception.InstanceNotFoundExceptionHIB;
 import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
@@ -37,6 +38,12 @@ public class MovieResource {
         return movieService.findAll();
     }
     
+    @GetMapping("/movies/media")
+    public List<MovieListDTO> findAllMedia() {
+        return movieService.findAllMedia();
+    }
+    
+    
     
     @GetMapping("/vistas/tovote")
     public List<MovieDTO> findAllVistasVote() {
@@ -46,6 +53,11 @@ public class MovieResource {
     @GetMapping("/list/{tipo}")
     public List<MovieDTO> findAllMoviesType(@PathVariable String tipo) {
         return movieService.findAllMoviesType(tipo);
+    }
+    
+    @GetMapping("/movies/media/{idMovie}")
+    public Long findAverage(@PathVariable Long idMovie) {
+        return movieService.findAverage(idMovie);
     }
 
     @GetMapping("/movies/{idMovie}")

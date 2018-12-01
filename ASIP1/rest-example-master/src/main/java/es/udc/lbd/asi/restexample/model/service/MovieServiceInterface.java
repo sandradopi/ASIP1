@@ -3,14 +3,16 @@ package es.udc.lbd.asi.restexample.model.service;
 import java.util.List;
 
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieListDTO;
 
 public interface MovieServiceInterface {
     public List<MovieDTO> findAll();
+    public List<MovieListDTO> findAllMedia();
     public MovieDTO findById(Long id);
     public MovieDTO save(MovieDTO movie);
     public void deleteById(Long idMovie);
     public MovieDTO update(MovieDTO movie);
-	List<MovieDTO> findAllMoviesType(String tipo);
-	//List<MovieDTO> findAllVistas();
-	List<MovieDTO> findAllVistasVote();
+	public List<MovieDTO> findAllMoviesType(String tipo);
+	public List<MovieDTO> findAllVistasVote();
+	public Long findAverage(Long idMovie);
 }

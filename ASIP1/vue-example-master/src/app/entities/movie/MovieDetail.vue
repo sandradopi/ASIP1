@@ -78,7 +78,8 @@
               <h4 class="subtitle">
                 <p class="subtitle-tag">{{ movie.duration}} minutes |</p>
                 <p class="subtitle-tag">{{ movie.genre.type}} | </p>
-                <p class="subtitle-tag">{{movie.data}}</p>
+                <p class="subtitle-tag">{{movie.data}} |</p>
+                <p class="subtitle-tag">Approximate average Rating: {{this.media}} </p>
               </h4>
               <p class="description">{{ movie.summary }}</p>
               <h4>
@@ -110,7 +111,8 @@ export default {
       statup: "nopendiente-pendiente",
       hide:null,
       aux: "",
-      rating:null    
+      rating:null,
+      media:null  
     }
   },
   computed: {
@@ -164,14 +166,23 @@ export default {
 
       .catch()
 
+      HTTP.get(`movies/media/${this.$route.params.id}`) 
+      .then(response => {
+        this.media = response.data
+      })
+      .catch(err => this.error = err.message)
+      .finally(() => this.loading = false)
+
+
+
     },
-    comprobarValoracion(){
-      
-    },
+   
 
     puntuar(){
       HTTP.put(`status/movies/${this.$route.params.id}/${this.rating}`)
-        .then(response => this.rating = response.data.valoration)
+        .then(response => {this.rating = response.data.valoration
+          return response})
+        .then(this.fetchData)
         .catch(this._errorHandler)
     },
 

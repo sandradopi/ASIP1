@@ -19,8 +19,11 @@
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           {{ movie.name }}
         </router-link>
-    </div>
     <img class="imagen"  v-if="!isAdmin" src="movie.jpg">
+    </br>
+     <p class="subtitle-tag">Approximate average Rating:{{ movie.media}}</p>
+    </div>
+    </div>
     <div class="buttone" v-if="isAdmin">
      <b-btn
         class="eliminado"
@@ -56,7 +59,8 @@ export default {
     return {
       loading: false,
       movies: null,
-      error: null
+      error: null,
+      media:null
     }
   },
   computed: {
@@ -71,7 +75,7 @@ export default {
   methods: {
     fetchData() {
       this.loading = true
-    HTTP.get('movies')
+    HTTP.get(`movies/media`)
     .then(response => {
        this.movies = response.data
      })
@@ -79,7 +83,9 @@ export default {
        this.error = err.message
      })
     .finally(() => this.loading = false)
+
     },
+
     eliminar(idMovie){
         HTTP.delete(`movies/${idMovie}`)
         .then(this._successHandler)
@@ -124,7 +130,7 @@ export default {
 
   .namemovie {
     margin-top :20px;
-    width:28%;
+    width:20%;
     height:20%;
     font-size: big;
     float:left;
@@ -140,12 +146,16 @@ export default {
   .imagen{
     width:50%;
     height:30%;
-    margin-left:70px;
+    margin-left:10px;
+    margin-bottom:10px;
+    margin-top:10px;
 
     
     }
 
   .tittle{
+    width:100%;
+    height:100%;
     font-size: 20px;
     color: red;
     text-align: center;
@@ -217,6 +227,13 @@ export default {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
+
+.subtitle-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: red;
+
+    }
 
 
 </style>

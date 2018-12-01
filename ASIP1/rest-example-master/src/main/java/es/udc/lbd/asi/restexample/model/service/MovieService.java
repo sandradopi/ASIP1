@@ -28,7 +28,9 @@ import es.udc.lbd.asi.restexample.model.repository.UserDAO;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.DirectorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.MovieListDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 
 
@@ -76,10 +78,55 @@ public class MovieService implements MovieServiceInterface{
 		
 		
     }
-
+  
+  @Override
+	public List<MovieListDTO> findAllMedia() {
+	  Long media=new Long(0);
+	  Long mediaFinal=new Long(0);
+	  
+	  List <MovieListDTO> movies =movieDAO.findAll().stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
+	  for(MovieListDTO m:movies){
+		  
+		  Movie bdMovie = movieDAO.findById(m.getIdMovie());
+		  List<Status> status= statusDAO.findByMovies(bdMovie);
+		  if(status.size()!=0){
+			  for(Status s:status){
+					 media=media+ s.getValoration();
+				  }
+			  mediaFinal= media/status.size();
+			  }
+		  else{
+			  mediaFinal=new Long(0);
+		  }
+		 
+		 m.setMedia(mediaFinal);
+		  
+	  }
+	  return movies;
+	}
+  	
+   @Override	
     public MovieDTO findById(Long idMovie)  {
     	 return new MovieDTO(movieDAO.findById(idMovie));
     }
+   
+   @Override
+    public Long findAverage(Long idMovie)  {
+	  Long media=new Long(0);
+	  Long mediaFinal=new Long(0);
+	  
+	  Movie bdMovie = movieDAO.findById(idMovie);
+	  List<Status> status= statusDAO.findByMovies(bdMovie);
+	  for(Status s:status){
+		 media=media+ s.getValoration();
+	  }
+	 if(status.size()==0){
+		 return mediaFinal;
+	 }else{
+	 mediaFinal= media/status.size();
+   	 return mediaFinal;
+   	 }
+   }
     
     @PreAuthorize("hasAuthority('ADMIN')")
     @Transactional(readOnly = false)
@@ -171,6 +218,8 @@ public class MovieService implements MovieServiceInterface{
 		List<MovieDTO> movies= movieDAO.findAllVistasVote(usuarioNormal).stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
 		return movies; 
 	}
+	
+	
 
 	
 

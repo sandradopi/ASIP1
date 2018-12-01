@@ -21,6 +21,5 @@ public interface MovieDAO {
 	public List<Movie> findAllUser();
 	public List<Movie> findAllDatePendiente(Date data);
 	public Long findByMovieUserVistaPendiente(String login, TipoStatus tipo);
-	//public Long findByMovieUserPendiente(String login);
 	public Long findByMovieUserVistaValoration(String login);
-}
+	}

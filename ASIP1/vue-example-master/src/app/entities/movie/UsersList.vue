@@ -60,21 +60,7 @@ export default {
 
     _errorHandler(err) {
       this.error = err.response.data.message
-    },
-
-    contar(login){
-      HTTP.get(`status/movies/vistas/${login}`)
-    .then(response => {
-       this.count = response.data
-     })
-
-     .catch(err => {
-       this.error = err.message
-     })
-    .finally(() => this.loading = false)
-
-    },
-    
+    },    
     
   }
 }

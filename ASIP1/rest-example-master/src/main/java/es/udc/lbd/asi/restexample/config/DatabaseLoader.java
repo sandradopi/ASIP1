@@ -116,7 +116,7 @@ public class DatabaseLoader {
     		genre2, participantes,dirigentes));
     
     movieService.save
-    (new Movie(false,"Jumanji","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"Fast and Furious","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes));
     
    
