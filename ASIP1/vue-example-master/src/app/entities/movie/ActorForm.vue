@@ -2,11 +2,7 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-    <div
-      v-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-    </div>
+    
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -78,6 +74,7 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
+import Vue from 'vue'
 
 
 export default {
@@ -118,6 +115,20 @@ export default {
         
       
     },
+    notification(){
+      if (this.error=="actorDTO.name no puede estar vacío"){
+        this.error= "Name is a required fields"
+      }
+      else if(this.error=="actorDTO.surname1 no puede estar vacío"){
+        this.error= "Surname1 is a required fields"
+      }else{
+        this.error= "Please, complete all the required fields"
+      }
+      Vue.notify({
+               text: this.error,
+               type: 'error'})
+
+    },
     back() {
       this.$router.go(-1)
     },
@@ -127,6 +138,7 @@ export default {
     },
     _errorHandler(err) {
       this.error = err.response.data.message
+      this.notification()
     }
   }
 }

@@ -21,9 +21,9 @@
         </router-link>
     <img class="imagen"  v-if="!isAdmin" src="movie.jpg">
     </br>
-     <p class="subtitle-tag">Approximate average Rating:{{ movie.media}}</p>
+     <p class ="subtitle-tag" v-if="!isAdmin">Approximate average Rating:{{ movie.media}}</p>
     </div>
-    </div>
+    
     <div class="buttone" v-if="isAdmin">
      <b-btn
         class="eliminado"
@@ -44,6 +44,7 @@
         @click="mostrar(movie.idMovie,movie)">Show</b-btn>
     </div>
      </div>
+    </div>
     </div>
   </LoadingPage>
 </template>
@@ -74,8 +75,20 @@ export default {
   },
   methods: {
     fetchData() {
-      this.loading = true
-    HTTP.get(`movies/media`)
+
+    if(!(this.isAdmin)){
+        this.loading = true
+        HTTP.get(`movies/media`)
+        .then(response => {
+           this.movies = response.data
+         })
+         .catch(err => {
+           this.error = err.message
+         })
+        .finally(() => this.loading = false)}
+    else{
+    this.loading = true
+    HTTP.get('movies')
     .then(response => {
        this.movies = response.data
      })
@@ -83,6 +96,7 @@ export default {
        this.error = err.message
      })
     .finally(() => this.loading = false)
+    }
 
     },
 
