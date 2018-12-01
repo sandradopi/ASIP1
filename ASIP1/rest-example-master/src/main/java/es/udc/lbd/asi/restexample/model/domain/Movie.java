@@ -154,6 +154,7 @@ public class Movie {
 		this.participantes = participantes;
 	}
 	
+	
 	public Set<Director> getDirigentes() {
 		return dirigentes;
 	}

@@ -312,7 +312,7 @@ export default {
 }
 .buttone{
   margin-top:10px;
-  width:25%;
+  width:60%;
   height:40%;
 
 }

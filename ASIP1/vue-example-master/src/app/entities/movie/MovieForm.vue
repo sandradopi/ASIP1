@@ -106,7 +106,7 @@
 
   
   </b-form-group>
-      <h5>Summary *</h5>
+      <h5>Summary</h5>
       <b-form-group
         label-for="summary">
         <b-form-textarea
@@ -205,6 +205,19 @@ export default {
       }
     },
     notification(){
+      if (this.error=="movieDTO.duration no puede ser null"){
+        this.error= "Duration is a required fields"
+      }
+      else if(this.error=="movieDTO.name no puede estar vacío"){
+        this.error= "Title is a required fields"
+      }
+      else if (this.error=="movieDTO.data no puede ser null"){
+        this.error= "Complete the data"
+      }else if (this.error=="movieDTO.genre no puede ser null"){
+        this.error= "Genre is a required fields"
+      }else{
+        this.error= "Please, complete all the required fields"
+      }
       Vue.notify({
                text: this.error,
                type: 'error'})
