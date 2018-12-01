@@ -5,19 +5,12 @@
       class="loading">
       Loading...
     </div>
-
-    <div
-      v-else-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-      <slot/>
-    </div>
-
-    <slot v-else/>
+    <slot/>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'LoadingPage',
   props: {

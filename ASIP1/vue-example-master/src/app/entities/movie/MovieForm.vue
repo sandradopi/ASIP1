@@ -2,11 +2,7 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-    <div
-      v-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-    </div>
+    
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -130,6 +126,7 @@
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
 import Multiselect from 'vue-multiselect'
+import Vue from 'vue'
 
 export default {
   components: { LoadingPage, Multiselect},
@@ -207,6 +204,12 @@ export default {
         .catch(this._errorHandler)
       }
     },
+    notification(){
+      Vue.notify({
+               text: this.error,
+               type: 'error'})
+
+    },
     back() {
       this.$router.go(-1)
     },
@@ -215,6 +218,7 @@ export default {
     },
     _errorHandler(err) {
       this.error = err.response.data.message
+      this.notification()
     }
   }
 }
