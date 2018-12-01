@@ -13,7 +13,12 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 
 
 	@Override
-	public NormalUser findByLogin(String login){
+	public User_ findByLogin(String login){
+		return   (User_) getSession().createQuery("from User_ p where p.login = :login").setParameter("login",login).uniqueResult();
+	}
+	
+	@Override
+	public NormalUser findByLoginNormal(String login){
 		return  (NormalUser) getSession().createQuery("from User_ p where p.login = :login").setParameter("login",login).uniqueResult();
 	}
 	
@@ -40,9 +45,10 @@ public class UserDAOHibernate extends GenericDAOHibernate implements UserDAO {
 	
 	@Override
 	public NormalUser findByIdNormal(Long idUser){
-		return ( NormalUser) getSession().createQuery("from User_ p where p.idUser = :idUser AND p.authority='USER'").setParameter("idUser", idUser).uniqueResult();
+		return  (NormalUser) getSession().createQuery("from User_ p where p.idUser = :idUser AND p.authority='USER'").setParameter("idUser", idUser).uniqueResult();
 	}
 
+	
 
 
 }

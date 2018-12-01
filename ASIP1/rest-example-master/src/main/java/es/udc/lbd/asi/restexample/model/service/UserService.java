@@ -59,7 +59,7 @@ public class UserService implements UserServiceInterface{
 		@PreAuthorize("hasAuthority('USER')")
 		@Override
 		public NormalUserListUserDTO findByLoginContadores(String login)  {
-			NormalUserListUserDTO u= new NormalUserListUserDTO(userDAO.findByLogin(login));
+			NormalUserListUserDTO u= new NormalUserListUserDTO(userDAO.findByLoginNormal(login));
 			u.setCountVista(movieDAO.findByMovieUserVistaPendiente(u.getLogin(), TipoStatus.VISTA));
 			u.setCountPendiente(movieDAO.findByMovieUserVistaPendiente(u.getLogin(),TipoStatus.PENDIENTE));
 			u.setCountValoration(movieDAO.findByMovieUserVistaValoration(u.getLogin()));
@@ -149,7 +149,7 @@ public class UserService implements UserServiceInterface{
 	    @Transactional(readOnly = false)
 	    @Override
 	    public void update(String login, String noti){
-	    	NormalUser bdUser = userDAO.findByLogin(login);
+	    	NormalUser bdUser = userDAO.findByLoginNormal(login);
 	    	if(noti.equals("no")){
 	    		bdUser.setNotification(null);
 	    	}else if(noti.equals("EMAIL")){
