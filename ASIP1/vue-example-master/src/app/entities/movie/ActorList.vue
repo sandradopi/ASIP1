@@ -23,7 +23,7 @@
      <b-btn
         class="eliminado"
         variant="primary"
-        @click="eliminar(actor.idActor)">Delete</b-btn>
+        @click="eliminar(actor.idActor, actor.name, actor.surname1)">Delete</b-btn>
 
       <b-btn
           class="editado"
@@ -73,7 +73,7 @@ export default {
     _successHandler(response) {
       this.fetchData()
     },
-    eliminar(idActor){
+    eliminar(idActor,name, surname1){
         HTTP.delete(`actors/${idActor}`)
         .then(response => {
           this.noti = response.data
@@ -88,7 +88,7 @@ export default {
             }
             else if (this.noti=="exito"){
               Vue.notify({
-               text: 'The actor has been delete',
+               text: 'The actor '+ "'"+name +" " +surname1+ "'"+' has been delete',
                type: 'success'})
             }
 

@@ -2,11 +2,7 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-    <div
-      v-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-    </div>
+   
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -41,6 +37,7 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
+import Vue from 'vue'
 
 
 export default {
@@ -54,6 +51,7 @@ export default {
     }
   
   },
+  
    
   created() {
       this.genre = {}
@@ -73,8 +71,16 @@ export default {
     _successHandler(response) {
      this.$router.replace({ name: 'GenreList'})
     },
+    notification(){
+        this.error= "Type is a required field"
+      Vue.notify({
+               text: this.error,
+               type: 'error'})
+
+    },
     _errorHandler(err) {
       this.error = err.response.data.message
+      this.notification()
     }
   }
 }

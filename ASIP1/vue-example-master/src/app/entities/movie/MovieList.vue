@@ -28,7 +28,7 @@
      <b-btn
         class="eliminado"
         variant="primary"
-        @click="eliminar(movie.idMovie)">Delete</b-btn>
+        @click="eliminar(movie.idMovie, movie.name)">Delete</b-btn>
 
     <div class= "oculto" v-if= "movie.hidden==false">
      <b-btn
@@ -53,6 +53,7 @@
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
 import auth from '../../common/auth'
+import Vue from 'vue'
 
 export default {
   components: { LoadingPage},
@@ -99,11 +100,15 @@ export default {
     }
 
     },
+   
 
-    eliminar(idMovie){
+    eliminar(idMovie, name){
         HTTP.delete(`movies/${idMovie}`)
         .then(this._successHandler)
         .catch(this._errorHandler)
+        Vue.notify({
+               text: "The film "+ "'"+name+ "'"+" has been deleted",
+               type: 'success'})
       },
 
     ocultar(idMovie,movie){
@@ -111,6 +116,9 @@ export default {
         HTTP.put(`movies/${idMovie}`, movie)
         .then(this._successHandler)
         .catch(this._errorHandler)
+        Vue.notify({
+               text: "The film "+ "'"+movie.name+ "'"+" has been hidden",
+               type: 'success'})
       },
 
      mostrar(idMovie,movie){
@@ -118,6 +126,9 @@ export default {
         HTTP.put(`movies/${idMovie}`, movie)
         .then(this._successHandler)
         .catch(this._errorHandler)
+        Vue.notify({
+               text: "The film "+ "'"+movie.name+ "'"+" has been shown",
+               type: 'success'})
       },
     
     _successHandler(response) {

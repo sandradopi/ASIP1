@@ -2,11 +2,7 @@
   <LoadingPage
     :loading="loading"
     :error="error">
-    <div
-      v-if="error"
-      class="error">
-      <pre>{{ error }}</pre>
-    </div>
+    
     <div class="float-right">
       <b-btn
         variant="primary"
@@ -65,6 +61,7 @@
 <script>
 import { HTTP } from '../../common/http-common'
 import LoadingPage from '../../components/LoadingPage'
+import Vue from 'vue'
 
 
 export default {
@@ -98,7 +95,7 @@ export default {
         .then(this._successHandler)
         .catch(this._errorHandler)
       } else {
-        HTTP.post('directors', this.actor)
+        HTTP.post('directors', this.director)
         .then(this._successHandler)
         .catch(this._errorHandler)
       }
@@ -108,12 +105,27 @@ export default {
     back() {
       this.$router.go(-1)
     },
+    notification(){
+      if (this.error=="directorDTO.name no puede estar vacío"){
+        this.error= "Name is a required field"
+      }
+      else if(this.error=="directorDTO.surname1 no puede estar vacío"){
+        this.error= "First Surname is a required field"
+      }else{
+        this.error= "Please, complete all the required fields"
+      }
+      Vue.notify({
+               text: this.error,
+               type: 'error'})
+
+    },
 
     _successHandler(response) {
      this.$router.replace({ name: 'DirectorList'})
     },
     _errorHandler(err) {
       this.error = err.response.data.message
+      this.notification()
     }
   }
 }
