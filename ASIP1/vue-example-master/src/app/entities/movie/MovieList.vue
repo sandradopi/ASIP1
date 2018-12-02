@@ -100,7 +100,6 @@ export default {
     }
 
     },
-   
 
     eliminar(idMovie, name){
         HTTP.delete(`movies/${idMovie}`)
