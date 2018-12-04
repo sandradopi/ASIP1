@@ -58,7 +58,7 @@ public class Movie {
     		joinColumns = {@JoinColumn(name = "idMovie")},
     		inverseJoinColumns = {@JoinColumn(name = "idDirector")}
     		)
-    @NotNull
+    @NotEmpty
     private Set<Director> dirigentes = new HashSet<Director>();
     
     public Movie() {

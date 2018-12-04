@@ -212,12 +212,15 @@ export default {
         this.error= "Title is a required field"
       }
       else if (this.error=="movieDTO.data no puede ser null"){
-        this.error= "Complete the data"
+        this.error= "Data is a required field"
       }else if (this.error=="movieDTO.genre no puede ser null"){
         this.error= "Genre is a required field"
-      }else{
-        this.error= "Please, complete all the required fields"
+      }else if (this.error=="Validation failed for classes [es.udc.lbd.asi.restexample.model.domain.Movie] during persist time for groups [javax.validation.groups.Default, ]\nList of constraint violations:[\n\tConstraintViolationImpl{interpolatedMessage='no puede estar vacío', propertyPath=dirigentes, rootBeanClass=class es.udc.lbd.asi.restexample.model.domain.Movie, messageTemplate='{javax.validation.constraints.NotEmpty.message}'}\n]"){
+        this.error= "Director is a required field"}
+      else{
+        this.error= "Complete all the required fields, please"
       }
+    
       Vue.notify({
                text: this.error,
                type: 'error'})
