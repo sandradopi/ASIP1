@@ -83,17 +83,27 @@ public class MovieService implements MovieServiceInterface{
 	public List<MovieListDTO> findAllMedia() {
 	  Long media=new Long(0);
 	  Long mediaFinal=new Long(0);
+	  Long valorationTotal= new Long(0);
 	  
 	  List <MovieListDTO> movies =movieDAO.findAll().stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
 	  for(MovieListDTO m:movies){
+		  media=new Long(0);
+		  valorationTotal= new Long(0);
 		  
 		  Movie bdMovie = movieDAO.findById(m.getIdMovie());
 		  List<Status> status= statusDAO.findByMovies(bdMovie);
 		  if(status.size()!=0){
 			  for(Status s:status){
+				  	if(s.getValoration()!=null){
 					 media=media+ s.getValoration();
+					 valorationTotal=valorationTotal+1;
+					 }
+				  
 				  }
-			  mediaFinal= media/status.size();
+			  if(media==0 && valorationTotal==0){
+				  mediaFinal=new Long(0);
+			  }else{
+			  mediaFinal= media/valorationTotal;}
 			  }
 		  else{
 			  mediaFinal=new Long(0);
@@ -114,18 +124,26 @@ public class MovieService implements MovieServiceInterface{
     public Long findAverage(Long idMovie)  {
 	  Long media=new Long(0);
 	  Long mediaFinal=new Long(0);
+	  Long valorationTotal= new Long(0);
 	  
 	  Movie bdMovie = movieDAO.findById(idMovie);
 	  List<Status> status= statusDAO.findByMovies(bdMovie);
-	  for(Status s:status){
-		 media=media+ s.getValoration();
-	  }
-	 if(status.size()==0){
-		 return mediaFinal;
-	 }else{
-	 mediaFinal= media/status.size();
-   	 return mediaFinal;
-   	 }
+	  if(status.size()!=0){
+		  for(Status s:status){
+			  	if(s.getValoration()!=null){
+				 media=media+ s.getValoration();
+				 valorationTotal=valorationTotal+1;
+				 }
+			  
+			  }
+		  if(media==0 && valorationTotal==0){
+			  return mediaFinal=new Long(0);
+		  }else{
+		  return mediaFinal= media/valorationTotal;
+		  }
+		  }else{
+	  return mediaFinal=new Long(0);}
+   	 
    }
     
     @PreAuthorize("hasAuthority('ADMIN')")

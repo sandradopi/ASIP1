@@ -39,11 +39,7 @@
               variant="link">If you don´t have an account, create it!</b-btn>
         </div>
     </div>
-        <div
-          v-if="error"
-          class="error">
-          <pre>{{ error }}</pre>
-        </div>
+       
      </div>
   </form>
 </template>

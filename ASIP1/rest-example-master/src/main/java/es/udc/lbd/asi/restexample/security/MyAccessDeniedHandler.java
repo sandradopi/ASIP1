@@ -20,7 +20,7 @@ package es.udc.lbd.asi.restexample.security;
      public void handle(HttpServletRequest request, HttpServletResponse response,
              AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
-         logger.debug("Access denied");
-         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Denied");
+         logger.debug("Access denied! Username or password incorrect");
+         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access denied! Username or password incorrect");
      }
  }

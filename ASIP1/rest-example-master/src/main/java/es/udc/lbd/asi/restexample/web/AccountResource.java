@@ -19,7 +19,9 @@ import javax.validation.Valid;
  import org.springframework.web.bind.annotation.RequestMapping;
  import org.springframework.web.bind.annotation.RestController;
 
- import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
+import es.udc.lbd.asi.restexample.model.exception.PasswordTooShort;
+import es.udc.lbd.asi.restexample.model.exception.RequiredFieldsException;
+import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
  import es.udc.lbd.asi.restexample.model.service.UserService;
 import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.LoginDTO;
@@ -52,7 +54,7 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
      private UserService userService;
 
      @PostMapping("/authenticate")
-     public JWTToken authenticate(@Valid @RequestBody LoginDTO loginDTO) throws CredentialsAreNotValidException {
+     public JWTToken authenticate(@RequestBody LoginDTO loginDTO) throws CredentialsAreNotValidException  {
 
          UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                  loginDTO.getLogin(), loginDTO.getPassword());
@@ -77,8 +79,9 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
      }
 
      @PostMapping("/register")
-     public void registerAccount(@Valid @RequestBody NormalUserDTO account) throws UserLoginExistsException, ParseException {
-        System.out.println("chao"+account.toString());
-    	 userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword(), account.getNoti());
-     }
+     public void registerAccount(@RequestBody NormalUserDTO account) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort {
+
+    		userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword(), account.getNoti());}
+  
+     
  }

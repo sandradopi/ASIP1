@@ -86,12 +86,6 @@
 
 
   </div>
-     <div
-      v-if="error"
-      class="error"
-      ifd= "error">
-      <pre>{{ error }}</pre>
-    </div>
      
 </div>
 </div>
@@ -101,6 +95,7 @@
 import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
+import Vue from 'vue'
 
 
 
@@ -136,6 +131,12 @@ export default {
 
       
     },
+    notification(){
+      Vue.notify({
+               text: this.error,
+               type: 'error'})
+
+    },
     back() {
       this.$router.go(-1)
     },
@@ -144,6 +145,7 @@ export default {
     },
       _errorHandler(err) {
       this.error = err.response.data.message
+      this.notification()
      }
   }
 }

@@ -17,7 +17,9 @@ import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.UserNoti;
-import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
+import es.udc.lbd.asi.restexample.model.exception.PasswordTooShort;
+import es.udc.lbd.asi.restexample.model.exception.RequiredFieldsException;
+import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
 import es.udc.lbd.asi.restexample.model.repository.StatusDAO;
 import es.udc.lbd.asi.restexample.model.repository.UserDAO;
@@ -68,22 +70,36 @@ public class UserService implements UserServiceInterface{
 		
 	     @Transactional(readOnly = false)
 	     @Override
-		 public void registerUser(String login, String email,String password, UserNoti noti) throws UserLoginExistsException, ParseException {
+		 public void registerUser(String login, String email,String password, UserNoti noti) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort {
 	    
 	    		 Date ahora = new Date();
 	    	     SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
 	    	     String actualDate= formateador.format(ahora);
 	    	     Date data = formateador.parse(actualDate);
 	   
-	         registerUser(login,email, password, false, data, noti);
+	    	     registerUser(login,email, password, false, data, noti);
 	     }
 	     
 	     @Transactional(readOnly = false)
 	     @Override
-	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data, UserNoti noti) throws UserLoginExistsException {
+	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data, UserNoti noti) throws UserLoginEmailExistsException, RequiredFieldsException, PasswordTooShort {
 	         if (userDAO.findByLogin(login) != null) {
-	             throw new UserLoginExistsException("User login " + login + " already exists");
+	             throw new UserLoginEmailExistsException("User login " + login + " already exists");
+	         } else if (userDAO.findByEmail(email) != null) {
+	             throw new UserLoginEmailExistsException("The email " +email + " already exists");
 	         }
+	         
+	        if(login == null){
+	        	  throw new RequiredFieldsException("The login is a required field");
+	        }else if (email == null){
+	        	  throw new RequiredFieldsException("The email is a required field");
+	        }else if (password==null){
+	        	throw new RequiredFieldsException("The password is a required field");
+	        }else if(password.length()<4){
+	        	throw new PasswordTooShort("The password is too short");
+	        }
+
+	        
 	         String encryptedPassword = passwordEncoder.encode(password);
 
 	         if (isAdmin) {

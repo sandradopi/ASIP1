@@ -32,6 +32,7 @@ public class Movie {
 	@NotEmpty
     private String name;
     private String summary;
+    private String url;
     @NotNull
     private Integer duration;
     @NotNull
@@ -66,7 +67,7 @@ public class Movie {
 
 
 	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data,
-			@NotNull Genre genre, Set<Actor> participantes, @NotNull Set<Director> dirigentes) {
+			@NotNull Genre genre, Set<Actor> participantes, @NotNull Set<Director> dirigentes, String url) {
 		super();
 		this.hidden = hidden;
 		this.name = name;
@@ -76,6 +77,7 @@ public class Movie {
 		this.genre = genre;
 		this.participantes = participantes;
 		this.dirigentes = dirigentes;
+		this.url= url;
 	}
 	
 	public Movie(Boolean hidden, @NotEmpty String name, String summary, @NotNull Integer duration, @NotNull Date data) {
@@ -163,12 +165,17 @@ public class Movie {
 		this.dirigentes = dirigentes;
 	}
 
-	@Override
-	public String toString() {
-		return "Movie [idMovie=" + idMovie + ", hidden=" + hidden + ", name=" + name + ", summary=" + summary
-				+ ", duration=" + duration + ", data=" + data + ", genre=" + genre + ", participantes=" + participantes
-				+ ", dirigentes=" + dirigentes + "]";
+
+	public String getUrl() {
+		return url;
 	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	
 	
 
 }

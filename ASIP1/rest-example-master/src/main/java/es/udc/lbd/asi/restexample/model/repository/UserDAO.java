@@ -14,5 +14,6 @@ public interface UserDAO {
     public User_ findById(Long idUser) ;
     public NormalUser findByIdNormal(Long idUser) ;
 	public List<NormalUser> findAllNoAdmin();
+	public User_ findByEmail(String email);
    
 }

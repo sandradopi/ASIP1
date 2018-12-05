@@ -22,7 +22,9 @@ import es.udc.lbd.asi.restexample.model.domain.Director;
 import es.udc.lbd.asi.restexample.model.domain.Genre;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.domain.UserNoti;
-import es.udc.lbd.asi.restexample.model.exception.UserLoginExistsException;
+import es.udc.lbd.asi.restexample.model.exception.PasswordTooShort;
+import es.udc.lbd.asi.restexample.model.exception.RequiredFieldsException;
+import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
 import es.udc.lbd.asi.restexample.model.repository.DirectorDAO;
 import es.udc.lbd.asi.restexample.model.repository.GenreDAO;
 import es.udc.lbd.asi.restexample.model.repository.MovieDAO;
@@ -57,16 +59,16 @@ public class DatabaseLoader {
      * transaciones.
      */
     @PostConstruct
-    public void init() throws ParseException {
+    public void init() throws ParseException, RequiredFieldsException, PasswordTooShort {
     	 try {
              databaseLoader.loadData();
-         } catch (UserLoginExistsException e) {
+         } catch (UserLoginEmailExistsException e) {
              logger.error(e.getMessage(), e);
          }
     }
 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
-    public void loadData() throws UserLoginExistsException, ParseException{
+    public void loadData() throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort{
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
     	
@@ -95,29 +97,29 @@ public class DatabaseLoader {
     
     movieService.save
     (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-29"),
-    		genre1, participantes,dirigentes));
+    		genre1, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie1.jpg"));
     
     movieService.save
     (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-29"),
-    		genre2, participantes,dirigentes));
+    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie2.jpg"));
     
     movieService.save
     (new Movie(false,"Harry Potter","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes));
+    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie3.jpg"));
    
     
     movieService.save
     (new Movie(false,"Infiltrados en miami","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes));
+    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie4.jpg"));
     
     
     movieService.save
     (new Movie(false,"Lara Croft","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes));
+    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie5.jpg"));
     
     movieService.save
     (new Movie(false,"Fast and Furious","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes));
+    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie6.jpg"));
     
    
     }

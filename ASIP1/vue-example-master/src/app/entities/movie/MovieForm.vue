@@ -194,6 +194,7 @@ export default {
     },
 
     save() {
+        
         if (this.$route.params.id) {
         HTTP.put(`movies/${this.$route.params.id}`, this.movie)
         .then(this._successHandler)
