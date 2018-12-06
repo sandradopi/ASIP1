@@ -12,7 +12,7 @@ public interface MovieServiceInterface {
     public MovieDTO save(MovieDTO movie);
     public void deleteById(Long idMovie);
     public MovieDTO update(MovieDTO movie);
-	public List<MovieDTO> findAllMoviesType(String tipo);
-	public List<MovieDTO> findAllVistasVote();
+	public List<MovieListDTO> findAllMoviesType(String tipo);
+	public List<MovieListDTO> findAllVistasVote();
 	public Long findAverage(Long idMovie);
 }

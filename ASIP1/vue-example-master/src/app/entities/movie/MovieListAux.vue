@@ -15,6 +15,8 @@
         </router-link>
     </div>
     <img class="imagen" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+    </br>
+     <p class ="subtitle-tag">Approximate average Rating:{{ movie.media}}</p>
     </div>
 </div>
 </template>
@@ -131,6 +133,12 @@ export default {
     text-transform: uppercase;
 
       
+    }
+    .subtitle-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: red;
+
     }
    
 

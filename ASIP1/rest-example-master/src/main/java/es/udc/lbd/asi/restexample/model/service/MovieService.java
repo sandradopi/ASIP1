@@ -218,8 +218,12 @@ public class MovieService implements MovieServiceInterface{
     
     @PreAuthorize("hasAuthority('USER')")
 	@Override
-	public List<MovieDTO> findAllMoviesType(String tipo) {
+	public List<MovieListDTO> findAllMoviesType(String tipo) {
     	TipoStatus estado = null;
+    	 Long media=new Long(0);
+    	 Long mediaFinal=new Long(0);
+    	 Long valorationTotal= new Long(0);
+   	  
     	NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
 		if (tipo.equals("VISTA")){
@@ -227,17 +231,74 @@ public class MovieService implements MovieServiceInterface{
 		}else if(tipo.equals("PENDIENTE")){
 			estado= TipoStatus.PENDIENTE;
 		}
-    	List<MovieDTO> movies= movieDAO.findAllMoviesType(usuarioNormal,estado).stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+		
+    	List<MovieListDTO> movies= movieDAO.findAllMoviesType(usuarioNormal,estado).stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
+    	
+    	for(MovieListDTO m:movies){
+  		  media=new Long(0);
+  		  valorationTotal= new Long(0);
+  		  
+  		  Movie bdMovie = movieDAO.findById(m.getIdMovie());
+  		  List<Status> status= statusDAO.findByMovies(bdMovie);
+  		  if(status.size()!=0){
+  			  for(Status s:status){
+  				  	if(s.getValoration()!=null){
+  					 media=media+ s.getValoration();
+  					 valorationTotal=valorationTotal+1;
+  					 }
+  				  
+  				  }
+  			  if(media==0 && valorationTotal==0){
+  				  mediaFinal=new Long(0);
+  			  }else{
+  			  mediaFinal= media/valorationTotal;}
+  			  }
+  		  else{
+  			  mediaFinal=new Long(0);
+  		  }
+  		 
+  		 m.setMedia(mediaFinal);
+  		  
+  	  }
 		return movies; 
 	}
 
 	
 	@PreAuthorize("hasAuthority('USER')")
 	@Override
-	public List<MovieDTO> findAllVistasVote() {
+	public List<MovieListDTO> findAllVistasVote() {
+		Long media=new Long(0);
+		Long mediaFinal=new Long(0);
+		Long valorationTotal= new Long(0);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
-		List<MovieDTO> movies= movieDAO.findAllVistasVote(usuarioNormal).stream().map(movie -> new MovieDTO(movie)).collect(Collectors.toList());	
+		List<MovieListDTO> movies= movieDAO.findAllVistasVote(usuarioNormal).stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
+		for(MovieListDTO m:movies){
+	  		  media=new Long(0);
+	  		  valorationTotal= new Long(0);
+	  		  
+	  		  Movie bdMovie = movieDAO.findById(m.getIdMovie());
+	  		  List<Status> status= statusDAO.findByMovies(bdMovie);
+	  		  if(status.size()!=0){
+	  			  for(Status s:status){
+	  				  	if(s.getValoration()!=null){
+	  					 media=media+ s.getValoration();
+	  					 valorationTotal=valorationTotal+1;
+	  					 }
+	  				  
+	  				  }
+	  			  if(media==0 && valorationTotal==0){
+	  				  mediaFinal=new Long(0);
+	  			  }else{
+	  			  mediaFinal= media/valorationTotal;}
+	  			  }
+	  		  else{
+	  			  mediaFinal=new Long(0);
+	  		  }
+	  		 
+	  		 m.setMedia(mediaFinal);
+	  		  
+	  	  }
 		return movies; 
 	}
 	

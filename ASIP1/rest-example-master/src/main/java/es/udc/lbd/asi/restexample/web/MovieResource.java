@@ -55,12 +55,12 @@ public class MovieResource{
     
     
     @GetMapping("/vistas/tovote")
-    public List<MovieDTO> findAllVistasVote() {
+    public List<MovieListDTO> findAllVistasVote() {
         return movieService.findAllVistasVote();
     }
     
     @GetMapping("/list/{tipo}")
-    public List<MovieDTO> findAllMoviesType(@PathVariable String tipo) {
+    public List<MovieListDTO> findAllMoviesType(@PathVariable String tipo) {
         return movieService.findAllMoviesType(tipo);
     }
     
