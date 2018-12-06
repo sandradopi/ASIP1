@@ -1,10 +1,13 @@
 package es.udc.lbd.asi.restexample.web;
 
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import es.udc.lbd.asi.restexample.model.domain.Movie;
 import es.udc.lbd.asi.restexample.model.service.MovieService;
@@ -27,7 +31,7 @@ import es.udc.lbd.asi.restexample.web.exception.RequestBodyNotValidException;
 
 @RestController
 @RequestMapping("/api")
-public class MovieResource {
+public class MovieResource{
 
     @Autowired
     private MovieService movieService;
@@ -43,6 +47,11 @@ public class MovieResource {
         return movieService.findAllMedia();
     }
     
+    @GetMapping("/movies/list/imagenes/{idMovie}")
+    public @ResponseBody byte[] findImagenes(@PathVariable Long idMovie) throws IOException {
+    	InputStream in = getClass().getClassLoader().getResourceAsStream("WEB-INF/images/movie"+idMovie+".jpg");
+        return IOUtils.toByteArray(in);
+    }
     
     
     @GetMapping("/vistas/tovote")

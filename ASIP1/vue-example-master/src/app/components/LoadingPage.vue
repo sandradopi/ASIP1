@@ -1,5 +1,8 @@
 <template>
   <div>
+    <slot/>
+  </br>
+  </br>
     <div v-if="loading" class="loading">
       <spinner 
         message="Loading..." 
@@ -7,7 +10,6 @@
         line-fg-color="#ff0000">
      </spinner>
     </div>
-    <slot/>
   </div>
 </template>
 

@@ -18,6 +18,7 @@ public class MovieDTO {
     @NotEmpty
     private String name;
     private String summary;
+    private String url;
     @NotNull
     private Integer duration;
     @NotNull
@@ -40,6 +41,7 @@ public class MovieDTO {
          this.duration = movie.getDuration();
          this.data = movie.getData();
          this.genre = new GenreDTO(movie.getGenre());
+         this.url= movie.getUrl();
          
          
          for(Actor a: movie.getParticipantes()){
@@ -123,6 +125,15 @@ public class MovieDTO {
 	public void setGenre(GenreDTO genre) {
 		this.genre = genre;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 	
     }
 

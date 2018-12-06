@@ -19,7 +19,7 @@
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           {{ movie.name }}
         </router-link>
-    <img class="imagen"  v-if="!isAdmin" src="movie.jpg">
+    <img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
     </br>
      <p class ="subtitle-tag" v-if="!isAdmin">Approximate average Rating:{{ movie.media}}</p>
     </div>
@@ -30,7 +30,7 @@
         variant="primary"
         @click="eliminar(movie.idMovie, movie.name)">Delete</b-btn>
 
-    <div class= "oculto" v-if= "movie.hidden==false">
+    <div class= "oculto" v-if= "isAdmin && movie.hidden==false">
      <b-btn
         class="ocultado"
         variant="primary"
@@ -70,6 +70,7 @@ export default {
        return auth.isAdmin()
      }
    },
+
   created() {
     this.fetchData()
     

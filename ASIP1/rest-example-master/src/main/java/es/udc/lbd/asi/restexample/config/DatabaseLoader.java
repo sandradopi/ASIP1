@@ -97,29 +97,29 @@ public class DatabaseLoader {
     
     movieService.save
     (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-29"),
-    		genre1, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie1.jpg"));
+    		genre1, participantes,dirigentes,"movie1.jpg"));
     
     movieService.save
     (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-29"),
-    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie2.jpg"));
+    		genre2, participantes,dirigentes,"movie2.jpg"));
     
     movieService.save
     (new Movie(false,"Harry Potter","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie3.jpg"));
+    		genre2, participantes,dirigentes,"movie3.jpg"));
    
     
     movieService.save
     (new Movie(false,"Infiltrados en miami","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie4.jpg"));
+    		genre2, participantes,dirigentes,"movie4.jpg"));
     
     
     movieService.save
     (new Movie(false,"Lara Croft","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie5.jpg"));
+    		genre2, participantes,dirigentes,"movie5.jpg"));
     
     movieService.save
     (new Movie(false,"Fast and Furious","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"/rest-example-master/src/main/java/es/udc/lbd/asi/restexample/repository/util/images/movie6.jpg"));
+    		genre2, participantes,dirigentes,"movie6.jpg"));
     
    
     }

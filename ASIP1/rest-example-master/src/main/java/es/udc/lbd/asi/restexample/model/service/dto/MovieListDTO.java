@@ -10,6 +10,7 @@ public class MovieListDTO {
 	 private String name;
 	 @NotEmpty
 	 private Long media;
+	 private String url;
 	 
 	 public MovieListDTO() {
 			
@@ -19,6 +20,7 @@ public class MovieListDTO {
 		this.idMovie = movie.getIdMovie();
 		this.name = movie.getName();
 		this.media = new Long(0);
+		this.url=movie.getUrl();
 	}
 
 	public Long getIdMovie() {
@@ -43,6 +45,19 @@ public class MovieListDTO {
 
 	public void setMedia(Long media) {
 		this.media = media;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		return "MovieListDTO [idMovie=" + idMovie + ", name=" + name + ", media=" + media + ", url=" + url + "]";
 	}
 	 
 	 
