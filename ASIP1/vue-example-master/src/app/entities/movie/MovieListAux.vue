@@ -107,10 +107,9 @@ export default {
 
   .namemovie {
     margin-top :50px;
-    width:25%;
-    height:15%;
+    margin-left :20px;
+    width:23%;
     float:left;
-
   }
 
 

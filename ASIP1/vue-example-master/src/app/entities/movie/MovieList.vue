@@ -156,6 +156,7 @@ export default {
 
 <style scoped lang="scss">
 
+
   .princ{
     font-size: 40px;
     letter-spacing: 8px;
