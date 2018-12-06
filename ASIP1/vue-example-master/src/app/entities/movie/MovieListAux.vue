@@ -9,14 +9,19 @@
     <h1 class="princ" > {{titulo}}</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
+        {{ movie.name }}
         <router-link 
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
-          {{ movie.name }}
+           <img class="imagen" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+            <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
         </router-link>
+         <div class="ratingt" v-if="!isAdmin">Average Rating:</div>
+          <div class ="media" v-if="!isAdmin">
+        <div class="media1" v-if="!isAdmin"> {{ movie.media}}
+        </div>
+      </div>
     </div>
-    <img class="imagen" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
     </br>
-     <p class ="subtitle-tag">Approximate average Rating:{{ movie.media}}</p>
     </div>
 </div>
 </template>
@@ -101,13 +106,11 @@ export default {
   }
 
   .namemovie {
-    margin-top :60px;
-    margin-bottom:20px;
+    margin-top :50px;
     width:25%;
-    height:20%;
-    font-size: big;
+    height:15%;
     float:left;
- 
+
   }
 
 
@@ -124,12 +127,10 @@ export default {
     
     }
 
-
   .tittle{
+    margin-right:30px;
     font-size: 20px;
-    color: red;
     text-align: center;
-    margin-bottom:10px;
     text-transform: uppercase;
 
       
@@ -140,7 +141,28 @@ export default {
       color: red;
 
     }
-   
+
+.media{
+    margin-right:15px;
+     float:right;
+     width: 70px;
+     height: 70px;
+     border-radius: 50%;
+     background: black;
+}
+
+.media1{
+    margin-top:20px;
+    width: 70px;
+    height: 70px;
+     
+}
+
+.ratingt{
+   float:left;
+   margin-left:35px;
+   font-size: 15px;
+}
 
 
 </style>
