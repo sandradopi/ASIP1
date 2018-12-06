@@ -19,9 +19,9 @@
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           {{ movie.name }}
         </router-link>
-    <img class="imagen"  v-if="!isAdmin && movie.idMovie<9 " v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+    <img class="imagen"  v-if="movie.idMovie<9 " v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
 
-    <img class="imagen"  v-if="!isAdmin && (movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
+    <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
 
     </br>
      <p class ="subtitle-tag" v-if="!isAdmin">Approximate average Rating:{{ movie.media}}</p>
@@ -157,16 +157,14 @@ export default {
 
 
   .namemovie {
-    margin-top :40px;
+    margin-top :60px;
     margin-bottom:20px;
-    width:20%;
+    width:25%;
     height:20%;
     font-size: big;
     float:left;
-    padding:10px;
-    margin-left :50px;
-    background-color: black;
-    border-radius: 20px 20px 20px 20px
+
+ 
   }
 
 
@@ -177,6 +175,8 @@ export default {
     margin-left:10px;
     margin-bottom:10px;
     margin-top:15px;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px
 
     
     }
@@ -238,9 +238,13 @@ export default {
   }
 
   .buttone{
+    margin-left:25px;
     margin-top:10px;
-    width:25%;
-    height:40%;
+    width:90%;
+    padding:20px;
+    height:60%;
+    background-color: black; 
+    border-radius: 20px 20px 20px 20px
 }
 
   .mostrar{

@@ -84,8 +84,12 @@ public class MovieService implements MovieServiceInterface{
 	  Long media=new Long(0);
 	  Long mediaFinal=new Long(0);
 	  Long valorationTotal= new Long(0);
+	  List <MovieListDTO> movies;
 	  
-	  List <MovieListDTO> movies =movieDAO.findAll().stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
+	  
+	 movies= movieDAO.findAllUser().stream().map(movie -> new MovieListDTO(movie)).collect(Collectors.toList());
+	   
+	  
 	  for(MovieListDTO m:movies){
 		  media=new Long(0);
 		  valorationTotal= new Long(0);

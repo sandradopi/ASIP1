@@ -109,7 +109,7 @@ public class DatabaseLoader {
    
     
     movieService.save
-    (new Movie(false,"Infiltrados en miami","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"Ant-Man","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie4.jpg"));
     
     
@@ -122,7 +122,7 @@ public class DatabaseLoader {
     		genre2, participantes,dirigentes,"movie6.jpg"));
     
     movieService.save
-    (new Movie(false,"Creed","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"Assassins´s Creed","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie5.jpg"));
     
     movieService.save

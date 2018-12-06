@@ -91,7 +91,9 @@
               <p class="directors">Directors: {{ directorsAsString }}</p>
             </h4>
           </div>
-<img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+ <img class="imagen"  v-if="movie.idMovie<9 " v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+
+    <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
            
       </div>
 
@@ -392,6 +394,8 @@ export default {
 
     width:30%;
     height:10%;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px
  
     }
 
@@ -401,10 +405,7 @@ export default {
       width:60%;
       height:50%;
 
-
-
     }
-
 
 
     .contenido{

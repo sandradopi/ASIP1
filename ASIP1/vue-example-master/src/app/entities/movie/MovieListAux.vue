@@ -14,7 +14,7 @@
           {{ movie.name }}
         </router-link>
     </div>
-    <img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+    <img class="imagen" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
     </div>
 </div>
 </template>
@@ -99,16 +99,13 @@ export default {
   }
 
   .namemovie {
-    margin-top :20px;
-    width:20%;
+    margin-top :60px;
+    margin-bottom:20px;
+    width:25%;
     height:20%;
     font-size: big;
     float:left;
-    padding:10px;
-    float-left:20px;
-    margin-left :50px;
-    background-color: white;
-    border-radius: 20px 20px 20px 20px
+ 
   }
 
 
@@ -118,7 +115,9 @@ export default {
     height:100%;
     margin-left:10px;
     margin-bottom:10px;
-    margin-top:10px;
+    margin-top:15px;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px
 
     
     }
