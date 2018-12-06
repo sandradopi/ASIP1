@@ -103,6 +103,9 @@ export default {
     color: red;
     text-align: center;
     text-transform: uppercase;
+    margin-bottom:20px;
+    width:100%;
+
   }
 
   .namemovie {

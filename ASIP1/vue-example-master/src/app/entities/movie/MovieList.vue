@@ -15,6 +15,8 @@
 
     <br/>
     <h1 class="princ"> Movies</h1>
+
+    <div class= "titulo1">
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
     {{ movie.name }}
@@ -30,9 +32,6 @@
         <div class="media1" v-if="!isAdmin"> {{ movie.media}}
         </div>
       </div>
-    
-
-    </br>
      
     </div>
     
@@ -163,11 +162,13 @@ export default {
     color: red;
     text-align: center;
     text-transform: uppercase;
+
+
   }
 
 
   .namemovie {
-    margin-top :50px;
+    margin-top :90px;
     margin-left :20px;
     width:23%;
     float:left;
@@ -179,7 +180,6 @@ export default {
   .imagen{
     width:90%;
     height:100%;
-    margin-left:10px;
     margin-bottom:10px;
     margin-top:15px;
     background-color: black;
