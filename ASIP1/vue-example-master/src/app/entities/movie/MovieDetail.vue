@@ -40,8 +40,9 @@
       </div>
     </br>
     </br>
+    </br>
      <div class="datosPelicula">
-     <div v-if="!isAdmin">
+     <div class= "botoncillos" v-if="!isAdmin">
        
       <b-form-checkbox class="cheeck"
                        v-model="statu"
@@ -49,7 +50,7 @@
                        value="vista-novista"
                        unchecked-value="novista-vista"
                        @change="checkboxFuction">
-       <div><strong>Marcar Pelicula como vista</strong></div>
+       <div><strong>Viewed Film</strong></div>
       </b-form-checkbox>
       <b-form-checkbox class="cheeck1"
                        v-if="statu=='novista-vista'"
@@ -57,7 +58,7 @@
                        value="pendiente-nopendiente"
                        unchecked-value="nopendiente-pendiente"
                        @change="checkboxFuctionPen">
-       <div><strong>Marcar Pelicula como pendiente</strong></div>
+       <div><strong>Pending Film</strong></div>
       </b-form-checkbox>
 
       <div class= "puntuation" v-if = "statu == 'vista-novista'">
@@ -71,7 +72,9 @@
      
 
   </div>
+  
 </br>
+ <div class= "contenido">
               <h1 class="title">
                 {{movie.name}}
               </h1>
@@ -88,7 +91,10 @@
               <p class="directors">Directors: {{ directorsAsString }}</p>
             </h4>
           </div>
+<img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+           
       </div>
+
     </div>
   </LoadingPage>
 </template>
@@ -245,6 +251,9 @@ export default {
     background-color:black;
     padding:3%;
     width:80%;
+    height:100%;
+    margin-left:120px;
+
   }
   .oculto{
      width:40%;
@@ -277,6 +286,7 @@ export default {
    .contenido{
     margin-top:5px;
    }
+
 .eliminado {
     margin-bottom:20px;
     background-color: #f44336; 
@@ -321,12 +331,8 @@ export default {
     color: white;
   
 }
-.buttone{
-  margin-top:10px;
-  width:60%;
-  height:40%;
 
-}
+
 
 .mostrar{
     margin-left:10px;
@@ -382,5 +388,32 @@ export default {
     max-width: 450px;
     
   }
+  .imagen{
+
+    width:30%;
+    height:10%;
+ 
+    }
+
+    .botoncillos{
+      margin-top:30px;
+      float:right;
+      width:60%;
+      height:50%;
+
+
+
+    }
+
+   
+
+    .contenido{
+      margin-top:40px;
+      float:right;
+      margin-right:123px;
+      
+
+
+    }
 
 </style>

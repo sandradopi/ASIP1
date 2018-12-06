@@ -169,8 +169,8 @@ export default {
 
 
   .imagen{
-    width:50%;
-    height:30%;
+    width:90%;
+    height:100%;
     margin-left:10px;
     margin-bottom:10px;
     margin-top:10px;

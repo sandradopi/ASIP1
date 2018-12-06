@@ -14,7 +14,7 @@
           {{ movie.name }}
         </router-link>
     </div>
-    <img class="imagen" src="movie.jpg">
+    <img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
     </div>
 </div>
 </template>
@@ -100,7 +100,7 @@ export default {
 
   .namemovie {
     margin-top :20px;
-    width:28%;
+    width:20%;
     height:20%;
     font-size: big;
     float:left;
@@ -111,12 +111,18 @@ export default {
     border-radius: 20px 20px 20px 20px
   }
 
-  .imagen{
-    width:50%;
-    height:30%;
-    margin-left:70px;
 
+
+  .imagen{
+    width:90%;
+    height:100%;
+    margin-left:10px;
+    margin-bottom:10px;
+    margin-top:10px;
+
+    
     }
+
 
   .tittle{
     font-size: 20px;
