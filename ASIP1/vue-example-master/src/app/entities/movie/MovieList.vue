@@ -19,7 +19,10 @@
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           {{ movie.name }}
         </router-link>
-    <img class="imagen"  v-if="!isAdmin" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+    <img class="imagen"  v-if="!isAdmin && movie.idMovie<9 " v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
+
+    <img class="imagen"  v-if="!isAdmin && (movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
+
     </br>
      <p class ="subtitle-tag" v-if="!isAdmin">Approximate average Rating:{{ movie.media}}</p>
     </div>
@@ -154,15 +157,15 @@ export default {
 
 
   .namemovie {
-    margin-top :20px;
+    margin-top :40px;
+    margin-bottom:20px;
     width:20%;
     height:20%;
     font-size: big;
     float:left;
     padding:10px;
-    float-left:20px;
     margin-left :50px;
-    background-color: white;
+    background-color: black;
     border-radius: 20px 20px 20px 20px
   }
 
@@ -173,7 +176,7 @@ export default {
     height:100%;
     margin-left:10px;
     margin-bottom:10px;
-    margin-top:10px;
+    margin-top:15px;
 
     
     }
@@ -192,6 +195,7 @@ export default {
    
   
   .eliminado {
+
     background-color: #f44336; 
     border: none;
     color: white;
@@ -212,6 +216,7 @@ export default {
   
   }
   .ocultado {
+
     margin-top:10px;
     background-color: #555555; 
     border: none;

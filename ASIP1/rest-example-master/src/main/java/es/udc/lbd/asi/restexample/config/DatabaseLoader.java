@@ -114,11 +114,19 @@ public class DatabaseLoader {
     
     
     movieService.save
-    (new Movie(false,"Lara Croft","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"Tomb Raider","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie5.jpg"));
     
     movieService.save
     (new Movie(false,"Fast and Furious","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes,"movie6.jpg"));
+    
+    movieService.save
+    (new Movie(false,"Creed","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes,"movie5.jpg"));
+    
+    movieService.save
+    (new Movie(false,"Civil War","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie6.jpg"));
     
    

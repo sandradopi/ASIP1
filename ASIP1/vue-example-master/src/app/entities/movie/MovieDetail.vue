@@ -405,12 +405,12 @@ export default {
 
     }
 
-   
+
 
     .contenido{
       margin-top:40px;
       float:right;
-      margin-right:123px;
+      margin-right:120px;
       
 
 
