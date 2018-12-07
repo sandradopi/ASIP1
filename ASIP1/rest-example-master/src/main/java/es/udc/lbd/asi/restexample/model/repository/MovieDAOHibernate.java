@@ -16,7 +16,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 	
 	@Override
 	public List<Movie> findAll() {
-		return getSession().createQuery("from Movie").list();
+		return getSession().createQuery("from Movie m order by m.name").list();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 
 		@Override
 		public List<Movie> findAllUser() {
-			return getSession().createQuery("from Movie m where m.hidden=false").list();
+			return getSession().createQuery("from Movie m where m.hidden=false order by m.name").list();
 			}
 
 		@Override

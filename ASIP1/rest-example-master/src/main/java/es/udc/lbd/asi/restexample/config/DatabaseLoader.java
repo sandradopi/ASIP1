@@ -104,12 +104,12 @@ public class DatabaseLoader {
     		genre2, participantes,dirigentes,"movie2.jpg"));
     
     movieService.save
-    (new Movie(false,"Harry Potter","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"Piratas del Caribe","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie3.jpg"));
    
     
     movieService.save
-    (new Movie(false,"Ant-Man","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    (new Movie(false,"La purga","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
     		genre2, participantes,dirigentes,"movie4.jpg"));
     
     
@@ -122,12 +122,12 @@ public class DatabaseLoader {
     		genre2, participantes,dirigentes,"movie6.jpg"));
     
     movieService.save
-    (new Movie(false,"Assassins´s Creed","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"movie5.jpg"));
+    (new Movie(false,"Los Vengadores","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes,"movie7.jpg"));
     
     movieService.save
-    (new Movie(false,"Civil War","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
-    		genre2, participantes,dirigentes,"movie6.jpg"));
+    (new Movie(false,"Black Panther","La pelicula va sobre...",250,  sdf.parse("2018-11-02"),
+    		genre2, participantes,dirigentes,"movie8.jpg"));
     
    
     }

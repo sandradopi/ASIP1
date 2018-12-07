@@ -20,12 +20,11 @@
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
     {{ movie.name }}
-        <router-link
+      <router-link
          :to="{ name: 'MovieDetail', params: { id: movie.idMovie }}">
           <img class="imagen"  v-if="movie.idMovie<9 " v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
-
-    <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
-        </router-link>
+          <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
+      </router-link>
       
       <div class="ratingt" v-if="!isAdmin">Average Rating:</div>
       <div class ="media" v-if="!isAdmin">
@@ -169,7 +168,7 @@ export default {
 
   .namemovie {
     margin-top :50px;
-    margin-left :20px;
+    margin-left:25px;
     width:23%;
     float:left;
 
@@ -179,7 +178,6 @@ export default {
 
   .imagen{
     width:90%;
-    height:100%;
     margin-bottom:10px;
     margin-top:15px;
     background-color: black;
