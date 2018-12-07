@@ -9,11 +9,12 @@
     </div>
     <br/>
     <h1 class="princ"> Users</h1>
-    <div class= "namemovie" v-for="user in users" :key="user.idUser">
+    <div class= "namemovie" v-for="user in users" >
     <div class= "tittle">
+      {{ user.login }} {{user.countVista}}
         <router-link
          :to="{ name: 'UserDetail', params: { id: user.login }}">
-         {{ user.login }} {{user.countVista}}
+         <img class="imagen" v-bind:src="'http://localhost:8080/api/user/list/imagenes/'+ user.login">
         </router-link>
     </div>
      </div>
@@ -74,33 +75,39 @@ export default {
     color: red;
     text-align: center;
     text-transform: uppercase;
+
+
   }
 
 
   .namemovie {
-    margin-top :20px;
-    width:28%;
-    height:20%;
-    font-size: big;
+    margin-top :50px;
+    margin-left:25px;
+    width:23%;
     float:left;
-    padding:10px;
-    float-left:20px;
-    margin-left :50px;
-    background-color: white;
-    border-radius: 20px 20px 20px 20px
+
   }
 
 
-  .tittle{
-    font-size: 20px;
-    color: red;
-    text-align: center;
+
+  .imagen{
+    width:90%;
     margin-bottom:10px;
+    margin-top:15px;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px
+
+    
+    }
+
+  .tittle{
+    margin-right:30px;
+    font-size: 20px;
+    text-align: center;
     text-transform: uppercase;
 
       
     }
-   
   
 
 

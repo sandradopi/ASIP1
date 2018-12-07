@@ -1,10 +1,13 @@
 package es.udc.lbd.asi.restexample.web;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.udc.lbd.asi.restexample.model.domain.Movie;
@@ -60,6 +64,12 @@ public class UserResource {
     public void update(@PathVariable String login, @PathVariable String noti) {
        
        userService.update(login,noti);
+    }
+    
+    @GetMapping("/list/imagenes/{login}")
+    public @ResponseBody byte[] findImagenes(@PathVariable String login) throws IOException {
+    	InputStream in = getClass().getClassLoader().getResourceAsStream("WEB-INF/images1/"+login+".jpg");
+        return IOUtils.toByteArray(in);
     }
   
     
