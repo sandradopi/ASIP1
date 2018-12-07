@@ -138,7 +138,8 @@ export default {
       allparticipantes: [],
       alldirigentes: [],
       allgenre: [],
-      selected: []
+      selected: [],
+      errors: null
     }
   
   },
@@ -169,6 +170,34 @@ export default {
     }
   },
   methods: {
+
+    checkForm () {
+      if (this.movie.name && this.movie.duration && this.movie.data && this.movie.genre && this.movie.dirigentes) {
+        return true;
+      }
+
+      if (!this.movie.name) {
+        this.errors="Title is a required field. "
+        return false;
+      }
+      if (!this.movie.duration) {
+        this.errors="Duration is a required field. "
+        return false;
+      }
+      if (!this.movie.data) {
+        this.errors= "Data is a required field. "
+        return false;
+      }
+      if (!this.movie.genre) {
+        this.errors ="Genre is a required field."
+        return false;
+      }
+      if (!this.movie.dirigentes) {
+        this.errors= "Directors is a required field."
+        return false;
+      }
+
+    },
     nameCustom ({ name, surname1 }) {
       return `${name}  ${surname1}`
     },
@@ -194,16 +223,23 @@ export default {
     },
 
     save() {
+       if (this.checkForm() == true){
+          if (this.$route.params.id) {
+            HTTP.put(`movies/${this.$route.params.id}`, this.movie)
+            .then(this._successHandler)
+            .catch(this._errorHandler)
+          } else {
+            HTTP.post('movies', this.movie)
+            .then(this._successHandler)
+            .catch(this._errorHandler)
+          }
+         
+        }else{
+            Vue.notify({
+              text: this.errors,
+              type: 'error'})
+        }
         
-        if (this.$route.params.id) {
-        HTTP.put(`movies/${this.$route.params.id}`, this.movie)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      } else {
-        HTTP.post('movies', this.movie)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      }
     },
     notification(){
       if (this.error=="movieDTO.duration no puede ser null"){

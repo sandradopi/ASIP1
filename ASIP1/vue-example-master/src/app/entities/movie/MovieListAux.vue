@@ -15,9 +15,9 @@
            <img class="imagen" v-bind:src="'http://localhost:8080/api/movies/list/imagenes/'+ movie.idMovie">
             <img class="imagen"  v-if="(movie.idMovie==9 || movie.idMovie>9)" src="movie.jpg">
         </router-link>
-         <div class="ratingt" v-if="!isAdmin">Average Rating:</div>
-          <div class ="media" v-if="!isAdmin">
-        <div class="media1" v-if="!isAdmin"> {{ movie.media}}
+         <div class="ratingt" >Average Rating:</div>
+          <div class ="media" >
+        <div class="media1" > {{ movie.media}}
         </div>
       </div>
     </div>

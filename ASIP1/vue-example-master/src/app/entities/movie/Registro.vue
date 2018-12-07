@@ -21,7 +21,7 @@
 
       
       <b-form-group
-        label="Login:"
+        label="Login: *"
         label-for="login">
         <b-form-input
           id="title"
@@ -33,7 +33,7 @@
       </b-form-group>
 
       <b-form-group
-        label="Password:"
+        label="Password: *"
         label-for="password">
         <b-form-input
           id="password"
@@ -47,7 +47,7 @@
 
 
        <b-form-group
-        label="Email:"
+        label="Email: *"
         label-for="email">
         <b-form-input
           id="email"
@@ -106,7 +106,9 @@ export default {
       user: {},
       error: null,
       statu:null,
-      options: ['SMS','EMAIL']
+      options: ['SMS','EMAIL'],
+      errors:null,
+      aux:null,
     }
   },
  
@@ -121,14 +123,40 @@ export default {
 
       
     },
-    save() {
-      if(this.statu=='false'){
-        this.user.noti=null;
+    checkForm () {
+      if (this.user.login && this.user.password && this.user.email) {
+        return true;
       }
-        return HTTP.post('register', this.user)
-        .then(this.userLogin)
-        .catch(this._errorHandler)
 
+      if (!this.user.login) {
+        this.errors = "Login is a required field."
+        return false;
+      }
+      if (!this.user.password) {
+        this.errors ="Password is a required field. "
+        return false;
+      }
+      if (!this.user.email) {
+        this.errors.push= "Email is a required field. "
+        return false;
+      }
+    },
+
+    save() {
+       if (this.checkForm() == true) {
+        if(this.statu=='false'){
+          this.user.noti=null;
+        }
+          return HTTP.post('register', this.user)
+          .then(this.userLogin)
+          .catch(this._errorHandler)
+      }else{
+        
+        Vue.notify({
+          text: this.errors,
+          type: 'error'})
+    
+      }
       
     },
     notification(){

@@ -84,6 +84,7 @@ export default {
       actor: {},
       error: null,
       loading: false,
+      errors:null,
 
     }
   
@@ -101,16 +102,37 @@ export default {
     }
   },
   methods: {
+    checkForm () {
+      if (this.actor.name && this.actor.surname1 || this.actor.name && this.actor.surname1 && this.actor.surname2 && this.actor.birthdate||this.actor.name && this.actor.surname1 && this.actor.surname2 || this.actor.name && this.actor.surname1 && this.actor.birthdate) {
+        return true;
+      }
+
+      if (!this.actor.name) {
+        this.errors= "Name is a required field"
+        return false;
+      }
+      if (!this.actor.surname1) {
+        this.errors= "The first surname is a required field. "
+        return false;
+      }
+    },
     
     save() {
-      if (this.$route.params.id) {
-        HTTP.put(`actors/${this.$route.params.id}`, this.actor)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      } else {
-        HTTP.post('actors', this.actor)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
+      if (this.checkForm() == true) { 
+        if (this.$route.params.id) {
+          HTTP.put(`actors/${this.$route.params.id}`, this.actor)
+          .then(this._successHandler)
+          .catch(this._errorHandler)
+        } else {
+          HTTP.post('actors', this.actor)
+          .then(this._successHandler)
+          .catch(this._errorHandler)
+        }
+
+      }else{
+        Vue.notify({
+          text: this.errors,
+          type: 'error'})
       }
         
       

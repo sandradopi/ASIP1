@@ -71,6 +71,7 @@ export default {
       director: {},
       error: null,
       loading: false,
+      errors:null,
 
     }
   
@@ -88,17 +89,38 @@ export default {
     }
   },
   methods: {
+     checkForm () {
+      if (this.director.name && this.director.surname1||this.director.name && this.director.surname1 && this.director.surname2) {
+        return true;
+      }
+
+      if (!this.director.name) {
+        this.errors= "Name is a required field."
+        return false;
+      }
+      if (!this.director.surname1) {
+        this.errors= "Surname1 is a required. field "
+        return false;
+      }
+    },
     
     save() {
-      if (this.$route.params.id) {
-        HTTP.put(`directors/${this.$route.params.id}`, this.director)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
-      } else {
-        HTTP.post('directors', this.director)
-        .then(this._successHandler)
-        .catch(this._errorHandler)
+      if (this.checkForm() == true) {
+        if (this.$route.params.id) {
+          HTTP.put(`directors/${this.$route.params.id}`, this.director)
+          .then(this._successHandler)
+          .catch(this._errorHandler)
+        } else {
+          HTTP.post('directors', this.director)
+          .then(this._successHandler)
+          .catch(this._errorHandler)
+        }
+      }else{
+        Vue.notify({
+          text: this.errors,
+          type: 'error'})
       }
+      
 
       
     },

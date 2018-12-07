@@ -47,6 +47,7 @@ export default {
       genre: {},
       error: null,
       loading: false,
+      errors: null,
 
     }
   
@@ -57,11 +58,27 @@ export default {
       this.genre = {}
   },
   methods: {
+
+    checkForm () {
+      if (this.genre.type) {
+        return true;
+      }else{
+        this.errors ="Type is a required field."
+        return false;
+      }
+    },
     
     save() {
+      if (this.checkForm() == true) {
         HTTP.post('genres', this.genre)
         .then(this._successHandler)
         .catch(this._errorHandler)
+      }else{
+        Vue.notify({
+          text: this.errors,
+          type: 'error'})
+      }
+        
       
     },
     back() {

@@ -91,13 +91,14 @@ public class UserService implements UserServiceInterface{
 	         
 	        if(login == null){
 	        	  throw new RequiredFieldsException("The login is a required field");
-	        }else if (email == null){
-	        	  throw new RequiredFieldsException("The email is a required field");
-	        }else if (password==null){
-	        	throw new RequiredFieldsException("The password is a required field");
+	        }else if (password == null){
+	        	  throw new RequiredFieldsException("The password is a required field");
 	        }else if(password.length()<4){
-	        	throw new PasswordTooShort("The password is too short");
-	        }
+	        	throw new PasswordTooShort("The password is too short, minimum 4 letters please");
+	        
+	        }else if (email==null){
+	        	throw new RequiredFieldsException("The email is a required field");}
+	       
 
 	        
 	         String encryptedPassword = passwordEncoder.encode(password);
