@@ -197,7 +197,8 @@ export default {
    
   
   .eliminado {
-
+    float:left;
+    margin-left:40px;
     background-color: #f44336; 
     border: none;
     color: white;
@@ -218,8 +219,8 @@ export default {
   
   }
   .ocultado {
-
-    margin-top:10px;
+    float:right;
+    margin-right:70px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -240,18 +241,16 @@ export default {
   }
 
   .buttone{
-    margin-left:15px;
     margin-top:10px;
-    margin-bottom:30px;
-    width:80%;
-    padding:20px;
-    height:60%;
+    margin-bottom:90px;
+    width:100%;
     background-color: black; 
     border-radius: 20px 20px 20px 20px
 }
 
   .mostrar{
-    margin-top:10px;
+    float:right;
+    margin-right:70px;
     background-color: green; 
     border: none;
     color: white;

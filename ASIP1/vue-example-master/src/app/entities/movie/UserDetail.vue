@@ -20,6 +20,7 @@
                     @click="Save()">Save</b-btn>
 
      <h1 class="title" :key="user.login"> {{user.login}}</h1>  
+    <img class="imagen" src="user.jpg ">
      <h4 class="subtitle">
       </br>
                   <div class="subdatos">
@@ -30,10 +31,11 @@
                   <p class="subtitle-tag1">Peliculas pendientes: {{user.countPendiente}} |</p>
                   <p class="subtitle-tag1">Peliculas vistas: {{user.countVista}} |</p>
                   <p class="subtitle-tag1">Peliculas valoradas: {{user.countValoration}} </p>
-
                  </div>
      </h4>    
+      
  </div>
+
 
 </br>
  <div class= "Noti" 
@@ -178,7 +180,8 @@ export default {
  .datosUsuario{
     background-color:black;
     padding:3%;
-    width:80%;
+    width:90%;
+
   }
 
   .subdatos{
@@ -191,6 +194,7 @@ export default {
   }
 
   .title{
+    margin-left:185px;
     font-size: 50px;
     font-weight: 700;
     color: white;
@@ -227,5 +231,12 @@ export default {
     color: white;
   
   }
+  .imagen{
+    float:left;
+    width:15%;
+    margin-right:20px;
+    border-radius: 20px 20px 20px 20px
+ 
+    }
 
 </style>

@@ -12,14 +12,17 @@
          variant="primary">New</b-btn>
     <br/>
     <h1 class="princ"> Genres</h1>
-    <div class= "namegenre" v-for="genre in genres" :key="genre.idGenre">
+    <div class= "namegenre" v-for="genre in genres">
+    <div class= "aux">
+        {{ genre.type }}
+    </div>
     <div class= "tittle">
         <router-link
          :to="{ name: ''}">
-          {{ genre.type }}
+         <img class="imagen" src="genero.jpg">
         </router-link>
     </div>
-    <img class="imagen" src="genero.jpg">
+    
   </LoadingPage>
 </template>
 
@@ -75,37 +78,34 @@ export default {
     text-align: center;
     text-transform: uppercase;
   }
-
+  
   .namegenre {
-    margin-top :20px;
-    width:28%;
-    height:20%;
+    margin-top :30px;
+    width:20%;
     font-size: big;
     float:left;
-    padding:10px;
-    float-left:20px;
-    margin-left :50px;
-    background-color: white;
-    border-radius: 20px 20px 20px 20px
-  
+   
+   
   }
+  
 
   .imagen{
-    width:50%;
-    height:30%;
-    margin-left:70px;
+    float:left;
+    margin-top:10px;
+    width:80%;
+    margin-left:7px;
+    border-radius: 20px 20px 20px 20px
     
     }
 
-  .tittle{
-    font-size: 20px;
-    color: red;
+    .aux{
+    font-size: 24px;
+    color: white;
     text-align: center;
     margin-bottom:10px;
     text-transform: uppercase;
-      
+    margin-right:30px;
     }
-
    
 </style>
 

@@ -99,7 +99,7 @@ export default {
         return false;
       }
       if (!this.director.surname1) {
-        this.errors= "Surname1 is a required. field "
+        this.errors= "The first surname is a required. field "
         return false;
       }
     },

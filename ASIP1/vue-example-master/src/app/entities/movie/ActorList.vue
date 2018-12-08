@@ -14,9 +14,10 @@
      <h1 class="princ"> Actors</h1>
     <div class= "nameactor" v-for="actor in actors" :key="actor.idActor">
     <div class= "tittle">
+    {{ actor.name }} {{actor.surname1}}
         <router-link
          :to="{ name: ''}">
-          {{ actor.name }} {{actor.surname1}}
+        <img class="imagen" src="perfil.jpg">
         </router-link>
     </div>
     <div class="buttone" >
@@ -31,7 +32,7 @@
            variant="primary">Edit</b-btn>
 
      </div>
-    <img class="imagen" src="perfil.jpg">
+    
     </div>
   </LoadingPage>
 </template>
@@ -117,28 +118,26 @@ export default {
   
   .nameactor {
     margin-top :20px;
-    width:28%;
+    width:20%;
     height:20%;
     font-size: big;
     float:left;
-    padding:10px;
-    float-left:20px;
-    margin-left :50px;
-    background-color: white;
+    padding:8px;
     border-radius: 20px 20px 20px 20px
   }
   
 
   .imagen{
+    margin-top:10px;
     width:50%;
-    height:30%;
-    margin-left:70px;
+    margin-left:7px;
+    border-radius: 20px 20px 20px 20px
     
     }
 
   .tittle{
-    font-size: 20px;
-    color: red;
+    font-size: 23px;
+    color: white;
     text-align: center;
     margin-bottom:10px;
     text-transform: uppercase;
@@ -146,10 +145,15 @@ export default {
     }
    
 .buttone{
-    margin-top:10px;
-    width:30%;
-    height:40%;
-}
+    margin-left:30px;
+    margin-top:20px;
+    margin-bottom:30px;
+    width:100%;
+    background-color: black; 
+    border-radius: 20px 20px 20px 20px
+  }
+
+
 .eliminado {
     margin-left:10px;
     margin-bottom:10px;

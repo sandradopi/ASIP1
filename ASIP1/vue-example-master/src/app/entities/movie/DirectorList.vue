@@ -14,9 +14,10 @@
      <h1 class="princ"> Directors</h1>
     <div class= "namedirector" v-for="director in directors" :key="director.idDirector">
     <div class= "tittle">
+      {{ director.name }} {{director.surname1}}
         <router-link
          :to="{ name: ''}">
-          {{ director.name }} {{director.surname1}}
+         <img class="imagen" src="perfil.jpg">
         </router-link>
     </div>
      <div class="buttone" >
@@ -31,7 +32,7 @@
            variant="primary">Edit</b-btn>
 
      </div>
-    <img class="imagen" src="director.jpg">
+    
   </LoadingPage>
 </template>
 
@@ -121,44 +122,43 @@ export default {
   
   .namedirector {
     margin-top :20px;
-    width:28%;
+    width:20%;
     height:20%;
     font-size: big;
     float:left;
-    padding:10px;
-    float-left:20px;
-    margin-left :50px;
-    background-color: white;
+    padding:8px;
     border-radius: 20px 20px 20px 20px
   }
   
 
   .imagen{
+    margin-top:10px;
     width:50%;
-    height:30%;
-    margin-left:100px;
-    float:right;
+    margin-left:7px;
+    border-radius: 20px 20px 20px 20px
     
-    
-    }
-
-  .buttone{
-    float:left;
-    width:10%;
-    height:10%;
-
     }
 
   .tittle{
-    font-size: 20px;
-    color: red;
+    font-size: 23px;
+    color: white;
     text-align: center;
     margin-bottom:10px;
     text-transform: uppercase;
       
     }
+   
+.buttone{
+    margin-left:30px;
+    margin-top:20px;
+    margin-bottom:30px;
+    width:100%;
+    background-color: black; 
+    border-radius: 20px 20px 20px 20px
+  }
 
-    .eliminado {
+
+.eliminado {
     margin-left:10px;
     margin-bottom:10px;
     background-color: #f44336; 
@@ -183,6 +183,7 @@ export default {
 
 .editado {
     margin-left:10px;
+    margin-bottom:10px;
     border: none;
     color: white;
     padding: 8px 29px;
@@ -201,7 +202,6 @@ export default {
     color: white;
   
 }
-
    
 
 
