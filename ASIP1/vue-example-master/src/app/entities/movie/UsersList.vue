@@ -11,11 +11,18 @@
     <h1 class="princ"> Users</h1>
     <div class= "namemovie" v-for="user in users" >
     <div class= "tittle">
-      {{ user.login }} {{user.countVista}}
+      {{ user.login }} 
         <router-link
          :to="{ name: 'UserDetail', params: { id: user.login }}">
-         <img class="imagen" v-bind:src="'http://localhost:8080/api/user/list/imagenes/'+ user.login">
+         <img class="imagen" src="user.jpg ">
         </router-link>
+
+        <div class="ratingt" >Viewed Films:</div>
+      <div class ="media" >
+        <div class="media1" > {{user.countVista}}
+        </div>
+      </div>
+
     </div>
      </div>
   </LoadingPage>
@@ -83,7 +90,7 @@ export default {
   .namemovie {
     margin-top :50px;
     margin-left:25px;
-    width:23%;
+    width:15%;
     float:left;
 
   }
@@ -108,6 +115,29 @@ export default {
 
       
     }
+    .media{
+    margin-right:15px;
+     float:right;
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+     background: black;
+}
+
+.media1{
+    margin-top:7px;
+    width: 40px;
+    height: 40px;
+     
+}
+
+.ratingt{
+   float:left;
+   margin-left:18px;
+   margin-top:10px;
+   font-size: 10px;
+}
+
   
 
 

@@ -50,7 +50,7 @@
                        value="vista-novista"
                        unchecked-value="novista-vista"
                        @change="checkboxFuction">
-       <div><strong>Viewed Film</strong></div>
+       <div><strong>Mark as viewed movie</strong></div>
       </b-form-checkbox>
       <b-form-checkbox class="cheeck1"
                        v-if="statu=='novista-vista'"
@@ -58,7 +58,7 @@
                        value="pendiente-nopendiente"
                        unchecked-value="nopendiente-pendiente"
                        @change="checkboxFuctionPen">
-       <div><strong>Pending Film</strong></div>
+       <div><strong>Mark as pending movie</strong></div>
       </b-form-checkbox>
 
       <div class= "puntuation" v-if = "statu == 'vista-novista'">
@@ -402,6 +402,7 @@ export default {
     .botoncillos{
       margin-top:30px;
       float:right;
+      margin-right:20px;
       width:60%;
       height:50%;
 
