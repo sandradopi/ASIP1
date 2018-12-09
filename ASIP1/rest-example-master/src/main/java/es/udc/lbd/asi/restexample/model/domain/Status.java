@@ -1,5 +1,7 @@
 package es.udc.lbd.asi.restexample.model.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -22,6 +26,10 @@ public class Status {
 	private Integer valoration;
 	@Enumerated(EnumType.STRING)
 	private TipoStatus type;
+	
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn (name = "idMovie")
@@ -37,12 +45,13 @@ public class Status {
 		
 	}
 	
-	public Status(Integer valoration, TipoStatus type, Movie movie, NormalUser user) {
+	public Status(Integer valoration, TipoStatus type, Movie movie, NormalUser user, Date data) {
 		super();
 		this.valoration = valoration;
 		this.type = type;
 		this.movie = movie;
 		this.user = user;
+		this.data=data;
 	}
 	
 	
@@ -54,6 +63,7 @@ public class Status {
 		this.type = type;
 	}
 
+	
 	public Integer getValoration() {
 		return valoration;
 	}
@@ -94,11 +104,15 @@ public class Status {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Status [idStatus=" + idStatus + ", valoration=" + valoration + ", type=" + type + ", movie=" + movie
-				+ ", user=" + user + "]";
+	public Date getData() {
+		return data;
 	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	
 
 	
 	

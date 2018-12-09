@@ -2,6 +2,7 @@ package es.udc.lbd.asi.restexample.web;
 
 
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class StatusResource {
 
 
 	@PostMapping("/{idMovie}/{statu}")
-	public void save(@PathVariable Long idMovie, @PathVariable String statu)   {
+	public void save(@PathVariable Long idMovie, @PathVariable String statu) throws ParseException   {
 			statusService.save(idMovie, statu);
 
 	}

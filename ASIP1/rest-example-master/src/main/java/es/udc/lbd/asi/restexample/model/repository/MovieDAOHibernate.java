@@ -37,7 +37,7 @@ public class MovieDAOHibernate extends GenericDAOHibernate implements MovieDAO {
 
 		@Override
 		public List<Movie> findAllMoviesType(NormalUser usuarioNormal, TipoStatus tipo) {
-			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type=:tipo AND movie.hidden=false AND s.user= :usuarioNormal").setParameter("usuarioNormal", usuarioNormal).setParameter("tipo", tipo).list();
+			return getSession().createQuery("select movie from Status as s inner join s.movie as movie WHERE s.movie = movie AND s.type=:tipo AND movie.hidden=false AND s.user= :usuarioNormal order by s.data desc").setParameter("usuarioNormal", usuarioNormal).setParameter("tipo", tipo).list();
 			
 		}
 

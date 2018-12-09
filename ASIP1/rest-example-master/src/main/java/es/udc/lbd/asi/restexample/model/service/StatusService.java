@@ -1,6 +1,10 @@
 package es.udc.lbd.asi.restexample.model.service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -31,7 +35,7 @@ public class StatusService implements StatusServiceInterface {
 	@PreAuthorize("hasAuthority('USER')")
 	@Transactional(readOnly = false)
 	@Override
-	public void save(Long MovieId, String statu) {
+	public void save(Long MovieId, String statu) throws ParseException {
 		Movie bdMovie = movieDAO.findById(MovieId);
 		NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
 		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
@@ -43,6 +47,12 @@ public class StatusService implements StatusServiceInterface {
 			} else if(statu.equals("nopendiente-pendiente")){
 				bdStatus = new Status(null,TipoStatus.PENDIENTE);	
 			}
+				Date ahora = new Date();
+	    	    SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+	    	    String actualDate= formateador.format(ahora);
+	    	    Date data = formateador.parse(actualDate);
+	    	     
+	    	    bdStatus.setData(data);
 				bdStatus.setMovie(bdMovie);
 				bdStatus.setNormalUser(usuarioNormal);
 				statusDAO.save(bdStatus);
