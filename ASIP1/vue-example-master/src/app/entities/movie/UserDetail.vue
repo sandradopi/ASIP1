@@ -1,12 +1,33 @@
 <template>
 <div>
+
+<MovieListAux v-if="bol== true" v-bind:tipo="this.tipo"></MovieListAux>
+
     <div
       v-if="error"
       class="error">
       <pre>{{ error }}</pre>
     </div>
+<div class="botones" v-if=" WhatLogin() ==this.user.login ">
+  <div class="peliculas1">
+    <b-btn class="personal"
+          :to="{ name: 'UserDetail', params: { id: this.user.login}}"
+          @click="bolAuxNeg()"
+          variant="primary">Personal Information</b-btn>
+</div>
+ <div class="peliculas1">
+    <b-btn class="viewed"
+          @click="bolAux('vista')"
+          variant="primary">Viewed Films</b-btn>
+</div>
 
-  <div class= "datosUsuario" >
+<div class="peliculas2">
+    <b-btn class="pending"
+          @click="bolAux('pendiente')"
+          variant="primary">Pending Films</b-btn>
+</div>
+</div>
+  <div class= "datosUsuario">
      <b-btn
                     class="editado"
                     v-if=" WhatLogin() ==this.user.login && this.control==false"
@@ -23,7 +44,7 @@
     <img class="imagen" src="user.jpg ">
      <h4 class="subtitle">
       </br>
-                  <div class="subdatos">
+                  <div class="subdatos" >
                   <p class="subtitle-tag">Email: {{user.email}} </p>
                   <p class="subtitle-tag"
                    v-if = "WhatLogin() ==this.user.login"> Notifications by: {{user.noti}} </p>
@@ -64,7 +85,10 @@
 
  </div >
 
-  </div>
+</br>
+ 
+</div>
+  
 </template>
 
 <script>
@@ -72,10 +96,11 @@ import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
 import Vue from 'vue'
+import MovieListAux from '../../entities/movie/MovieListAux'
 
 
 export default {
-  components: {  Multiselect },
+  components: {  Multiselect, MovieListAux },
   data() {
     return { //datos que usamos
       error: null,
@@ -84,6 +109,9 @@ export default {
       options: ['SMS','EMAIL'],
       statu:"false",
       aux:null,
+      bol:false,
+      tipo:""
+
 
     }
   },
@@ -125,6 +153,20 @@ export default {
     },
      WhatLogin() {
       return auth.user.login
+    },
+
+    bolAux(tipologia){
+      if (tipologia=='vista'){
+
+        this.tipo='Viewed Movies';
+      }else if (tipologia=='pendiente'){
+        this.tipo='Pending Movies'
+      }
+      this.bol=true;
+    },
+    bolAuxNeg(){
+      this.bol=false;
+      this.tipo=''
     },
 
      Control() {
@@ -177,7 +219,21 @@ export default {
 
 <style scoped lang="scss">
 
+.peliculas1{
+  float:left;
+  margin-right:2px;
+
+}
+
+
+.botones{
+  margin-left:70px;
+  margin-top:90px;
+
+}
+
  .datosUsuario{
+    margin-left:70px;
     background-color:black;
     padding:3%;
     width:90%;

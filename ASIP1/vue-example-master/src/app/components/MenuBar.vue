@@ -38,6 +38,7 @@
           exact>Users</b-nav-item>
 
         <b-nav-item
+          class="nav-item"
           v-if="isAdmin"
           :to="{ name: 'ActorList' }"
           exact>Actors</b-nav-item>
@@ -66,8 +67,12 @@
 
       <b-navbar-nav class="ml-auto">
         <b-nav-item
-         v-if="isLogged"
+         v-if="isLogged && !isAdmin" 
          :to="{ name: 'UserDetail' , params: { id: WhatLogin}}">
+        {{ loggedUser }} </b-nav-item>
+
+        <b-nav-item
+         v-if="isLogged && isAdmin" >
         {{ loggedUser }} </b-nav-item>
       </b-navbar-nav>
 
@@ -118,15 +123,19 @@ export default {
   text-transform: uppercase;
 }
 
-.nav-item{
-  font-size:17px;
+ul.navbar-nav li.nav-item a {
+  font-size:19px;
   color:white;
 
 }
 
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+  color:red;
+}
 
-
-
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+   color:red;
+}
 
 
 </style>

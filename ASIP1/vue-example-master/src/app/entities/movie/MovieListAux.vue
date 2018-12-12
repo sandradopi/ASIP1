@@ -6,7 +6,8 @@
       <pre>{{ error }}</pre>
     </div>
     <br/>
-    <h1 class="princ" > {{titulo}}</h1>
+    <h1 class="princ" v-if="tipo != null"> {{tipo}}</h1>
+     <h1 class="princ" v-if="tipo == null"> {{titulo}}</h1>
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         {{ movie.name }}
@@ -33,6 +34,9 @@ import auth from '../../common/auth'
 
 export default {
   components: { LoadingPage},
+  props:{
+    tipo:null
+  },
   data() {
     return {
       movies: null,
@@ -46,6 +50,7 @@ export default {
   },
   
   created() {
+    debugger
     this.fetchData()
     
   },
