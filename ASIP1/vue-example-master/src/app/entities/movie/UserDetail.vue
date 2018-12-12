@@ -1,14 +1,11 @@
 <template>
 <div>
-
-<MovieListAux v-if="bol== true" v-bind:tipo="this.tipo"></MovieListAux>
-
     <div
       v-if="error"
       class="error">
       <pre>{{ error }}</pre>
     </div>
-<div class="botones" v-if=" WhatLogin() ==this.user.login ">
+<div class="botones">
   <div class="peliculas1">
     <b-btn class="personal"
           :to="{ name: 'UserDetail', params: { id: this.user.login}}"
@@ -27,7 +24,7 @@
           variant="primary">Pending Films</b-btn>
 </div>
 </div>
-  <div class= "datosUsuario">
+  <div class= "datosUsuario" v-if="bol==false">
      <b-btn
                     class="editado"
                     v-if=" WhatLogin() ==this.user.login && this.control==false"
@@ -58,9 +55,9 @@
  </div>
 
 
-</br>
+
  <div class= "Noti" 
-  v-if= "WhatLogin() ==this.user.login && this.control==true">
+  v-if= "WhatLogin() ==this.user.login && this.control==true && bol==false">
    <b-form-checkbox class="cheeck"
                        v-model="statu"
                        value= "true"
@@ -82,11 +79,8 @@
       </multiselect>
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 </div>
-
  </div >
-
-</br>
- 
+ <MovieListAux v-if="bol== true" v-bind:tipo="this.tipo" class="aux"></MovieListAux>
 </div>
   
 </template>
@@ -125,6 +119,8 @@ export default {
   methods: {
     fetchData() {
 
+      if(this.bol!=true){
+
      HTTP.get(`users/detail/${this.$route.params.id}`) 
     .then(response => {
        this.user = response.data
@@ -150,6 +146,7 @@ export default {
        this.error = err.message
      })
 
+  }
     },
      WhatLogin() {
       return auth.user.login
@@ -163,6 +160,7 @@ export default {
         this.tipo='Pending Movies'
       }
       this.bol=true;
+      this.fetchData()
     },
     bolAuxNeg(){
       this.bol=false;
@@ -219,6 +217,11 @@ export default {
 
 <style scoped lang="scss">
 
+.Noti{
+  margin-top:20px;
+  margin-left:80px;
+}
+
 .peliculas1{
   float:left;
   margin-right:2px;
@@ -238,6 +241,14 @@ export default {
     padding:3%;
     width:90%;
 
+  }
+
+  .aux{
+    background-color:black;
+    margin-left:70px;
+    background-color:black;
+    padding:2%;
+    width:90%;
   }
 
   .subdatos{

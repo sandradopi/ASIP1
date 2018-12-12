@@ -187,6 +187,7 @@ export default {
     }
 
   .tittle{
+    width:100%;
     margin-right:30px;
     font-size: 20px;
     text-align: center;

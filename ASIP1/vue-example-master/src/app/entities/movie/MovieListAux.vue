@@ -6,8 +6,7 @@
       <pre>{{ error }}</pre>
     </div>
     <br/>
-    <h1 class="princ" v-if="tipo != null"> {{tipo}}</h1>
-     <h1 class="princ" v-if="tipo == null"> {{titulo}}</h1>
+     <h1 class="princ"> {{titulo}}</h1> 
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
         {{ movie.name }}
@@ -41,22 +40,24 @@ export default {
     return {
       movies: null,
       error: null,
-      titulo:''
+      titulo:'',
+      auxPeticion:'',
     }
   },
 
    watch: {
-    '$route': 'fetchData'
+    '$route': 'fetchData',
+      tipo: 'fetchData'
   },
   
   created() {
-    debugger
     this.fetchData()
     
   },
   methods: {
   fetchData() {
-    
+
+    if(this.tipo==null){//Entramos desde el NavBar
 
     if (this.$route.params.id=='VISTA') {
       this.titulo = 'Viewed Movies'
@@ -87,8 +88,39 @@ export default {
        .catch(err => {
        this.error = err.message})
     }
+  }
+
+  if(this.tipo!=null){ //Entramos desde el perfil publico del usuario pasandole props para
+                      //decirle que tiene que cargar, si vistas o pendientes
+                      // por que reutilizamos el componente
+
+                     
+   if (this.tipo=='Viewed Movies') {
+      this.titulo = 'Viewed Movies'
+      this.auxPeticion='VISTA'
+      HTTP.get(`list/${this.auxPeticion}`)
+      .then(response => {
+       this.movies = response.data})
+     .catch(err => {
+       this.error = err.message })
      
-    },
+
+    }
+
+
+    else if (this.tipo=='Pending Movies'){
+       this.titulo = 'Pending Movies'
+       this.auxPeticion='PENDIENTE'
+       HTTP.get(`list/${this.auxPeticion}`)
+      .then(response => {
+       this.movies = response.data })
+      .catch(err => {
+       this.error = err.message})
+
+  }
+     
+    }
+  },
     
     _successHandler(response) {
       this.fetchData()
@@ -135,6 +167,7 @@ export default {
     }
 
   .tittle{
+    width:100%;
     margin-right:30px;
     font-size: 20px;
     text-align: center;
