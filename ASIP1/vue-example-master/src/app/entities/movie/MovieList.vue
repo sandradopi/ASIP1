@@ -169,7 +169,7 @@ export default {
   .namemovie {
     margin-top :50px;
     margin-left:25px;
-    width:23%;
+    width:18%;
     float:left;
 
   }
@@ -198,7 +198,7 @@ export default {
   
   .eliminado {
     float:left;
-    margin-left:40px;
+    margin-left:15px;
     background-color: #f44336; 
     border: none;
     color: white;
@@ -220,7 +220,7 @@ export default {
   }
   .ocultado {
     float:right;
-    margin-right:70px;
+    margin-right:40px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -250,7 +250,7 @@ export default {
 
   .mostrar{
     float:right;
-    margin-right:70px;
+    margin-right:40px;
     background-color: green; 
     border: none;
     color: white;
@@ -273,23 +273,25 @@ export default {
 
 .media{
     margin-right:15px;
-     float:right;
-     width: 70px;
-     height: 70px;
+    float:right;
+     width: 40px;
+     height: 40px;
      border-radius: 50%;
      background: black;
 }
 
 .media1{
-    margin-top:20px;
-    width: 70px;
-    height: 70px;
+    float:right;
+    margin-top:5px;
+    width: 50px;
+    height: 50px;
      
 }
 
 .ratingt{
+  margin-top:7px;
    float:left;
-   margin-left:35px;
+   margin-left:15px;
    font-size: 15px;
 }
 

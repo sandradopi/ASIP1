@@ -109,6 +109,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+
 .hello{
   font-size: 20px;
   letter-spacing: 1px;

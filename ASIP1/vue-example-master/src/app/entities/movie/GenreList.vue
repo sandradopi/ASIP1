@@ -81,19 +81,17 @@ export default {
   
   .namegenre {
     margin-top :30px;
-    width:20%;
+    margin-left:10px;
+    width:15%;
     font-size: big;
-    float:left;
-   
+    float:left;  
    
   }
   
-
   .imagen{
-    float:left;
     margin-top:10px;
     width:80%;
-    margin-left:7px;
+    margin-left:30px;
     border-radius: 20px 20px 20px 20px
     
     }
@@ -104,7 +102,7 @@ export default {
     text-align: center;
     margin-bottom:10px;
     text-transform: uppercase;
-    margin-right:30px;
+    margin-left:25px;
     }
    
 </style>

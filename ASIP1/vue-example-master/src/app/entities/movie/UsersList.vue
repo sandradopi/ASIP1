@@ -118,24 +118,24 @@ export default {
     .media{
     margin-right:15px;
      float:right;
-     width: 40px;
-     height: 40px;
+     width: 30px;
+     height: 30px;
      border-radius: 50%;
      background: black;
 }
 
 .media1{
-    margin-top:7px;
-    width: 40px;
-    height: 40px;
+ 
+    width: 30px;
+    height: 30px;
      
 }
 
 .ratingt{
    float:left;
    margin-left:18px;
-   margin-top:10px;
-   font-size: 10px;
+   margin-top:5px;
+   font-size: 13px;
 }
 
   
