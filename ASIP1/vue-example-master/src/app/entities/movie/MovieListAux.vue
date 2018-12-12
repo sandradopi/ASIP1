@@ -142,11 +142,13 @@ export default {
     text-transform: uppercase;
     margin-bottom:20px;
     width:100%;
+    background-color:black;
+    padding:30px;
 
   }
 
   .namemovie {
-    margin-top :50px;
+    margin-top :20px;
     margin-left :20px;
     width:18%;
     float:left;

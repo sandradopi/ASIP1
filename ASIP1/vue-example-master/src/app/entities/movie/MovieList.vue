@@ -154,25 +154,26 @@ export default {
 
 <style scoped lang="scss">
 
-
-  .princ{
+ .princ{
     font-size: 40px;
     letter-spacing: 8px;
     color: red;
     text-align: center;
     text-transform: uppercase;
-
+    margin-bottom:20px;
+    width:100%;
+    background-color:black;
+    padding:30px;
 
   }
-
 
   .namemovie {
-    margin-top :50px;
-    margin-left:25px;
+    margin-top :20px;
+    margin-left :20px;
     width:18%;
     float:left;
-
   }
+
 
 
 

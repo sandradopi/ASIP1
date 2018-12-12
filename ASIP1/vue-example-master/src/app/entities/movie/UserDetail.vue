@@ -80,7 +80,7 @@
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 </div>
  </div >
- <MovieListAux v-if="bol== true" v-bind:tipo="this.tipo" class="aux"></MovieListAux>
+ <MovieListAux v-if="bol== true" v-bind:tipo="this.tipo"></MovieListAux>
 </div>
   
 </template>
@@ -243,13 +243,6 @@ export default {
 
   }
 
-  .aux{
-    background-color:black;
-    margin-left:70px;
-    background-color:black;
-    padding:2%;
-    width:90%;
-  }
 
   .subdatos{
     margin-top:30px;
