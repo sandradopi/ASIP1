@@ -51,7 +51,7 @@ export default {
   },
   methods: {
   fetchData() {
-    debugger
+    
 
     if (this.$route.params.id=='VISTA') {
       this.titulo = 'Viewed Movies'
