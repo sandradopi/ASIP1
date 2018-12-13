@@ -8,20 +8,19 @@
 <div class="botones">
   <div class="peliculas1">
     <b-btn class="personal"
-          :to="{ name: 'UserDetail', params: { id: this.$route.params.id}}"
           @click="bolAuxNeg()"
-          variant="primary">Personal Information</b-btn>
+          variant="primary">Personal Information</b-btn> <!--bolAuxNeg sirve para controlar la variable bol que hace que si esta a false solo se vea la informacion personal de la persona, y si esta a true hace que se vea solo el componente MovieListAux, donde el contenido seran las pelis vistas o pendientes-->
 </div>
  <div class="peliculas1">
     <b-btn class="viewed"
           @click="bolAux('vista')"
-          variant="primary">Viewed Films</b-btn>
+          variant="primary">Viewed Films</b-btn> <!--bolAux cambia la variable bol a true para que solo se vea el componente MovieListAux y le pasamos el tipo que luego le pasaremos al componente movieListAux para que sepa si listar pendientes o vistas-->
 </div>
 
 <div class="peliculas2">
     <b-btn class="pending"
           @click="bolAux('pendiente')"
-          variant="primary">Pending Films</b-btn>
+          variant="primary">Pending Films</b-btn> 
 </div>
 </div>
   <div class= "datosUsuario" v-if="bol==false">
@@ -30,7 +29,7 @@
                     v-if=" WhatLogin() ==this.user.login && this.control==false"
                     :to="{ name: 'UserUpdate', params: { id: user.login }}"
                     variant="primary"
-                    @click="Editado()">Edit</b-btn>
+                    @click="Editado()">Edit</b-btn> <!--Solo podemos editar las notificaciones del usuario que esta logueado-->
       <b-btn
                     class="editado"
                     v-if="this.control==true "
@@ -57,7 +56,7 @@
 
 
  <div class= "Noti" 
-  v-if= "WhatLogin() ==this.user.login && this.control==true && bol==false">
+  v-if= "WhatLogin() ==this.user.login && this.control==true && bol==false"> <!--control controla que salga en la pantalla o el boton de edit o el de save-->
    <b-form-checkbox class="cheeck"
                        v-model="statu"
                        value= "true"
@@ -96,15 +95,14 @@ import MovieListAux from '../../entities/movie/MovieListAux'
 export default {
   components: {  Multiselect, MovieListAux },
   data() {
-    return { //datos que usamos
+    return {
       error: null,
       user:{},
-      control:false,
+      control:false, //Es una variable de control para saber cuando tiene que aparecer el boton de Editar y el de Save
       options: ['SMS','EMAIL'],
-      statu:"false",
-      aux:null,
-      bol:false,
-      tipo:""
+      statu:"false", //Estado del cheeckbox
+      bol:false, //Variable de control para que se vea en pantalla o los datos del perfil o los listados
+      tipo:"" //Tipo que le pasamos al componente MovieListAux para que sepa si listar vistas o pendientes
 
 
     }
@@ -133,17 +131,13 @@ export default {
        return response
        
      })
-     .then(response => {
-        this.aux = response.data.noti
-        return response
-      })
 
     .then(() => { 
-        if(this.aux!=null){
+        if(this.user.noti!=null){
         this.statu="true";
       }
 
-      else if(this.aux==null){
+      else if(this.user.noti==null){
         this.statu="false";
       }
       })
