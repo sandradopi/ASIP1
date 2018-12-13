@@ -218,14 +218,14 @@ public class MovieService implements MovieServiceInterface{
     
     @PreAuthorize("hasAuthority('USER')")
 	@Override
-	public List<MovieListDTO> findAllMoviesType(String tipo) {
+	public List<MovieListDTO> findAllMoviesType(String tipo, String login) {
     	TipoStatus estado = null;
     	 Long media=new Long(0);
     	 Long mediaFinal=new Long(0);
     	 Long valorationTotal= new Long(0);
    	  
-    	NormalUserDTO usuario= userService.getCurrentUserWithoutAuthority();
-		NormalUser usuarioNormal= userDAO.findByIdNormal(usuario.getIdUser());
+    	
+		NormalUser usuarioNormal= userDAO.findByLoginNormal(login);
 		if (tipo.equals("VISTA")){
 			estado= TipoStatus.VISTA;
 		}else if(tipo.equals("PENDIENTE")){

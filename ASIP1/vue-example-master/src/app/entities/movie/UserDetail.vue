@@ -8,7 +8,7 @@
 <div class="botones">
   <div class="peliculas1">
     <b-btn class="personal"
-          :to="{ name: 'UserDetail', params: { id: this.user.login}}"
+          :to="{ name: 'UserDetail', params: { id: this.$route.params.id}}"
           @click="bolAuxNeg()"
           variant="primary">Personal Information</b-btn>
 </div>
@@ -42,13 +42,13 @@
      <h4 class="subtitle">
       </br>
                   <div class="subdatos" >
-                  <p class="subtitle-tag">Email: {{user.email}} </p>
+                  <p class="subtitle-tag">Email: {{this.user.email}} </p>
                   <p class="subtitle-tag"
-                   v-if = "WhatLogin() ==this.user.login"> Notifications by: {{user.noti}} </p>
-                  <p class="subtitle-tag">Fecha de registro: {{user.data}} </p>
-                  <p class="subtitle-tag1">Peliculas pendientes: {{user.countPendiente}} |</p>
-                  <p class="subtitle-tag1">Peliculas vistas: {{user.countVista}} |</p>
-                  <p class="subtitle-tag1">Peliculas valoradas: {{user.countValoration}} </p>
+                   v-if = "WhatLogin() ==this.user.login"> Notifications by: {{this.user.noti}} </p>
+                  <p class="subtitle-tag">Fecha de registro: {{this.user.data}} </p>
+                  <p class="subtitle-tag1">Peliculas pendientes: {{this.user.countPendiente}} |</p>
+                  <p class="subtitle-tag1">Peliculas vistas: {{this.user.countVista}} |</p>
+                  <p class="subtitle-tag1">Peliculas valoradas: {{this.user.countValoration}} </p>
                  </div>
      </h4>    
       
@@ -80,7 +80,7 @@
       <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 </div>
  </div >
- <MovieListAux v-if="bol== true" v-bind:tipo="this.tipo"></MovieListAux>
+ <MovieListAux v-if="bol== true" v-bind:login="this.$route.params.id" v-bind:tipo="this.tipo" class="aux"></MovieListAux>
 </div>
   
 </template>
@@ -110,7 +110,8 @@ export default {
     }
   },
   watch: {
-    '$route': 'fetchData'
+    '$route': 'fetchData',
+    
   },
  
   created() { //se va a lanzar siempre en una clase de componentes
@@ -118,6 +119,11 @@ export default {
   },
   methods: {
     fetchData() {
+
+      if(this.$route.params.bol==false){
+        this.bol=false;
+       
+      }
 
       if(this.bol!=true){
 
@@ -160,7 +166,7 @@ export default {
         this.tipo='Pending Movies'
       }
       this.bol=true;
-      this.fetchData()
+      
     },
     bolAuxNeg(){
       this.bol=false;
@@ -243,6 +249,11 @@ export default {
 
   }
 
+  .aux{
+    background-color:black;
+    margin-left:70px;
+    width:90%;
+  }
 
   .subdatos{
     margin-top:30px;

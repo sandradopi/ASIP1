@@ -68,7 +68,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item
          v-if="isLogged && !isAdmin" 
-         :to="{ name: 'UserDetail' , params: { id: WhatLogin}}">
+         :to="{ name: 'UserDetail' , params: { id: WhatLogin, bol:false}}"> <!--esta variable bol es la que controla que aparezca la informacion del usuario y oculte las peliculas vistas y pendientes en UserDetail. Supongamos que fuimos a la lista de usuarios y pulsamos en las peliculas vistas de otro usuario que no es el que esta logueado, al pulsar desde el menu en el perfil de la persona logueada, nos irá gracias a esto, a la información personal de la persona logueada, en vez de mostrar las peliculas vistas, que era en la pantalla en la que estabamos pero de la persona logueada. -->
         {{ loggedUser }} </b-nav-item>
 
         <b-nav-item

@@ -6,6 +6,7 @@
       <pre>{{ error }}</pre>
     </div>
     <br/>
+   
      <h1 class="princ"> {{titulo}}</h1> 
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
@@ -34,7 +35,8 @@ import auth from '../../common/auth'
 export default {
   components: { LoadingPage},
   props:{
-    tipo:null
+    tipo:null,
+    login:null
   },
   data() {
     return {
@@ -47,7 +49,8 @@ export default {
 
    watch: {
     '$route': 'fetchData',
-      tipo: 'fetchData'
+      tipo: 'fetchData',
+      login: 'fetchData',
   },
   
   created() {
@@ -61,7 +64,7 @@ export default {
 
     if (this.$route.params.id=='VISTA') {
       this.titulo = 'Viewed Movies'
-      HTTP.get(`list/${this.$route.params.id}`)
+      HTTP.get(`list/${this.$route.params.id}/${auth.user.login}`)
       .then(response => {
        this.movies = response.data})
      .catch(err => {
@@ -72,7 +75,7 @@ export default {
 
     else if (this.$route.params.id=='PENDIENTE'){
        this.titulo = 'Pending Movies'
-       HTTP.get(`list/${this.$route.params.id}`)
+       HTTP.get(`list/${this.$route.params.id}/${auth.user.login}`)
       .then(response => {
        this.movies = response.data })
       .catch(err => {
@@ -98,7 +101,7 @@ export default {
    if (this.tipo=='Viewed Movies') {
       this.titulo = 'Viewed Movies'
       this.auxPeticion='VISTA'
-      HTTP.get(`list/${this.auxPeticion}`)
+      HTTP.get(`list/${this.auxPeticion}/${this.login}`)
       .then(response => {
        this.movies = response.data})
      .catch(err => {
@@ -111,7 +114,7 @@ export default {
     else if (this.tipo=='Pending Movies'){
        this.titulo = 'Pending Movies'
        this.auxPeticion='PENDIENTE'
-       HTTP.get(`list/${this.auxPeticion}`)
+       HTTP.get(`list/${this.auxPeticion}/${this.login}`)
       .then(response => {
        this.movies = response.data })
       .catch(err => {
@@ -120,7 +123,9 @@ export default {
   }
      
     }
+
   },
+  
     
     _successHandler(response) {
       this.fetchData()

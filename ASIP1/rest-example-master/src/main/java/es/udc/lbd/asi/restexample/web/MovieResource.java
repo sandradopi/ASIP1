@@ -59,9 +59,9 @@ public class MovieResource{
         return movieService.findAllVistasVote();
     }
     
-    @GetMapping("/list/{tipo}")
-    public List<MovieListDTO> findAllMoviesType(@PathVariable String tipo) {
-        return movieService.findAllMoviesType(tipo);
+    @GetMapping("/list/{tipo}/{login}")
+    public List<MovieListDTO> findAllMoviesType(@PathVariable String tipo, @PathVariable String login) {
+        return movieService.findAllMoviesType(tipo, login);
     }
     
     @GetMapping("/movies/media/{idMovie}")
