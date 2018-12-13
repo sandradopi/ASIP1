@@ -96,9 +96,6 @@ import { HTTP } from '../../common/http-common'
 import auth from '../../common/auth'
 import Multiselect from 'vue-multiselect'
 import Vue from 'vue'
-
-
-
 export default {
   components: {  Multiselect},
   data() {
@@ -120,14 +117,9 @@ export default {
       })
       .then(this._successHandler)
       .catch(this._errorHandler)
-
       
     },
     checkForm () {
-      if (this.user.login && this.user.password && this.user.email) {
-        return true;
-      }
-
       if (!this.user.login) {
         this.errors = "Login is a required field."
         return false;
@@ -137,13 +129,22 @@ export default {
         return false;
       }
       if (!this.user.email) {
-        this.errors.push= "Email is a required field. "
+        this.errors= "Email is a required field. "
         return false;
       }
+      var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!expr.test(this.user.email)) {
+        this.errors= "The email: "+ this.user.email +" don´t have the good format, review it "
+        return false;
+      }
+      if (this.user.login && this.user.password && this.user.email) {
+        return true;
+      }
     },
-
     save() {
+
        if (this.checkForm() == true) {
+    
         if(this.statu=='false'){
           this.user.noti=null;
         }
@@ -163,7 +164,6 @@ export default {
       Vue.notify({
                text: this.error,
                type: 'error'})
-
     },
     back() {
       this.$router.go(-1)
@@ -184,15 +184,10 @@ export default {
     font: 150% sans-serif;
     font: message-box;
   }
-
   .formulario{
   width:40%;
   margin-left:30%;
-
-
   
 }
-
  
 </style>
-

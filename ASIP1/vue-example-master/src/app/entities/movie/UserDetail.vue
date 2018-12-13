@@ -224,7 +224,6 @@ export default {
 
 .peliculas1{
   float:left;
-  margin-right:2px;
 
 }
 
@@ -232,6 +231,8 @@ export default {
 .botones{
   margin-left:70px;
   margin-top:90px;
+  width:32.6%;
+  background-color:#007bff;
 
 }
 

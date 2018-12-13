@@ -251,6 +251,7 @@ export default {
 
   .datosPelicula{
     background-color:black;
+    border-radius: 20px 20px 20px 20px;
     padding:3%;
     width:80%;
     height:100%;

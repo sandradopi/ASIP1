@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import es.udc.lbd.asi.restexample.model.domain.NormalUser;
 import es.udc.lbd.asi.restexample.model.domain.TipoStatus;
 import es.udc.lbd.asi.restexample.model.domain.UserAuthority;
 import es.udc.lbd.asi.restexample.model.domain.UserNoti;
+import es.udc.lbd.asi.restexample.model.exception.EmailIncorrect;
 import es.udc.lbd.asi.restexample.model.exception.PasswordTooShort;
 import es.udc.lbd.asi.restexample.model.exception.RequiredFieldsException;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
@@ -70,36 +73,53 @@ public class UserService implements UserServiceInterface{
 		
 	     @Transactional(readOnly = false)
 	     @Override
-		 public void registerUser(String login, String email,String password, UserNoti noti) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort {
+		 public void registerUser(String login, String email,String password, UserNoti noti) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort, EmailIncorrect {
 	    
 	    		 Date ahora = new Date();
 	    	     SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
 	    	     String actualDate= formateador.format(ahora);
 	    	     Date data = formateador.parse(actualDate);
-	   
+	    	     String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" +
+	    	    	      "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
+	    	     
+	    	     Pattern pattern = Pattern.compile(emailPattern);
+	    	     
+	    	     //Comprobaciones Servicio del Registro
+	    	     
+	    	    if(login == null){ //Login vacio
+		        	  throw new RequiredFieldsException("The login is a required field");
+		         }
+		        else if (userDAO.findByLogin(login) != null) {
+		             throw new UserLoginEmailExistsException("User login " + login + " already exists");//login existente
+		        }
+		        
+		        if (email== null){//Que el email esté vacio
+		        	 throw new RequiredFieldsException("The email is a required field");
+		        }else if (userDAO.findByEmail(email) != null) {
+		             throw new UserLoginEmailExistsException("The email " +email + " already exists"); //email existente
+		        } else{
+	    	    	 Matcher matcher = pattern.matcher(email);
+	    	    	 if (!matcher.matches()){
+	    	    	 throw new EmailIncorrect("The email: "+ email +" don´t have the good format, review it ");
+	    	    	 }
+	    	   
+		        }
+	    	    
+		       
+		       if (password == null){ //password vacio
+		        	  throw new RequiredFieldsException("The password is a required field");
+		        	  
+		        }else if(password.length()<4){ //Password muy corta
+		        	throw new PasswordTooShort("The password is too short, minimum 4 letters please");
+		        }
+
 	    	     registerUser(login,email, password, false, data, noti);
 	     }
 	     
 	     @Transactional(readOnly = false)
 	     @Override
 	     public void registerUser(String login,String email,String password, boolean isAdmin, Date data, UserNoti noti) throws UserLoginEmailExistsException, RequiredFieldsException, PasswordTooShort {
-	         if (userDAO.findByLogin(login) != null) {
-	             throw new UserLoginEmailExistsException("User login " + login + " already exists");
-	         } else if (userDAO.findByEmail(email) != null) {
-	             throw new UserLoginEmailExistsException("The email " +email + " already exists");
-	         }
-	         
-	        if(login == null){
-	        	  throw new RequiredFieldsException("The login is a required field");
-	        }else if (password == null){
-	        	  throw new RequiredFieldsException("The password is a required field");
-	        }else if(password.length()<4){
-	        	throw new PasswordTooShort("The password is too short, minimum 4 letters please");
-	        
-	        }else if (email==null){
-	        	throw new RequiredFieldsException("The email is a required field");}
 	       
-
 	        
 	         String encryptedPassword = passwordEncoder.encode(password);
 

@@ -19,6 +19,7 @@ import javax.validation.Valid;
  import org.springframework.web.bind.annotation.RequestMapping;
  import org.springframework.web.bind.annotation.RestController;
 
+import es.udc.lbd.asi.restexample.model.exception.EmailIncorrect;
 import es.udc.lbd.asi.restexample.model.exception.PasswordTooShort;
 import es.udc.lbd.asi.restexample.model.exception.RequiredFieldsException;
 import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
@@ -79,7 +80,7 @@ import es.udc.lbd.asi.restexample.security.JWTConfigurer;
      }
 
      @PostMapping("/register")
-     public void registerAccount(@RequestBody NormalUserDTO account) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort {
+     public void registerAccount(@RequestBody NormalUserDTO account) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort, EmailIncorrect {
 
     		userService.registerUser(account.getLogin(),account.getEmail(), account.getPassword(), account.getNoti());}
   
