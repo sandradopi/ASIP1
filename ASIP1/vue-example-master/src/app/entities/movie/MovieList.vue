@@ -202,7 +202,7 @@ export default {
   
   .eliminado {
     float:left;
-    margin-left:15px;
+    margin-left:20px;
     background-color: #f44336; 
     border: none;
     color: white;
@@ -224,7 +224,7 @@ export default {
   }
   .ocultado {
     float:right;
-    margin-right:40px;
+    margin-right:25px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -254,7 +254,7 @@ export default {
 
   .mostrar{
     float:right;
-    margin-right:40px;
+    margin-right:25px;
     background-color: green; 
     border: none;
     color: white;
