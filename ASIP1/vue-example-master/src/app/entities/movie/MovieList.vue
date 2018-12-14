@@ -8,14 +8,16 @@
       <pre>{{ error }}</pre>
     </div>
 
-      <b-btn
-         v-if="isAdmin"
-         :to="{ name: 'MovieCreate' }"
-         variant="primary">New</b-btn>
-
     <br/>
     <h1 class="princ"> Movies</h1>
 
+    <div class="new">
+     <b-btn
+         v-if="isAdmin"
+         :to="{ name: 'MovieCreate' }"
+         variant="primary ">New</b-btn>
+    </div>
+    
     <div class= "titulo1">
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
@@ -297,6 +299,11 @@ export default {
    font-size: 15px;
 }
 
+.new{
+  margin-left:600px;
+  margin-top:30px;
+  margin-bottom:30px;
+}
 
 </style>
 
