@@ -12,6 +12,7 @@ import es.udc.lbd.asi.restexample.model.exception.UserLoginEmailExistsException;
 import es.udc.lbd.asi.restexample.model.service.dto.ActorDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
+import es.udc.lbd.asi.restexample.model.service.dto.NormalUserRegistroDTO;
 
 
 public interface UserServiceInterface {
@@ -22,6 +23,7 @@ public interface UserServiceInterface {
     public void registerUser(String login,String email, String password,UserNoti noti) throws UserLoginEmailExistsException, ParseException, RequiredFieldsException, PasswordTooShort, EmailIncorrect;
 	public NormalUserListUserDTO findByLoginContadores(String login);
 	public void update(String login, String noti);
+	public List<NormalUserRegistroDTO> findAllLoginEmail();
   
 
 

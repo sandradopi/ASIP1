@@ -42,11 +42,13 @@ public class MovieResource{
         return movieService.findAll();
     }
     
+    //Para traernos todas las medias
     @GetMapping("/movies/media")
     public List<MovieListDTO> findAllMedia() {
         return movieService.findAllMedia();
     }
     
+    //Traernos todas las fotos
     @GetMapping("/movies/list/imagenes/{idMovie}")
     public @ResponseBody byte[] findImagenes(@PathVariable Long idMovie) throws IOException {
     	InputStream in = getClass().getClassLoader().getResourceAsStream("WEB-INF/images/movie"+idMovie+".jpg");
@@ -54,16 +56,20 @@ public class MovieResource{
     }
     
     
-    @GetMapping("/vistas/tovote")
+    @GetMapping("/vistas/tovote")//Listar las peliculas vistas pendientes de ser votadas
+    //Es otro diferente al de vistas y pendientes por que en la consulta SQL hay que buscar
+    //las que tengan la valoracion a nulo
+    
     public List<MovieListDTO> findAllVistasVote() {
         return movieService.findAllVistasVote();
     }
     
-    @GetMapping("/list/{tipo}/{login}")
+    @GetMapping("/list/{tipo}/{login}") //Listar pendientes y vistas
     public List<MovieListDTO> findAllMoviesType(@PathVariable String tipo, @PathVariable String login) {
         return movieService.findAllMoviesType(tipo, login);
     }
     
+    //Para traernos la media de una pelicula en concreto
     @GetMapping("/movies/media/{idMovie}")
     public Long findAverage(@PathVariable Long idMovie) {
         return movieService.findAverage(idMovie);
