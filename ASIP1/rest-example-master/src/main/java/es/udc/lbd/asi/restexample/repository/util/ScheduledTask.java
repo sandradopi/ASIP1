@@ -62,7 +62,7 @@ public class ScheduledTask {
 		session = Session.getDefaultInstance(properties);
 	}
 	
-    @Scheduled(cron = "0 50 11 * * * ")
+    @Scheduled(cron = "0 30 16 * * * ")
     public void reportCurrentTime() throws AddressException, MessagingException, ParseException {
     	init();
     	Date ahora = new Date();

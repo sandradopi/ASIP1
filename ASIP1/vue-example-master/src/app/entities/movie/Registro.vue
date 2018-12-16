@@ -151,7 +151,7 @@ export default {
         this.errors ="Password is a required field. "
         return false;
       } else if (this.user.password.length <4 ) {
-        this.errors ="The password is too short. "
+        this.errors ="The password is too short. Minimum 4 letters please"
         return false;
       }
 

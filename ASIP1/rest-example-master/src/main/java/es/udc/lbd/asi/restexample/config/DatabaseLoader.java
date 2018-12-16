@@ -96,11 +96,11 @@ public class DatabaseLoader {
     dirigentes.add(director1);
     
     movieService.save
-    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-11-29"),
+    (new Movie(false,"Spiderman","La pelicula va sobre...",160, sdf.parse("2018-12-16"),
     		genre1, participantes,dirigentes,"movie1.jpg"));
     
     movieService.save
-    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-11-29"),
+    (new Movie(false,"Wonder Woman","La pelicula va sobre...",250, sdf.parse("2018-12-16"),
     		genre2, participantes,dirigentes,"movie2.jpg"));
     
     movieService.save

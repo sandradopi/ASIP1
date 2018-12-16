@@ -224,7 +224,7 @@ export default {
   }
   .ocultado {
     float:right;
-    margin-right:25px;
+    margin-right:15px;
     background-color: #555555; 
     border: none;
     color: white;
@@ -254,7 +254,7 @@ export default {
 
   .mostrar{
     float:right;
-    margin-right:25px;
+    margin-right:15px;
     background-color: green; 
     border: none;
     color: white;
