@@ -18,7 +18,6 @@
       v-if="user"
       class="app-form"
       @submit="save">
-
       
       <b-form-group
         label="Login: *"
@@ -71,7 +70,7 @@
    <h6>Notifications:</h6>
       <multiselect 
         v-model="user.noti" 
-        :options= options
+        :options= "options"
         :allow-empty="false"
         :searchable="false"
         :show-labels="false"
@@ -82,8 +81,6 @@
   
   </b-form-group>
     </b-form>
-
-
 
   </div>
      
@@ -104,15 +101,17 @@ export default {
       error: null,
       statu:null, //Estado del cheeck box
       options: ['SMS','EMAIL'],
-      users:{} //Nos traemos los logins y emails unicamente al principio para luego comprobar si estan repetidos
     }
 
   },
-  created() { 
+ created() {
     this.fetchData()
+    
   },
- 
    methods: {
+     fetchData() {
+      
+     },
     userLogin() {
       auth.login({
         login: this.user.login,
@@ -122,29 +121,12 @@ export default {
       .catch(this._errorHandler)
       
     },
-     fetchData() {
-      HTTP.get(`users/LoginEmail`) 
-    .then(response => {
-       this.users = response.data
-     })
-     .catch(err => {
-       this.error = err.message
-     })
-
-    },
-
+     
 
     checkForm () {
       if (!this.user.login) {
         this.errors = "Login is a required field."
         return false;
-      } else{
-         for(var i=0; i< this.users.length; i+=1){
-          if (this.users[i].login == this.user.login){
-            this.errors= "Login already exists "
-            return false
-          }
-        }
       }
 
       if (!this.user.password) {
@@ -158,19 +140,16 @@ export default {
       if (!this.user.email) {
         this.errors= "Email is a required field. "
         return false;
-      }else{
-        for(var i=0; i< this.users.length; i+=1){
-          if (this.users[i].email == this.user.email){
-            this.errors= "Email already exists "
-            return false
-          }
-        }
       }
 
 
       var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       if (!expr.test(this.user.email)) {
         this.errors= "The email: "+ this.user.email +" don´t have the good format, review it "
+        return false;
+      }
+      if(this.statu && (this.user.noti!="SMS" && this.user.noti!="EMAIL")){
+        this.errors= "Choose a type of notification please "
         return false;
       }
       if (this.user.login && this.user.password && this.user.email) {

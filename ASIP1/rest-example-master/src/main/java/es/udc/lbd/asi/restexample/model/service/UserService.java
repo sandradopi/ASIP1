@@ -31,7 +31,6 @@ import es.udc.lbd.asi.restexample.model.service.dto.AdminUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.MovieDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.NormalUserListUserDTO;
-import es.udc.lbd.asi.restexample.model.service.dto.NormalUserRegistroDTO;
 import es.udc.lbd.asi.restexample.model.service.dto.UserDTO;
 import es.udc.lbd.asi.restexample.security.SecurityUtils;
 
@@ -56,9 +55,6 @@ public class UserService implements UserServiceInterface{
 		public List<NormalUserDTO> findAll() {
 			 return userDAO.findAll().stream().map(user -> new NormalUserDTO(user)).collect(Collectors.toList());}
   		
-  		@Override
-		public List<NormalUserRegistroDTO> findAllLoginEmail() {
-			 return userDAO.findAll().stream().map(user -> new NormalUserRegistroDTO(user)).collect(Collectors.toList());}
 		
 		@PreAuthorize("hasAuthority('USER')")
 		@Override
