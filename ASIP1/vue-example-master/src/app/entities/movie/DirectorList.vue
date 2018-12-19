@@ -28,8 +28,7 @@
 
        <b-btn
           class="editado"
-           :to="{ name: 'DirectorUpdate', params: { id: director.idDirector }}"
-           >Edit</b-btn>
+           :to="{ name: 'DirectorUpdate', params: { id: director.idDirector }}">Edit</b-btn>
 
      </div>
     
