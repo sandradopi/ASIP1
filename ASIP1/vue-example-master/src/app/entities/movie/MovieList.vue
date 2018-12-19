@@ -19,6 +19,7 @@
     </div>
     
     <div class= "titulo1">
+
     <div class= "namemovie" v-for="movie in movies" :key="movie.idMovie">
     <div class= "tittle">
     {{ movie.name }}
@@ -29,7 +30,7 @@
       </router-link>
       
       <div class="ratingt" v-if="!isAdmin">Average Rating:</div>
-      <div class ="media" v-if="!isAdmin">
+      <div v-bind:class="{ destaca: movie.destaca, media:movie.destaca==null }" v-if="!isAdmin">
         <div class="media1" v-if="!isAdmin"> {{ movie.media}}
         </div>
       </div>
@@ -74,7 +75,8 @@ export default {
       loading: false,
       movies: null,
       error: null,
-      media:null
+      media:null,
+      max:0
     }
   },
   computed: {
@@ -90,11 +92,25 @@ export default {
   methods: {
     fetchData() {
 
+
     if(!(this.isAdmin)){
         this.loading = true
         HTTP.get(`movies/media`)
         .then(response => {
            this.movies = response.data
+           return this.movies
+         })
+        .then(movies => {
+         for (var i = 0; i < movies.length; i ++){
+            if(movies[i].media> this.max){
+              this.max=movies[i].media;
+            }
+          }
+          for (var i = 0; i < movies.length; i ++){
+            if(movies[i].media== this.max){
+              movies[i].destaca=true;
+            }
+          }
          })
          .catch(err => {
            this.error = err.message
@@ -105,12 +121,17 @@ export default {
     HTTP.get('movies')
     .then(response => {
        this.movies = response.data
+       
      })
      .catch(err => {
        this.error = err.message
      })
     .finally(() => this.loading = false)
     }
+
+    },
+
+    selectDesta(movies){
 
     },
 
@@ -171,6 +192,7 @@ export default {
 
   .namemovie {
     margin-top :20px;
+    margin-bottom:10px;
     margin-left :20px;
     width:18%;
     float:left;
@@ -281,19 +303,28 @@ export default {
      width: 40px;
      height: 40px;
      border-radius: 50%;
-     background: black;
+     background: #804c51;
+}
+
+.destaca{
+    margin-right:15px;
+    float:right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #b70d0d;
 }
 
 .media1{
     float:right;
     margin-top:5px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
      
 }
 
 .ratingt{
-  margin-top:7px;
+   margin-top:7px;
    float:left;
    margin-left:15px;
    font-size: 15px;
