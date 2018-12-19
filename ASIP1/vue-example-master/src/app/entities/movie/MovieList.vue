@@ -131,9 +131,6 @@ export default {
 
     },
 
-    selectDesta(movies){
-
-    },
 
     eliminar(idMovie, name){
         HTTP.delete(`movies/${idMovie}`)

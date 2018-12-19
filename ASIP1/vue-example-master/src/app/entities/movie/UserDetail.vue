@@ -8,19 +8,17 @@
 <div class="botones">
   <div class="peliculas1">
     <b-btn class="personal"
-          @click="bolAuxNeg()"
-          variant="primary">Personal Information</b-btn> <!--bolAuxNeg sirve para controlar la variable bol que hace que si esta a false solo se vea la informacion personal de la persona, y si esta a true hace que se vea solo el componente MovieListAux, donde el contenido seran las pelis vistas o pendientes-->
+          @click="bolAuxNeg()">Personal Information</b-btn> <!--bolAuxNeg sirve para controlar la variable bol que hace que si esta a false solo se vea la informacion personal de la persona, y si esta a true hace que se vea solo el componente MovieListAux, donde el contenido seran las pelis vistas o pendientes-->
 </div>
  <div class="peliculas1">
     <b-btn class="viewed"
-          @click="bolAux('vista')"
-          variant="primary">Viewed Films</b-btn> <!--bolAux cambia la variable bol a true para que solo se vea el componente MovieListAux y le pasamos el tipo que luego le pasaremos al componente movieListAux para que sepa si listar pendientes o vistas-->
+          @click="bolAux('vista')">Viewed Films</b-btn> <!--bolAux cambia la variable bol a true para que solo se vea el componente MovieListAux y le pasamos el tipo que luego le pasaremos al componente movieListAux para que sepa si listar pendientes o vistas-->
 </div>
 
 <div class="peliculas2">
     <b-btn class="pending"
           @click="bolAux('pendiente')"
-          variant="primary">Pending Films</b-btn> 
+    >Pending Films</b-btn> 
 </div>
 </div>
   <div class= "datosUsuario" v-if="bol==false">
@@ -28,12 +26,10 @@
                     class="editado"
                     v-if=" WhatLogin() ==this.user.login && this.control==false"
                     :to="{ name: 'UserUpdate', params: { id: user.login }}"
-                    variant="primary"
                     @click="Editado()">Edit</b-btn> <!--Solo podemos editar las notificaciones del usuario que esta logueado-->
       <b-btn
                     class="editado"
                     v-if="this.control==true "
-                    variant="primary"
                     @click="Save()">Save</b-btn>
 
      <h1 class="title" :key="user.login"> {{user.login}}</h1>  
@@ -232,7 +228,7 @@ export default {
   margin-left:70px;
   margin-top:90px;
   width:32.6%;
-  background-color:#007bff;
+  background-color:#6c757d;
 
 }
 
@@ -275,7 +271,6 @@ export default {
         }
     }
 
-   
 
     .editado{
     float:right;

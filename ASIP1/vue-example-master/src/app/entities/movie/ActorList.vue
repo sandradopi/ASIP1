@@ -29,7 +29,7 @@
       <b-btn
           class="editado"
            :to="{ name: 'ActorUpdate', params: { id: actor.idActor }}"
-           variant="primary">Edit</b-btn>
+           >Edit</b-btn>
 
      </div>
     

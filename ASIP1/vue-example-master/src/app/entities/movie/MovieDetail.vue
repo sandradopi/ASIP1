@@ -30,12 +30,11 @@
     <div v-if="movie">
       <div class="float-right">
         <b-btn
-          variant="primary"
           @click="back()">Back</b-btn>
           <b-btn
            v-if="isAdmin"
            :to="{ name: 'MovieUpdate', params: { id: movie.idMovie }}"
-           variant="primary">Edit</b-btn>
+           >Edit</b-btn>
           
       </div>
     </br>

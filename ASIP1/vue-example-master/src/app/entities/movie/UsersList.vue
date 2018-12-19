@@ -121,7 +121,7 @@ export default {
      width: 30px;
      height: 30px;
      border-radius: 50%;
-     background: black;
+     background: #804c51;
 }
 
 .media1{
